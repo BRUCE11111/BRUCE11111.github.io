@@ -1,0 +1,2268 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="计算机网络, 小灰的博客">
+    <meta name="description" content="">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>计算机网络 | 小灰的博客</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+
+    <script src="/libs/jquery/jquery.min.js"></script>
+
+<meta name="generator" content="Hexo 5.4.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+<link rel="alternate" href="/atom.xml" title="小灰的博客" type="application/atom+xml">
+</head>
+
+
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">小灰的博客</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>分类</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/contact" class="waves-effect waves-light">
+      
+      <i class="fas fa-comments" style="zoom: 0.6;"></i>
+      
+      <span>留言板</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>友情链接</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">小灰的博客</div>
+        <div class="logo-desc">
+            
+            Never really desperate, only the lost of the soul.
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			分类
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/contact" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-comments"></i>
+			
+			留言板
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			友情链接
+		</a>
+          
+        </li>
+        
+        
+        <li><div class="divider"></div></li>
+        <li>
+            <a href="https://github.com/blinkfox/hexo-theme-matery" class="waves-effect waves-light" target="_blank">
+                <i class="fab fa-github-square fa-fw"></i>Fork Me
+            </a>
+        </li>
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+            <style>
+    .nav-transparent .github-corner {
+        display: none !important;
+    }
+
+    .github-corner {
+        position: absolute;
+        z-index: 10;
+        top: 0;
+        right: 0;
+        border: 0;
+        transform: scale(1.1);
+    }
+
+    .github-corner svg {
+        color: #0f9d58;
+        fill: #fff;
+        height: 64px;
+        width: 64px;
+    }
+
+    .github-corner:hover .octo-arm {
+        animation: a 0.56s ease-in-out;
+    }
+
+    .github-corner .octo-arm {
+        animation: none;
+    }
+
+    @keyframes a {
+        0%,
+        to {
+            transform: rotate(0);
+        }
+        20%,
+        60% {
+            transform: rotate(-25deg);
+        }
+        40%,
+        80% {
+            transform: rotate(10deg);
+        }
+    }
+</style>
+
+<a href="https://github.com/blinkfox/hexo-theme-matery" class="github-corner tooltipped hide-on-med-and-down" target="_blank"
+   data-tooltip="Fork Me" data-position="left" data-delay="50">
+    <svg viewBox="0 0 250 250" aria-hidden="true">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+              fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
+        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+              fill="currentColor" class="octo-body"></path>
+    </svg>
+</a>
+        
+    </nav>
+
+</header>
+
+    
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/9.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">计算机网络</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        padding: 35px 0 15px 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        padding-bottom: 30px;
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+
+        position: absolute;
+        right: 23.5vw;
+        display: block;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                          <div class="article-tag">
+                            <span class="chip bg-color">无标签</span>
+                          </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/network/" class="post-category">
+                                network
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2021-03-15
+                </div>
+                
+
+                
+
+                
+
+                
+
+                
+            </div>
+        </div>
+        <hr class="clearfix">
+
+        
+        <!-- 是否加载使用自带的 prismjs. -->
+        <link rel="stylesheet" href="/libs/prism/prism.css">
+        
+
+        
+
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h1 id="计算机网络"><a href="#计算机网络" class="headerlink" title="计算机网络"></a>计算机网络</h1><h3 id="传输时延"><a href="#传输时延" class="headerlink" title="传输时延"></a>传输时延</h3><p><font color="green">时延指数据（一个报文或分组，甚至比特）从网络的一段传送到另一端所需的时间。</font></p>
+<ul>
+<li>$总时延=发送时延+传播时延+处理时延+排队时延$</li>
+</ul>
+<ol>
+<li>发送时延</li>
+</ol>
+<p>主机或路由器发送数据帧所需要的时间。(从发送数据帧的第一个比特算起，到该帧的最后一个比特发送完毕所需要的时间)。</p>
+<p>$ sendTime=length of data(bit) / velocity(bit/s)$</p>
+<ol start="2">
+<li>传播时延</li>
+</ol>
+<p>信道中传输时间。</p>
+<p>$propagate=length of channel(m) / electromagnetic wave velocity (m/s) $</p>
+<ol start="3">
+<li>处理时延</li>
+</ol>
+<p>主机或路由器收到分组，分析分组的首部、从分组中提取数据部分、进行差错检验、寻找下一个路由器地址等。</p>
+<ol start="4">
+<li>排队时延</li>
+</ol>
+<p>分组进入路由器在输入队列排队，在发送后输出队列排队发送。</p>
+<p>![](D:\1\奇技淫巧\photoDon’t delete\network\OSI七层模型.PNG)</p>
+<h3 id="网络性能指标"><a href="#网络性能指标" class="headerlink" title="网络性能指标"></a>网络性能指标</h3><ul>
+<li><p>速率(bit/s)</p>
+<p>1K=$10^3$ M G T P E Z Y</p>
+<p><font color="red">电脑上显示的M指的是 按照存储格式讲的，存储计算机1024bit $k=2^{10}$  K M G T P E Z Y</font></p>
+</li>
+<li><p>带宽</p>
+</li>
+</ul>
+<p>通信上讲的带宽，3.0Ghz ~3.4 Ghz  0.4  按照频率范围上讲的。</p>
+<p>计算机网络中，带宽指的是信道传输的最大速率。</p>
+<h3 id="ADSL-Asymmetric-Digital-Subscriber-Line"><a href="#ADSL-Asymmetric-Digital-Subscriber-Line" class="headerlink" title="ADSL (Asymmetric Digital Subscriber Line)"></a>ADSL (Asymmetric Digital Subscriber Line)</h3><p>![adsl](D:\1\奇技淫巧\photoDon’t delete\adsl.PNG)</p>
+<h3 id="HFC-Hybrid-Fiber-Coax-光纤同轴混合网"><a href="#HFC-Hybrid-Fiber-Coax-光纤同轴混合网" class="headerlink" title="HFC(Hybrid Fiber Coax)光纤同轴混合网"></a>HFC(Hybrid Fiber Coax)光纤同轴混合网</h3><p>![调制解调器](D:\1\奇技淫巧\photoDon’t delete\调制解调器.PNG)</p>
+<h4 id="FTTx技术"><a href="#FTTx技术" class="headerlink" title="FTTx技术"></a>FTTx技术</h4><p>光纤到户(FTTH)</p>
+<h2 id="数据链路层"><a href="#数据链路层" class="headerlink" title="数据链路层"></a>数据链路层</h2><h3 id="1-点对点信道"><a href="#1-点对点信道" class="headerlink" title="1. 点对点信道"></a>1. 点对点信道</h3><p>链路：一个点到邻近结点的一条物理线路。数据链路是除了链路，还要有必要的通信协议进行传输，把所有这些协议的硬件和软件加到链路，叫做数据链路。</p>
+<ol>
+<li><p>结点A把网络层IP数据报添加首部和尾部。</p>
+</li>
+<li><p>结点A把封装好的数据发送给B的数据链路层。</p>
+</li>
+<li><p>B先进行差错检验，无错提取IP数据报，否则丢弃。</p>
+</li>
+</ol>
+<p>a) <font color="green">封装成帧</font></p>
+<p>添加首尾部。最大传输数据单元(Maximum Transfer Unit,MTU)，数据部分的最大长度上限。帧定界符 开始 SOH (00000001)  结束EOT(00000100)。</p>
+<p>b) <font color="green">透明传输</font></p>
+<p>数据部分是文本文件中的字符时，不可能和控制字符相同，任何内容都可以通过帧传过去，所以是透明传输。</p>
+<p>当信息是图片时，可能会出现控制符一样的二进制位。</p>
+<p>![](D:\1\奇技淫巧\photoDon’t delete\数据链路透明传输.png)</p>
+<p>解决办法，插入转义字符ESC(00011011),接收端将数据发往网络层要删除所有的ESC。</p>
+<p>![](D:\1\奇技淫巧\photoDon’t delete\ESC转义字符.png)</p>
+<p>c) <font color="green">差错检验</font></p>
+<p>循环冗余检测(Cyclic Redundancy Check，CRC)。增加n位冗余码（除以n+1位除数）。</p>
+<p>FCS(Frame Check Sequence)。</p>
+<p>接收端，如果R（余数）算出来是0，则accept。否则，丢弃。</p>
+<p>增加了帧编号、确认、重传机制。</p>
+<h3 id="PPP-Point-to-Point-Protocal"><a href="#PPP-Point-to-Point-Protocal" class="headerlink" title="PPP(Point-to-Point Protocal)"></a>PPP(Point-to-Point Protocal)</h3><ol>
+<li><font color="green">协议的组成</font></li>
+</ol>
+<p>a) 封装到链路的方法。</p>
+<p>b) <strong>LCP链路控制协议</strong>，建立配置和测试链路连接。RFC1661定义了11种类型的LCP分组。</p>
+<p>c) <strong>网络控制协议NCP</strong>。其中的每一个协议支持不同的网络层协议，如IP、OSI的网络层。</p>
+<ol start="2">
+<li><font color="green">协议帧的格式</font></li>
+</ol>
+<p>![](D:\1\奇技淫巧\photoDon’t delete\PPP协议帧的格式.png)</p>
+<p>首部4个字段：7E PPP的定界符。FF 03 至今没给出定义。协议 是2字节协议字段， 0x0021时，PPP的信息是IP数据报，0xC021，是PPP协议的控制协议LCP的数据。</p>
+<p>信息部分可变化，最长1500字节。</p>
+<p>FCS冗余码。</p>
+<ol start="3">
+<li><font color="green">零比特填充</font>（同步传输）</li>
+</ol>
+<p>5个连续1后面插入0。以此来保证透明传输。</p>
+<p>![](D:\1\奇技淫巧\photoDon’t delete\零比特填充.png)</p>
+<ol start="4">
+<li><font color="green">协议的工作状态</font></li>
+</ol>
+<p>![](D:\1\奇技淫巧\photoDon’t delete\PPP协议状态图.png)</p>
+<p>PPP协议起始和终止都处于“链路静止”状态。之后用户向ISP拨号，与ISP建立物理链路，然后LCP链路开始进行协议协商，如果成功，则开始进行网络层协议（NCP）协商，如果是IP协议则是IPCP（IP控制协议），将IPCP封装成帧。网络层配置结束，数据链路开始工作（链路打开）。</p>
+<p>图中可以看出PPP协议不是单纯的数据链路层协议，还包括物理层内容和网络层内容。</p>
+<h3 id="2-使用广播信道的数据链路层（CSMA-CD"><a href="#2-使用广播信道的数据链路层（CSMA-CD" class="headerlink" title="2.使用广播信道的数据链路层（CSMA/CD)"></a>2.使用广播信道的数据链路层（CSMA/CD)</h3><p>![](D:\1\奇技淫巧\photoDon’t delete\局域网拓扑.png)</p>
+<p><font color="green">1. 共享信道的两种划分方法</font></p>
+<p>a) 静态划分信道</p>
+<p>频分复用、时分复用、码分复用和波分复用等。开销较大。</p>
+<p>b) 动态媒体接入控制</p>
+<ul>
+<li>随机接入</li>
+</ul>
+<p>用户根据自己的情况随机发送信息，可能产生碰撞，需要碰撞协议。</p>
+<ul>
+<li>受控接入</li>
+</ul>
+<p>不能随机发送，比如令牌环局域网和及集中控制的轮询和多点线路探询。</p>
+<p><font color="green">2. 以太网的两个标准</font></p>
+<p>IEEE 802委员会提出将数据链路层划分为 <strong>逻辑链路控制LLC</strong>（Logic Link Control) 和 <strong>媒体接入控制层MAC</strong>(Media Access Control)。</p>
+<p>![](D:\1\奇技淫巧\photoDon’t delete\数据链路层划分.png)</p>
+<p>LLC与传输媒体无关，MAC处理传输媒体有关的内容。</p>
+<p>之后因为以太网的发展，局域网技术没落，目前大部分厂商只MAC协议，LLC作用已经消失。</p>
+<p><font color="green">3. 适配器的作用</font></p>
+<p>计算机和外界局域网连接需要<strong>适配器</strong>。适配器和计算机之间通过IO总线传输信息，适配器和局域网通过双绞线和电缆传输信息。</p>
+<p>适配器功能不局限于数据链路层，适配器在接发各种帧时不使用CPU，当帧判断可用时，才会发出中断信息通知计算机，并交付协议栈中的网络层。</p>
+<p><font color="green">4.CSMA/CD协议</font>(Carrier Sense Multiple Access with Collision Detection)<strong>载波监听多点接入/碰撞</strong></p>
+<p>以太网发送数据都是用 <strong>曼彻斯特编码</strong>。变化频率变化了一倍，所以频率开销增大。</p>
+<p>![](D:\1\奇技淫巧\photoDon’t delete\曼彻斯特编码.png)</p>
+<ul>
+<li>多点接入：多个计算机同时连接在一根总线上。</li>
+<li>载波监听：使用电子技术检测总线上有没有其他计算机在发送数据。载波只是名词，就是检测信道，检测其他计算机发没发信息。</li>
+<li>碰撞检测（冲突检测）：边发送边监听，适配器边发送边检测信道上的信号电压信号，以便于发送数据时监听其他计算机发没发数据。当两个计算机同时发送数据，则碰撞，随机等待一段时间再发送。</li>
+<li><strong>电磁波在1km的电缆传播时延是5us。</strong></li>
+<li>发送数据总有传播时延，当传播时延内另一个计算机发了数据，则碰撞。所以一个计算机最多消耗**两倍$2\tau$**的总线到端的传播时延。</li>
+</ul>
+<p>![](D:\1\奇技淫巧\photoDon’t delete\传播时延对载波监听的影响.png)</p>
+<p>可以看出，一个计算机只能半双工通信，图中看出每次计算机发送信号都不确定是否会碰撞，$2\tau$时延就是<strong>碰撞窗口</strong>（争用期）。</p>
+<ul>
+<li><strong>截断二进制指数退避</strong>(truncated binary exponential backoff)</li>
+</ul>
+<ol>
+<li>$2\tau$协议规定为51.2us。对于10Mbit/s以太网，发送512bit。所以碰撞窗口期是发送512bit时间。</li>
+<li>$k=min[重传次数…10]$ 从离散整数集合$[0,1,…,(2^k-1)]$ 选取整数即为重传次数，必须小于10。</li>
+<li>重传大于16次，丢弃帧，向高层报告。</li>
+</ol>
+<ul>
+<li>强化碰撞</li>
+</ul>
+<p>当发送数据后，还要继续发送32或48bit人为干扰信号，让所有用户都知道已经发生了碰撞。</p>
+<p>![](D:\1\奇技淫巧\photoDon’t delete\人为干扰信号.png)</p>
+<ul>
+<li>设定帧间最小间隔9.6us.给接收方96bit时间做准备处理下一次数据。</li>
+</ul>
+<p>![](D:\1\奇技淫巧\photoDon’t delete\CSMA协议要点.png)</p>
+<ul>
+<li>集线器 局域网星型拓扑，可靠性很好，使用双绞线连接，出现802.3i 10BASE-T标准。10代表10Mbit/s数据。</li>
+</ul>
+<p>实际上还是抽象成总线形式，所以每个时间只允许一个站发送数据。</p>
+<p><strong>集线器工作在物理层</strong>，每个端口仅仅转发信号。</p>
+<h3 id="3-信道利用率"><a href="#3-信道利用率" class="headerlink" title="3. 信道利用率"></a>3. 信道利用率</h3><h3 id="4-mac-地址"><a href="#4-mac-地址" class="headerlink" title="4.mac 地址"></a>4.mac 地址</h3><p>每一个适配器都有一个MAC地址。固化在适配器ROM中的地址。</p>
+<p>MAC的格式：</p>
+<p>![](D:\1\奇技淫巧\photoDon’t delete\MAC地址.png)</p>
+<p>前两个字段是目的地址和源地址，分别占6个字节。第三个字段是类型，表明数据部分使用的协议是什么。最后是冗余码(fcs crc)。</p>
+<p>数据部分最小长度46，不满46就填充够46。</p>
+<p>MAC帧前还有8个字节，前7字节是为了同步时钟频率，最后一个帧开始界定符。</p>
+<h3 id="5-扩展以太网"><a href="#5-扩展以太网" class="headerlink" title="5. 扩展以太网"></a>5. 扩展以太网</h3><ol>
+<li>物理层扩展</li>
+</ol>
+<p>增加解调器扩大物理链路交流区域。</p>
+<p>![](D:\1\奇技淫巧\photoDon’t delete\扩展以太网物理层.png)</p>
+<ol start="2">
+<li>数据链路层扩展</li>
+</ol>
+<p>交换式集线器称为以太网交换机或者第二层交换机。实质上是多接口的网桥。其内部通过自学习算法存储帧交换表。</p>
+<p>独占传输媒体，无碰撞地传输数据。</p>
+<p>生成树协议STP，不改变网络拓扑，逻辑上没有闭环，防止兜圈子问题。</p>
+<ol start="3">
+<li>虚拟局域网VLAN</li>
+</ol>
+<p>![](D:\1\奇技淫巧\photoDon’t delete\虚拟局域网VLAN.png)</p>
+<p>可以防止广播风暴，A1发送信息只有A组能够看到。</p>
+<p>帧格式：</p>
+<p>![](D:\1\奇技淫巧\photoDon’t delete\VLAN帧格式.png)</p>
+<p>在MAC帧中插入4字节VLAN标记，源地址后两位如果是0x8100时，表明后面加了VLAN。源地址的最后两个字节中，前3位是用户优先级字段，接着一位是规范格式符CFI，最后12位是虚拟局域网VLAN标识符VID，它标记了这个以太网帧属于哪个虚拟局域网。</p>
+<h2 id="网络层"><a href="#网络层" class="headerlink" title="网络层"></a>网络层</h2><p>网络层只提供尽最大努力交付服务，可以减少路由器价格成本等，因为计算机本身具有很强的计算能力，差错检验能力很强。</p>
+<h4 id="1-网络协议IP"><a href="#1-网络协议IP" class="headerlink" title="1.网络协议IP"></a>1.网络协议IP</h4><p>一般指的是第四个版本IPv4。一般和<strong>地址解析协议</strong>(Address Resolution Protocol,ARP)、<strong>网际控制报文协议ICMP</strong>(Internet Control Message Protocol)、<strong>网际组管理协议IGMP</strong>（Internet Group Management Protocol）。</p>
+<p>![](D:\1\奇技淫巧\photoDon’t delete\IP及其配套协议.png)</p>
+<p>2.网络互连的中间设备</p>
+<ol>
+<li><p>物理层使用的中间设备是<strong>转发器</strong>。</p>
+</li>
+<li><p>数据链路层使用的中间设备是<strong>网桥或桥接器</strong>。</p>
+</li>
+<li><p>网络层使用的中间设备是<strong>路由器</strong>。</p>
+</li>
+<li><p>网络层以上使用的中间设备叫<strong>网关</strong>。网关连接两个不兼容的系统需要在高层进行协议转换.</p>
+<p>3.虚拟互联网络</p>
+</li>
+</ol>
+<p>由于不同的计算机网络使用相同的IP协议。因此可以看做虚拟互连网络</p>
+<p><strong>直接交付</strong>目的主机在本网络中不需要其他路由器转发。</p>
+<p><strong>间接交付</strong>目的主机不在本网络。</p>
+<h4 id="2-分类的IP地址"><a href="#2-分类的IP地址" class="headerlink" title="2.分类的IP地址"></a>2.分类的IP地址</h4><p>IP地址就是互联网上每一台主机的每一个接口分配一个在全世界范围内唯一的32位标识符。IP地址现在由<strong>互联网名字和数字分配机构ICANN</strong>（Internet Corporation for Assigned Names and Numbers)进行分配。</p>
+<p>IP地址的<strong>第一个字段</strong>是网络号，标志主机所连接到的网络。一个网络号在整个互联网范围内是唯一的。<strong>第二个字段</strong>是主机号，它标志该主机</p>
+<p>![](D:\1\奇技淫巧\photoDon’t delete\IP网络号字段.png)</p>
+<p>$ IP地址 :: = {&lt;网络号&gt;,&lt;主机号&gt;}$</p>
+<ul>
+<li>A类、B类和C类网络号字段数分别是1、2和3.网络号字段的最前面有1-3位是类别位，数值分别是0,10，110。</li>
+<li>A类、B类和C类地址的主机号分别为3、2和1。</li>
+<li>D类地址用于多播。</li>
+<li>E类地址保留为以后使用。</li>
+</ul>
+<h4 id="3-常用的3类地址"><a href="#3-常用的3类地址" class="headerlink" title="3.常用的3类地址"></a>3.常用的3类地址</h4><ul>
+<li>A类 主机号占3个字节，因此每个A类网络最大主机数是$2^{24}-2$。全0主机号字段表示“这个”，保留地址意思是“本网络”，例如某主机IP5.6.7.8那么其本地网络就是5.0.0.0。全1表示网络上所有的主机。A类共有$2^{31}$个地址。</li>
+<li>B类 两个字节，前面两位固定，剩下14位分配网络号。14位不可能全0和全1。<strong>所以不需要减2</strong>。但是<strong>128.0.0.0</strong>是不指派的，B类最小网路地址是<strong>128.1.0.0</strong>。所以网络数是$2^{14}-1$。B类共$2^{30}$地址。</li>
+<li>C类 三个字节网络号，110。网络号还有21位可以分配。<strong>192.0.0.0</strong>不指派，C类<strong>192.0.0.0</strong>不指派，可以使用的最小网络地址是<strong>192.0.1.0</strong>。这样C类地址可以指派的网络总数是$2^{21}-1$。共$2^{29}$地址。</li>
+</ul>
+<p>![](D:\1\奇技淫巧\photoDon’t delete\IP分配范围.png)</p>
+<h4 id="4-IP地址和硬件地址"><a href="#4-IP地址和硬件地址" class="headerlink" title="4.IP地址和硬件地址"></a>4.IP地址和硬件地址</h4><p>![](D:\1\奇技淫巧\photoDon’t delete\network\ip地址与硬件地址.png)</p>
+<p>数据从高层向底层传输。网络层和网络层以上使用IP地址，数据链路层及其以下的使用硬件地址。</p>
+<p>![](D:\1\奇技淫巧\photoDon’t delete\network\不同层次的地址1.png)</p>
+<p>![](D:\1\奇技淫巧\photoDon’t delete\network\不同层次的地址.png)</p>
+<ol>
+<li>路由器只根据目的站的IP地址的网络号进行选择。</li>
+<li>局域网链路层只看到MAC帧。IP数据报被封装在MAC帧中，MAC帧在不同网络上传送时，其MAC帧首部中的源地址和目的地址发生变化。图中可以看出，MAC从H1到R1传送，源地址和目的地址是HA1和HA3，R1收到帧后，重新添加源地址和目的地址HA4和HA4。</li>
+</ol>
+<h4 id="5-地址解析协议ARP"><a href="#5-地址解析协议ARP" class="headerlink" title="5.地址解析协议ARP"></a>5.地址解析协议ARP</h4><p><strong>知道了IP地址，如何找到其对应的MAC地址呢？</strong></p>
+<p>![](D:\1\奇技淫巧\photoDon’t delete\network\ARP协议的作用.png)</p>
+<p>还有一个RARP逆地址解析协议，现在的DHCP协议包含了RARP，不需要再讲。</p>
+<ul>
+<li><strong>ARP解决</strong>这个问题的方法是在主机ARP高速缓存中存放一个从<strong>IP地址到硬件地址的映射表</strong>，并且这个映射表还经常动态更新（新增或超时删除）。</li>
+</ul>
+<p>A向B发数据报，先在ARP高速缓存中查看B的IP地址，如果有再找ARP映射表，找到硬件地址就放到MAC帧中。如果B刚刚加入网络，找不到B硬件地址，则：</p>
+<p>![](D:\1\奇技淫巧\photoDon’t delete\network\ARP工作原理.png)</p>
+<ul>
+<li>ARP找硬件地址步骤：</li>
+</ul>
+<ol>
+<li>A发送ARP请求广播。</li>
+<li>网络上所有主机收到广播信息。</li>
+<li>B收到请求，向A发送自己地址。（B可以收到A的所有ARP缓存信息，方便以后和本网络（局域网）中所有主机通信）。</li>
+<li>A收到B地址更新ARP高速缓存。</li>
+</ol>
+<ul>
+<li><strong>生存时间</strong>：10~20min。超时就剔除那个硬件地址。（防止某个时刻B的硬件更换导致硬件地址变化）。</li>
+<li><strong>实际是按照硬件地址通信的</strong>，那么为什么还要有IP呢？</li>
+</ul>
+<p>全世界不同网络使用不同的硬件地址，这些网络互相通信就必须做硬件地址转换工作，会使网络十分复杂。IP就屏蔽了这个问题。</p>
+<h4 id="6-IP数据报格式"><a href="#6-IP数据报格式" class="headerlink" title="6.IP数据报格式"></a>6.IP数据报格式</h4><p>TCP/IP中各种数据格式常常以32位（4字节）描述。</p>
+<p>![](D:\1\奇技淫巧\photoDon’t delete\network\IP数据报格式.png)</p>
+<ol>
+<li>首部。</li>
+</ol>
+<p>5个4字节描述（共20字节，每个4*8=32位）。</p>
+<ul>
+<li><strong>版本</strong> 4位，IP协议的版本，双方通信的IP版本必须一致。</li>
+<li><strong>首部长度</strong> 4位，可表示最大十进制数是15。一般是0101（5,5*4=20），当首部长度为最大值1111，则60字节（15*4）。</li>
+<li><strong>区分服务</strong> 占8位，用来获得更好的服务。这个字段在旧的标准叫做服务类型。实际一直没用过。</li>
+<li><strong>总长度</strong> 总长度指首部和数据之和的长度，单位为字节。总长度为16位，数据报最大长度为$2^{16}-1$字节。<strong>MTU</strong>(Maximum Transfer Unit)。当一个IP数据报封装成链路层的帧时，此数据报的总长度一定不能超过下面数据链路层规定的MTU值。当超过就要分片。</li>
+<li><strong>标识</strong> 占16位，IP软件有一个计数器，产生一个数据报计数器加1，赋给标识字段，解决IP数据报不是按序接收的问题。</li>
+<li><strong>标志</strong> 占3位，目前只有两位有意义。最低位MF=1，表示后面还有分片，MF=0表示最后数据分片中最后一个。中间一位DF=1表示不能分片，DF=0允许分片。</li>
+<li><strong>片偏移</strong> 占13位。较长的分组在分片后，某片在原分组中的相对位置，相对用户数据字段的起点。片偏移以8个字节为偏移单位，每个分片长度一定是8字节的整数倍。</li>
+<li><strong>生存时间</strong> 8位，TTL(Time To Live)，表明这是数据报在网络中的寿命。发出数据报的源点设置这个字段。其目的是防止无法交付的数据报无限制地在互联网兜圈子。现在TTL指传几跳路由器，经过一个路由器就减一。初始TTL=1只能在本地局域网络传送。</li>
+<li><strong>协议</strong> 占8位，协议字段指出数据报携带的数据是使用何种协议，以便使目的主机的IP层知道应将数据部分交给上层哪个协议处理。</li>
+<li><strong>首部检验和</strong> 16位，只检验数据报的首部，不检验数据部分可以减少工作量。检验方法如图：</li>
+</ul>
+<p>![](D:\1\奇技淫巧\photoDon’t delete\network\ip检验首部和.png)</p>
+<p><strong>发送方</strong>将所有首部划分为16位序列，所有16位相加计算反码写入检验和字段。</p>
+<p><strong>接收方</strong>收到数据报后将首部的所有16位再使用反码算数相加，得到的和计算反码和数据报中的检验和字段相加，结果必为0，否则出错。</p>
+<ul>
+<li><p><strong>源地址</strong> 32位。</p>
+</li>
+<li><p><strong>目的地址</strong> 32位。</p>
+</li>
+<li><p><strong>可变部分</strong> 可变从1-40字节不等。用来支持排错、测量以及安全等措施。实际上很少使用（增加计算开销）。</p>
+</li>
+<li><p>路由表中主要信息：</p>
+</li>
+</ul>
+<p>$(目的网络地址，下一跳地址)$</p>
+<p>![](D:\1\奇技淫巧\photoDon’t delete\network\ip路由表信息.png)</p>
+<ol start="2">
+<li>默认路由</li>
+</ol>
+<p>![](D:\1\奇技淫巧\photoDon’t delete\network\默认路由.png)</p>
+<p>主机发送IP数据报时要查找路由表，如果一台主机连接在一个小网络上，这个网络只用一台路由器连接，那么使用默认路由。</p>
+<ol start="3">
+<li>分组转发</li>
+</ol>
+<p>路由器收到数据报，从路由表知道下一跳IP地址后，利用ARP将IP地址转换为硬件地址放入MAC帧首部，从而送给下一跳路由器或主机。</p>
+<h4 id="7-划分子网"><a href="#7-划分子网" class="headerlink" title="7.划分子网"></a>7.划分子网</h4><ol>
+<li>从两级IP地址到三级IP地址</li>
+</ol>
+<p>两级IP地址（网络号+主机号）问题：</p>
+<ul>
+<li><p>浪费。A类主机数超过1000万，B类超过6万。很多公司宁愿申请A和B类也不想要C。造成IP资源浪费。</p>
+</li>
+<li><p>每一个物理网络分配网络号使得路由表太大，网络性能变差。</p>
+</li>
+</ul>
+<p><strong>三级IP</strong>增加子网号字段：<strong>划分子网</strong>。</p>
+<p>$ IP地址 ::={&lt;网络号&gt;，&lt;子网号&gt;，&lt;主机号&gt;}$</p>
+<ul>
+<li>其他网络发给本单位的IP数据报，根据网络号找到本单位网络，本网络收到后，按照子网号找到目的子网。</li>
+</ul>
+<p>![](D:\1\奇技淫巧\photoDon’t delete\network\划分子网.png)</p>
+<p>![](D:\1\奇技淫巧\photoDon’t delete\network\划分子网1.png)</p>
+<ol start="2">
+<li>子网掩码</li>
+</ol>
+<p>使用子网掩码找到子网中的目的主机。</p>
+<p>![](D:\1\奇技淫巧\photoDon’t delete\network\子网掩码.png)</p>
+<p>不管网络有没有划分子网，只要把子网掩码和IP地址进行按位与，就能得到网络地址。</p>
+<p>如果网络没有划分子网，路由器就默认使用<strong>默认子网掩码</strong>。</p>
+<p>![](D:\1\奇技淫巧\photoDon’t delete\network\默认子网掩码.png)</p>
+<p>路由器现在交换信息，必须把自己的子网掩码告诉相邻路由器，这样路由表还给出了每个网络的子网掩码。</p>
+<ul>
+<li>减少了可用主机数。</li>
+<li><strong>划分子网的分组转发</strong>：</li>
+</ul>
+<p>$(目的网络地址，下一跳地址，子网掩码)$</p>
+<ol>
+<li>收到的数据报提取IP地址D。</li>
+<li>判断直接交付。子网掩码与D按位与，得到网络号和<strong>本网络</strong>不匹配间接交付执行3，匹配直接交付。</li>
+<li>路由表有D特定主机路由，则根据路由表IP发送下一跳，否则4。</li>
+<li>对路由表每一行按位与得到结果N。若N与某行网络地址匹配，则发给下一跳，否则5。</li>
+<li>发送默认路由，否则6。</li>
+<li>分组出错。</li>
+</ol>
+<p>![](D:\1\奇技淫巧\photoDon’t delete\network\子网分组转发.png)</p>
+<p>![](D:\1\奇技淫巧\photoDon’t delete\network\子网交付过程.png)</p>
+<h4 id="8-构造超网-（CIDR"><a href="#8-构造超网-（CIDR" class="headerlink" title="8.构造超网 （CIDR)"></a>8.构造超网 （CIDR)</h4><p><strong>无分类域间路由选择CIDR</strong>(Class Inter-Domain Routing)。</p>
+<p>1）消除了传统的A类、B类和C类地址以及划分子网概念。把32位地址划分前后两个部分，前面的部分是<strong>网络前缀</strong>，后面的部分指明主机。</p>
+<p>$IP地址 ::={&lt;网络前缀&gt;，&lt;主机号&gt;}$</p>
+<p>在IP地址后面加上斜线“/”写上网络前缀所占的位数。例如：206.0.64.0/18</p>
+<p>2）网络前缀都相同的连续IP组成一个“CIDR地址块”。只要知道CIDR地址块中的任何一个地址，就可以知道地址块的起始地址（最小地址）和最大地址。使用<strong>32位地址掩码</strong>。</p>
+<p>3）最长前缀匹配。超网路由，网络前缀和下一跳地址组成。每次匹配可能会有多条匹配结果，选取匹配前缀最长的。</p>
+<p>4）使用<strong>二叉线索</strong>查找路由表。</p>
+<p>![](D:\1\奇技淫巧\photoDon’t delete\network\二叉线索搜索树.png)</p>
+<h4 id="9-网际控制报文协议ICMP"><a href="#9-网际控制报文协议ICMP" class="headerlink" title="9.网际控制报文协议ICMP"></a>9.网际控制报文协议ICMP</h4><p>![](D:\1\奇技淫巧\photoDon’t delete\network\ICMP报文格式.png)</p>
+<ul>
+<li>有<strong>ICMP差错报告报文</strong>和<strong>ICMP询问报文</strong> 两类。</li>
+</ul>
+<p>![](D:\1\奇技淫巧\photoDon’t delete\network\ICMP报文数据.png)</p>
+<p>1）终点不可达。 当路由器或主机不能交付数据报时就向源点发送终点不可达报文。</p>
+<p>2）时间超过 当数据报的生存时间为0，丢弃该数据包，还要向源点发送时间超过报文。<strong>或</strong>终点在预定时间内不能收到数据报的全部数据片，就将数据报片丢弃，并向源点发送时间超过报文。</p>
+<p>3）参数问题 数据报首部中有字段的值不正确时，丢弃该数据报，并向IP发送参数问题报文。</p>
+<p>4）改变路由（重定向） 路由器把改变报文发送给主机，让主机知道下次应该发给另外的路由器。</p>
+<p>5）回送请求和回答 由主机或路由向特定目的主机发出询问。收到此报文的主机向源主机或路由器发送ICMP回送回答报文。主要来测试目的站是否可达以及了解相关状态。</p>
+<p>6）时间戳请求和回答。 I请求某台主机回答当前日期和时间。可用于时钟同步和时间测量。</p>
+<ul>
+<li><p>应用</p>
+<p><strong>PING</strong>测试两主机连通性。</p>
+<p><strong>traceroute（unix，windows 是tracert）</strong> 跟踪从源点到终点的路径。</p>
+</li>
+</ul>
+<h3 id="10-路由选择协议"><a href="#10-路由选择协议" class="headerlink" title="10. 路由选择协议"></a>10. 路由选择协议</h3><ol>
+<li>分层次的路由选择协议。</li>
+</ol>
+<p>1）互联网的规模非常大。路由器如果要知所有网络路径，路由表非常大处理费时。</p>
+<p>2）许多单位不愿意外界了解自己的布局细节但是还想连接到互联网上。</p>
+<p>所以，分成很多自治系统（Autonomous System ,AS），一个AS对其他AS表现出的是一个单一的和一致的路由选择策略。</p>
+<p>选择协议分为两类：<strong>内部网关协议IGP（Interior Gateway Protocol）</strong>和<strong>外部网关协议EGP（External Gateway Protocol）</strong>。</p>
+<p>IGP：自治系统内部使用的路由选择协议，与其他自治系统选择什么路由协议无关。如RIP和OSPF。<strong>域内路由选择</strong>。</p>
+<p>EGP：不同的自治系统间的协议。例如BGP版本4（BGP-4）。<strong>域间路由选择</strong>。</p>
+<ol start="2">
+<li><strong>RIP</strong>（Routing Information Protocol）</li>
+</ol>
+<p>基于距离向量的路由选择协议。距离定义：每经过一跳路由器就+1。例如直连路由是1。所以RIP适用于（小型网络）。</p>
+<ul>
+<li>RIP不能在两个主机间同时使用多个路由，RIP选择一条最少路由器的路由，哪怕还存在另一条高速但路由器较多的路由。</li>
+<li>仅和相邻路由交换信息。</li>
+<li><strong>距离选择算法</strong></li>
+</ul>
+<p>1）对地址为X的相邻路由发来的RIP报文，把“下一跳”字段中的地址改为X，并把所有“距离”加1。每一个项目都有三个关键数据：目的网络N，距离d，下一跳路由器X。</p>
+<p>2）对修改后的RIP报文每一个项目：</p>
+<p>若原来路由表<strong>没有</strong>目的网络N，则把该项目添加到路由表中。</p>
+<p>否则（有N）：</p>
+<p>若下一跳路由器是X，则把收到的项目替换为原来的路由表中的项目。</p>
+<p>否则（到目的网络N的下一跳不是X）：</p>
+<p>收到的项目中的距离d小于路由表中的距离，则进行更新。否则什么也不做。</p>
+<p>3）3分钟还没有收到相邻路由器的更新路由表，则把相邻路由器记为不可达的路由器，即距离设置为<strong>16</strong>。</p>
+<p>4）返回。</p>
+<p>这个算法基础是<strong>Bellman-Ford算法</strong>。（求A到B最短路径）</p>
+<p>例题<strong>直接看书P155页 例题</strong>，看一眼如何更新表就懂了。</p>
+<ul>
+<li>RIP协议的报文格式</li>
+</ul>
+<p>![](D:\1\奇技淫巧\photoDon’t delete\network\Rip协议格式.png)</p>
+<p>一个RIP报文最多携带25个路由，所以最大长度4+20*25=504字节。<strong>使用UDP传送</strong>。</p>
+<p>RIP的首部占4个字节，其中命令字段指出报文的意义。例如1表示请求路由信息，2表示请求路由信息的响应或未被请求而发出的路由更新报文。首部后面的必为0为了4字节对齐。</p>
+<ul>
+<li>RIP协议存在的问题</li>
+</ul>
+<p>当网络出现故障时，要经过较长时间才能将此信息传送到所有路由器。<strong>好消息传得快，坏消息传的慢</strong>。例子：</p>
+<p>![](D:\1\奇技淫巧\photoDon’t delete\network\Rip协议的限制.png)</p>
+<p>图中“1,1，直接“指到网络1,1跳，直接交付。 网络1出现了故障，R1无法到达网1。于是路由器R1把到网1的距离改为16。但是，很可能经过30秒钟后R1才把更新信息发送给R2。R2可能已经先把自己的路由表发给R1，其中有”1,2，R1“这一项。</p>
+<p>R1收到R2的更新报文后，把1,2，R1更新为1,3，R2。之后会再把更新后的信息发给R2。R2又更新自己的路由表为1，4，R1。如此往复直到加到16。</p>
+<ol start="3">
+<li><strong>OSPF</strong> 开放最短路径优先(Open Shortest Path First)</li>
+</ol>
+<p>它是为克服RIP的缺点在1989年开发出来的。</p>
+<p>使用了Dijkstra提出的<strong>最短路径算法SPF</strong>。</p>
+<p>特点：</p>
+<p>1）向本自治系统中所有路由器发送信息。使用<strong>洪泛法</strong>。路由器通过所有输出端口向所有相邻路由器发送信息。而每一个相邻路由器又再将此信息发往所有相邻路由器。</p>
+<p>2）发送的信息就是<strong>本路由器相邻的所有路由器的链路状态</strong>。<strong>度量</strong>表示费用、距离、时延、带宽等等，这些都是网络管理人员决定的，较为灵活。</p>
+<p>3）只有链路发生变化时才会向所有路由器用洪泛法发送此信息。</p>
+<p>OSPF将一个自治系统再划分为若干个更小的范围，叫做区域。图4-34就表示一个自治系统划分为4个区域。</p>
+<p>![](D:\1\奇技淫巧\photoDon’t delete\network\OSPF区域.png)</p>
+<p>这样洪泛法就作用于每个区域内。上层叫<strong>主干区域</strong>，R3、R4和R7是<strong>区域边界路由器</strong>。R6是<strong>自治系统边界路由器</strong>。（和其他自治系统连接）</p>
+<p>![](D:\1\奇技淫巧\photoDon’t delete\network\OSPF格式.png)</p>
+<p>使用24字节的首部长度：</p>
+<p>1）版本。当前版本为2。</p>
+<p>2）类型。5种类型中的一种。</p>
+<p>3）分组长度。包括OSPF首部在内的分组长度。</p>
+<p>4）路由器标识符。发送改分组的路由器接口的IP地址。</p>
+<p>5）区域标识符。分组属于区域的标识符。</p>
+<p>6）检验和。用来检验分组中的差错。</p>
+<p>7）鉴别类型。0（不用）1（口令）。</p>
+<p>8）鉴别。 鉴别类型为0填0。鉴别类型1填8个字符的口令。</p>
+<h3 id="11-外部网关协议BGP"><a href="#11-外部网关协议BGP" class="headerlink" title="11.外部网关协议BGP"></a>11.外部网关协议BGP</h3><p>边界网关协议（BGP）</p>
+<p>不同自治区域使用BGP的原因有：</p>
+<ol>
+<li><p>互联网规模太大。路由表维持开销太大。</p>
+</li>
+<li><p>不同自治区域用的协议可能不同。而且有的自治区域不喜欢让别的自治区域流量通过本区域。</p>
+</li>
+</ol>
+<p>BGP采用<strong>路径向量路由选择协议</strong>，满足管理员的条件下，选择比较好的路径，并非找一条最佳路径。</p>
+<p>一个BGP发言人与其他AS的BGP发言人要交换信息，首先建立TCP连接，端口号179，然后在此连接上交换BGP报文以建立BGP会话。</p>
+<p>![](D:\1\奇技淫巧\photoDon’t delete\network\BGP和AS的关系.png)</p>
+<p>有了BGP会使得路由表简化很多，BGP协议交换路由信息的结点数量级是自治系统个数的量级，这要比网络数小很多，只要找对正确的BGP发言人，就可以发送数据报，简化路由表信息。</p>
+<ul>
+<li>BGP-4的4种报文</li>
+</ul>
+<p>1）OPEN（打开）报文，用来和相邻的另一个BGP发言人建立关系，使通信初始化。</p>
+<p>2）UPDATE（更新）报文，用来通告某一路由信息，以及列出要撤销的多条路由。</p>
+<p>3）KEEPALIVE（保活），用来周期性地证实邻站的连通性。</p>
+<p>4）NOTIFICATION（通知）报文，用来发送检测到的差错。</p>
+<ul>
+<li>BGP路由表包括目的网络前缀，下一跳路由以及到达该网络经过的自治系统序列。（如果一个BGP收到了其他BGP的路径通知，检查本自治系统是否在路径序列中，防止兜圈子）。</li>
+</ul>
+<p>![](D:\1\奇技淫巧\photoDon’t delete\network\BGP报文格式.png)</p>
+<ul>
+<li><p>标记用来鉴别BGP报文，不使用鉴别，标记全部置1。长度字段指出包括通用首部在内的整个BGP报文长度，最小19，最大4096。类型1-4，上述BGP报文中的一种。</p>
+</li>
+<li><p>OPEN报文共有6个字段，即版本</p>
+</li>
+</ul>
+<h3 id="12-IPV6"><a href="#12-IPV6" class="headerlink" title="12.IPV6"></a>12.IPV6</h3><p>IPV6将地址空间增大到128位，相当于IPV4的$2^{96}$倍。</p>
+<p>![](D:\1\奇技淫巧\photoDon’t delete\network\IPV6格式.png)</p>
+<ul>
+<li>首部固定40字节。</li>
+<li><strong>版本</strong> 占4位。协议的版本，IPV6是6.</li>
+<li><strong>通信量类</strong> 占8位，为了区分不同的IPV6数据类型和优先级。</li>
+<li><strong>流标号</strong> 占20位。<strong>流</strong>指的是从特定源点到特定终点的一系列数据报，流所经过的路径上路由器都保证指明的服务质量。属于同一个流的数据报都有一样的流标号。</li>
+<li><strong>有效载荷长度</strong> 占16位。IPV6数据报除基本首部以外的字节数。这个字段的最大值是64KB。</li>
+<li><strong>下一个首部</strong> 占8位。</li>
+</ul>
+<p>1）IPv6没有扩展首部时，指明后面的数据应该交付IP层哪一个协议。</p>
+<p>2）出现扩展首部时，下一个字段的值标识第一个扩展首部的类型。</p>
+<ul>
+<li><strong>跳数限制</strong> 占8位。防止数据报在网络中无限期存在。最大255跳。</li>
+<li><strong>源地址</strong> 128位。发送数据报的IP地址。</li>
+<li><strong>目的地址</strong> 128位。接收数据报的IP地址。</li>
+</ul>
+<ol>
+<li><strong>IPV6地址</strong></li>
+</ol>
+<p>1）<strong>单播</strong> 传统的点对点通信。</p>
+<p>2）<strong>多播</strong> 一点对多点通信。</p>
+<p>3）<strong>任播</strong> 终点是一组计算机，数据报只交付其中一个，通常是距离较近的那个。</p>
+<p>2.<strong>冒号十六进制法</strong></p>
+<p>![](D:\1\奇技淫巧\photoDon’t delete\network\十六进制冒号法.png)</p>
+<p>![](D:\1\奇技淫巧\photoDon’t delete\network\v6压缩.png)</p>
+<p>CIDR无分类网络地址同样可以适用。直接在后面加上/。</p>
+<p>![](D:\1\奇技淫巧\photoDon’t delete\network\IPV6无分类.png)</p>
+<ul>
+<li>地址分类</li>
+</ul>
+<p>![](D:\1\奇技淫巧\photoDon’t delete\network\IPV6地址分类.png)</p>
+<p>1） 未指明地址。16字节全0地址。只能为某个主机当源地址适用，使用条件是这个主机还未分配IP地址。仅此一个。</p>
+<p>2）环回地址。功能和V4一样。仅此一个。</p>
+<p>3）多播地址。功能和V4一样。1/256个。</p>
+<p>4）本地链路多播地址。有些主机没有连接到互联网上，占1/1024。</p>
+<p>5）全球单播地址。 如图。</p>
+<ol start="3">
+<li><strong>从IPV4向IPV6过渡</strong></li>
+</ol>
+<p>1）<strong>双协议栈</strong></p>
+<p>一部分主机装有IPV4和IPV6两个协议栈。这样这个主机可以两种类型的网络数据通信。使用<strong>DNS</strong>查询目的主机使用的是那种协议。</p>
+<p>![](D:\1\奇技淫巧\photoDon’t delete\network\双协议栈.png)</p>
+<p>2）<strong>隧道技术</strong></p>
+<p>IPv6数据报进入IPv4网络时，使用IPv4数据报封装IPv6。这样就可以在IPv4网络中传播。在离开v4网络时，只交付数据部分（即v6）。双协议栈的主机想知道封装的是一个v6数据报，v4首部协议字段置为41。</p>
+<ol start="4">
+<li><strong>ICMPv6</strong></li>
+</ol>
+<p>也需要使用类似ICMP反馈差错信息。</p>
+<p>![](D:\1\奇技淫巧\photoDon’t delete\network\ICMPv6分类.png)</p>
+<h3 id="13-IP多播"><a href="#13-IP多播" class="headerlink" title="13.IP多播"></a>13.IP多播</h3><ul>
+<li>一对多通信。一个源点发送给很多终点。</li>
+<li></li>
+</ul>
+<p>![](D:\1\奇技淫巧\photoDon’t delete\network\单播与多播比较.png)</p>
+<ul>
+<li>多播实际上是IP地址中D类地址。只能用于目的地址，不能用于源地址。没有ICMP差错报文。</li>
+<li>协议。IGMP网际组管理协议。</li>
+</ul>
+<p>![](D:\1\奇技淫巧\photoDon’t delete\network\IGMP.png)</p>
+<p>IGMP让连接在本地局域网上的多播路由器知道本局域网上是否有主机参与或退出了某个多播组。</p>
+<p>配合<strong>多播路由选择协议</strong>一起工作，</p>
+<p>![](D:\1\奇技淫巧\photoDon’t delete\network\多播路由选择协议.png)</p>
+<ul>
+<li>IGMP两个工作阶段</li>
+</ul>
+<p>1）加入。某台主机加入多播组时，该主机应向多播组的多播地址发送一个IGMP报文，声明自己要成为该组的成员。本地多播路由器收到IGMP报文后，还要利用多播路由选择协议把这种组成员关系发给其他多播路由器。</p>
+<p>2）删除。本地多播路由器周期性探询主机，查询这些主机是否还是组的成员。只要有一台主机对某个组响应，那么多播路由器就认为这个组是活跃的。只要几次探询后没有一个主机响应，那么就不会再把这个组的成员关系转发给其他转播路由器。</p>
+<ul>
+<li>多播路由选则协议</li>
+</ul>
+<p>多播路由选择协议尚未标准化。（此部分学习了解一下即可）</p>
+<p>多播路由选择实际上要找出以源主机为根节点的多播转发树。转发数据报使用如下方法：</p>
+<p>1）<strong>洪泛与剪除</strong></p>
+<p>这种方法适用于较小的多播组，所有组成员接入的局域网也都是相邻接的。使用的是<strong>反向路径广播</strong>（RPB）。</p>
+<p>洪泛就是广播，剪除就是。</p>
+<p>洪泛与剪除示例：</p>
+<p>![](D:\1\奇技淫巧\photoDon’t delete\network\洪泛与剪除.png)</p>
+<p>如果多播转发树上的某个路由器发现它的下游树枝没有多播组成员，则下游树枝一起<strong>剪除</strong>。图中虚线椭圆就是剪除。当有新成员增加，再加回多播转发树。</p>
+<p>2）<strong>隧道技术</strong></p>
+<p>适用于多播组位置在地理上分布很分散。</p>
+<p>路由器R1和R2不支持多播，那么R1和R2需要对多播数据报封装，再加上普通数据报首部，使之成为向单一目的站发送的单播数据报，然后“隧道”一样从R1发到R2。</p>
+<p>![](D:\1\奇技淫巧\photoDon’t delete\network\IP多播隧道技术.png)</p>
+<p>3）<strong>基于核心的发现技术</strong></p>
+<p>对每一个多播组G指定一个核心路由器，给出它的IP单播地址。核心路由器按照前面的方法创建出多播组G的转发树。如果有一个路由器R1向核心路由器发送数据报，那么它途中经过的每一个路由器都要检查其内容。</p>
+<p>书上没讲明白（P184）。了解一下算了。</p>
+<h3 id="14-虚拟专用网和网络地址转换NAT"><a href="#14-虚拟专用网和网络地址转换NAT" class="headerlink" title="14 虚拟专用网和网络地址转换NAT"></a>14 虚拟专用网和网络地址转换NAT</h3><ol>
+<li><strong>虚拟专用网</strong></li>
+</ol>
+<p>IPv4中有内部网络专用地址（为了防止和公网地址重叠，产生二义性问题）：</p>
+<p>1）<code>10.0.0.0</code> 到 <code>10.255.255.255</code>(10.0.0.0/8，24位块)对应A类地址</p>
+<p>2）<code>172.16.0.0</code>到<code>172.31.255.255</code>(172.16.0.0/12它又称为20位块) 对应B类</p>
+<p>3）<code>192.168.0.0</code>到<code>196.168.255.255</code>（192.168.0.0/16，16位块）对应C类</p>
+<p>这样的IP地址叫<strong>专用互联网</strong>或<strong>本地互联网</strong>。</p>
+<ul>
+<li>利用公用的作为本机构专用网之间的通信载体，这种专用网叫<strong>虚拟专用网VPN(Virtual Private Network)<strong>，用于机构的内部通信。所有经过互联网传输的</strong>数据要加密</strong>。</li>
+<li>IP隧道技术</li>
+</ul>
+<p>隧道技术就是封装（把原来数据放到新的数据报，以方便通信）。</p>
+<p>![](D:\1\奇技淫巧\photoDon’t delete\network\虚拟专用网示例.png)</p>
+<p>从X到Y，源地址X、目的地址Y+真实数据报。A发到了R1，R1会对所有数据加密封装，发给R2.R2在解密，就知道发给Y。</p>
+<p>逻辑上看起来就是一个从R1到R2的直接路径（实际上经过了很多路由器传输），所以叫隧道。</p>
+<ol start="2">
+<li><strong>网络地址转换NAT</strong></li>
+</ol>
+<p>分到了本地专用地址（内部网络专用地址），但是需要和外网通信咋办？<strong>公网IPv4地址太少啦。</strong></p>
+<p>NAT就出来解决这个问题，一个NAT软件至少有一个有效的公网IP地址，使用NAT地址转换表来对应公网IP地址。</p>
+<p>![](D:\1\奇技淫巧\photoDon’t delete\network\NAT路由表.png)</p>
+<p>![](D:\1\奇技淫巧\photoDon’t delete\network\NAT工作原理.png)</p>
+<p>比如主机A向主机B发送信息，NAT路由器会将其地址<code>192.168.0.3</code>映射成<code>172.38.1.5</code>。B看到的A的地址实际上就是NAT的这个地址。B不知道A的实际地址是什么。B发给A信息目的地址就写NAT的IP就行。收到B的信息，NAT路由器根据NAT转换表转成A的<code>192.168.0.3</code>。</p>
+<p>有一个问题来了，我们家庭的路由器，实际就一个IP地址，为什么那么多设备都能访问外网？</p>
+<p>虽然只有一个公网IP地址，但是发明了<strong>端口号</strong>（运输层）啊！！！</p>
+<p>![](D:\1\奇技淫巧\photoDon’t delete\network\NAT端口号.png)</p>
+<p>这个新的表叫<strong>网络地址与端口号转换NAPT</strong>。实际上现在很多人还是叫NAT转换表。</p>
+<h3 id="15-多协议标记交换-MPLS-MultiProtocol-Label-Switching"><a href="#15-多协议标记交换-MPLS-MultiProtocol-Label-Switching" class="headerlink" title="15. 多协议标记交换 MPLS(MultiProtocol Label Switching)"></a>15. 多协议标记交换 MPLS(MultiProtocol Label Switching)</h3><p>增强IP功能的协议。采用面向连接的技术，每个分组携带一个叫做标记的小整数。当分组到达交换机时，交换机读取分组的标记，并采用标记值来检索分组标记，</p>
+<ul>
+<li>基本工作过程</li>
+</ul>
+<p>在传统的IP路由器查找路由表时，需要找最长匹配的前缀，耗时很大。MPLS对这个进行了优化。</p>
+<p>在MPLS入口处，给每一个IP数据报打上固定长度的标记，然后对打上标记的IP数据报用硬件转发，速度大大加快。</p>
+<p>使用硬件技术对打上标记的IP数据报进行转发成为标记交换，根据标记在数据链路层（硬件）上直接转发。</p>
+<p>![](D:\1\奇技淫巧\photoDon’t delete\network\MPLS工作原理.png)</p>
+<p>MPLS的基本工作流程书中没细讲，主要有：（了解一下）</p>
+<p>1）MPLS域指各LSR（标记交换路由器）使用专门的<strong>标记分配协议LDP</strong>交换报文，并找出特定标记相对应的路径，即<strong>标记交换路径LSP</strong>，如图中的ABCD。各LSR根据路径构造<strong>转发表</strong>。</p>
+<p>2）IP数据报进入MPLS就给它打标记，按照转发表发给下一个LSR。</p>
+<p>![](D:\1\奇技淫巧\photoDon’t delete\network\LDP协议.png)</p>
+<p>3）一个标记仅仅在两个标记交换路由器LSR之间才有意义。每经过一个LSR，LSR就要更换新的标记并转发，即把入标记换位出标记，这叫标记交换。</p>
+<p>如图中B从入口0收到标记为3的分组，要将出接口换为1并且标记重新打1。</p>
+<p>4）数据离开MPLS时，MPLS的出口结点就把MPLS标记删除，交付非MPLS路由器，按照普通的转发规则继续传递。</p>
+<ul>
+<li>MPLS中的重要概念 <strong>FEC转发等价类</strong></li>
+</ul>
+<p>转发等价类就是路由器按照同样方式对待的IP数据报的集合，即同样的接口转发到同样的下一跳地址，具有同样的服务类别和同样的丢弃优先级等。</p>
+<p>![](D:\1\奇技淫巧\photoDon’t delete\network\FEC的例子.png)</p>
+<p>划分FEC的方法不受限制，只接受管理员控制。图中是FEC用于负载平衡的例子。传统的路由选择H1和H2分别向H3和H4发送信息，都只能选择最短路径ABC，导致过载。FEC可以指定H2选择ADEC。</p>
+<ul>
+<li>MPLS的首部位置和协议格式</li>
+</ul>
+<p>![](D:\1\奇技淫巧\photoDon’t delete\network\MPLS首部位置.png)</p>
+<p>IP数据报首部之间插入4字节的MPLS首部。把加上MPLS的IP数据报封装成帧时，以太网字段单播时为$8847_{16}$和$8848_{16}$这样来判断是否使用MPLS。</p>
+<p>![](D:\1\奇技淫巧\photoDon’t delete\network\MPLS首部格式.png)</p>
+<p>1）标记值。 最大$2^{20}$。在设置MPLS标记时可以使用所有的20位。</p>
+<p>2）试验。 3位，目前保留用于试验。</p>
+<p>3）栈S 。1位，“标记栈”时使用。</p>
+<p>4）生存时间TTL。 8位，防止MPLS在MPLS兜圈子。</p>
+<h2 id="运输层"><a href="#运输层" class="headerlink" title="运输层"></a>运输层</h2><h3 id="1-运输层协议概述"><a href="#1-运输层协议概述" class="headerlink" title="1. 运输层协议概述"></a>1. 运输层协议概述</h3><p>端到端的通信实际上是两个主机中的应用进程之间的通信。</p>
+<p>运输层“复用”和“分用”。复用指的是发送方不同的应用进程都可以使用同一个运输层协议传送数据，而“分用”是指接收方的运输层在剥去报文的首部后能够把这些数据正确交付目的应用进程。</p>
+<p>![](D:\1\奇技淫巧\photoDon’t delete\network\运输层.png)</p>
+<p>运输层的两个主要协议：UDP(User Datagram Protocol)和TCP(Transmission Control Protocol)。</p>
+<p>![](D:\1\奇技淫巧\photoDon’t delete\network\运输层两个协议.png)</p>
+<p>按照OSI的术语，两个对等运输实体在通信时传送的数据单位叫<strong>运输协议数据单元</strong>。</p>
+<p>![](D:\1\奇技淫巧\photoDon’t delete\network\使用UDP和TCP的不同协议.png)</p>
+<p><strong>协议端口号</strong>通常又称为<strong>端口</strong>，虽然通信的终点是应用进程，但只要把所传送的报文交到目的主机的某个合适的目的端口，剩下的工作交由TCP或UDP来完成。（这里的端口主义和交换机或路由器上的端口区分，那个是硬件端口，这个是软件端口）。</p>
+<p>TCP/IP运输层用一个16位（<strong>共65535个</strong>）的端口号来标志一个端口。端口号只具有本地意义，它只是标记本计算机应用层中的各个进程在运输层交互时的层间接口。</p>
+<p>通信时，<strong>不仅要知道对方的IP地址，还要知道对方的端口号</strong>。</p>
+<ul>
+<li><strong>服务端</strong>使用的端口号。</li>
+</ul>
+<p>1）熟知端口号或系统端口号</p>
+<p>数值 0~1023。</p>
+<p>![](D:\1\奇技淫巧\photoDon’t delete\network\熟知端口号.png)</p>
+<p>2）登记端口号。数值 1024~49151。这类端口号为了没有熟知端口号的应用程序使用的。</p>
+<ul>
+<li><strong>客户端</strong>使用的端口号</li>
+</ul>
+<p>数值为49152~65535。这类端口号仅在客户进程运行时才动态选择，因此又叫<strong>短暂端口号</strong>。</p>
+<h3 id="2-UDP-用户数据报协议"><a href="#2-UDP-用户数据报协议" class="headerlink" title="2. UDP 用户数据报协议"></a>2. UDP 用户数据报协议</h3><p>UDP(User Datagram Protocol)只在IP的数据报服务上增加了很少的一点功能。</p>
+<p>1）无连接的。发送数据之前不需要建立连接，减少开销和发送数据之前的时延。</p>
+<p>2）尽最大努力 交付。不需要维护复杂的连接状况。</p>
+<p>3）面向报文的。发送方的UDP对应用程序交下来的报文，在添加首部后交付IP层。<strong>UDP一次交付一个完整的报文</strong>。如果报文太长，IP会对其进行分片，降低IP层的效率。</p>
+<p>![](D:\1\奇技淫巧\photoDon’t delete\network\UDP面向报文.png)</p>
+<p>4）没有拥塞控制。网络出现的拥塞不会使源主机发送速率降低。这对实时应用很重要。</p>
+<p>5）UDP支持一对一，一对多，多对一，多对多的交互通信。</p>
+<p>6）UDP的首部开销少，只有8个字节，比TCP的20字节要短。</p>
+<h3 id="3-UDP的首部格式"><a href="#3-UDP的首部格式" class="headerlink" title="3.UDP的首部格式"></a>3.UDP的首部格式</h3><p>![](D:\1\奇技淫巧\photoDon’t delete\network\UDP的首部格式.png)</p>
+<p>数据字段和首部字段。首部字段中划分的每个字段<strong>都是两个字节</strong>。</p>
+<p>1）源端口 源端口号。在需要对方回信时选用，不需要时全用0。</p>
+<p>2）目的端口 目的端口号。终点交付时必须使用。</p>
+<p>3）长度 UDP用户数据报的长度，最小值8（仅有首部）。</p>
+<p>4） 检验和 检测UDP用户数据报在传输时是否有错。有错就丢弃。</p>
+<p>UDP基于端口的复用：</p>
+<p>![](D:\1\奇技淫巧\photoDon’t delete\network\UDP基于端口的复用.png)</p>
+<p>比如UDP发现端口号不正确，丢弃该报文，由ICMP发送端口不可达差错报文给发送方。</p>
+<p>UDP计算检验和，UDP要在用户数据报之前加上<strong>12个字节的伪首部</strong>。计算检验和时<strong>临时</strong>加在数据报前，得到临时的UDP数据报。检验和就是按照这个临时的UDP用户数据包来进行计算。<strong>伪首部不向上传递也不想下传递</strong>，只是为了计算检验和。</p>
+<p>UDP的检验和是把首部和数据部分一起检验（和IP只检验首部不同）。</p>
+<p>![](D:\1\奇技淫巧\photoDon’t delete\network\计算UDP检验和.png)</p>
+<p>发送方把检验和字段记为0。伪首部以及UDP数据报看成许多16位子串。若UDP数据部分不是偶数字节，需要填入一个全零字节，按照<strong>二进制反码</strong>计算出16位字的和。将此二进制反码写入检验和字段，发送给目的主机。</p>
+<p>接收方收到UDP，按二进制反码求16位字的和，无差错其结果应全为1。否则就表明差错出现。</p>
+<p>差错检验能力并不强，但简单快速。</p>
+<h3 id="4-传输控制协议TCP"><a href="#4-传输控制协议TCP" class="headerlink" title="4.传输控制协议TCP"></a>4.传输控制协议TCP</h3><p>1） 面向连接。打电话一样，通信之前需要拨号建立连接，结束时需要挂断结束连接。</p>
+<p>2）TCP只能<strong>点对点</strong>。 端点对端点。</p>
+<p>3）TCP提供<strong>可靠交付</strong>的服务。 可以检查传送的数据无差错、不丢失、不重复并且按序到达。</p>
+<p>4）全双工通信。通信双方的应用进程在任何时候都可以发送数据。</p>
+<p>5）面向字节流。 流 指的是流入进程或者从进程流出的字节序列。虽然应用进程和TCP的交互是一次一个数据块，但是TCP把这些数据看成是一连串的无结构的字节流。TCP并不知道所传送的字节流的含义。TCP只保证收到的字节流和发送的字节流一样。</p>
+<p>![](D:\1\奇技淫巧\photoDon’t delete\network\TCP字节流.png)</p>
+<ul>
+<li>TCP的连接</li>
+</ul>
+<p>$套接字 socket=(IP地址 : 端口号)$ </p>
+<p>TCP连接 : :=${socket_1,socket_2}={(IP_1 : port_1),(IP_2,port_2)} $</p>
+<ul>
+<li>可靠传输原理</li>
+</ul>
+<p>1） 停止等待协议</p>
+<p>![](D:\1\奇技淫巧\photoDon’t delete\network\停止等待协议.png)</p>
+<p>正常情况下，A发送M1，B收到发送确认M1，A收到确认继续发送。</p>
+<p>超时情况下，A发送的M1可能丢失或者错误，B没收到或者收到错误的会没有任何响应。A一段时间没收到确认需要重发。</p>
+<p>所以，需要注意的要点是：</p>
+<p>1）A发送后必须保留发送数据的副本，以备重传。</p>
+<p>2）分组和确认分组都需要编号，确认哪个没收到哪个收到。</p>
+<p>3）合理的超时重传时间十分重要。</p>
+<ul>
+<li>确认丢失和确认迟到</li>
+</ul>
+<p>![](D:\1\奇技淫巧\photoDon’t delete\network\确认丢失和迟到.png)</p>
+<p>图中a的情况：</p>
+<p>1）B的确认丢失，A重发，B又收到M1，需要将M1扔掉。</p>
+<p>2）B需要重发M1确认报文，A发了两次M1说明没收到确认。</p>
+<p>图中b的情况：</p>
+<p>B的确认报文因为第一次的报文迟到了，所以A要丢弃一个确认报文。</p>
+<p>![](D:\1\奇技淫巧\photoDon’t delete\network\TCP信道利用率1.png)</p>
+<p>![](D:\1\奇技淫巧\photoDon’t delete\network\TCP信道利用率.png)</p>
+<p>U表示信道利用率。A发送分组时间是$T_D$，收到确认时间是$T_A$。可以发现这样信道利用率比较低，很长时间才能发送下一个数据，发明了流水线发送：（ARQ协议或滑动窗口协议）</p>
+<p>![](D:\1\奇技淫巧\photoDon’t delete\network\TCP流水线发送.png)</p>
+<ul>
+<li>连续ARQ协议。</li>
+</ul>
+<p>![](D:\1\奇技淫巧\photoDon’t delete\network\连续ARQ协议.png)</p>
+<p>发送窗口，一下子发送5个分组。收到一个确认，窗口就向前滑动一个。</p>
+<p><strong>累积确认方式，按序到达的最后一个分组确认</strong>。例如，12345中的3丢了，会收到2的确认报文，因为只有12是有序的，这里就要重新发345。</p>
+<ul>
+<li><strong>首部报文格式</strong></li>
+</ul>
+<p>![](D:\1\奇技淫巧\photoDon’t delete\network\TCP的首部报文格式.png)</p>
+<p>首部固定20字节，可选40字节，首部最长60字节。</p>
+<ul>
+<li><p>源端口 目的端口 。如字面意思。</p>
+</li>
+<li><p>序号。 4字节，$[0,2^{32}-1]$，序号增加到$2^{32}-1$后重新从0开始发。每一个字节都按顺序编号，当前发了301-400字节，那么下一个报文的序号是401。</p>
+</li>
+<li><p>确认。 <strong>期望收到对方下一个报文段的第一个数据字节的序号</strong>。比如B收到了A发送过来的501-600的数据。则发送601确认。若确认号等于N，则N-1个字节都收到了。</p>
+</li>
+<li><p>数据偏移。 占4位。记录数据的起始字段距离TCP报文起始距离多远。数据偏移的单位是32位字（以4字节作为基本单位），所以最大这个字段占4位最大15，15*4=60字节。所以TCP的首部长度最大60字节。</p>
+</li>
+<li><p>保留。 占6位，保留今后使用。</p>
+</li>
+<li><p>紧急URG。 URG=1时，紧急数据应该不能排队直接优先发送分组。</p>
+</li>
+<li><p>确认ACK。 连接建立后所有传送的报文段都为1。</p>
+</li>
+<li><p>推送PSH。 接收方收到PSH=1时，不能等缓冲区满才交付上层，要直接交付，事情紧急。</p>
+</li>
+<li><p>复位RST。 RST=1表示TCP发生严重错误，要释放连接。RST=1还可拒绝一个非法报文段。</p>
+</li>
+<li><p>同步SYN。 在建立连接时来同步序号。当SYN=1而ACK=0时，表明这是一个连接请求报文段。对方若同意建立连接，则应在响应的报文段中使SYN=1和ACK=1。因此SYN置1就表示这是一个连接请求或连接接受报文。</p>
+</li>
+<li><p>结束FIN。 用来释放一个连接。当FIN=1时，表明报文段发送方的数据已发送完毕，并要求释放运输连接。</p>
+</li>
+<li><p>窗口。 2字节。窗口值是[0,$2^{16}-1$]之间的整数。窗口指的是发送报文段的一方的接收窗口。窗口值告诉对方，从本报文段首部中的确认号算起，接收方目前允许对方发送的数据量，这是因为接收方的数据缓存空间是有限的。窗口值作为接收方让发送方设置其发送窗口的依据。</p>
+</li>
+<li><p>检验和。 占2字节。检验和字段检验的范围包括首部和数据两部分。</p>
+</li>
+<li><p>紧急指针。 占2字节。仅在URG=1时有意义。指出本报文段中紧急数据的字节数。紧急指针指出了紧急数据的末尾在报文段中的位置</p>
+</li>
+<li><p>选项。最长可达40字节。当没有选项时，TCP的首部是20字节。</p>
+</li>
+</ul>
+<h3 id="5-TCP可靠传输的实现"><a href="#5-TCP可靠传输的实现" class="headerlink" title="5. TCP可靠传输的实现"></a>5. TCP可靠传输的实现</h3><ol>
+<li>以字节为单位的滑动窗口</li>
+</ol>
+<p>![](D:\1\奇技淫巧\photoDon’t delete\network\构造滑动窗口.png)</p>
+<p>发送方A的发送窗口，发送窗口表示在没有收到B确认的情况下，A可以连续把窗口内的数据都发出去。凡是发过的数据都要暂时备份，以便超时重传。</p>
+<p>TCP标准不同意窗口前沿向后收缩，因为有可能已经发送过，收缩后表示没法送这些数据，会产生错误。</p>
+<p>![](D:\1\奇技淫巧\photoDon’t delete\network\发送窗口.png)</p>
+<p>p3-p1 发送窗口</p>
+<p>P2-P1 已发送但未收到确认。</p>
+<p>P3-P2 允许发送但未发送（可用窗口或有效窗口）</p>
+<p>详细的窗口滑动距离可以参考书 P 222。只要明白确认号是有序序列的下一个，都能说对。</p>
+<p>![](D:\1\奇技淫巧\photoDon’t delete\network\TCP缓存和窗口的关系.png)</p>
+<p>发送方：</p>
+<p>发送窗口只是发送缓存的一部分。已确认的数据应该从缓存删除，因此发送窗口和缓存的后沿是重合的。</p>
+<p>接收方：</p>
+<p>缓存存放按序到达、但尚未被应用程序读取的数据。未按序到达的数据。</p>
+<p>要点：</p>
+<p>1）A的发送窗口是根据B的接收窗口设置的，但同一时刻A的发送窗口并不和B的接收窗口一样大（网络传送窗口值需要经历一定的时间滞后）。A可能还要根据网络拥塞情况控制发送窗口的数值。</p>
+<p>2）接收方都是累积确认。但是不应该过分推迟发送确认，否则会导致发送方不必要的重传。</p>
+<ol start="2">
+<li>超时重传时间选择</li>
+</ol>
+<p>使用<strong>自适应算法</strong>设置重传时间。</p>
+<p>记录报文发出的时间，以及收到相应的确认时间，时间差就是<strong>报文段的往返时间RTT</strong>。TCP保留RTT的加权平均往返时间。</p>
+<p>![](D:\1\奇技淫巧\photoDon’t delete\network\TCP往返时间.png)</p>
+<p>建议$\alpha$=1/8。确认重传时间RTO：</p>
+<p>![](D:\1\奇技淫巧\photoDon’t delete\network\TCP超时重传时间.png)</p>
+<p>$新的RTT_{D}=（1-\beta)\times(旧的RTT_{D})+\beta \times |RTT_{s}-新的RTT样本|$</p>
+<p>$\beta=0.25$</p>
+<p>![](D:\1\奇技淫巧\photoDon’t delete\network\TCP重传时间示例.png)</p>
+<p>正常的RTO按照上面公式计算即可。对于需要重传的数据，每次重传一次，就直接把RTO=2*RTO。两倍的原来的RTO就行。</p>
+<ol start="3">
+<li>选择确认SACK</li>
+</ol>
+<p>![](D:\1\奇技淫巧\photoDon’t delete\network\SACK字节流不连续.png)</p>
+<p><strong>为了减少不必要的重传</strong>。每一个字节块都有两个边界，例如图中的L1和R1来标记接收方收到的字节。首部可变选项长度最大40字节，选项中先加上“允许SACK”。一个边界使用32位（4字节），所以一个标记需要8字节（L和R），还需要两个字节，一个指明使用SACK，一个指明这个选项占用多少字节。（书上也没讲清楚，看看得了）</p>
+<h3 id="6-TCP流量控制"><a href="#6-TCP流量控制" class="headerlink" title="6.TCP流量控制"></a>6.TCP流量控制</h3><p>流量控制指的是<strong>发送方发送数据不要太快，接收方来得及接收</strong>。</p>
+<p>![](D:\1\奇技淫巧\photoDon’t delete\network\滑动窗口机制进行流量控制.png)</p>
+<p>接收方B进行了流量控制，告诉A应该发多少。当rwnd=0 A只能等待不能发送。直到B发回新的ACK。</p>
+<p>有一种特殊情况，如果最后rwnd=0后，B有了新的缓存空间，给A发了新的确认和窗口，但是这个消息丢了，会导致A和B互相等待死锁。为了解决这种情况，设置持续计时器，持续计时器到时，A就发送<strong>零窗口探测报文段</strong>，对方就在这个探测报文段给出新的窗口值。</p>
+<ol>
+<li>TCP的传输效率</li>
+</ol>
+<p>缓存只管把当前窗口内的数据交付TCP，发送的数据直接由TCP去处理。</p>
+<p><strong>例子1</strong>：TCP何时发送数据关乎网络利用率。如果用户每次只发1个字节，那么加上头部40个字节（iP20+TCP20)共41字节。接收方发送确认信息40字节。这么一个字节就传送81个字节，利用率很低。</p>
+<p>书中提到两个方法：</p>
+<p>1）Nagle方法：应用程序把要发送的数据缓存到发送缓存，TCP先发送第一个数据字节，缓存后面到达的数据，收到确认后，把缓存区所有数据装成一个TCP报文一起发送，同时对后续的数据继续缓存，收到前一个确认再继续发送。Nagle规定，数据达到发送窗口一半或报文段的最大长度（MSS)就立即发送一个报文段。<strong>差不多是控制发送方接收窗口大小</strong>。</p>
+<p>2）糊涂窗口：糊涂窗口就是指例子1的情况，不断地发送1个字节，网络利用率很低。为了解决问题，规定让接收方等一段时间，接收缓存有足够空间或接收缓存有了一半空间。这两种情况下才让发送方发送一个长TCP。<strong>差不多是控制接收方窗口大小，不要有一点空间就着急告诉发送方</strong></p>
+<p>这两种方法可配合使用，达到效果。</p>
+<h3 id="7-TCP的拥塞控制"><a href="#7-TCP的拥塞控制" class="headerlink" title="7.TCP的拥塞控制"></a>7.TCP的拥塞控制</h3><p>拥塞控制就是防止过多的数据注入网络，这样可以使网络中的路由器或链路不至于过载。网络能够承受现有的网络负荷。拥塞控制是一个全局的过程，涉及所有的主机和路由器。</p>
+<p>简单地将处理机速率提高，可能会把瓶颈移到其他地方。比如某个结点缓存太小，我就给它弄成无限缓存，结果缓存排队的数据太多了，很多信息又全部重传，我这还没发出去你就又来一轮，越来越慢。<strong>拥塞控制是个全局的控制，所以说拥塞不能只看某一个地方，需要全局把控</strong>。</p>
+<p>流量控制是点对点通信量的控制。</p>
+<p>![](D:\1\奇技淫巧\photoDon’t delete\network\拥塞控制所起的作用.png)</p>
+<p>从控制理论的角度看拥塞控制，分为<strong>开环控制</strong>和<strong>闭环控制</strong>两种方法。</p>
+<p>开环控制就是设计网络时事先将有关发生的拥塞因素考虑周到，力求网络在工作时不产生拥塞。但一旦整个系统运行起来，就不再中途进行改正了。</p>
+<p>闭环控制基于反馈环路的概念，主要有：</p>
+<p>1）检测网络系统以便检测到拥塞在何时发生、何处发生。</p>
+<p>2）把拥塞发生的信息传送到可采取行动的地方。</p>
+<p>3）调整网络系统的运行以解决出现的问题。</p>
+<ul>
+<li>TCP的拥塞控制</li>
+</ul>
+<p>1）慢开始和拥塞避免</p>
+<p>基于窗口的拥塞控制。发送方维持一个叫做拥塞窗口cwnd的状态变量。拥塞窗口的大小取决于网络的拥塞程度，并且动态地变化。<strong>发送方让自己的发送窗口等于拥塞窗口。</strong></p>
+<p>原则：只要网络没有出现拥塞，拥塞窗口可以再增大一些，以便发送更多分组，提高网路利用率。但只要出现拥塞，就把拥塞窗口减小。</p>
+<p>只要发送的报文出现了丢失（需要重传）就判断为拥塞。</p>
+<p><strong>慢开始</strong>算法：当主机开始发送数据时，由于并不清楚网络状况，由小到大逐渐增大发送窗口，也就是由小到大逐渐增大拥塞窗口数值。</p>
+<p>刚开始cwnd设置为不超过2至4个SMSS（Sender Maximum Segment Size）最大报文段的数值。</p>
+<p>若SMSS&gt;2190字节，则设置初始拥塞窗口cwnd=2*SMSS。且不超过2个报文段。</p>
+<p>若SMSS&gt;1095字节且SMSS&lt;2190字节，则设置初始拥塞窗口cwnd=3*SMSS字节，且不超过3个报文段。</p>
+<p>若SMSS&lt;=1095字节，则cwnd=4*SMSS字节，不超过4个报文段。</p>
+<p>以此限制初始窗口的拥塞字节数。每收到一个对新的报文段确认后，拥塞窗口增加最多一个SMSS数值。</p>
+<p>$拥塞窗口cwnd每次的增加量=min(N,SMSS)$</p>
+<p>N是原先未被确认的，现在刚收到的确认报文段所确认的字节数。</p>
+<p>不难看出，当N&lt;SMSS时，拥塞窗口每次的增加量要小于SMSS。</p>
+<p>![](D:\1\奇技淫巧\photoDon’t delete\network\发送方wend的情况.png)</p>
+<p>使用慢开始算法，收到确认号就根据确认号扩大窗口，可以看到窗口是成倍增加的。例如：第一次发送的收到了（窗口内是1）2。那么窗口就是（2,3）期望收到4，变为4，下次（4,5,6,7），期望收到8，变为8。</p>
+<p><strong>拥塞避免</strong>算法不像慢开始算法成倍，它只加1（1指的是一个MSS最大数据报文段），<strong>更加缓慢地增大</strong>。</p>
+<p>为了防止拥塞cwnd增长过大，设置慢开始门限。慢开始门限ssthresh：</p>
+<p>当cwnd&lt;ssthresh时，使用上述慢开始算法。</p>
+<p>当cwnd&gt;sshthresh时，停止使用慢开始算法而改用拥塞避免算法。</p>
+<p>当=时，即可使用慢开始算法，也可使用拥塞避免算法。</p>
+<p>![](D:\1\奇技淫巧\photoDon’t delete\network\TCP拥塞控制变化情况.png)</p>
+<p>这幅图中讲了拥塞控制的例子，具体看书中P234。</p>
+<p>![](D:\1\奇技淫巧\photoDon’t delete\network\快重传.png)</p>
+<p><strong>快速重传算法</strong>可以让发送方<strong>尽快知道报文发生了丢失</strong>。图中M3丢了要不停地发确认M2，只要<strong>一连收到3个重复确认</strong>，发送方就知道应立即重传。</p>
+<p>图中发现了丢失个别报文段，于是采用<strong>快恢复算法</strong>，调整门限值<code>cwnd=ssthresh=cwnd/2</code>，并开始执行拥塞避免算法。</p>
+<p>在拥塞避免阶段，拥塞窗口是<strong>线性增大</strong>，称为**加法增大AI(Additive Increase)<strong>。而一旦出现超时或3个重复的确认，就要把门限值设为当前拥塞窗口的一半，并且大大减少拥塞窗口的数值，称为</strong>“乘法减小”MD（Multiplicative Decrease)**。二者合并一起就是AIMD算法</p>
+<p>可归纳为如下流程图：</p>
+<p>![](D:\1\奇技淫巧\photoDon’t delete\network\拥塞控制流程图.png)</p>
+<p>以上讨论全是假设接收方窗口无限大。接收方窗口称为通知窗口，实际运行中发送方的窗口一定不能超过对方给出的接收方窗口值rwnd。</p>
+<p>所以$发送方窗口的上限值=Min[rwnd,cwnd]$</p>
+<ul>
+<li>主动队列管理（AQM,Active Queue Management）</li>
+</ul>
+<p>路由器缓存都有限制，如果数据报文太多，路由器队列缓存尾部会丢弃报文，导致一连串的报文丢失，重传导致判定网络拥塞。很多TCP会同时进入慢开始状态，使得全网的通信量突然下降，网络恢复正常后，这些TCP又同时信息量增大。</p>
+<p>为了避免这种全局同步现象，提出了主动队列管理(AQM)，不要等到路由器队列长度最大值了才丢弃分组，而是当长度达到某个值时主动丢弃分组，提醒发送方放慢发送速率。</p>
+<h3 id="8-TCP的运输连接管理"><a href="#8-TCP的运输连接管理" class="headerlink" title="8.TCP的运输连接管理"></a>8.TCP的运输连接管理</h3><ul>
+<li><strong>三次握手</strong>：</li>
+</ul>
+<p>![](D:\1\奇技淫巧\photoDon’t delete\network\TCP三次握手.png)</p>
+<p>最初两台主机都处于关闭状态，A要主动连接，叫主动打开，B是被动打开连接。A和B都有传输控制模块TCB，这个模块用来发起请求。</p>
+<p>A打算建立TCP连接时，向B发出连接请求报文段，这时首部中的同步位SYN=1，同时选择初始序号seq=x。SYN报文段不能携带数据，但要消耗一个序号。这时A主机进入SYN-SENT（同步已发送）状态。</p>
+<p>B收到连接请求报文段后，如同意建立连接，则向A发送确认。把SYN和ACK都置为1，<code>ack = x+1</code>。选择一个初始序号<code>seq = y</code>，并消耗一个序号。服务器B进入SYN-RCVD（同步收到）状态。</p>
+<p>TCP客户进程收到B的确认后，向B发送确认。确认报文段的ACK置1，确认号<code>ack=y+1</code>，而自己的序号<code>seq=x+1</code>。ACK报文段可以携带数据，但如果不携带数据则不消耗序号，下一个数据报文段的序号仍是seq=x+1。这时建立了连接A进入ESTABLISHED（已建立连接）状态。</p>
+<p><strong>问题：为什么A还要最后发一次确认呢？</strong></p>
+<p>主要是为了防止已失效的连接请求报文段突然又传到了B。本来是一个失效的报文段，如果没有确认，B会立马同意连接，这情况如果多了，B主机岂不是卡死。</p>
+<ul>
+<li>TCP连接释放</li>
+</ul>
+<p>数据传输完毕后，通信双方要释放连接。A和B处于ESTABLISHED状态时，A的应用发出连接释放报文段，停止发送数据，关闭TCP连接。</p>
+<p>A把控制位FIN置为1，其序号<code>seq = u</code>，等于前面已经传送过来数据最后一个字节加1。A进入FIN-WAIT-1(终止等待1)状态，等待B的确认。注意FIN报文段即使不携带数据，也要消耗一个序号。</p>
+<p>![](D:\1\奇技淫巧\photoDon’t delete\network\TCP连接释放过程.png)</p>
+<p>B收到连接释放报文发出确认，确认号是<code>ack = u+1</code>，而这个报文段自己的序号是v，等于B前面已经发送的数据最后一个字节加1。B进入CLOSE-WAIT（关闭等待）状态。TCP处于<strong>半关闭</strong>状态。</p>
+<p>A收到B的确认后，进入FIN-WAIT-2（终止等待2）状态，等待B发出的连接释放报文段。</p>
+<p>B如果没有向A发送的数据，发送FIN=1，假定B现在的序号是w（可能B向A发了一些数据，如果没发，那序号是u+1），但B还是继续重复上次发过的确认号则<code>ACK = u+1</code>。B进入LAST-ACK（最后确认状态），等待A的确认。</p>
+<p>A在收到对此发出确认。ACK置为1，<code>ack =</code>W+1`，而自己的序号是 seq = u+1。进入TIME-WAIT(时间等待)状态。经过**时间等待计时器（Maximum Segment Lifetime)**设置的2MSL后，A进入CLOSED状态。</p>
+<p><strong>为什么A需要等待2MSL时间？</strong></p>
+<p>1）为了保证A发送的最后ACK报文段到达B。这个ACK报文段可能丢失，B收不到对重传FIN+ACK报文段的确认，B会在一定时间内重传，A就能够2MSL时间内等到B的信息。A重传，并且重新启动2MSL计时器。直到A和B都进入CLOSED状态。</p>
+<p>2）防止“已失效的连接请求报文段”出现在本连接中。A发送完最后ACK后，再经过2MSL，可使本连接持续的时间内所产生的所有报文段从网络中消失，这样就可以使下一个新的连接不会出现旧的报文请求文段。</p>
+<p>注意，以为2MSL的存在，B结束TCP的时间比A早一些。</p>
+<p>TCP还有<strong>保活计时器（keepalive timeer）</strong>如果某个client和服务器建立连接但突然故障，服务器一直等待，不能总是等啊。若服务器两个小时还没有收到客户数据，服务器就开始发送探测报文段，并且每隔75秒发送一次，若连续发送10个探测报文段client无响应，服务器认为client故障，关闭连接。</p>
+<ul>
+<li>TCP的有限状态机（相当于总体流程图）</li>
+</ul>
+<p>![](D:\1\奇技淫巧\photoDon’t delete\network\TCP有限状态机.png)</p>
+<h2 id="应用层"><a href="#应用层" class="headerlink" title="应用层"></a>应用层</h2><h3 id="1-域名系统DNS"><a href="#1-域名系统DNS" class="headerlink" title="1. 域名系统DNS"></a>1. 域名系统DNS</h3><p>DNS(Domain Name System)是用来将机器名字转换为IP地址。互联网的命名系统中使用了很多的“域”，域是名字空间中一个可被管理的划分，还可被划分子域，出现了顶级域、二级域、三级域等等，因此就出现了“域名”这个名词。</p>
+<p>DNS现在设计成了分布式系统，大部分解析在本地进行，少量解析在互联网上通信，DNS效率很高。</p>
+<p>域名到IP地址的解析是由许多<strong>域名服务器程序</strong>共同完成，运行域名服务器程序的机器叫<strong>域名服务器</strong>。</p>
+<p>解析要点：当某一个应用进程把主机名解析成IP地址时，该应用进程就要调用解析程序，并成为DNS的一个客户，把待解析的域名放在DNS请求报文中，以<strong>UDP</strong>的形式发送本地域名服务器。本地域名服务器查找后，把对应的IP地址放在回答报文中返回。若本地域名服务器不能找到地址，则此域名服务器暂时成为DNS中的另一个客户，并向其他应服务器请求，直到找到回答。</p>
+<p>![](D:\1\奇技淫巧\photoDon’t delete\network\域名.png)</p>
+<p>域名标号由英文字母和数字组成，<strong>每一个标号不超过63个字符</strong>，也<strong>不区分大小写字母</strong>，标号中除了连字符-外不能使用其他标点符号。级别最低的域名写在左边，级别高的写在右边。<strong>由多个标号组成的完整域名不可超过255个字符</strong>。</p>
+<p>最高的顶级域名由ICANN管理，域名可使每一个域名在全互联网内都是唯一的。</p>
+<p>2012年顶级域名共分为3大类：</p>
+<p>1）国家顶级域名nTLD。cn表示中国，us表示美国，uk表示英国等。国家顶级域名达到296个。</p>
+<p>2）通用顶级域名gTLD。com（公司企业）aero（航空运输业）asia（亚太地区）。。。等。</p>
+<p>3）基础结构域名。只有一个arpa，用于反向域名解析，也叫<strong>反向域名</strong>。</p>
+<p>![](D:\1\奇技淫巧\photoDon’t delete\network\域名层次.png)</p>
+<p>我国把二级域名划分为“<strong>类别域名</strong>和<strong>行政区域名</strong>两大类：</p>
+<p>“类别域名”共7个，分别为：ac（科研机构），com（工、商、金融等企业），edu（中国的教育机构），gov（中国的政府机构），mil（中国的国防机构），net（提供互联网网络服务机构），org（非营利性组织）。</p>
+<p>行政域名共34个，适用于我国的各省、自治区、直辖市例如：bj（北京），js（江苏）</p>
+<ul>
+<li>域名服务器</li>
+</ul>
+<p>![](D:\1\奇技淫巧\photoDon’t delete\network\DNS划分区.png)</p>
+<p>一个服务器所管辖的范围叫区，每一个区有权限域名服务器。区小于等于域，但不能大于域。</p>
+<p>![](D:\1\奇技淫巧\photoDon’t delete\network\域名区解释.png)</p>
+<p>1）根域名服务器：知道所有顶级域名服务器域名和IP地址。本地域名服务器只要无法解析某个域名，就要请求根域名服务器。某个客户请求根域名服务，就找最近的根域名服务器地址发查询。根域名服务器会告诉本地域名服务器下一步找哪个顶级域名服务器。</p>
+<p>2）顶级域名服务器：负责管理在该顶级域名服务器注册的所有二级域名。</p>
+<p>3）权限域名服务器：负责一个区的域名服务器，当权限服务器不能给出最后的查询回答时，就会告诉DNS客户下一步找哪个权限域名服务器。</p>
+<p>4）本地域名服务器：本地域名服务器不属于图6-3中的层次结构。每一个互联网服务提供者ISP，或者一个大学都可以拥有一个本地域名服务器，也叫默认域名服务器。本地域名服务器离客户很近。</p>
+<p>主机向本地域名服务器的查询都是<strong>递归查询</strong>。如果本地域名服务器不知道IP地址，就以DNS客户身份向其他根域名服务器发起请求，递归查询结果。</p>
+<p>本地域名服务器向根域名查询是<strong>迭代查询</strong>。当根域名服务器收到本地域名服务器发出的迭代查询请求报文时，要么给出IP地址，要么告诉本地域名服务器“下一步应该向哪个域名服务器查询（把自己知道的顶级域名服务器地址）”，然后本地域名服务器查询顶级域名服务器，查到就结束，没查到顶级域名服务器告诉它查询哪个权限域名服务器值，直到查到。</p>
+<p>![](D:\1\奇技淫巧\photoDon’t delete\network\DNS查询举例.png)</p>
+<p> 每个服务器（本地、根、顶级等）都有高速缓存，保存最近查询过的域名地址，减少网络通信量。</p>
+<h3 id="2-FTP文件传送协议"><a href="#2-FTP文件传送协议" class="headerlink" title="2.FTP文件传送协议"></a>2.FTP文件传送协议</h3><p>FTP使用TCP可靠传输服务。</p>
+<p>FTP由两大部分组成：<strong>主进程</strong>，负责接受新的请求。<strong>从属进程</strong>，负责处理单个请求。</p>
+<p>主进程工作步骤：</p>
+<p>1）打开熟知端口（端口号21），使客户进程能够连接上。</p>
+<p>2）等待客户进程发出连接请求。</p>
+<p>3）启动从属进程处理客户进程发来的请求。从属进程对客户进程的请求处理完毕后终止，但从属进程可能在运行期间根据需要创建一些其他子进程。</p>
+<p>4）回到等待状态，继续接受其他客户进程发来的请求。主进程和从属进程的处理是并行进行的。</p>
+<p>![](D:\1\奇技淫巧\photoDon’t delete\network\FTP连接.png)</p>
+<p>进行文件传输时，FTP客户和服务器之间要建立两个并行的TCP连接：“控制连接”和”数据连接“。控制连接在整个会话期间一直保持打开，FTP客户发出传送请求，通过控制连接发送给服务端的控制进程。实际传输文件的是数据连接，服务端控制进程收到FTP客户文件传输请求后就创建数据传送进程和数据连接。</p>
+<p>网络文件系统NFS和FTP不同，NFS允许应用进程远程打开一个远地文件，并且能在该文件的某一个特定的位置上开始读写数据。</p>
+<ul>
+<li>简单文件传送协议TFTP</li>
+</ul>
+<p>TCP/IP协议族中还有一个简单文件传送协议TFTP，<strong>使用UDP数据报</strong>，因此TFTP需要有自己的差错改正措施。TFTP只支持文件传输而不支持交互。</p>
+<p>TFTP可用于UDP环境。TFTP代码所占内存小。</p>
+<p>1）它每次传送512字节数据，但最后一次不足512。</p>
+<p>2）数据报文按序编号，从1开始。</p>
+<p>3）支持ASCII码或二进制传送。</p>
+<p>4）可对文件进行读写。</p>
+<p>5）使用很简单的首部。</p>
+<h3 id="3-WWW万维网"><a href="#3-WWW万维网" class="headerlink" title="3. WWW万维网"></a>3. WWW万维网</h3><ul>
+<li>URL统一资源定位符</li>
+</ul>
+<p>用来表示从互联网上得到的资源位置和访问这些资源的方法。URL给出资源的位置提供一种抽象的识别方法，并用这种方法给资源定位。</p>
+<p>![](D:\1\奇技淫巧\photoDon’t delete\network\URL形式.png)</p>
+<p>URL左边第一部分是协议，这里的协议是指什么协议获取该万维网文档。最常用的是http，其次是ftp。</p>
+<p>协议后面加” ://“是规定的格式。右边是第二部分主机，指出这个万维网文档在哪一台主机上。主机指的是该主机在互联网上的域名。再后面是端口和路径，有时可以省略。</p>
+<p>现在的浏览器为了方便用户，可以把前面的http://甚至www省略，浏览器会自动填充。</p>
+<ul>
+<li>使用HTTP的URL</li>
+</ul>
+<p>![](D:\1\奇技淫巧\photoDon’t delete\network\HTTP的URL.png)</p>
+<p>HTTP默认端口号是80。</p>
+<ul>
+<li>超文本传输协议HTTP （<strong>hyper transport text protocol</strong>）</li>
+</ul>
+<p>HTTP定义了浏览器怎样向万维网服务器请求万维网文档，以及服务器怎样把文档传送给浏览器。从层次的角度看，HTTP是面向事务的应用层协议，它是万维网上能够可靠地交换文件的重要基础。</p>
+<p>![](D:\1\奇技淫巧\photoDon’t delete\network\万维网的工作过程.png)</p>
+<p>服务器进程监听TCP的端口80，发现请求即建立请求，一旦监听连接建立，浏览器就向万维网服务器发出浏览某个页面的请求，服务器接着就返回所请求页面作为响应。最后TCP连接释放。</p>
+<p>HTTP规定HTTP客户和服务器之间的每次交互，都由一个ASCII码串构成的请求和一个类似的通用互联网扩充，即“MIME(MIME-like)”的响应组成。HTTP报文都是用TCP连接传送。</p>
+<p>![](D:\1\奇技淫巧\photoDon’t delete\network\HTTP请求时间.png)</p>
+<p>HTTP1.0版本是<strong>非持续连接</strong>。每次同一个客户的新请求都建立新的TCP连接。不仅耗时而且导致服务器负担过重。</p>
+<p>HTTP1.1协议较好地解决了这个问题，它使用<strong>持续连接</strong>，万维网服务器在发送响应之后仍然在一段时间内保持这条连接，使同一个客户和该服务器可以继续在这条连接上传送后续的HTTP请求报文和响应报文。</p>
+<p>1.1协议持续连接有两种方式：<strong>非流水线方式</strong>和<strong>流水线方式</strong>。</p>
+<p>非流水线：客户收到前一个响应后才能发出下一个请求。因此客户没访问以此对象都要用去一个RTT往返时间。</p>
+<p>流水线方式：客户收到HTTP的响应报文之前就能够接着发送新的请求报文。于是一个个请求报文到达服务器后，服务器就可连续发回响应报文。使用流水线方式，客户访问<strong>所有对象</strong>只需花费一个RTT时间。使得TCP连接中的空闲时间减少，提高了下载文档效率。</p>
+<ul>
+<li>HTTP的报文结构</li>
+</ul>
+<p>HTTP有两类报文：</p>
+<p>1）请求报文——从客户向服务器发送请求报文。</p>
+<p>2）响应报文——从服务器到客户的回答。</p>
+<p>![](D:\1\奇技淫巧\photoDon’t delete\network\HTTP报文结构.png)</p>
+<p>1）开始行，用于区分是请求报文还是响应报文。在请求报文中的开始行叫做请求行，而在响应报文中的开始行叫做状态行。开始行的三个字段之间都以空格分隔开，最后的“CR”和“LF”分别代表回车和换行。</p>
+<p>2）首部行。说明浏览器、服务器或报文主体的一些信息。首部可以有好几行，但可以不使用。每一行中都有首部字段名和它的值，每一行在结束的地方都要有回车和换行。整个首部行结束时，还有一空行将首部和后面的实体主体分开。</p>
+<p>3）实体主体，在请求报文中一般都不用这个字段，而在响应报文中也可能没有这个字段。</p>
+<p>![](D:\1\奇技淫巧\photoDon’t delete\network\HTTP几种方法.PNG)</p>
+<p>![](D:\1\奇技淫巧\photoDon’t delete\network\HTTP方法.png)</p>
+<p>![](D:\1\奇技淫巧\photoDon’t delete\network\HTTP报文请求例子.png)</p>
+<p>相应报文经常见到的状态行：</p>
+<p>HTTP/1.1 202 Accepted {接受}</p>
+<p>HTTP/1.1 400 Bad Request {错误的请求}</p>
+<p>HTTP/1.1 404 Not Found {找不到}</p>
+<ul>
+<li>服务器上存放用户信息</li>
+</ul>
+<p>万维网网站点可以使用Cookie来跟踪用户。当用户A浏览某个Cookie网站时，该网站的服务器就为A产生一个唯一的识别码，并以此作为索引在服务器的后端数据库中产生一个项目。接着给A的HTTP响应报文中添加一个叫做Set-cookie的首部行。这里的首部字段名就是Set-cookie，而后面的“值”就是赋予该用户的“识别码”。</p>
+<p>当A收到这个响应时，其浏览器就在它管理的特定Cookie文件中添加一行，其中包括这个服务器的主机名和Set-cookie后面给出的识别码。</p>
+<ul>
+<li>超文本标记语言HTML</li>
+</ul>
+<p>对HTML学习过，这里可以不用看。</p>
+<ul>
+<li>动态文档</li>
+</ul>
+<p>动态文档是指文档的内容在浏览器访问万维网服务器时才由应用程序动态创建。当浏览器请求到达时，万维网服务器要运行另一个应用程序，并把控制转移到此应用程序。应用程序对HTTP报文处理输出HTTP格式的文档，万维网服务器把应用程序的输出作为对浏览器的响应。</p>
+<ul>
+<li>活动万维网文档</li>
+</ul>
+<p>动态文档一旦建立，内容就固定下来无法刷新。所以为了解决这个问题，设计了活动万维网文档。</p>
+<p>两种技术可用于浏览器屏幕显示的连续更新。<strong>服务器推送</strong>，这种技术是将所有工作都交给服务器。服务器不断地运行与动态文档相关联的应用程序，定期更新信息，并发送更新过的文档。</p>
+<p><strong>活动文档</strong>，这种技术把所有工作交给浏览器，每当请求一个活动文档，服务器就返回一段活动文档的副本，使该程序副本在浏览器端运行。这时活动文档可与用户直接交互。</p>
+<ul>
+<li>万维网的信息检索系统</li>
+</ul>
+<p>搜索引擎分为两类：<strong>全文检索搜索引擎</strong>和<strong>分类目录搜索引擎</strong>。</p>
+<p>全文搜索引擎是一种纯技术型的检索工具。它的工作原理是通过搜索软件（爬虫）到互联网上的各网站收集信息，找到一个网站后可以从这个网站再链接到另一个网站，按照一定规则建立一个很大的在线索引数据库供用户查询。用户输入关键字从已经建立的索引数据库里进行查询。（google）</p>
+<p>分类目录搜索利用各网站向搜索引擎提交网站信息时填写的关键词和网站描述等信息，经过人工审核后，输入分类目录数据库中，供网上用户查询。因此分类目录搜索叫分类网站搜索。</p>
+<p>![](D:\1\奇技淫巧\photoDon’t delete\network\两种搜索引擎的区别.png)</p>
+<h3 id="4-电子邮件"><a href="#4-电子邮件" class="headerlink" title="4.电子邮件"></a>4.电子邮件</h3><p>简单邮件传送协议SMTP(Simple Mail Transfer Protocol)和互联网文本报文格式。</p>
+<p>邮件系统构件：用户代理、邮件服务器以及邮件发送协议(SMTP)和邮件读取协议（POP3)</p>
+<p>![](D:\1\奇技淫巧\photoDon’t delete\network\电子邮件的主要构件.png)</p>
+<p>POP3是邮局协议（版本3）。</p>
+<p>SMTP和POP3都是使用TCP来作为传输协议的。</p>
+<h4 id="SMTP协议"><a href="#SMTP协议" class="headerlink" title="SMTP协议"></a>SMTP协议</h4><p>规定了两个相互通信的SMTP进程之间如何交换信息。邮件内部格式，邮件如何存储，以及邮件系统应以多快的速度来发送邮件，SMTP也都<strong>未</strong>做出规定。</p>
+<p>SMTP规定了14条命令和21种应答信息。每条命令用几个字母组成，而每一种应答信息一般都只有一行信息，由一个3位数字的代码开始，后面附上（也可以不附上）很简单的文字说明。</p>
+<p>1）连接建立。</p>
+<p>发件人的邮件发送到发送方的邮件服务器邮件缓存后，SMTP客户每隔一段时间对邮件缓存扫描一次。如发现有邮件，使用SMTP熟知端口25与接收方邮件服务器的SMTP服务器建立TCP连接。建立连接后，接收方SMTP服务器发出“220 Service ready”（服务就绪）应答。然后客户向SMTP服务器发送HELO命令，附上发送方的主机名。SMTP服务器若有能力接收邮件，则回答：“250 OK”，表示已准备好接收。若SMTP服务器不可用，则回答“421 Service not available”（服务不可用）。</p>
+<p>若一定时间内（比如三天）发送不了邮件，邮件服务器就会把情况通知发件人。</p>
+<p>SMTP不使用中间的邮件服务器，TCP连接总是点对点。</p>
+<p>2）邮件发送</p>
+<p><code>MAIN</code>命令开始，如：“<code>MAIL FROM</code>：<a href="mailto:xiexiren@tsinghua.org.cn">xiexiren@tsinghua.org.cn</a>”。若SMTP服务器已准备好接收邮件，则回答“250 OK”。否则返回代码指出原因：</p>
+<p>![](D:\1\奇技淫巧\photoDon’t delete\network\SMTP返回代码.png)</p>
+<p>后面跟着一个或多个RCPT命令（发送一个还是多个收件人），RCPT格式：<code>RCPT TO:&lt;收件人地址&gt;</code>。RCPT是recipient（收件人）的缩写。每发送一个RCPT命令，都应当有相应的信息从SMTP服务器返回，如：“250 OK”，表明指明的邮箱在接收方的系统中，或“550 No such user here”,即不存在此邮箱。</p>
+<p>RCPT命令的作用就是：先弄清楚接收方系统是否已做好接收邮件的准备，然后才发送邮件。</p>
+<p>3）连接释放</p>
+<p>邮件发送完毕后，SMTP客户应发送QUIT命令。SMTP服务器返回的信息是“221（服务关闭）”，表示SMTP同意释放TCP连接。邮件传送的全部过程结束。</p>
+<h4 id="电子邮件的信息格式"><a href="#电子邮件的信息格式" class="headerlink" title="电子邮件的信息格式"></a>电子邮件的信息格式</h4><p>一封电子邮件分为<strong>信封</strong>和<strong>内容</strong>两大部分。</p>
+<p><code>To</code>：后面填入一个或多个收件人的电子邮件地址。在电子邮件软件中，用户把经常通信的对象姓名和电子邮件地址写到<strong>地址簿</strong>。</p>
+<p><code>Subject</code>：是邮件的<strong>主题</strong>。</p>
+<h4 id="邮件读取协议POP3和IMAP"><a href="#邮件读取协议POP3和IMAP" class="headerlink" title="邮件读取协议POP3和IMAP"></a>邮件读取协议POP3和IMAP</h4><p>邮局协议POP3和IMAP网际报文存取协议(Internet Message Access Protocol)。</p>
+<p>POP3协议的一个特点就是只要用户从POP3服务器读取了邮件，POP3服务器就该把邮件删除。</p>
+<p>IMAP比POP3复杂很多，IMAP和POP都按照客户服务器方式工作，但它们有很大区别。用户可以在不同的地方使用不同的计算机，随时处理自己的邮件服务。使用IMAP时，在用户的计算机上运行IMAP客户程序，然后与接收方的邮件服务器上的IMAP建立TCP连接。用户在自己的计算机上就可以操纵邮件服务器的邮箱，就像本地操纵一样，IMAP是一个联机协议。</p>
+<p>![](D:\1\奇技淫巧\photoDon’t delete\network\IMAP和POP3.png)</p>
+<ul>
+<li>通用互联网邮件扩充MIME</li>
+</ul>
+<p>![](D:\1\奇技淫巧\photoDon’t delete\network\MIME和SMTP的关系.png)</p>
+<p>MIME主要包括以下三部分：</p>
+<p>1）5个新的邮件首部字段，它们可以包含在原来的邮件首部中。这些字段提供了有关邮件主体的信息。</p>
+<p>2）定义了许多邮件内容的格式，对多媒体电子邮件的表示方法进行了标准化。</p>
+<p>3）定义了传送编码，可对任何内容格式进行转换，而不会被邮件系统改变。</p>
+<p>![](D:\1\奇技淫巧\photoDon’t delete\network\MIME首部格式.png)</p>
+<p>其中，4）内容传送编码。MEME对ACSII码构成的邮件不进行任何转换。另一种编码方式是quoted-printable，这种编码方式等号“=”和不可打印的ACSII码，除特殊字符等号“=”外，都不可改变。（<font color="red">这个地方在介绍其他编码方式，可以不用看</font>）</p>
+<p>5)内容类型</p>
+<p>内容类型必须有两个标识符，即“内容类型”和“子类型”，中间用“/“分开。</p>
+<p>![](D:\1\奇技淫巧\photoDon’t delete\network\MIME内容类型.png)</p>
+<p>![](D:\1\奇技淫巧\photoDon’t delete\network\MIME内容类型1.png)</p>
+<h3 id="5-动态主机控制协议DHCP"><a href="#5-动态主机控制协议DHCP" class="headerlink" title="5.动态主机控制协议DHCP"></a>5.动态主机控制协议DHCP</h3><p>协议软件参数化，让很多不同的计算机有可能使用同一个经过编译后的二进制代码。一台计算机需求不同，可以通过参数对代码行为进行控制。</p>
+<p>协议软件中给这些参数赋值的动作叫做<strong>协议配置</strong>。一个协议软件在使用之前必须是正确配置的。协议软件配置的项目如下：</p>
+<ul>
+<li>IP地址</li>
+<li>子网掩码</li>
+<li>默认路由器的IP地址</li>
+<li>域名服务器的IP地址</li>
+</ul>
+<p>因为IP地址中还包括网络号，如果一个主机生产出来后就固定一个IP是不行的。</p>
+<p>现在广泛使用的是**动态主机配置协议DHCP(Dynamic Host Configuration Protocol)**，它提供了即插即用联网机制。</p>
+<p>DHCP使用客户服务器方式。需要IP地址的主机在启动时就向DHCP服务器广播发送<strong>发现报文</strong>(将目的IP地址置为全1，即255.255.255.255)，，本机地址设置为0.0.0.0（本机还不知道，只能这么设置）。这个报文只有DHCP服务器能够进行回答。DHCP服务器现在其数据库中查找该计算机的配置信息，若找到，则返回信息。若找不到，则从服务器的IP地址池中取一个地址分配给该计算机。DHCP服务器回答报文叫<strong>提供报文</strong>，表示“提供”了IP地址等配置信息。</p>
+<p>为了防止DHCP服务器太多，每个网络至少有一个DHCP中继代理，通常是一台路由器，它配置了DHCP服务器的IP地址信息。当DHCP中继代理收到主机A以广播形式发送的报文后，就以单播的形式向DHCP服务器发送此报文，等待回答。</p>
+<p>![](D:\1\奇技淫巧\photoDon’t delete\network\DHCP中级代理.png)</p>
+<p>DHCP服务器分配给DHCP客户的IP的地址是临时的，因此DHCP客户只能在一段有限时间内使用这个IP地址，这个时间叫<strong>租用期</strong>。DHCP协议规定租用期用4字节表示，单位是秒。因此租用期范围是1秒到136年。DHCP客户也可在自己发送的报文中提出对租用期的要求。</p>
+<p>DHCP客户使用<strong>UDP</strong>端口68，服务器使用67。</p>
+<p>![](D:\1\奇技淫巧\photoDon’t delete\network\DHCP的工作过程.png)</p>
+<p>工作协议的解释详情看P297。</p>
+<h3 id="6-简单网络管理协议SNMP"><a href="#6-简单网络管理协议SNMP" class="headerlink" title="6. 简单网络管理协议SNMP"></a>6. 简单网络管理协议SNMP</h3><p>管理站又称为管理器，是整个网络系统的核心。它通常是个有良好图形界面的高性能工作站，并由网络管理员直接操作和控制。</p>
+<p>SNMP中的管理程序和代理程序按客户服务器方式工作。在被管理对象上运行的SNMP服务器程序不停地监听来自客户程序的请求，一旦发现就返回所需要的信息，或者执行某个动作。</p>
+<p>网络管理有一个基本<strong>原理</strong>：若要管理某个对象，就必然会给该对象添加一些软件或硬件，但这种“添加”对原有对象的影响必须尽量小些。</p>
+<p>SNMP网络管理由三个部分组成，即SNMP本身、管理信息结构SMI和管理信息库MIB。</p>
+<ul>
+<li>管理信息结构SMI</li>
+</ul>
+<p>SMI是SNMP的重要组成部分。SMI的功能有：</p>
+<p>1）被管对象如何命名。</p>
+<p>2）用来存储被管对象的数据类型有哪些。</p>
+<p>3）在网络上传送的管理数据应如何编码。</p>
+<ol>
+<li>被管对象的命名。</li>
+</ol>
+<p>SMI规定，所有的被管对象都必须处在对象命名树上。</p>
+<p>![](D:\1\奇技淫巧\photoDon’t delete\network\SMI对象命名树.png)</p>
+<p>对象命名树的根没有名字，它下面有三个顶级对象，都是世界上著名的标准指定单位，即ITU-T，ISO以及这两个组织的联合体。internet节点下面的标号为2的节点是mgmt（管理）。再下面是mib-2，包含了所有被SNMP管理的对象。</p>
+<ol start="2">
+<li>被管对象的数据类型</li>
+</ol>
+<p>SMI使用基本的抽象语法记法1（即ISO制定的ASN.1)来定义数据类型。这里的ISO ASN.1不用管，它只是描述数据的结构形式。</p>
+<p>SMI把数据类型分为两大类：<strong>简单类型</strong>和<strong>结构化类型</strong>。简单类型是最基本的、直接使用ASN.1定义的类型。</p>
+<p>![](D:\1\奇技淫巧\photoDon’t delete\network\SMI数据类型.png)</p>
+<ol start="3">
+<li>编码方法</li>
+</ol>
+<p>使用**基本编码规则BER(Basic Encoding Rule)**进行数据的编码。BER指明了每种数据的类型和值。ASN.1把所有数据元素都表示为T-L-V三个字段组成的序列。T字段定义数据的类型，L字段定义V字段的长度，而V字段定义数据的值。</p>
+<p>![](D:\1\奇技淫巧\photoDon’t delete\network\TLV方法.png)</p>
+<p>T字段叫做<strong>标记字段</strong>。占1字节。T字段比较复杂，因为他要定义数据类型较多。T字段又分为以下三个子字段：</p>
+<p>1）类别（2位）共四种：通用类（00），即ASN.1定义的类型。应用类（01）即SMI定义的类型。上下文类（10），即上下文所定义的类型；专用类（11），保留为特定厂商定义的类型。</p>
+<p>2）格式（1位）共两种，指出数据类型的种类：简单数据类型（0）、结构化数据类型（1）。</p>
+<p>3）编号（5位），共两种，标志不同的数据类型。编号的范围是0-30。当编号大于30时，T字段就要扩展多个字节。</p>
+<p>L字段又叫做长度字段。L字段为单字节时，其最高位为0，后面的7位定义V字段的长度。当L字段为多个字节时，其最高位为1，而后面的7位定义后续字节的字节数。</p>
+<p>![](D:\1\奇技淫巧\photoDon’t delete\network\L字段的格式.png)</p>
+<p>V字段又叫值字段，用于定义数据元素的值。</p>
+<ul>
+<li>管理信息库MIB</li>
+</ul>
+<p>管理信息指互联网的网管框架中被管对象的集合。被管对象构成了一个虚拟的信息存储器，所以才称为管理信息库MIB。管理程序就使用MIB中的这些信息对网络进行管理。只有在MIB中的对象才是SNMP所能够管理的。</p>
+<p>MIB的意义：节点<code>ip</code>下面有个名为<code>ipInReceives</code>的MIB变量，表示收到的IP数据报数量。在图6-22中，这个变量的标号是3，变量的名字是:<code>iso.org.dod.internet.mgmt.mib.ip.ipInReceives</code>，而相应的数值表示是1.3.6.1.2.1.4.3。</p>
+<ul>
+<li>SNMP的协议数据单元和报文</li>
+</ul>
+<p>1）<strong>“读”</strong>操作，用Get报文来检测各被管对象的状况。</p>
+<p>2）<strong>”写“</strong>操作，用Set报文来改变各被管对象的状况。</p>
+<p>SNMP的这些功能通过探询操作来实现，即SNMP管理进程定时向被管理设备周期性地发送探询信息。上述时间间隔可通过SNMP的管理信息库MIB来建立。探询的好处是：第一，可使系统相对简单。第二，能限制通过网络所产生的管理信息的通信量。</p>
+<p>SNMP同时不是完全的探寻协议，它不允许不经过询问就能发送某些信息。这种信息称为陷阱，表示它能够捕捉“事件”。但这种陷阱信息的参数是受限制的。</p>
+<p><strong>使用无连接的UDP</strong>。服务器端使用161来接收Get或Set报文和发送响应报文，但运行管理程序的客户端则使用熟知端口162来接收来自各代理的trap报文。</p>
+<p>![](D:\1\奇技淫巧\photoDon’t delete\network\SNMP的报文格式.png)</p>
+<p>SNMP报文没有固定的字段，共分为以下四个部分：</p>
+<p>1）版本</p>
+<p>2）首部</p>
+<p>3）安全参数</p>
+<p>4）数据部分</p>
+<h3 id="7-应用进程跨越网络的通信"><a href="#7-应用进程跨越网络的通信" class="headerlink" title="7. 应用进程跨越网络的通信"></a>7. 应用进程跨越网络的通信</h3><p>实际上应用程序调用系统接口。此接口把控制权交给操作系统，操作系统执行完成后，在返回给应用进程。系统调用接口实际上就是应用进程的控制权和操作系统的控制权进行转换的一个接口。</p>
+<p>书中后面在讲开发的Socket套接字接口例子(套接字现在已经成为操作系统内核的一部分），熟悉编程了这东西比书上懂得多多了。</p>
+<p>![](D:\1\奇技淫巧\photoDon’t delete\network\套接字.png)</p>
+<p>常用的系统调用（TCP服务）</p>
+<p>1） 连接建立阶段。</p>
+<p>套接字创建后，它的端口号和IP地址都是空的，因此应用进程要调用bind（绑定）来指明套接字的本地地址（本地端口号和本地IP地址）。</p>
+<p>服务器调用bind后，还必须调用listen（监听）把套接字设置为被动方式，以便随时接受客户的服务请求。UDP服务器由于只是提供无连接服务，不使用listen系统调用。</p>
+<p>然后调用accept（接受），能够处理多个连接（并发）。</p>
+<p>客户请求连接后，服务器把套接字的标识符返回给发起连接的客户方。</p>
+<p>2）数据传送阶段</p>
+<p>send系统调用传送数据，使用recv系统调用接收数据。</p>
+<p>通常send调用把数据复制到操作系统内核的缓存种，若系统的缓存已经满了，send就暂时阻塞，直到缓存有空间存放新的数据。</p>
+<p>3）连接释放</p>
+<p>close调用释放连接和撤销套接字。</p>
+<p>![](D:\1\奇技淫巧\photoDon’t delete\network\系统调用使用顺序.png)</p>
+
+                
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">小灰灰</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="http://example.com/2021/03/15/network-basic/">http://example.com/2021/03/15/network-basic/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="/about" target="_blank">小灰灰</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            <span class="chip bg-color">无标签</span>
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+                <style>
+    #reward {
+        margin: 40px 0;
+        text-align: center;
+    }
+
+    #reward .reward-link {
+        font-size: 1.4rem;
+        line-height: 38px;
+    }
+
+    #reward .btn-floating:hover {
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2), 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    #rewardModal {
+        width: 320px;
+        height: 350px;
+    }
+
+    #rewardModal .reward-title {
+        margin: 15px auto;
+        padding-bottom: 5px;
+    }
+
+    #rewardModal .modal-content {
+        padding: 10px;
+    }
+
+    #rewardModal .close {
+        position: absolute;
+        right: 15px;
+        top: 15px;
+        color: rgba(0, 0, 0, 0.5);
+        font-size: 1.3rem;
+        line-height: 20px;
+        cursor: pointer;
+    }
+
+    #rewardModal .close:hover {
+        color: #ef5350;
+        transform: scale(1.3);
+        -moz-transform:scale(1.3);
+        -webkit-transform:scale(1.3);
+        -o-transform:scale(1.3);
+    }
+
+    #rewardModal .reward-tabs {
+        margin: 0 auto;
+        width: 210px;
+    }
+
+    .reward-tabs .tabs {
+        height: 38px;
+        margin: 10px auto;
+        padding-left: 0;
+    }
+
+    .reward-content ul {
+        padding-left: 0 !important;
+    }
+
+    .reward-tabs .tabs .tab {
+        height: 38px;
+        line-height: 38px;
+    }
+
+    .reward-tabs .tab a {
+        color: #fff;
+        background-color: #ccc;
+    }
+
+    .reward-tabs .tab a:hover {
+        background-color: #ccc;
+        color: #fff;
+    }
+
+    .reward-tabs .wechat-tab .active {
+        color: #fff !important;
+        background-color: #22AB38 !important;
+    }
+
+    .reward-tabs .alipay-tab .active {
+        color: #fff !important;
+        background-color: #019FE8 !important;
+    }
+
+    .reward-tabs .reward-img {
+        width: 210px;
+        height: 210px;
+    }
+</style>
+
+<div id="reward">
+    <a href="#rewardModal" class="reward-link modal-trigger btn-floating btn-medium waves-effect waves-light red">赏</a>
+
+    <!-- Modal Structure -->
+    <div id="rewardModal" class="modal">
+        <div class="modal-content">
+            <a class="close modal-close"><i class="fas fa-times"></i></a>
+            <h4 class="reward-title">你的赏识是我前进的动力</h4>
+            <div class="reward-content">
+                <div class="reward-tabs">
+                    <ul class="tabs row">
+                        <li class="tab col s6 alipay-tab waves-effect waves-light"><a href="#alipay">支付宝</a></li>
+                        <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
+                    </ul>
+                    <div id="alipay">
+                        <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
+                    </div>
+                    <div id="wechat">
+                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('.tabs').tabs();
+    });
+</script>
+
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
+            <div class="card">
+                <a href="/2021/03/15/network-basic/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/9.jpg" class="responsive-img" alt="计算机网络">
+                        
+                        <span class="card-title">计算机网络</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-03-15
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/network/" class="post-category">
+                                    network
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2021/03/15/basic/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/22.jpg" class="responsive-img" alt="basic">
+                        
+                        <span class="card-title">basic</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-03-15
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-user fa-fw"></i>
+                            小灰灰
+                            
+                        </span>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget card" style="background-color: white;">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+
+    <footer class="page-footer bg-color">
+    
+        <link rel="stylesheet" href="/libs/aplayer/APlayer.min.css">
+<style>
+    .aplayer .aplayer-lrc p {
+        
+        display: none;
+        
+        font-size: 12px;
+        font-weight: 700;
+        line-height: 16px !important;
+    }
+
+    .aplayer .aplayer-lrc p.aplayer-lrc-current {
+        
+        display: none;
+        
+        font-size: 15px;
+        color: #42b983;
+    }
+
+    
+    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body {
+        left: -66px !important;
+    }
+
+    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body:hover {
+        left: 0px !important;
+    }
+
+    
+</style>
+<div class="">
+    
+    <div class="row">
+        <meting-js class="col l8 offset-l2 m10 offset-m1 s12"
+                   server="netease"
+                   type="playlist"
+                   id="503838841"
+                   fixed='true'
+                   autoplay='false'
+                   theme='#42b983'
+                   loop='all'
+                   order='random'
+                   preload='auto'
+                   volume='0.7'
+                   list-folded='true'
+        >
+        </meting-js>
+    </div>
+</div>
+
+<script src="/libs/aplayer/APlayer.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js"></script>
+
+    
+    <div class="container row center-align" style="margin-bottom: 0px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            
+                <span id="year">2019-2021</span>
+            
+            <span id="year">2019</span>
+            <a href="/about" target="_blank">小灰灰</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            <br>
+            
+            
+            
+            
+            
+            
+            <span id="busuanzi_container_site_pv">
+                |&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;<span id="busuanzi_value_site_pv"
+                    class="white-color"></span>&nbsp;次
+            </span>
+            
+            
+            <span id="busuanzi_container_site_uv">
+                |&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;<span id="busuanzi_value_site_uv"
+                    class="white-color"></span>&nbsp;人
+            </span>
+            
+            <br>
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="https://github.com/blinkfox" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:1181062873@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1181062873" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 1181062873" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="/atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
+        <i class="fas fa-rss"></i>
+    </a>
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script type="text/javascript">
+$(function () {
+    var searchFunc = function (path, search_id, content_id) {
+        'use strict';
+        $.ajax({
+            url: path,
+            dataType: "xml",
+            success: function (xmlResponse) {
+                // get the contents from search data
+                var datas = $("entry", xmlResponse).map(function () {
+                    return {
+                        title: $("title", this).text(),
+                        content: $("content", this).text(),
+                        url: $("url", this).text()
+                    };
+                }).get();
+                var $input = document.getElementById(search_id);
+                var $resultContent = document.getElementById(content_id);
+                $input.addEventListener('input', function () {
+                    var str = '<ul class=\"search-result-list\">';
+                    var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                    $resultContent.innerHTML = "";
+                    if (this.value.trim().length <= 0) {
+                        return;
+                    }
+                    // perform local searching
+                    datas.forEach(function (data) {
+                        var isMatch = true;
+                        var data_title = data.title.trim().toLowerCase();
+                        var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                        var data_url = data.url;
+                        data_url = data_url.indexOf('/') === 0 ? data.url : '/' + data_url;
+                        var index_title = -1;
+                        var index_content = -1;
+                        var first_occur = -1;
+                        // only match artiles with not empty titles and contents
+                        if (data_title !== '' && data_content !== '') {
+                            keywords.forEach(function (keyword, i) {
+                                index_title = data_title.indexOf(keyword);
+                                index_content = data_content.indexOf(keyword);
+                                if (index_title < 0 && index_content < 0) {
+                                    isMatch = false;
+                                } else {
+                                    if (index_content < 0) {
+                                        index_content = 0;
+                                    }
+                                    if (i === 0) {
+                                        first_occur = index_content;
+                                    }
+                                }
+                            });
+                        }
+                        // show search results
+                        if (isMatch) {
+                            str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                            var content = data.content.trim().replace(/<[^>]+>/g, "");
+                            if (first_occur >= 0) {
+                                // cut out 100 characters
+                                var start = first_occur - 20;
+                                var end = first_occur + 80;
+                                if (start < 0) {
+                                    start = 0;
+                                }
+                                if (start === 0) {
+                                    end = 100;
+                                }
+                                if (end > content.length) {
+                                    end = content.length;
+                                }
+                                var match_content = content.substr(start, end);
+                                // highlight all keywords
+                                keywords.forEach(function (keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    match_content = match_content.replace(regS, "<em class=\"search-keyword\">" + keyword + "</em>");
+                                });
+
+                                str += "<p class=\"search-result\">" + match_content + "...</p>"
+                            }
+                            str += "</li>";
+                        }
+                    });
+                    str += "</ul>";
+                    $resultContent.innerHTML = str;
+                });
+            }
+        });
+    };
+
+    searchFunc('/search.xml', 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+	
+    
+
+    
+
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/shizuku.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"react":{"opacity":0.7}});</script></body>
+
+</html>
