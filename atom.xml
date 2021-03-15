@@ -3,11 +3,11 @@
   <title>小灰的博客</title>
   
   <subtitle>热爱技术，热爱生活</subtitle>
-  <link href="http://example.com/atom.xml" rel="self"/>
+  <link href="http://bruce11111.github.io/atom.xml" rel="self"/>
   
-  <link href="http://example.com/"/>
+  <link href="http://bruce11111.github.io/"/>
   <updated>2021-03-15T07:53:10.376Z</updated>
-  <id>http://example.com/</id>
+  <id>http://bruce11111.github.io/</id>
   
   <author>
     <name>小灰灰</name>
@@ -18,8 +18,8 @@
   
   <entry>
     <title>MYSQL</title>
-    <link href="http://example.com/2021/03/15/database/"/>
-    <id>http://example.com/2021/03/15/database/</id>
+    <link href="http://bruce11111.github.io/2021/03/15/database/"/>
+    <id>http://bruce11111.github.io/2021/03/15/database/</id>
     <published>2021-03-15T07:51:32.000Z</published>
     <updated>2021-03-15T07:53:10.376Z</updated>
     
@@ -34,15 +34,15 @@
     
     
     
-    <category term="database" scheme="http://example.com/categories/database/"/>
+    <category term="database" scheme="http://bruce11111.github.io/categories/database/"/>
     
     
   </entry>
   
   <entry>
     <title>java</title>
-    <link href="http://example.com/2021/03/15/java/"/>
-    <id>http://example.com/2021/03/15/java/</id>
+    <link href="http://bruce11111.github.io/2021/03/15/java/"/>
+    <id>http://bruce11111.github.io/2021/03/15/java/</id>
     <published>2021-03-15T07:47:03.000Z</published>
     <updated>2021-03-15T07:50:39.079Z</updated>
     
@@ -57,15 +57,15 @@
     
     
     
-    <category term="java" scheme="http://example.com/categories/java/"/>
+    <category term="java" scheme="http://bruce11111.github.io/categories/java/"/>
     
     
   </entry>
   
   <entry>
     <title>操作系统</title>
-    <link href="http://example.com/2021/03/15/operate/"/>
-    <id>http://example.com/2021/03/15/operate/</id>
+    <link href="http://bruce11111.github.io/2021/03/15/operate/"/>
+    <id>http://bruce11111.github.io/2021/03/15/operate/</id>
     <published>2021-03-15T07:46:44.000Z</published>
     <updated>2021-03-15T07:48:48.626Z</updated>
     
@@ -80,15 +80,15 @@
     
     
     
-    <category term="operate" scheme="http://example.com/categories/operate/"/>
+    <category term="operate" scheme="http://bruce11111.github.io/categories/operate/"/>
     
     
   </entry>
   
   <entry>
     <title>计算机网络</title>
-    <link href="http://example.com/2021/03/15/network/"/>
-    <id>http://example.com/2021/03/15/network/</id>
+    <link href="http://bruce11111.github.io/2021/03/15/network/"/>
+    <id>http://bruce11111.github.io/2021/03/15/network/</id>
     <published>2021-03-15T07:26:53.000Z</published>
     <updated>2021-03-15T07:43:08.225Z</updated>
     
@@ -103,7 +103,7 @@
     
     
     
-    <category term="network" scheme="http://example.com/categories/network/"/>
+    <category term="network" scheme="http://bruce11111.github.io/categories/network/"/>
     
     
   </entry>
