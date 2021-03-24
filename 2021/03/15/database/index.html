@@ -1018,6 +1018,13 @@ SHOW CREATE FUNCTION P1;<span aria-hidden="true" class="line-numbers-rows"><span
 <p>循环体</p>
 <p>until 结束循环条件</p>
 <p>end repeat。</p>
+<h2 id="1-MYSQL-架构"><a href="#1-MYSQL-架构" class="headerlink" title="1. MYSQL 架构"></a>1. MYSQL 架构</h2><p><img src="/2021/03/15/database/sqlstructure.PNG"></p>
+<ol>
+<li>连接层</li>
+<li>服务层</li>
+<li>引擎层</li>
+<li>存储层</li>
+</ol>
 <h2 id="1-索引"><a href="#1-索引" class="headerlink" title="1. 索引"></a>1. 索引</h2><pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">CREATE [UNIQUE] INDEX indexname ON mytable(columnname(length));#或
 ALTER mytable ADD [UNIQUE] INDEX [indexname] ON (columnname(length))<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
@@ -1067,7 +1074,13 @@ LIMIT &lt; limit_number &gt;<span aria-hidden="true" class="line-numbers-rows"><
 <li>概念</li>
 </ul>
 <p>它按照自己搜集的统计信息给出它认为最优的执行计划。</p>
-<h3 id="7-2-EXPLAIN"><a href="#7-2-EXPLAIN" class="headerlink" title="7.2 EXPLAIN"></a>7.2 EXPLAIN</h3><table>
+<h3 id="7-2-EXPLAIN"><a href="#7-2-EXPLAIN" class="headerlink" title="7.2 EXPLAIN"></a>7.2 EXPLAIN</h3><ol>
+<li>慢查询的开启并捕获。</li>
+<li>explain + 慢SQL分析</li>
+<li>show profile查询SQL在Mysql服务器里面的执行细节和生命周期情况。</li>
+<li>SQL数据库服务器的参数调优。</li>
+</ol>
+<table>
 <thead>
 <tr>
 <th>id</th>
@@ -1240,7 +1253,100 @@ LIMIT &lt; limit_number &gt;<span aria-hidden="true" class="line-numbers-rows"><
 <ol start="6">
 <li>每张表有多少行被优化器查询</li>
 </ol>
-<h1 id="MYSQL-面试题"><a href="#MYSQL-面试题" class="headerlink" title="MYSQL 面试题"></a>MYSQL 面试题</h1><h3 id="0-SQL-语句主要可以划分为以下-3-个类别。-DDL-DML-DCL"><a href="#0-SQL-语句主要可以划分为以下-3-个类别。-DDL-DML-DCL" class="headerlink" title="0. SQL 语句主要可以划分为以下 3 个类别。 DDL DML DCL"></a>0. <strong>SQL 语句主要可以划分为以下 3 个类别。</strong> DDL DML DCL</h3><p><strong>DDL（Data Definition Languages）语句：</strong>数据定义语言，这些语句定义了不同的数据段、数据库、表、列、索引等数据库对象的定义。常用的语句关键字主要包括 create、drop、alter等。</p>
+<h3 id="7-3-小表驱动大表"><a href="#7-3-小表驱动大表" class="headerlink" title="7.3 小表驱动大表"></a>7.3 小表驱动大表</h3><p>当B表的数据集必须小于A表数据集时，用in优于exists。</p>
+<p>exists子查询只返回<code>true</code>或<code>false</code>。</p>
+<h3 id="7-4-ORDER-BY-使用index排序"><a href="#7-4-ORDER-BY-使用index排序" class="headerlink" title="7.4 ORDER BY  使用index排序"></a>7.4 ORDER BY  使用index排序</h3><ol>
+<li>ORDER BY 语句使用索引最左前列。</li>
+<li>使用where子句与Order BY 子句条件列组合满足索引最左前列。</li>
+</ol>
+<h3 id="7-5-filesort"><a href="#7-5-filesort" class="headerlink" title="7.5 filesort"></a>7.5 filesort</h3><ol>
+<li>双路排序</li>
+</ol>
+<p>MYSQL 4.1之前使用双路排序，意思是两次扫描磁盘，最终得到数据。（从磁盘读取排序字段，在buffer进行排序，再从磁盘读取其他字段）。</p>
+<p>读取行指针和<code>orderby</code>列，对他们进行排序，然后扫描已经排序好的列表，按照列表中的值重新从列表中</p>
+<ol start="2">
+<li>单路排序</li>
+</ol>
+<p>从磁盘读取查询需要的所有列，按照orderby列在buffer对它们进行排序，然后扫描排序后的列表进行输出，它的效率更快一些，避免出现了第二次读取数据。并且把随机IO变成了顺序IO，但是它会使用更多空间，因为把每一行都保存在内存。</p>
+<p><font color="red">MYSQL两种排序：文件排序和扫描有序索引排序。</font></p>
+<h3 id="7-6-慢查询日志"><a href="#7-6-慢查询日志" class="headerlink" title="7.6 慢查询日志"></a>7.6 慢查询日志</h3><p>mysql默认没有开启慢查询日志，需要手动设置。如果不是调优，一般不开启。</p>
+<p><code>SHOW VARIABLES LIKE '%slow_query_log%'</code></p>
+<p>由<code>long_query_time</code>控制，默认情况下<code>long_query_time</code>的值为10秒。</p>
+<p><code>mysqldumpslow -s r -t 10 XXX.log</code> 得到返回记录集最多的10个SQL。</p>
+<p>第一步，发现问题</p>
+<p>第二步， 开启慢查询 抓取和截取</p>
+<p>第三步，explain </p>
+<p>第四步， show profile 更改配置</p>
+<h3 id="7-7-Show-Profile"><a href="#7-7-Show-Profile" class="headerlink" title="7.7 Show Profile"></a>7.7 Show Profile</h3><p><code>Show Profile</code>是mysql提供可以用来分析当前会话中语句执行的资源消耗情况。可以用于SQL的调优的测量。</p>
+<p>默认情况下，参数处于关闭状态，并保存最近15次的运行结果。</p>
+<p>使用步骤：</p>
+<ol>
+<li><p><code>Show variables like 'prifiling'</code> 查看是否关闭，准备将其打开</p>
+</li>
+<li><p><code>set profiling=on</code></p>
+</li>
+<li><p>查看结果 <code>show profiles</code></p>
+</li>
+<li><p><code>show profile cpu,block io for query 2;</code> 2表示查询语句的id</p>
+<p>这里语句中只写了cpu和io，还有其他信息，参数有：</p>
+<p><img src="/2021/03/15/database/showprofiles.PNG"></p>
+</li>
+<li></li>
+</ol>
+<p><img src="/2021/03/15/database/showprofilep.PNG"></p>
+<h3 id="7-8-全局查询日志"><a href="#7-8-全局查询日志" class="headerlink" title="7.8 全局查询日志"></a>7.8 全局查询日志</h3><p>不要在生产环境中开启这个功能。测试环境下使用。</p>
+<p><code>set global general_log=1</code></p>
+<p><code>set global log_output='TABLE'</code>此后，所编写的sql语句，将会记录到mysql库里的general_log表里，可以用下面命令查看：</p>
+<p><code>select * from mysql.general_log</code></p>
+<h2 id="3-锁机制"><a href="#3-锁机制" class="headerlink" title="3. 锁机制"></a>3. 锁机制</h2><h3 id="3-1-表锁"><a href="#3-1-表锁" class="headerlink" title="3.1 表锁"></a>3.1 表锁</h3><ul>
+<li><code>show open tables</code></li>
+<li>手动上锁</li>
+</ul>
+<p><code>lock table 表名字 read(write)， 表名字2 read(write)， 其他</code></p>
+<ul>
+<li>释放锁</li>
+</ul>
+<p><code>unlock tables</code></p>
+<p>读锁的使用：</p>
+<p>加了读锁，可以读，但是不能写这个表了，这个数据库中的其他表也不能读了。（读写复制的原因）</p>
+<p>第二个session再来此数据库中的更改其他表也只能阻塞。</p>
+<p>写锁的使用：</p>
+<p>加了写锁，可以更改此表，不能查询其他表。</p>
+<p>第二个session可以查其他表，但是不能查此表。</p>
+<h4 id="3-1-1-MYISAM"><a href="#3-1-1-MYISAM" class="headerlink" title="3.1.1 MYISAM"></a>3.1.1 MYISAM</h4><p>偏读锁。在执行查询语句(select)前，会自动给涉及的所有表加读锁，在执行增删改操作前，会自动给涉及的表加写锁。</p>
+<ul>
+<li>表级锁有两种模式</li>
+</ul>
+<p>表共享读锁（Table Read Lock)</p>
+<p>表独占写锁（Table Write Lock）</p>
+<table>
+<thead>
+<tr>
+<th align="center">锁类型</th>
+<th align="center">可否兼容</th>
+<th align="center">读锁</th>
+<th align="center">写锁</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">读锁</td>
+<td align="center">是</td>
+<td align="center">是</td>
+<td align="center">否</td>
+</tr>
+<tr>
+<td align="center">写锁</td>
+<td align="center">是</td>
+<td align="center">否</td>
+<td align="center">否</td>
+</tr>
+</tbody></table>
+<ol>
+<li>对Myisam表的读操作（加读锁），不会阻塞其他进程对同一表的读请求，但会阻塞对同一表的写请求。只有当读锁释放后，才会执行其他进程的写操作。</li>
+<li>对MyISAM表的写操作（加写锁），会阻塞其他进程对同一表的读和写操作，只有当写锁释放后，才会执行其他进程的读写操作。</li>
+</ol>
+<h4 id="3-2-1-分析表的锁定"><a href="#3-2-1-分析表的锁定" class="headerlink" title="3.2.1 分析表的锁定"></a>3.2.1 分析表的锁定</h4><p><code>show status like 'talbe%'</code></p>
+<h3 id="3-2-行级锁"><a href="#3-2-行级锁" class="headerlink" title="3.2 行级锁"></a>3.2 行级锁</h3><h1 id="MYSQL-面试题"><a href="#MYSQL-面试题" class="headerlink" title="MYSQL 面试题"></a>MYSQL 面试题</h1><h3 id="0-SQL-语句主要可以划分为以下-3-个类别。-DDL-DML-DCL"><a href="#0-SQL-语句主要可以划分为以下-3-个类别。-DDL-DML-DCL" class="headerlink" title="0. SQL 语句主要可以划分为以下 3 个类别。 DDL DML DCL"></a>0. <strong>SQL 语句主要可以划分为以下 3 个类别。</strong> DDL DML DCL</h3><p><strong>DDL（Data Definition Languages）语句：</strong>数据定义语言，这些语句定义了不同的数据段、数据库、表、列、索引等数据库对象的定义。常用的语句关键字主要包括 create、drop、alter等。</p>
 <p><strong>DML（Data Manipulation Language）语句：</strong>数据操纵语句，用于添加、删除、更新和查询数据库记录，并检查数据完整性，常用的语句关键字主要包括 insert、delete、udpate 和select 等。(增添改查）</p>
 <p><strong>DCL（Data Control Language）语句：</strong>数据控制语句，用于控制不同数据段直接的许可和访问级别的语句。这些语句定义了数据库、表、字段、用户的访问权限和安全级别。主要的语句关键字包括 grant、revoke 等。</p>
 <h3 id="1-数据库三大范式是什么"><a href="#1-数据库三大范式是什么" class="headerlink" title="1. 数据库三大范式是什么"></a>1. 数据库三大范式是什么</h3><p>第一范式：每个列都不可以再拆分。</p>
@@ -1601,18 +1707,17 @@ LIMIT &lt; limit_number &gt;<span aria-hidden="true" class="line-numbers-rows"><
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="far fa-dot-circle"></i>&nbsp;本篇
-            </div>
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2021/03/15/database/">
+                <a href="/2021/03/24/interview/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/10.jpg" class="responsive-img" alt="MYSQL">
+                        <img src="/medias/featureimages/7.jpg" class="responsive-img" alt="Interview">
                         
-                        <span class="card-title">MYSQL</span>
+                        <span class="card-title">Interview</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -1622,22 +1727,17 @@ LIMIT &lt; limit_number &gt;<span aria-hidden="true" class="line-numbers-rows"><
                         
                     </div>
                     <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-03-15
-                            </span>
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2021-03-24
+                        </span>
                         <span class="publish-author">
                             
-                            <i class="fas fa-bookmark fa-fw icon-category"></i>
-                            
-                            <a href="/categories/database/" class="post-category">
-                                    database
-                                </a>
-                            
+                            <i class="fas fa-user fa-fw"></i>
+                            小灰灰
                             
                         </span>
                     </div>
                 </div>
-
                 
             </div>
         </div>

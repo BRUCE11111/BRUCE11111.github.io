@@ -6,7 +6,7 @@
   <link href="http://bruce11111.github.io/atom.xml" rel="self"/>
   
   <link href="http://bruce11111.github.io/"/>
-  <updated>2021-03-15T07:53:10.376Z</updated>
+  <updated>2021-03-24T09:01:48.255Z</updated>
   <id>http://bruce11111.github.io/</id>
   
   <author>
@@ -17,11 +17,49 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>Network Interview</title>
+    <link href="http://bruce11111.github.io/2021/03/24/interview-1/"/>
+    <id>http://bruce11111.github.io/2021/03/24/interview-1/</id>
+    <published>2021-03-24T08:21:36.000Z</published>
+    <updated>2021-03-24T09:01:48.255Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;1-TIME-WAIT过多&quot;&gt;&lt;a href=&quot;#1-TIME-WAIT过多&quot; class=&quot;headerlink&quot; title=&quot;1. TIME_WAIT过多&quot;&gt;&lt;/a&gt;1. TIME_WAIT过多&lt;/h2&gt;&lt;h3 id=&quot;1-1原因&quot;&gt;&lt;a</summary>
+        
+      
+    
+    
+    
+    <category term="network" scheme="http://bruce11111.github.io/categories/network/"/>
+    
+    
+    <category term="interview" scheme="http://bruce11111.github.io/tags/interview/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Interview</title>
+    <link href="http://bruce11111.github.io/2021/03/24/interview/"/>
+    <id>http://bruce11111.github.io/2021/03/24/interview/</id>
+    <published>2021-03-24T08:21:28.000Z</published>
+    <updated>2021-03-24T08:21:28.159Z</updated>
+    
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
     <title>MYSQL</title>
     <link href="http://bruce11111.github.io/2021/03/15/database/"/>
     <id>http://bruce11111.github.io/2021/03/15/database/</id>
     <published>2021-03-15T07:51:32.000Z</published>
-    <updated>2021-03-15T07:53:10.376Z</updated>
+    <updated>2021-03-22T03:10:54.598Z</updated>
     
     
       
@@ -67,7 +105,7 @@
     <link href="http://bruce11111.github.io/2021/03/15/operate/"/>
     <id>http://bruce11111.github.io/2021/03/15/operate/</id>
     <published>2021-03-15T07:46:44.000Z</published>
-    <updated>2021-03-15T07:48:48.626Z</updated>
+    <updated>2021-03-21T14:35:30.072Z</updated>
     
     
       
