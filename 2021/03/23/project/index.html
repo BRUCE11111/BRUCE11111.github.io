@@ -1643,28 +1643,32 @@ spring.jackson.time-zone=GMT+8<span aria-hidden="true" class="line-numbers-rows"
     <span class="token keyword">return</span> <span class="token class-name">R</span><span class="token punctuation">.</span><span class="token function">ok</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<h1 id="一、什么是统一异常处理"><a href="#一、什么是统一异常处理" class="headerlink" title="一、什么是统一异常处理"></a>一、什么是统一异常处理</h1><h2 id="1、制造异常"><a href="#1、制造异常" class="headerlink" title="1、制造异常"></a>1、制造异常</h2><p>除以0</p>
+<h3 id="3-10-统一异常处理"><a href="#3-10-统一异常处理" class="headerlink" title="3.10 统一异常处理"></a>3.10 统一异常处理</h3><p><strong>1、制造异常</strong></p>
+<p>除以0 </p>
 <pre class="line-numbers language-none"><code class="language-none">int a = 10/0;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
-<h2 id="2、什么是统一异常处理"><a href="#2、什么是统一异常处理" class="headerlink" title="2、什么是统一异常处理"></a><img src="/2021/03/23/project/42cfc6ab-afaf-4516-8b67-d1e198277567.png" alt="img">2、什么是统一异常处理</h2><p>我们想让异常结果也显示为统一的返回结果对象，并且统一处理系统的异常信息，那么需要统一异常处理</p>
-<h1 id="二、统一异常处理"><a href="#二、统一异常处理" class="headerlink" title="二、统一异常处理"></a>二、统一异常处理</h1><h2 id="1、创建统一异常处理器"><a href="#1、创建统一异常处理器" class="headerlink" title="1、创建统一异常处理器"></a>1、创建统一异常处理器</h2><p>在service-base中创建统一异常处理类GlobalExceptionHandler.java：</p>
-<pre class="line-numbers language-none"><code class="language-none">/**
+<p><img src="/2021/03/23/project/42cfc6ab-afaf-4516-8b67-d1e198277567.png" alt="img"></p>
+<p>我们想让异常结果也显示为统一的返回结果对象，并且统一处理系统的异常信息，那么需要统一异常处理</p>
+<p><strong>1、创建统一异常处理器</strong></p>
+<p>在service-base中创建统一异常处理类GlobalExceptionHandler.java：</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">/**
  * 统一异常处理类
- */
-@ControllerAdvice
-public class GlobalExceptionHandler {
-    @ExceptionHandler(Exception.class)
-    @ResponseBody
-    public R error(Exception e){
-        e.printStackTrace();
-        return R.error();
-    }
-}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+ */</span>
+<span class="token annotation punctuation">@ControllerAdvice</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">GlobalExceptionHandler</span> <span class="token punctuation">{</span>
+    <span class="token annotation punctuation">@ExceptionHandler</span><span class="token punctuation">(</span><span class="token class-name">Exception</span><span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">)</span>
+    <span class="token annotation punctuation">@ResponseBody</span>
+    <span class="token keyword">public</span> <span class="token class-name">R</span> <span class="token function">error</span><span class="token punctuation">(</span><span class="token class-name">Exception</span> e<span class="token punctuation">)</span><span class="token punctuation">{</span>
+        e<span class="token punctuation">.</span><span class="token function">printStackTrace</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> <span class="token class-name">R</span><span class="token punctuation">.</span><span class="token function">error</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<h2 id="2、测试"><a href="#2、测试" class="headerlink" title="2、测试"></a>2、测试</h2><p>返回统一错误结果</p>
+<p><strong>2、测试</strong> </p>
+<p>返回统一错误结果</p>
 <p><img src="/2021/03/23/project/c54eac64-d736-4dc4-9923-fb85f87d31a2.png" alt="img"></p>
 <p>处理特定异常</p>
-<p>1、添加异常处理方法 </p>
+<p><strong>1、添加异常处理方法</strong> </p>
 <p>GlobalExceptionHandler.java中添加</p>
 <pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token annotation punctuation">@ExceptionHandler</span><span class="token punctuation">(</span><span class="token class-name">ArithmeticException</span><span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">)</span>
 <span class="token annotation punctuation">@ResponseBody</span>
@@ -1673,7 +1677,7 @@ public class GlobalExceptionHandler {
     <span class="token keyword">return</span> <span class="token class-name">R</span><span class="token punctuation">.</span><span class="token function">error</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">message</span><span class="token punctuation">(</span><span class="token string">"执行了自定义异常"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<p>2、测试</p>
+<p><strong>2、测试</strong></p>
 <p><img src="/2021/03/23/project/2b02cb8f-53fd-4847-a5ad-10e134c44f28.png" alt="img"></p>
 <p><strong>四、自定义异常</strong></p>
 <p>1、创建自定义异常类</p>

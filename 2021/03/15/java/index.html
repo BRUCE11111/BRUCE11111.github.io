@@ -503,12 +503,9 @@
 <li><strong>分配对象头</strong>。对象头包括类元数据、对象的哈希码以及对象的GC分代年龄等。</li>
 <li><strong>init初始化</strong>。按照程序员的意愿对类中的数据进行初始化。</li>
 </ol>
-<blockquote>
-<p><font color="green">对象的内存布局</font></p>
-</blockquote>
-<ol>
+<h3 id="gt-对象的内存布局"><a href="#gt-对象的内存布局" class="headerlink" title=">对象的内存布局"></a><font color="green">&gt;对象的内存布局</font></h3><ol>
 <li><strong>对象头</strong>。包括对象的哈希码、GC分代年龄等。</li>
-<li><strong>实例数据</strong>。程序中所定义的各种字段内容。</li>
+<li><strong>实例数据</strong>。程序中所s定义的各种字段内容。</li>
 <li><strong>对齐填充</strong>。由于对象占位必须是8字节的整数倍，所以当对象实例部分空间未占满时（对象头本身是8字节的1倍或2倍），会对剩余空间进行填充。</li>
 </ol>
 <h3 id="gt-句柄和直接引用"><a href="#gt-句柄和直接引用" class="headerlink" title="> 句柄和直接引用"></a><font color="green">&gt; 句柄和直接引用</font></h3><ol>

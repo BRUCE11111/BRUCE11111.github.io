@@ -6,7 +6,7 @@
   <link href="http://bruce11111.github.io/atom.xml" rel="self"/>
   
   <link href="http://bruce11111.github.io/"/>
-  <updated>2021-03-31T02:24:11.219Z</updated>
+  <updated>2021-03-31T13:19:36.406Z</updated>
   <id>http://bruce11111.github.io/</id>
   
   <author>
@@ -15,6 +15,79 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>cookies和session</title>
+    <link href="http://bruce11111.github.io/2021/03/31/cookies-he-session/"/>
+    <id>http://bruce11111.github.io/2021/03/31/cookies-he-session/</id>
+    <published>2021-03-31T13:00:56.000Z</published>
+    <updated>2021-03-31T13:19:36.406Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;简述&quot;&gt;&lt;a href=&quot;#简述&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="network" scheme="http://bruce11111.github.io/categories/network/"/>
+    
+    
+    <category term="HTTP" scheme="http://bruce11111.github.io/tags/HTTP/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>spring注解原理</title>
+    <link href="http://bruce11111.github.io/2021/03/31/spring-zhu-jie-yuan-li/"/>
+    <id>http://bruce11111.github.io/2021/03/31/spring-zhu-jie-yuan-li/</id>
+    <published>2021-03-31T07:36:33.000Z</published>
+    <updated>2021-03-31T09:22:41.215Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;Spring-注解驱动开发&quot;&gt;&lt;a href=&quot;#Spring-注解驱动开发&quot; class=&quot;headerlink&quot; title=&quot;Spring 注解驱动开发&quot;&gt;&lt;/a&gt;Spring</summary>
+        
+      
+    
+    
+    
+    <category term="Spring" scheme="http://bruce11111.github.io/categories/Spring/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>System类源码分析</title>
+    <link href="http://bruce11111.github.io/2021/03/31/system-lei-yuan-ma-fen-xi/"/>
+    <id>http://bruce11111.github.io/2021/03/31/system-lei-yuan-ma-fen-xi/</id>
+    <published>2021-03-31T03:38:47.000Z</published>
+    <updated>2021-03-31T03:52:54.735Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;The-Security-Manager&quot;&gt;&lt;a href=&quot;#The-Security-Manager&quot; class=&quot;headerlink&quot; title=&quot;The Security Manager&quot;&gt;&lt;/a&gt;The Security</summary>
+        
+      
+    
+    
+    
+    <category term="java" scheme="http://bruce11111.github.io/categories/java/"/>
+    
+    
+    <category term="java" scheme="http://bruce11111.github.io/tags/java/"/>
+    
+  </entry>
   
   <entry>
     <title>javaunderlying</title>
@@ -105,7 +178,7 @@
     <link href="http://bruce11111.github.io/2021/03/23/project/"/>
     <id>http://bruce11111.github.io/2021/03/23/project/</id>
     <published>2021-03-23T02:54:31.000Z</published>
-    <updated>2021-03-30T12:58:21.225Z</updated>
+    <updated>2021-03-31T09:29:42.439Z</updated>
     
     
       
@@ -151,7 +224,7 @@
     <link href="http://bruce11111.github.io/2021/03/15/java/"/>
     <id>http://bruce11111.github.io/2021/03/15/java/</id>
     <published>2021-03-15T07:47:03.000Z</published>
-    <updated>2021-03-31T03:23:37.152Z</updated>
+    <updated>2021-03-31T03:38:53.035Z</updated>
     
     
       
