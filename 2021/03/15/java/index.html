@@ -491,18 +491,7 @@
 <p>$T(n) = a * T(\frac{n}{b}) + f(n)$</p>
 <p><img src="/2021/03/15/java/%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6%E4%B8%BB%E6%88%90%E5%88%86%E5%88%86%E6%9E%90.PNG"></p>
 <p><img src="/2021/03/15/java/%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6%E4%B8%BB%E6%88%90%E5%88%86%E5%88%86%E6%9E%901.PNG"></p>
-<blockquote>
-<h3 id="java-compator"><a href="#java-compator" class="headerlink" title="java compator"></a><font color="green">java compator</font></h3></blockquote>
-<ul>
-<li>保持这个顺序就返回-1 (&gt; 还是 &lt;)</li>
-<li>交换顺序就返回1</li>
-<li>什么都不做就返回0；所以 升序的话 如果1&lt;2,返回-1,保持顺序[1,2],如果3&gt;2,返回-1,交换顺序[2,3]</li>
-</ul>
-<pre class="line-numbers language-none"><code class="language-none">if (a &gt; b) return -1; 保持a&gt; b的顺序
-if (a &gt; b) return 1; 交换ab<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-
-
-
+<h2 id="1-JVM虚拟机"><a href="#1-JVM虚拟机" class="headerlink" title="1. JVM虚拟机"></a>1. JVM虚拟机</h2><p>虚拟机的启动是通过引导类加载器（bootstrap class loader）创建一个初始类（initial class）来完成的，这个类是由虚拟机的具体实现指定的。</p>
 <h3 id="gt-面向对象和面向过程的区别"><a href="#gt-面向对象和面向过程的区别" class="headerlink" title="&nbsp;> 面向对象和面向过程的区别"></a><font color="green">&nbsp;&gt; 面向对象和面向过程的区别</font></h3><ul>
 <li>面向过程 ： 面向过程性能很好。类调用时需要实例化，开销大消耗资源。但是面向过程没有面向对象易于维护、复扩展。</li>
 <li>面向对象：易维护、复用、扩展。因为面向对象有封装、继承、多态的特性，低耦合系统。</li>
@@ -533,22 +522,6 @@ if (a &gt; b) return 1; 交换ab<span aria-hidden="true" class="line-numbers-row
 </ol>
 <p><strong>优点</strong>：速度快。</p>
 <p><strong>缺点</strong>：对象被移动时，所有指向该对象的reference都需要被改变，耗时。</p>
-<h3 id="gt-迭代器Iterator"><a href="#gt-迭代器Iterator" class="headerlink" title=">迭代器Iterator"></a>&gt;<font color="green">迭代器Iterator</font></h3><p>迭代器是一种模式，可以使得序列类型的结构数据的遍历行为与被遍历的对象分离。无需关心对象底层的实现，只要拿到这个对象，就可以使用迭代器遍历这个对象的内部。</p>
-<ul>
-<li>Iterable 实现这个接口的集合对象支持迭代。实现Iterable后可以配合foreach使用。</li>
-<li>Iterator 迭代器，提供迭代机制的对象。</li>
-</ul>
-<p>Iterator三个方法经常使用<code>hasnext()</code> <code>next()</code> <code>remove()</code>。其中<code>remove()</code>的使用需要先调用<code>next()</code>。</p>
-<p>迭代出的对象也是引用的拷贝，结果还是引用。可以根据迭代出的元素直接修改对象。</p>
-<p>Iterator的remove方法可以保证不跑出ModificationException异常即<code>Fail-fast</code>机制。</p>
-<ul>
-<li>for 和 Iterator的区别</li>
-</ul>
-<ol>
-<li>ArrayList对随机访问快速，而for循环中的<code>get()</code>方法采用的是随机访问的方法，因此在ArrayList里，for循环较快。</li>
-<li>LinkedList顺序访问较快，Iterator中的<code>next()</code>方法使用顺序访问，因此在LinkedList里，使用iterator更快。</li>
-<li>for循环适合快速指定元素拿取数据。Iterator适合链式结构。</li>
-</ol>
 <h3 id="gt-双亲委派机制"><a href="#gt-双亲委派机制" class="headerlink" title="> 双亲委派机制"></a>&gt; <font color="green">双亲委派机制</font></h3><p>当要加载某个类时，需要把任务委托给上级类加载器，递归询问是否已经加载此类，如果没有，自己才会加载。</p>
 <p><img src="/2021/03/15/java/%E5%8F%8C%E4%BA%B2%E5%A7%94%E6%B4%BE%E6%9C%BA%E5%88%B6.png" alt="句柄"></p>
 <ol>
@@ -570,369 +543,6 @@ if (a &gt; b) return 1; 交换ab<span aria-hidden="true" class="line-numbers-row
 <p>作用：</p>
 <p>1.防止重复加载同一个类。</p>
 <p>2.防止代码被篡改。（只能有一个被加载的类，已经加载的类不能被篡改）。</p>
-<h3 id="gt-volatile关键字"><a href="#gt-volatile关键字" class="headerlink" title="> volatile关键字"></a><font color="green">&gt; volatile关键字</font></h3><p>1.保持可见性。</p>
-<p>可见性是指当多个线程访问同一个变量时，一个线程修改了这个变量的值，其他线程能够立即看得到修改的值。（强制重读）</p>
-<p>可见性不能保证线程安全。线程安全的三个条件：原子性、可见性、禁止重排序。三者的解释可参考<a target="_blank" rel="noopener" href="https://www.cnblogs.com/dolphin0520/p/3920373.html">https://www.cnblogs.com/dolphin0520/p/3920373.html</a></p>
-<p>2.禁止指令重排序。</p>
-<pre class="line-numbers language-none"><code class="language-none">x = 10;         //语句1
-y = x;         //语句2
-x++;           //语句3
-x = x + 1;     //语句4<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>如果语句3是带有volatile关键字的，位于语句3前面的语句不能重排序至其后面，语句3后面的语句不能重排序到3前面。语句3前面的语句可以随便重排序，只要自己不要越过语句3就行。</p>
-<p><strong>经典问题</strong>：</p>
-<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">volatile</span> <span class="token keyword">int</span> inc <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
-    
-   <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token class-name">String</span><span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-       <span class="token keyword">final</span> <span class="token class-name">Test</span> test <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Test</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-       <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> i<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span>i<span class="token operator">&lt;</span><span class="token number">10</span><span class="token punctuation">;</span>i<span class="token operator">++</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
-           <span class="token keyword">new</span> <span class="token class-name">Thread</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
-               <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">run</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-                   <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> j<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span>j<span class="token operator">&lt;</span><span class="token number">1000</span><span class="token punctuation">;</span>j<span class="token operator">++</span><span class="token punctuation">)</span>
-                       test<span class="token punctuation">.</span><span class="token function">increase</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-               <span class="token punctuation">}</span><span class="token punctuation">;</span>
-           <span class="token punctuation">}</span><span class="token punctuation">.</span><span class="token function">start</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-       <span class="token punctuation">}</span>
-   <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">increase</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-       inc<span class="token operator">++</span><span class="token punctuation">;</span>
-   <span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>运行结果小于10000。原因：</p>
-<p>假如某个时刻变量inc的值为10，</p>
-<p>　　线程1对变量进行自增操作，线程1先读取了变量inc的原始值，线程2对变量进行自增操作，然后线程1被阻塞了；</p>
-<p>　　由于线程1只是对变量inc进行读取操作，而没有对变量进行修改操作，所以不会导致线程2的工作内存中缓存变量inc的缓存行无效，所以线程2会直接去主存读取inc的值，发现inc的值时10，然后进行加1操作，并把11写入工作内存，最后写入主存。</p>
-<pre class="line-numbers language-none"><code class="language-none">i++操作可以被拆分为三步：
-     1，线程读取i的值
-     2、i进行自增计算
-     3、刷新回i的值<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>　　然后线程1接着进行加1操作，注意此时在线程1的工作内存中inc的值更新为11（volatile强制重读），但是线程1之前卡在了自增计算（非原子性操作，操作的还是10自增）所以线程1对inc进行加1操作后inc的值为11，然后将11写入工作内存（11替换强制更新的11），最后写入主存。</p>
-<p>　　那么两个线程分别进行了一次自增操作后，inc只增加了1，结果都为11。</p>
-<ul>
-<li><strong>单例模式中的volatile</strong> 双检锁机制</li>
-</ul>
-<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">DoubleCheckedLocking</span> <span class="token punctuation">{</span> <span class="token comment">// 1</span>
-	<span class="token keyword">private</span> <span class="token keyword">volatile</span> <span class="token keyword">static</span> <span class="token class-name">Instance</span> instance<span class="token punctuation">;</span> <span class="token comment">// 2</span>
-	<span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token class-name">Instance</span> <span class="token function">getInstance</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token comment">// 3</span>
-		<span class="token keyword">if</span> <span class="token punctuation">(</span>instance <span class="token operator">==</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token comment">// 4:第一次检查</span>
-			<span class="token keyword">synchronized</span> <span class="token punctuation">(</span><span class="token class-name">DoubleCheckedLocking</span><span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token comment">// 5:加锁</span>
-				<span class="token keyword">if</span> <span class="token punctuation">(</span>instance <span class="token operator">==</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token comment">// 6:第二次检查</span>
-				instance <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Instance</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 7:问题的根源出在这里</span>
-			<span class="token punctuation">}</span> <span class="token comment">// 8</span>
-		<span class="token punctuation">}</span> <span class="token comment">// 9</span>
-		<span class="token keyword">return</span> instance<span class="token punctuation">;</span> <span class="token comment">// 10</span>
-	<span class="token punctuation">}</span> <span class="token comment">// 11</span>
-<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>第7行实际上编译后分为3步：</p>
-<pre class="line-numbers language-java" data-language="java"><code class="language-java">memory <span class="token operator">=</span> <span class="token function">allocate</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>　　<span class="token comment">// 1：分配对象的内存空间</span>
-<span class="token function">ctorInstance</span><span class="token punctuation">(</span>memory<span class="token punctuation">)</span><span class="token punctuation">;</span>　<span class="token comment">// 2：初始化对象</span>
-instance <span class="token operator">=</span> memory<span class="token punctuation">;</span>　　<span class="token comment">// 3：设置instance指向刚分配的内存地址</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-
-<p>编译期会做指令重排序，所以会有：</p>
-<pre class="line-numbers language-java" data-language="java"><code class="language-java">memory <span class="token operator">=</span> <span class="token function">allocate</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>　　<span class="token comment">// 1：分配对象的内存空间</span>
-instance <span class="token operator">=</span> memory<span class="token punctuation">;</span>　　<span class="token comment">// 3：设置instance指向刚分配的内存地址</span>
-<span class="token comment">// 注意，此时对象还没有被初始化！</span>
-<span class="token function">ctorInstance</span><span class="token punctuation">(</span>memory<span class="token punctuation">)</span><span class="token punctuation">;</span>　<span class="token comment">// 2：初始化对象</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>当A线程上面132的顺序分配了对象，但是当A刚刚执行完毕3，B看到了instance已经不为<code>null</code>，B此时调用了空对象，发生<font color="red">错误</font>。</p>
-<h3 id="lt-happens-before原则"><a href="#lt-happens-before原则" class="headerlink" title="< happens-before原则"></a><font color="green">&lt; happens-before原则</font></h3><ul>
-<li>程序次序规则：一个线程内，按照代码顺序，书写在前面的操作先行发生于书写在后面的操作</li>
-<li>锁定规则：一个unLock操作先行发生于后面对同一个锁lock操作</li>
-<li>volatile变量规则：对一个变量的写操作先行发生于后面对这个变量的读操作</li>
-<li>传递规则：如果操作A先行发生于操作B，而操作B又先行发生于操作C，则可以得出操作A先行发生于操作C</li>
-<li>线程启动规则：Thread对象的start()方法先行发生于此线程的每个一个动作</li>
-<li>线程中断规则：对线程interrupt()方法的调用先行发生于被中断线程的代码检测到中断事件的发生</li>
-<li>线程终结规则：线程中所有的操作都先行发生于线程的终止检测，我们可以通过Thread.join()方法结束、Thread.isAlive()的返回值手段检测到线程已经终止执行</li>
-<li>对象终结规则：一个对象的初始化完成先行发生于他的finalize()方法的开始</li>
-</ul>
-<h3 id="lt-static-关键字"><a href="#lt-static-关键字" class="headerlink" title="<static 关键字"></a><font color="green">&lt;static 关键字</font></h3><blockquote>
-<p>static 关键字</p>
-</blockquote>
-<p>java中不存在“全局变量”概念，可以用static表示“伪全局”概念。</p>
-<p>被static修饰就是静态变量，所以JVM肯定将其放在单独的常量池里。JVM可以方便访问它们。</p>
-<p>要点：</p>
-<ol>
-<li><p>被 static 修饰的成员变量和成员方法是独立于该类的。</p>
-<p>静态变量和静态方法是随着类加载时被完成初始化的（类加载时已经存在），它在内存中仅有一个，且 JVM 也只会为它分配一次内存，同时类所有的实例都共享静态变量，可以直接通过类名来访问它。</p>
-<p>可如下直接使用：</p>
-</li>
-</ol>
-<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token class-name">ClassName</span><span class="token punctuation">.</span>propertyName
-<span class="token class-name">ClassName</span><span class="token punctuation">.</span><span class="token function">methodName</span><span class="token punctuation">(</span>……<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-
-<ol start="2">
-<li>它只能调用 static 变量和方法。</li>
-<li>不能以任何形式引用 this、super。</li>
-<li>static 变量在定义时必须要进行初始化，且初始化时间要早于非静态变量。</li>
-</ol>
-<h3 id="lt-final关键字"><a href="#lt-final关键字" class="headerlink" title="<final关键字"></a><font color="green">&lt;final关键字</font></h3><p>某些数据不可更改。final修饰的叫常量。“常量”的使用有以下两个地方：</p>
-<ol>
-<li>编译期常量，永远不可改变。</li>
-<li>运行期初始化时，不可改变。根据对象的不同而表现不同，但同时又不希望它被改变，这个时候我们就可以使用运行期常量。</li>
-</ol>
-<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">private</span> <span class="token keyword">final</span> <span class="token class-name">String</span> final_01 <span class="token operator">=</span> <span class="token string">"demo"</span><span class="token punctuation">;</span><span class="token comment">//编译期常量，必须要进行初始化，且不可更改</span>
-
-<span class="token keyword">public</span> <span class="token keyword">class</span> test<span class="token punctuation">{</span>
-    <span class="token keyword">public</span> <span class="token keyword">final</span> <span class="token class-name">String</span> str<span class="token punctuation">;</span>
-    <span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token class-name">Random</span> random <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Random</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token keyword">private</span> <span class="token keyword">final</span> <span class="token keyword">int</span> final_03 <span class="token operator">=</span> random<span class="token punctuation">.</span><span class="token function">nextInt</span><span class="token punctuation">(</span><span class="token number">50</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment">//使用随机数来进行初始化,运行期初始化，每次new新的类都会改变内容（random）。</span>
-    <span class="token function">test</span><span class="token punctuation">(</span><span class="token class-name">String</span> s<span class="token punctuation">)</span><span class="token punctuation">{</span>
-        <span class="token keyword">this</span><span class="token punctuation">.</span>str<span class="token operator">=</span>s<span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>注意点：</p>
-<ol>
-<li>final修饰的方法不能被修改重写，可以被继承。</li>
-<li>final修饰的类不能修改不能继承，最终类。</li>
-<li>匿名内部类中参数必须为final。</li>
-</ol>
-<h3 id="lt-java异常"><a href="#lt-java异常" class="headerlink" title="<java异常"></a><font color="green">&lt;java异常</font></h3><ol>
-<li>异常的体系结构</li>
-</ol>
-<p>什么是异常？</p>
-<p>异常指的就是程序的不正常，简单理解就是程序所发生的错误。</p>
-<ul>
-<li>分类</li>
-</ul>
-<p>a 编译时异常： 编译期间，编译器检测到某段代码可能会发生某些问题，需要程序员提前给代码做出错误的解决方案，否则编译无法通过。</p>
-<p>b 运行时异常 编译正常，运行时出现了错误。</p>
-<ul>
-<li>体系结构</li>
-</ul>
-<p>a throwable</p>
-<p>​    Error:严重错误</p>
-<p>​    Exception:</p>
-<p>​        RuntimeException</p>
-<p>​        IRuntimeException</p>
-<ul>
-<li><p>异常出现的原理</p>
-<p>java对异常的默认处理方式是抛出问题给上一级，如果出现了问题，java会根据问题所描述的异常类创建一个对象，底层通过throw关键字将该对象抛出给上一级。（mehtod -&gt; main -&gt; jvm -&gt; 将异常位置和错误原因打印）</p>
-</li>
-<li><p>异常的处理方式</p>
-<ul>
-<li><p>问题可以自己处理的</p>
-<p>try catch处理方式 (后面的代码还可以继续执行)</p>
-</li>
-<li><p>问题处理不掉的</p>
-<p>throw处理方式。 如果是RuntimeException异常，则方法上面无需throws声明。</p>
-</li>
-</ul>
-</li>
-</ul>
-<p>throws 和 throw throws是仅仅对方法进行声明，告知调用者此方法存在异常。</p>
-<p>throw是抛出。</p>
-<ul>
-<li><p>Spring框架的事务默认是RuntimeException才进行回滚</p>
-<ul>
-<li>解决方案 </li>
-</ul>
-<p>修改Transactional注解中的rollbackFor属性可以指定为exception异常回滚。</p>
-<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token annotation punctuation">@Transactional</span><span class="token punctuation">(</span>rollbackFor<span class="token operator">=</span><span class="token punctuation">{</span><span class="token class-name">Exception</span><span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">}</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
-</ul>
-<p>自己定义异常 （规范的异常类名，找一个类继承exception）。</p>
-<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">class</span> <span class="token class-name">MyPersonAgeException</span> <span class="token keyword">extends</span> <span class="token class-name">RuntimeExceptoin</span><span class="token punctuation">(</span>或 <span class="token class-name">Exception</span><span class="token punctuation">)</span>
-    
-    记得加入字符串的构造参数<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-
-
-
-<h3 id="lt-JAVA-集合"><a href="#lt-JAVA-集合" class="headerlink" title="<JAVA 集合"></a><font color="green">&lt;JAVA 集合</font></h3><p><img src="/2021/03/15/java/java%E9%9B%86%E5%90%88%E7%B1%BB.png" alt="句柄"></p>
-<ol>
-<li><strong>Collection</strong></li>
-</ol>
-<p>最基本的集合接口，它不提供直接的实现，JAVA SDK提供的类都是继承自Collection的<strong>子接口</strong>。所有实现Collection的接口类必须实现两类构造函数</p>
-<p>a) 无参构造函数。创建空的Collection。</p>
-<p>b) 有参构造函数，用于创建新的Collection。</p>
-<p>解决ArrayLlist的线程不安全(<code>concurrentModificationException</code>)。</p>
-<ol>
-<li>换成<code>vector</code>。</li>
-<li>换成`Collections.synchronizeList(new ArrayList());</li>
-<li>new copyOnWriteArrayList();写时赋值。</li>
-</ol>
-<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token number">1.L</span>ist
-
-a<span class="token punctuation">)</span> <span class="token class-name">ArrayList</span> 
-
-初始容量<span class="token number">10</span>。基于数组实现。每次扩容<span class="token number">1.5</span>倍。
-
-b<span class="token punctuation">)</span> <span class="token class-name">LinkedList</span>
-
-基于双向链表实现，近开头或结尾（靠近索引）遍历链表。
-
-c<span class="token punctuation">)</span> <span class="token class-name">Vector</span>
-
-与<span class="token class-name">ArrayList</span>一样，不同在于它是线程安全。
-
-d<span class="token punctuation">)</span> <span class="token class-name">Stack</span>
-
-继承自<span class="token class-name">Vector</span>，后进先出的栈。提供push pop peek empty search。
-
-<span class="token number">2.</span>Set
-
-与list区别是不包含重复元素。
-
-a）<span class="token class-name">EnumSet</span>
-
-枚举专用<span class="token class-name">Set</span>，所有元素都是枚举类型。
-
-b）<span class="token class-name">HashSet</span>
-
-查询速度最快的集合，内部以<span class="token class-name">Hashcode</span>实现，顺序也以哈希码排序。
-
-c）<span class="token class-name">TreeSet</span>
-
-排序状态的<span class="token class-name">Set</span>，以<span class="token class-name">TreeMap</span>实现，以自然元素顺序或用户自定义`<span class="token class-name">Comparator</span>`排序。
-
-<span class="token number">3.</span>Queue
-（<span class="token number">1</span>）不阻塞的： <span class="token class-name">PriorityQueue</span> 和 <span class="token class-name">ConcurrentLinkedQueue</span>
-　　<span class="token class-name">PriorityQueue</span> 和 <span class="token class-name">ConcurrentLinkedQueue</span> 类在 <span class="token class-name">Collection</span> <span class="token class-name">Framework</span> 中加入两个具体集合实现。 
-　　<span class="token class-name">PriorityQueue</span> 类实质上维护了一个有序列表。加入到 <span class="token class-name">Queue</span> 中的元素根据它们的天然排序（通过其 <span class="token class-name"><span class="token namespace">java<span class="token punctuation">.</span>util<span class="token punctuation">.</span></span>Comparable</span> 实现）或者根据传递给构造函数的 <span class="token class-name"><span class="token namespace">java<span class="token punctuation">.</span>util<span class="token punctuation">.</span></span>Comparator</span> 实现来定位。
-　　<span class="token class-name">ConcurrentLinkedQueue</span> 是基于链接节点的、线程安全的队列。并发访问不需要同步。因为它在队列的尾部添加元素并从头部删除它们，所以只要不需要知道队列的大 小，<span class="token class-name">ConcurrentLinkedQueue</span> 对公共集合的共享访问就可以工作得很好。收集关于队列大小的信息会很慢，需要遍历队列。
-（<span class="token number">2</span>）阻塞的：
-　　五个阻塞队列类。它实质上就是一种带有一点扭曲的 FIFO 数据结构。不是立即从队列中添加或者删除元素，线程执行操作阻塞，直到有空间或者元素可用。
-五个队列所提供的各有不同：
-　　 <span class="token class-name">ArrayBlockingQueue</span> ：一个由数组支持的有界队列。
-　　 <span class="token class-name">LinkedBlockingQueue</span> ：一个由链接节点支持的可选有界队列。
-　　 <span class="token class-name">PriorityBlockingQueue</span> ：一个由优先级堆支持的无界优先级队列。
-　　 <span class="token class-name">DelayQueue</span> ：一个由优先级堆支持的、基于时间的调度队列。
-　　 <span class="token class-name">SynchronousQueue</span> ：一个利用 <span class="token class-name">BlockingQueue</span> 接口的简单聚集（rendezvous）机制。
-    
-  <span class="token number">3.1</span> <span class="token class-name">ArrayDeque</span>
-    默认<span class="token number">16</span>，最小<span class="token number">8</span>。 object<span class="token punctuation">[</span><span class="token punctuation">]</span>数组存储。
-    栈操作：push pop peek 队列：offer poll peek
-    一般操作：add<span class="token comment">//尾 </span>
-    remove <span class="token comment">//首</span>
-    <span class="token keyword">public</span> <span class="token class-name">E</span> <span class="token function">remove</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        <span class="token keyword">return</span> <span class="token function">removeFirst</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-    
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p><img src="/2021/03/15/java/%E9%98%9F%E5%88%97.png" alt="句柄"></p>
-<ol start="2">
-<li><strong>Map</strong></li>
-</ol>
-<p>与List和set不同，由一对键值对组成的集合，key到value的映射。</p>
-<p>a) HashMap</p>
-<p><strong>链表+数组</strong>.内部定义hash表数组<code>Entry[] table</code>，元素通过哈希函数的到哈希地址转为数组存放索引，当有冲突同一个索引处保存链表。</p>
-<p><img src="/2021/03/15/java/%E5%93%88%E5%B8%8C%E8%A1%A8%E7%BB%93%E6%9E%84.png" alt="句柄"></p>
-<p><strong>初始大小16</strong>，容量必须为$2^{n}$（<code>h &amp; (length-1)</code>这条规律成立前提长度必须是2的n次方）。JDK1.8 链表升级为<strong>红黑树</strong>结构。当本索引冲突<strong>大于8</strong>链表就转为红黑树，当冲突值小于6再转为普通链表。</p>
-<p>高位右移动是为了扰动，防止哈希冲突</p>
-<p><img src="/2021/03/15/java/%E5%93%88%E5%B8%8C%E5%86%B2%E7%AA%81%E9%AB%98%E4%BD%8D%E6%89%B0%E5%8A%A8.png" alt="句柄"></p>
-<p>在对数组长度进行按位与运算后得到的结果相同，就发生了冲突。</p>
-<p><code>h &gt;&gt;&gt; 16</code>过扰动计算之后，最终得到的index的值不一样了.</p>
-<p>更多细节参考其他博客，写的比较详细，记住常问的就行。<a target="_blank" rel="noopener" href="https://blog.csdn.net/xu_dongdong/article/details/80251936">https://blog.csdn.net/xu_dongdong/article/details/80251936</a> <a target="_blank" rel="noopener" href="https://blog.csdn.net/woshimaxiao1/article/details/83661464">https://blog.csdn.net/woshimaxiao1/article/details/83661464</a></p>
-<p>b) HashTable</p>
-<ul>
-<li><p><strong>线程安全</strong>，<code>(hash &amp; 0x7FFFFFFF) % tab.length</code>它是通过这句话直接对hash地址取模，不是像HashMap按位与。0x7FFFFFFF做一次按位与操作，主要是为了保证得到的index的第一位为0，也就是为了得到一个正数。因为有符号数第一位0代表正数，1代表负数。</p>
-</li>
-<li><p><strong>初始大小为11</strong>，之后每次扩充为<strong>原来的2n+1</strong>。HashTable的链表数组的默认大小是一个素数、奇数。之后的每次扩充结果也都是奇数。</p>
-</li>
-<li><p>当哈希表的大小为素数时，简单的取模哈希的结果会更加<strong>均匀</strong>。</p>
-</li>
-<li><p>和HashMap<strong>区别</strong></p>
-</li>
-</ul>
-<p>1、继承的父类不同</p>
-<p>   Hashtable继承自Dictionary类，而HashMap继承自AbstractMap类。但二者都实现了Map接口。</p>
-<p>2、线程安全性不同</p>
-<p> 如果多个线程同时访问一个哈希映射，而其中至少一个线程从结构上修改了该映射，则它必须保持外部同步。Hashtable 中的方法是Synchronize的，而HashMap中的方法在缺省情况下是非Synchronize的。在多线程并发的环境下，可以直接使用Hashtable，不需要自己为它的方法实现同步，但使用HashMap时就必须要自己增加同步处理。</p>
-<p>3、只有HashMap可以让你将空值作为一个表的条目的key或value</p>
-<p>c) ConcurrentHashMap</p>
-<ul>
-<li>ConcurrentHashMap的hash实现和HashMap一样，但是<strong>用了不同的哈希算法</strong>（Wang/Jenkins 哈希算法）。</li>
-<li><strong>线程安全</strong> <strong>“分段锁”的概念</strong>，具体可以理解为把一个大的Map拆分成N个小的HashTable，根据key.hashCode()来决定把key放到哪个HashTable中。</li>
-</ul>
-<p>ConcurrentHashMap中，就是把Map分成了N个Segment，put和get的时候，都是现根据key.hashCode()算出放到哪个Segment中。</p>
-<ul>
-<li>通过把整个Map分为N个Segment（类似HashTable），可以提供相同的线程安全，<strong>但是效率提升N倍，默认提升16倍</strong>。</li>
-</ul>
-<p>ConcurrentHashMap原理可参考<a target="_blank" rel="noopener" href="https://blog.csdn.net/xuefeng0707/article/details/40834595">https://blog.csdn.net/xuefeng0707/article/details/40834595</a></p>
-<h3 id="gt-hashset-添加元素怎么判断对象是否重复的？"><a href="#gt-hashset-添加元素怎么判断对象是否重复的？" class="headerlink" title="> hashset 添加元素怎么判断对象是否重复的？"></a><font color="green">&gt; hashset 添加元素怎么判断对象是否重复的？</font></h3><p>1.第一，任何类都继承了Object类的hashcode（）方法，如果未重写hashcode，hashset会使用默认hashcode转化对象属性字段为散列码。<br>2.第二，当得到散列码确定插入的位置后，接下来hashset会调用 要添加对象的equals()方法 与已经在该位置上的所有对象进行比较，如果有一个为true，则不插入，如果为false，则插入。<br>注意，是调用的插入对象的equals方法，不是已经在hashset中的对象。</p>
-<h3 id="lt-有没有goto语句"><a href="#lt-有没有goto语句" class="headerlink" title="<有没有goto语句"></a><font color="green">&lt;有没有<code>goto</code>语句</font></h3><p>有，也有<code>const</code>。JAVA只保留但基本不用了。</p>
-<blockquote>
-<p>一个<code>.class</code>文件可不可以有多个类</p>
-</blockquote>
-<p>可以有多个，但是public只有一个。两个以上public就不知道加载哪个类，会报错。</p>
-<h3 id="lt-String-常量池"><a href="#lt-String-常量池" class="headerlink" title="< String 常量池"></a><font color="green">&lt; String 常量池</font></h3><p>字符串常量池底层是用<strong>HashTable</strong>实现的。</p>
-<ol>
-<li>创建对象的两种方式。</li>
-</ol>
-<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token class-name">String</span> s1 <span class="token operator">=</span> <span class="token string">"hello"</span><span class="token punctuation">;</span>     
-<span class="token class-name">String</span> s2 <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">String</span><span class="token punctuation">(</span><span class="token string">"hello"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>     <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>s1<span class="token operator">==</span>s2<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//false</span>
-<span class="token comment">//第一种方式是在常量池中拿对象，第二种方式是直接在堆内存空间创建一个新的对象。 </span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-
-<ol start="2">
-<li>JDK版本中(1.7后), 字符串常量池被实现在Java堆内存中。</li>
-</ol>
-<pre class="line-numbers language-none"><code class="language-none">String str1 = "abc"; 
-String str2 = "abc"; 
-String str3 = "abc"; 
-String str4 = new String("abc");
-String str5 = new String("abc");
-System.out.println(str4==str5);//false<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p><img src="/2021/03/15/java/%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%86%85%E5%AD%98.png" alt="句柄"></p>
-<ol start="3">
-<li><p><strong>“双引号””声明字符串的方式</strong>, </p>
-<p>JVM首先会去<strong>字符串池</strong>中查找是否存在”abc”这个对象：</p>
-</li>
-</ol>
-<ul>
-<li>不存在，在字符串池中创建”abc”这个对象，将”abc”这个对象的引用地址返回给字符串常量s1。</li>
-<li>如果存在，直接将池中”abc”这个对象的地址返回，赋给字符串常量。</li>
-</ul>
-<ol start="4">
-<li><p><strong>new字符串</strong></p>
-<p>JVM首先在字符串池中查找有没有”abc”这个字符串对象：</p>
-</li>
-</ol>
-<ul>
-<li>存在，<strong>直接在堆</strong>中创建一个”abc”字符串对象，然后将堆中的”abc”对象的地址返回赋给引用str4。</li>
-<li>不存在，<strong>字符串池</strong>中创建一个”abc”字符串对象，然后再在<strong>堆</strong>中创建一个”abc”字符串对象，将堆中”abc”字符串对象的地址返回赋给s3引用。</li>
-</ul>
-<ol start="5">
-<li><strong>intern()</strong> </li>
-</ol>
-<p>调用 intern方法时，查字符串池中：</p>
-<ul>
-<li><p>与此对象字符串<strong>内容相同</strong>，如果池已经包含一个等于此String对象的字符串（用**equals(object)**方法确定），则返回池中的字符串。</p>
-</li>
-<li><p>不相同，将此String对象添加到池中，并返回此String对象在常量池中的引用。 对于任意两个字符串s和t，所有字面值字符串和字符串赋值常量表达式都使用 intern()进行操作。</p>
-</li>
-</ul>
-<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token class-name">String</span> str1 <span class="token operator">=</span> <span class="token string">"abc"</span><span class="token punctuation">;</span> 
-<span class="token class-name">String</span> str2 <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">StringBuilder</span><span class="token punctuation">(</span><span class="token string">"ab"</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">apend</span><span class="token punctuation">(</span><span class="token string">"c"</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token class-name">String</span> str3 <span class="token operator">=</span> str2<span class="token punctuation">.</span><span class="token function">intern</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>str1<span class="token operator">==</span>str2<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//false</span>
-<span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>str1<span class="token operator">==</span>str3<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//true</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>例题：</p>
-<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token class-name">String</span> s1 <span class="token operator">=</span> <span class="token string">"a"</span><span class="token punctuation">;</span>
-<span class="token class-name">String</span> s2 <span class="token operator">=</span> s1 <span class="token operator">+</span> <span class="token string">"b"</span><span class="token punctuation">;</span>
-<span class="token class-name">String</span> s3 <span class="token operator">=</span> <span class="token string">"a"</span> <span class="token operator">+</span> <span class="token string">"b"</span><span class="token punctuation">;</span>
-<span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>s2 <span class="token operator">==</span> <span class="token string">"ab"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>s3 <span class="token operator">==</span> <span class="token string">"ab"</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>第一条语句打印的结果为false，第二条语句打印的结果为true，这说明javac编译可以对字符串常量直接相加的表达式进行优化，不必要等到运行期再去进行加法运算处理，而是在编译时去掉其中的加号，直接将其编译成一个这些常量相连的结果。由于s2只能在运行期间才能确定，所以s2指向的不是常量池中的“ab”。</p>
-<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">/**
- * 编译期确定
- * 对于final修饰的变量，它在编译时被解析为常量值的一个本地拷贝存储到自己的常量池中或嵌入到它的字节码流中。
- * 所以此时的"a" + s1和"a" + "b"效果是一样的。故结果为true。
- */</span>
-<span class="token class-name">String</span> s0 <span class="token operator">=</span> <span class="token string">"ab"</span><span class="token punctuation">;</span> 
-<span class="token keyword">final</span> <span class="token class-name">String</span> s1 <span class="token operator">=</span> <span class="token string">"b"</span><span class="token punctuation">;</span> 
-<span class="token class-name">String</span> s2 <span class="token operator">=</span> <span class="token string">"a"</span> <span class="token operator">+</span> s1<span class="token punctuation">;</span>  
-<span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token punctuation">(</span>s0 <span class="token operator">==</span> s2<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">//result = true</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>题目中的第一行代码被编译器在编译时优化后，相当于直接定义了一个”abcd”的字符串，所以，上面的代码应该只创建了一个String对象。写如下两行代码，</p>
-<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token class-name">String</span> s <span class="token operator">=</span><span class="token string">"a"</span> <span class="token operator">+</span> <span class="token string">"b"</span> <span class="token operator">+</span><span class="token string">"c"</span> <span class="token operator">+</span> <span class="token string">"d"</span><span class="token punctuation">;</span>
-<span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>s<span class="token operator">==</span> <span class="token string">"abcd"</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-
-<p>最终打印的结果应该为true。</p>
 <h3 id="lt-JVM结构"><a href="#lt-JVM结构" class="headerlink" title="< JVM结构"></a><font color="green">&lt; JVM结构</font></h3><p>HotSpot是使用指针的方式来访问对象：java堆中存放访问类元数据（描述数据的数据，也就是模板）的地址，reference存储的就直接是对象的地址。</p>
 <p><img src="/2021/03/15/java/JVM1.7.png" alt="句柄"></p>
 <p><img src="/2021/03/15/java/JVM%E5%86%85%E5%AD%98%E7%BB%93%E6%9E%84.png" alt="句柄"></p>
@@ -1315,6 +925,394 @@ System.out.println(str4==str5);//false<span aria-hidden="true" class="line-numbe
 <p>1）所有实例被回收</p>
 <p>2）加载该类的ClassLoader被回收</p>
 <p>3）Class对象无法通过任何途径访问(包括反射)</p>
+<h2 id="2-Java基础"><a href="#2-Java基础" class="headerlink" title="2. Java基础"></a>2. Java基础</h2><h3 id="lt-static-关键字"><a href="#lt-static-关键字" class="headerlink" title="<static 关键字"></a><font color="green">&lt;static 关键字</font></h3><blockquote>
+<p>static 关键字</p>
+</blockquote>
+<p>java中不存在“全局变量”概念，可以用static表示“伪全局”概念。</p>
+<p>被static修饰就是静态变量，所以JVM肯定将其放在单独的常量池里。JVM可以方便访问它们。</p>
+<p>要点：</p>
+<ol>
+<li><p>被 static 修饰的成员变量和成员方法是独立于该类的。</p>
+<p>静态变量和静态方法是随着类加载时被完成初始化的（类加载时已经存在），它在内存中仅有一个，且 JVM 也只会为它分配一次内存，同时类所有的实例都共享静态变量，可以直接通过类名来访问它。</p>
+<p>可如下直接使用：</p>
+</li>
+</ol>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token class-name">ClassName</span><span class="token punctuation">.</span>propertyName
+<span class="token class-name">ClassName</span><span class="token punctuation">.</span><span class="token function">methodName</span><span class="token punctuation">(</span>……<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<ol start="2">
+<li>它只能调用 static 变量和方法。</li>
+<li>不能以任何形式引用 this、super。</li>
+<li>static 变量在定义时必须要进行初始化，且初始化时间要早于非静态变量。</li>
+</ol>
+<p>静态方法里面为什么不能用this指针，从底层上来说，操作数栈中的没有this指针，而普通方法index=0永远是this。</p>
+<h3 id="lt-final关键字"><a href="#lt-final关键字" class="headerlink" title="<final关键字"></a><font color="green">&lt;final关键字</font></h3><p>某些数据不可更改。final修饰的叫常量。“常量”的使用有以下两个地方：</p>
+<ol>
+<li>编译期常量，永远不可改变。</li>
+<li>运行期初始化时，不可改变。根据对象的不同而表现不同，但同时又不希望它被改变，这个时候我们就可以使用运行期常量。</li>
+</ol>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">private</span> <span class="token keyword">final</span> <span class="token class-name">String</span> final_01 <span class="token operator">=</span> <span class="token string">"demo"</span><span class="token punctuation">;</span><span class="token comment">//编译期常量，必须要进行初始化，且不可更改</span>
+
+<span class="token keyword">public</span> <span class="token keyword">class</span> test<span class="token punctuation">{</span>
+    <span class="token keyword">public</span> <span class="token keyword">final</span> <span class="token class-name">String</span> str<span class="token punctuation">;</span>
+    <span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token class-name">Random</span> random <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Random</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">private</span> <span class="token keyword">final</span> <span class="token keyword">int</span> final_03 <span class="token operator">=</span> random<span class="token punctuation">.</span><span class="token function">nextInt</span><span class="token punctuation">(</span><span class="token number">50</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment">//使用随机数来进行初始化,运行期初始化，每次new新的类都会改变内容（random）。</span>
+    <span class="token function">test</span><span class="token punctuation">(</span><span class="token class-name">String</span> s<span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>str<span class="token operator">=</span>s<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>注意点：</p>
+<ol>
+<li>final修饰的方法不能被修改重写，可以被继承。</li>
+<li>final修饰的类不能修改不能继承，最终类。</li>
+<li>匿名内部类中参数必须为final。</li>
+</ol>
+<blockquote>
+<h3 id="java-compator"><a href="#java-compator" class="headerlink" title="java compator"></a><font color="green">java compator</font></h3></blockquote>
+<ul>
+<li>保持这个顺序就返回-1 (&gt; 还是 &lt;)</li>
+<li>交换顺序就返回1</li>
+<li>什么都不做就返回0；所以 升序的话 如果1&lt;2,返回-1,保持顺序[1,2],如果3&gt;2,返回-1,交换顺序[2,3]</li>
+</ul>
+<pre class="line-numbers language-none"><code class="language-none">if (a &gt; b) return -1; 保持a&gt; b的顺序
+if (a &gt; b) return 1; 交换ab<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<h3 id="lt-java异常"><a href="#lt-java异常" class="headerlink" title="<java异常"></a><font color="green">&lt;java异常</font></h3><ol>
+<li>异常的体系结构</li>
+</ol>
+<p>什么是异常？</p>
+<p>异常指的就是程序的不正常，简单理解就是程序所发生的错误。</p>
+<ul>
+<li>分类</li>
+</ul>
+<p>a 编译时异常： 编译期间，编译器检测到某段代码可能会发生某些问题，需要程序员提前给代码做出错误的解决方案，否则编译无法通过。</p>
+<p>b 运行时异常 编译正常，运行时出现了错误。</p>
+<ul>
+<li>体系结构</li>
+</ul>
+<p>a throwable</p>
+<p>​    Error:严重错误</p>
+<p>​    Exception:</p>
+<p>​        RuntimeException</p>
+<p>​        IRuntimeException</p>
+<ul>
+<li><p>异常出现的原理</p>
+<p>java对异常的默认处理方式是抛出问题给上一级，如果出现了问题，java会根据问题所描述的异常类创建一个对象，底层通过throw关键字将该对象抛出给上一级。（mehtod -&gt; main -&gt; jvm -&gt; 将异常位置和错误原因打印）</p>
+</li>
+<li><p>异常的处理方式</p>
+<ul>
+<li><p>问题可以自己处理的</p>
+<p>try catch处理方式 (后面的代码还可以继续执行)</p>
+</li>
+<li><p>问题处理不掉的</p>
+<p>throw处理方式。 如果是RuntimeException异常，则方法上面无需throws声明。</p>
+</li>
+</ul>
+</li>
+</ul>
+<p>throws 和 throw throws是仅仅对方法进行声明，告知调用者此方法存在异常。</p>
+<p>throw是抛出。</p>
+<ul>
+<li><p>Spring框架的事务默认是RuntimeException才进行回滚</p>
+<ul>
+<li>解决方案 </li>
+</ul>
+<p>修改Transactional注解中的rollbackFor属性可以指定为exception异常回滚。</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token annotation punctuation">@Transactional</span><span class="token punctuation">(</span>rollbackFor<span class="token operator">=</span><span class="token punctuation">{</span><span class="token class-name">Exception</span><span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">}</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
+</ul>
+<p>自己定义异常 （规范的异常类名，找一个类继承exception）。</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">class</span> <span class="token class-name">MyPersonAgeException</span> <span class="token keyword">extends</span> <span class="token class-name">RuntimeExceptoin</span><span class="token punctuation">(</span>或 <span class="token class-name">Exception</span><span class="token punctuation">)</span>
+    
+    记得加入字符串的构造参数<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="lt-JAVA-集合"><a href="#lt-JAVA-集合" class="headerlink" title="<JAVA 集合"></a><font color="green">&lt;JAVA 集合</font></h3><p><img src="/2021/03/15/java/java%E9%9B%86%E5%90%88%E7%B1%BB.png" alt="句柄"></p>
+<ol>
+<li><strong>Collection</strong></li>
+</ol>
+<p>最基本的集合接口，它不提供直接的实现，JAVA SDK提供的类都是继承自Collection的<strong>子接口</strong>。所有实现Collection的接口类必须实现两类构造函数</p>
+<p>a) 无参构造函数。创建空的Collection。</p>
+<p>b) 有参构造函数，用于创建新的Collection。</p>
+<p>解决ArrayLlist的线程不安全(<code>concurrentModificationException</code>)。</p>
+<ol>
+<li>换成<code>vector</code>。</li>
+<li>换成`Collections.synchronizeList(new ArrayList());</li>
+<li>new copyOnWriteArrayList();写时赋值。</li>
+</ol>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token number">1.L</span>ist
+
+a<span class="token punctuation">)</span> <span class="token class-name">ArrayList</span> 
+
+初始容量<span class="token number">10</span>。基于数组实现。每次扩容<span class="token number">1.5</span>倍。
+
+b<span class="token punctuation">)</span> <span class="token class-name">LinkedList</span>
+
+基于双向链表实现，近开头或结尾（靠近索引）遍历链表。
+
+c<span class="token punctuation">)</span> <span class="token class-name">Vector</span>
+
+与<span class="token class-name">ArrayList</span>一样，不同在于它是线程安全。
+
+d<span class="token punctuation">)</span> <span class="token class-name">Stack</span>
+
+继承自<span class="token class-name">Vector</span>，后进先出的栈。提供push pop peek empty search。
+
+<span class="token number">2.</span>Set
+
+与list区别是不包含重复元素。
+
+a）<span class="token class-name">EnumSet</span>
+
+枚举专用<span class="token class-name">Set</span>，所有元素都是枚举类型。
+
+b）<span class="token class-name">HashSet</span>
+
+查询速度最快的集合，内部以<span class="token class-name">Hashcode</span>实现，顺序也以哈希码排序。
+
+c）<span class="token class-name">TreeSet</span>
+
+排序状态的<span class="token class-name">Set</span>，以<span class="token class-name">TreeMap</span>实现，以自然元素顺序或用户自定义`<span class="token class-name">Comparator</span>`排序。
+
+<span class="token number">3.</span>Queue
+（<span class="token number">1</span>）不阻塞的： <span class="token class-name">PriorityQueue</span> 和 <span class="token class-name">ConcurrentLinkedQueue</span>
+　　<span class="token class-name">PriorityQueue</span> 和 <span class="token class-name">ConcurrentLinkedQueue</span> 类在 <span class="token class-name">Collection</span> <span class="token class-name">Framework</span> 中加入两个具体集合实现。 
+　　<span class="token class-name">PriorityQueue</span> 类实质上维护了一个有序列表。加入到 <span class="token class-name">Queue</span> 中的元素根据它们的天然排序（通过其 <span class="token class-name"><span class="token namespace">java<span class="token punctuation">.</span>util<span class="token punctuation">.</span></span>Comparable</span> 实现）或者根据传递给构造函数的 <span class="token class-name"><span class="token namespace">java<span class="token punctuation">.</span>util<span class="token punctuation">.</span></span>Comparator</span> 实现来定位。
+　　<span class="token class-name">ConcurrentLinkedQueue</span> 是基于链接节点的、线程安全的队列。并发访问不需要同步。因为它在队列的尾部添加元素并从头部删除它们，所以只要不需要知道队列的大 小，<span class="token class-name">ConcurrentLinkedQueue</span> 对公共集合的共享访问就可以工作得很好。收集关于队列大小的信息会很慢，需要遍历队列。
+（<span class="token number">2</span>）阻塞的：
+　　五个阻塞队列类。它实质上就是一种带有一点扭曲的 FIFO 数据结构。不是立即从队列中添加或者删除元素，线程执行操作阻塞，直到有空间或者元素可用。
+五个队列所提供的各有不同：
+　　 <span class="token class-name">ArrayBlockingQueue</span> ：一个由数组支持的有界队列。
+　　 <span class="token class-name">LinkedBlockingQueue</span> ：一个由链接节点支持的可选有界队列。
+　　 <span class="token class-name">PriorityBlockingQueue</span> ：一个由优先级堆支持的无界优先级队列。
+　　 <span class="token class-name">DelayQueue</span> ：一个由优先级堆支持的、基于时间的调度队列。
+　　 <span class="token class-name">SynchronousQueue</span> ：一个利用 <span class="token class-name">BlockingQueue</span> 接口的简单聚集（rendezvous）机制。
+    
+  <span class="token number">3.1</span> <span class="token class-name">ArrayDeque</span>
+    默认<span class="token number">16</span>，最小<span class="token number">8</span>。 object<span class="token punctuation">[</span><span class="token punctuation">]</span>数组存储。
+    栈操作：push pop peek 队列：offer poll peek
+    一般操作：add<span class="token comment">//尾 </span>
+    remove <span class="token comment">//首</span>
+    <span class="token keyword">public</span> <span class="token class-name">E</span> <span class="token function">remove</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token function">removeFirst</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p><img src="/2021/03/15/java/%E9%98%9F%E5%88%97.png" alt="句柄"></p>
+<ol start="2">
+<li><strong>Map</strong></li>
+</ol>
+<p>与List和set不同，由一对键值对组成的集合，key到value的映射。</p>
+<p>a) HashMap</p>
+<p><strong>链表+数组</strong>.内部定义hash表数组<code>Entry[] table</code>，元素通过哈希函数的到哈希地址转为数组存放索引，当有冲突同一个索引处保存链表。</p>
+<p><img src="/2021/03/15/java/%E5%93%88%E5%B8%8C%E8%A1%A8%E7%BB%93%E6%9E%84.png" alt="句柄"></p>
+<p><strong>初始大小16</strong>，容量必须为$2^{n}$（<code>h &amp; (length-1)</code>这条规律成立前提长度必须是2的n次方）。JDK1.8 链表升级为<strong>红黑树</strong>结构。当本索引冲突<strong>大于8</strong>链表就转为红黑树，当冲突值小于6再转为普通链表。</p>
+<p>高位右移动是为了扰动，防止哈希冲突</p>
+<p><img src="/2021/03/15/java/%E5%93%88%E5%B8%8C%E5%86%B2%E7%AA%81%E9%AB%98%E4%BD%8D%E6%89%B0%E5%8A%A8.png" alt="句柄"></p>
+<p>在对数组长度进行按位与运算后得到的结果相同，就发生了冲突。</p>
+<p><code>h &gt;&gt;&gt; 16</code>过扰动计算之后，最终得到的index的值不一样了.</p>
+<p>更多细节参考其他博客，写的比较详细，记住常问的就行。<a target="_blank" rel="noopener" href="https://blog.csdn.net/xu_dongdong/article/details/80251936">https://blog.csdn.net/xu_dongdong/article/details/80251936</a> <a target="_blank" rel="noopener" href="https://blog.csdn.net/woshimaxiao1/article/details/83661464">https://blog.csdn.net/woshimaxiao1/article/details/83661464</a></p>
+<p>b) HashTable</p>
+<ul>
+<li><p><strong>线程安全</strong>，<code>(hash &amp; 0x7FFFFFFF) % tab.length</code>它是通过这句话直接对hash地址取模，不是像HashMap按位与。0x7FFFFFFF做一次按位与操作，主要是为了保证得到的index的第一位为0，也就是为了得到一个正数。因为有符号数第一位0代表正数，1代表负数。</p>
+</li>
+<li><p><strong>初始大小为11</strong>，之后每次扩充为<strong>原来的2n+1</strong>。HashTable的链表数组的默认大小是一个素数、奇数。之后的每次扩充结果也都是奇数。</p>
+</li>
+<li><p>当哈希表的大小为素数时，简单的取模哈希的结果会更加<strong>均匀</strong>。</p>
+</li>
+<li><p>和HashMap<strong>区别</strong></p>
+</li>
+</ul>
+<p>1、继承的父类不同</p>
+<p>   Hashtable继承自Dictionary类，而HashMap继承自AbstractMap类。但二者都实现了Map接口。</p>
+<p>2、线程安全性不同</p>
+<p> 如果多个线程同时访问一个哈希映射，而其中至少一个线程从结构上修改了该映射，则它必须保持外部同步。Hashtable 中的方法是Synchronize的，而HashMap中的方法在缺省情况下是非Synchronize的。在多线程并发的环境下，可以直接使用Hashtable，不需要自己为它的方法实现同步，但使用HashMap时就必须要自己增加同步处理。</p>
+<p>3、只有HashMap可以让你将空值作为一个表的条目的key或value</p>
+<p>c) ConcurrentHashMap</p>
+<ul>
+<li>ConcurrentHashMap的hash实现和HashMap一样，但是<strong>用了不同的哈希算法</strong>（Wang/Jenkins 哈希算法）。</li>
+<li><strong>线程安全</strong> <strong>“分段锁”的概念</strong>，具体可以理解为把一个大的Map拆分成N个小的HashTable，根据key.hashCode()来决定把key放到哪个HashTable中。</li>
+</ul>
+<p>ConcurrentHashMap中，就是把Map分成了N个Segment，put和get的时候，都是现根据key.hashCode()算出放到哪个Segment中。</p>
+<ul>
+<li>通过把整个Map分为N个Segment（类似HashTable），可以提供相同的线程安全，<strong>但是效率提升N倍，默认提升16倍</strong>。</li>
+</ul>
+<p>ConcurrentHashMap原理可参考<a target="_blank" rel="noopener" href="https://blog.csdn.net/xuefeng0707/article/details/40834595">https://blog.csdn.net/xuefeng0707/article/details/40834595</a></p>
+<h3 id="gt-hashset-添加元素怎么判断对象是否重复的？"><a href="#gt-hashset-添加元素怎么判断对象是否重复的？" class="headerlink" title="> hashset 添加元素怎么判断对象是否重复的？"></a><font color="green">&gt; hashset 添加元素怎么判断对象是否重复的？</font></h3><p>1.第一，任何类都继承了Object类的hashcode（）方法，如果未重写hashcode，hashset会使用默认hashcode转化对象属性字段为散列码。<br>2.第二，当得到散列码确定插入的位置后，接下来hashset会调用 要添加对象的equals()方法 与已经在该位置上的所有对象进行比较，如果有一个为true，则不插入，如果为false，则插入。<br>注意，是调用的插入对象的equals方法，不是已经在hashset中的对象。</p>
+<h3 id="gt-迭代器Iterator"><a href="#gt-迭代器Iterator" class="headerlink" title=">迭代器Iterator"></a>&gt;<font color="green">迭代器Iterator</font></h3><p>迭代器是一种模式，可以使得序列类型的结构数据的遍历行为与被遍历的对象分离。无需关心对象底层的实现，只要拿到这个对象，就可以使用迭代器遍历这个对象的内部。</p>
+<ul>
+<li>Iterable 实现这个接口的集合对象支持迭代。实现Iterable后可以配合foreach使用。</li>
+<li>Iterator 迭代器，提供迭代机制的对象。</li>
+</ul>
+<p>Iterator三个方法经常使用<code>hasnext()</code> <code>next()</code> <code>remove()</code>。其中<code>remove()</code>的使用需要先调用<code>next()</code>。</p>
+<p>迭代出的对象也是引用的拷贝，结果还是引用。可以根据迭代出的元素直接修改对象。</p>
+<p>Iterator的remove方法可以保证不跑出ModificationException异常即<code>Fail-fast</code>机制。</p>
+<ul>
+<li>for 和 Iterator的区别</li>
+</ul>
+<ol>
+<li>ArrayList对随机访问快速，而for循环中的<code>get()</code>方法采用的是随机访问的方法，因此在ArrayList里，for循环较快。</li>
+<li>LinkedList顺序访问较快，Iterator中的<code>next()</code>方法使用顺序访问，因此在LinkedList里，使用iterator更快。</li>
+<li>for循环适合快速指定元素拿取数据。Iterator适合链式结构。</li>
+</ol>
+<h3 id="gt-volatile关键字"><a href="#gt-volatile关键字" class="headerlink" title="> volatile关键字"></a><font color="green">&gt; volatile关键字</font></h3><p>1.保持可见性。</p>
+<p>可见性是指当多个线程访问同一个变量时，一个线程修改了这个变量的值，其他线程能够立即看得到修改的值。（强制重读）</p>
+<p>可见性不能保证线程安全。线程安全的三个条件：原子性、可见性、禁止重排序。三者的解释可参考<a target="_blank" rel="noopener" href="https://www.cnblogs.com/dolphin0520/p/3920373.html">https://www.cnblogs.com/dolphin0520/p/3920373.html</a></p>
+<p>2.禁止指令重排序。</p>
+<pre class="line-numbers language-none"><code class="language-none">x = 10;         //语句1
+y = x;         //语句2
+x++;           //语句3
+x = x + 1;     //语句4<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>如果语句3是带有volatile关键字的，位于语句3前面的语句不能重排序至其后面，语句3后面的语句不能重排序到3前面。语句3前面的语句可以随便重排序，只要自己不要越过语句3就行。</p>
+<p><strong>经典问题</strong>：</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">volatile</span> <span class="token keyword">int</span> inc <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    
+   <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token class-name">String</span><span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+       <span class="token keyword">final</span> <span class="token class-name">Test</span> test <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Test</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+       <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> i<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span>i<span class="token operator">&lt;</span><span class="token number">10</span><span class="token punctuation">;</span>i<span class="token operator">++</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+           <span class="token keyword">new</span> <span class="token class-name">Thread</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+               <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">run</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                   <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> j<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span>j<span class="token operator">&lt;</span><span class="token number">1000</span><span class="token punctuation">;</span>j<span class="token operator">++</span><span class="token punctuation">)</span>
+                       test<span class="token punctuation">.</span><span class="token function">increase</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+               <span class="token punctuation">}</span><span class="token punctuation">;</span>
+           <span class="token punctuation">}</span><span class="token punctuation">.</span><span class="token function">start</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+       <span class="token punctuation">}</span>
+   <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">increase</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+       inc<span class="token operator">++</span><span class="token punctuation">;</span>
+   <span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>运行结果小于10000。原因：</p>
+<p>假如某个时刻变量inc的值为10，</p>
+<p>　　线程1对变量进行自增操作，线程1先读取了变量inc的原始值，线程2对变量进行自增操作，然后线程1被阻塞了；</p>
+<p>　　由于线程1只是对变量inc进行读取操作，而没有对变量进行修改操作，所以不会导致线程2的工作内存中缓存变量inc的缓存行无效，所以线程2会直接去主存读取inc的值，发现inc的值时10，然后进行加1操作，并把11写入工作内存，最后写入主存。</p>
+<pre class="line-numbers language-none"><code class="language-none">i++操作可以被拆分为三步：
+     1，线程读取i的值
+     2、i进行自增计算
+     3、刷新回i的值<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>　　然后线程1接着进行加1操作，注意此时在线程1的工作内存中inc的值更新为11（volatile强制重读），但是线程1之前卡在了自增计算（非原子性操作，操作的还是10自增）所以线程1对inc进行加1操作后inc的值为11，然后将11写入工作内存（11替换强制更新的11），最后写入主存。</p>
+<p>　　那么两个线程分别进行了一次自增操作后，inc只增加了1，结果都为11。</p>
+<ul>
+<li><strong>单例模式中的volatile</strong> 双检锁机制</li>
+</ul>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">DoubleCheckedLocking</span> <span class="token punctuation">{</span> <span class="token comment">// 1</span>
+	<span class="token keyword">private</span> <span class="token keyword">volatile</span> <span class="token keyword">static</span> <span class="token class-name">Instance</span> instance<span class="token punctuation">;</span> <span class="token comment">// 2</span>
+	<span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token class-name">Instance</span> <span class="token function">getInstance</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token comment">// 3</span>
+		<span class="token keyword">if</span> <span class="token punctuation">(</span>instance <span class="token operator">==</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token comment">// 4:第一次检查</span>
+			<span class="token keyword">synchronized</span> <span class="token punctuation">(</span><span class="token class-name">DoubleCheckedLocking</span><span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token comment">// 5:加锁</span>
+				<span class="token keyword">if</span> <span class="token punctuation">(</span>instance <span class="token operator">==</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token comment">// 6:第二次检查</span>
+				instance <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Instance</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 7:问题的根源出在这里</span>
+			<span class="token punctuation">}</span> <span class="token comment">// 8</span>
+		<span class="token punctuation">}</span> <span class="token comment">// 9</span>
+		<span class="token keyword">return</span> instance<span class="token punctuation">;</span> <span class="token comment">// 10</span>
+	<span class="token punctuation">}</span> <span class="token comment">// 11</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>第7行实际上编译后分为3步：</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">memory <span class="token operator">=</span> <span class="token function">allocate</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>　　<span class="token comment">// 1：分配对象的内存空间</span>
+<span class="token function">ctorInstance</span><span class="token punctuation">(</span>memory<span class="token punctuation">)</span><span class="token punctuation">;</span>　<span class="token comment">// 2：初始化对象</span>
+instance <span class="token operator">=</span> memory<span class="token punctuation">;</span>　　<span class="token comment">// 3：设置instance指向刚分配的内存地址</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p>编译期会做指令重排序，所以会有：</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">memory <span class="token operator">=</span> <span class="token function">allocate</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>　　<span class="token comment">// 1：分配对象的内存空间</span>
+instance <span class="token operator">=</span> memory<span class="token punctuation">;</span>　　<span class="token comment">// 3：设置instance指向刚分配的内存地址</span>
+<span class="token comment">// 注意，此时对象还没有被初始化！</span>
+<span class="token function">ctorInstance</span><span class="token punctuation">(</span>memory<span class="token punctuation">)</span><span class="token punctuation">;</span>　<span class="token comment">// 2：初始化对象</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>当A线程上面132的顺序分配了对象，但是当A刚刚执行完毕3，B看到了instance已经不为<code>null</code>，B此时调用了空对象，发生<font color="red">错误</font>。</p>
+<h3 id="lt-happens-before原则"><a href="#lt-happens-before原则" class="headerlink" title="< happens-before原则"></a><font color="green">&lt; happens-before原则</font></h3><ul>
+<li>程序次序规则：一个线程内，按照代码顺序，书写在前面的操作先行发生于书写在后面的操作</li>
+<li>锁定规则：一个unLock操作先行发生于后面对同一个锁lock操作</li>
+<li>volatile变量规则：对一个变量的写操作先行发生于后面对这个变量的读操作</li>
+<li>传递规则：如果操作A先行发生于操作B，而操作B又先行发生于操作C，则可以得出操作A先行发生于操作C</li>
+<li>线程启动规则：Thread对象的start()方法先行发生于此线程的每个一个动作</li>
+<li>线程中断规则：对线程interrupt()方法的调用先行发生于被中断线程的代码检测到中断事件的发生</li>
+<li>线程终结规则：线程中所有的操作都先行发生于线程的终止检测，我们可以通过Thread.join()方法结束、Thread.isAlive()的返回值手段检测到线程已经终止执行</li>
+<li>对象终结规则：一个对象的初始化完成先行发生于他的finalize()方法的开始</li>
+</ul>
+<h3 id="lt-有没有goto语句"><a href="#lt-有没有goto语句" class="headerlink" title="<有没有goto语句"></a><font color="green">&lt;有没有<code>goto</code>语句</font></h3><p>有，也有<code>const</code>。JAVA只保留但基本不用了。</p>
+<blockquote>
+<p>一个<code>.class</code>文件可不可以有多个类</p>
+</blockquote>
+<p>可以有多个，但是public只有一个。两个以上public就不知道加载哪个类，会报错。</p>
+<h3 id="lt-String-常量池"><a href="#lt-String-常量池" class="headerlink" title="< String 常量池"></a><font color="green">&lt; String 常量池</font></h3><p>字符串常量池底层是用<strong>HashTable</strong>实现的。</p>
+<ol>
+<li>创建对象的两种方式。</li>
+</ol>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token class-name">String</span> s1 <span class="token operator">=</span> <span class="token string">"hello"</span><span class="token punctuation">;</span>     
+<span class="token class-name">String</span> s2 <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">String</span><span class="token punctuation">(</span><span class="token string">"hello"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>     <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>s1<span class="token operator">==</span>s2<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//false</span>
+<span class="token comment">//第一种方式是在常量池中拿对象，第二种方式是直接在堆内存空间创建一个新的对象。 </span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<ol start="2">
+<li>JDK版本中(1.7后), 字符串常量池被实现在Java堆内存中。</li>
+</ol>
+<pre class="line-numbers language-none"><code class="language-none">String str1 = "abc"; 
+String str2 = "abc"; 
+String str3 = "abc"; 
+String str4 = new String("abc");
+String str5 = new String("abc");
+System.out.println(str4==str5);//false<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p><img src="/2021/03/15/java/%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%86%85%E5%AD%98.png" alt="句柄"></p>
+<ol start="3">
+<li><p><strong>“双引号””声明字符串的方式</strong>, </p>
+<p>JVM首先会去<strong>字符串池</strong>中查找是否存在”abc”这个对象：</p>
+</li>
+</ol>
+<ul>
+<li>不存在，在字符串池中创建”abc”这个对象，将”abc”这个对象的引用地址返回给字符串常量s1。</li>
+<li>如果存在，直接将池中”abc”这个对象的地址返回，赋给字符串常量。</li>
+</ul>
+<ol start="4">
+<li><p><strong>new字符串</strong></p>
+<p>JVM首先在字符串池中查找有没有”abc”这个字符串对象：</p>
+</li>
+</ol>
+<ul>
+<li>存在，<strong>直接在堆</strong>中创建一个”abc”字符串对象，然后将堆中的”abc”对象的地址返回赋给引用str4。</li>
+<li>不存在，<strong>字符串池</strong>中创建一个”abc”字符串对象，然后再在<strong>堆</strong>中创建一个”abc”字符串对象，将堆中”abc”字符串对象的地址返回赋给s3引用。</li>
+</ul>
+<ol start="5">
+<li><strong>intern()</strong> </li>
+</ol>
+<p>调用 intern方法时，查字符串池中：</p>
+<ul>
+<li><p>与此对象字符串<strong>内容相同</strong>，如果池已经包含一个等于此String对象的字符串（用**equals(object)**方法确定），则返回池中的字符串。</p>
+</li>
+<li><p>不相同，将此String对象添加到池中，并返回此String对象在常量池中的引用。 对于任意两个字符串s和t，所有字面值字符串和字符串赋值常量表达式都使用 intern()进行操作。</p>
+</li>
+</ul>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token class-name">String</span> str1 <span class="token operator">=</span> <span class="token string">"abc"</span><span class="token punctuation">;</span> 
+<span class="token class-name">String</span> str2 <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">StringBuilder</span><span class="token punctuation">(</span><span class="token string">"ab"</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">apend</span><span class="token punctuation">(</span><span class="token string">"c"</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token class-name">String</span> str3 <span class="token operator">=</span> str2<span class="token punctuation">.</span><span class="token function">intern</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>str1<span class="token operator">==</span>str2<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//false</span>
+<span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>str1<span class="token operator">==</span>str3<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//true</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>例题：</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token class-name">String</span> s1 <span class="token operator">=</span> <span class="token string">"a"</span><span class="token punctuation">;</span>
+<span class="token class-name">String</span> s2 <span class="token operator">=</span> s1 <span class="token operator">+</span> <span class="token string">"b"</span><span class="token punctuation">;</span>
+<span class="token class-name">String</span> s3 <span class="token operator">=</span> <span class="token string">"a"</span> <span class="token operator">+</span> <span class="token string">"b"</span><span class="token punctuation">;</span>
+<span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>s2 <span class="token operator">==</span> <span class="token string">"ab"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>s3 <span class="token operator">==</span> <span class="token string">"ab"</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>第一条语句打印的结果为false，第二条语句打印的结果为true，这说明javac编译可以对字符串常量直接相加的表达式进行优化，不必要等到运行期再去进行加法运算处理，而是在编译时去掉其中的加号，直接将其编译成一个这些常量相连的结果。由于s2只能在运行期间才能确定，所以s2指向的不是常量池中的“ab”。</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">/**
+ * 编译期确定
+ * 对于final修饰的变量，它在编译时被解析为常量值的一个本地拷贝存储到自己的常量池中或嵌入到它的字节码流中。
+ * 所以此时的"a" + s1和"a" + "b"效果是一样的。故结果为true。
+ */</span>
+<span class="token class-name">String</span> s0 <span class="token operator">=</span> <span class="token string">"ab"</span><span class="token punctuation">;</span> 
+<span class="token keyword">final</span> <span class="token class-name">String</span> s1 <span class="token operator">=</span> <span class="token string">"b"</span><span class="token punctuation">;</span> 
+<span class="token class-name">String</span> s2 <span class="token operator">=</span> <span class="token string">"a"</span> <span class="token operator">+</span> s1<span class="token punctuation">;</span>  
+<span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token punctuation">(</span>s0 <span class="token operator">==</span> s2<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">//result = true</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>题目中的第一行代码被编译器在编译时优化后，相当于直接定义了一个”abcd”的字符串，所以，上面的代码应该只创建了一个String对象。写如下两行代码，</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token class-name">String</span> s <span class="token operator">=</span><span class="token string">"a"</span> <span class="token operator">+</span> <span class="token string">"b"</span> <span class="token operator">+</span><span class="token string">"c"</span> <span class="token operator">+</span> <span class="token string">"d"</span><span class="token punctuation">;</span>
+<span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>s<span class="token operator">==</span> <span class="token string">"abcd"</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>最终打印的结果应该为true。</p>
 <blockquote>
 <p>java switch 作用于哪些类型</p>
 </blockquote>
@@ -1693,20 +1691,7 @@ obj <span class="token operator">=</span> <span class="token keyword">null</span
 <h3 id="lt-switch语句能否作用在byte上，能否作用在long上，能否作用在String上"><a href="#lt-switch语句能否作用在byte上，能否作用在long上，能否作用在String上" class="headerlink" title="< switch语句能否作用在byte上，能否作用在long上，能否作用在String上?"></a><font color="green">&lt; switch语句能否作用在byte上，能否作用在long上，能否作用在String上?</font></h3><p>在switch（e）中，e只能是一个整数表达式或者枚举常量（更大字体），整数表达式可以是int基本类型或Integer包装类型，由于byte,short,char都可以隐含转换为int，所以，这些类型以及这些类型的包装类型也是可以的。显然，long和String类型都不符合switch的语法规定，并且不能被隐式转换成int类型，所以，它们不能作用于swtich语句中。</p>
 <p><em>switch语句能否作用在String上说错了，Java1.7之后已经支持这种写法了！</em></p>
 <h3 id="lt-a-hashCode-有什么用？与-a-equals-b-有什么关系？"><a href="#lt-a-hashCode-有什么用？与-a-equals-b-有什么关系？" class="headerlink" title="<&nbsp;**a.hashCode() 有什么用？与 a.equals(b) 有什么关系？**"></a><font color="green">&lt;&nbsp;**a.hashCode() 有什么用？与 a.equals(b) 有什么关系？**</font></h3><p>hashCode() 方法对应对象整型的 hash 值。它常用于基于 hash 的集合类，如 Hashtable、HashMap、LinkedHashMap等等。它与 equals() 方法关系特别紧密。根据 Java 规范，两个使用 equal() 方法来判断相等的对象，必须具有相同的 hash code。</p>
-<h3 id="java线程池用过没有？"><a href="#java线程池用过没有？" class="headerlink" title=" java线程池用过没有？"></a><font color="green"> java线程池用过没有？</font></h3><blockquote>
-<p>Executors提供了四种方法来创建线程池。</p>
-</blockquote>
-<ol>
-<li>newFixedThreadPool() :创建固定大小的线程池。</li>
-<li>newCachedThreadPool(): 创建无限大小的线程池，线程池中线程数量不固定，可根据需求自动更改。</li>
-<li>newSingleThreadPool() : 创建单个线程池，线程池中只有一个线程。</li>
-<li>newScheduledThreadPool() 创建固定大小的线程池，可以延迟或定时的执行任务。</li>
-</ol>
-<h5 id="线程池作用"><a href="#线程池作用" class="headerlink" title="线程池作用"></a>线程池作用</h5><ol>
-<li>限制线程个数，避免线程过多导致系统运行缓慢或崩溃。</li>
-<li>不需要频繁的创建和销毁，节约资源、响应更快。</li>
-</ol>
-<h3 id="lt-JAVA-并发"><a href="#lt-JAVA-并发" class="headerlink" title="< JAVA 并发"></a><font color="green">&lt; JAVA 并发</font></h3><p>最初的计算机只能接受一些特定的指令，用户每输入一个指令，计算机就做出一个操作。当用户在思考或者输入时，计算机就在等待。这样效率非常低下，在很多时候，计算机都处在等待状态。</p>
+<h3 id=""><a href="#" class="headerlink" title=""></a><font color="green"></font></h3><h2 id="3-多线程"><a href="#3-多线程" class="headerlink" title="3. 多线程"></a>3. 多线程</h2><h3 id="lt-JAVA-并发"><a href="#lt-JAVA-并发" class="headerlink" title="< JAVA 并发"></a><font color="green">&lt; JAVA 并发</font></h3><p>最初的计算机只能接受一些特定的指令，用户每输入一个指令，计算机就做出一个操作。当用户在思考或者输入时，计算机就在等待。这样效率非常低下，在很多时候，计算机都处在等待状态。</p>
 <p><strong>批处理操作系统</strong></p>
 <p>后来有了<strong>批处理操作系统</strong>,把一系列需要操作的指令写下来，形成一个<strong>清单</strong>，一次性交给计算机。</p>
 <p>批处理操作系统在一定程度上提高了计算机的效率，但是由于<strong>批处理操作系统的指令运行方式仍然是串行的，内存中始终只有一个程序在运行</strong>，后面的程序需要等待前面的程序执行完成后才能开始执行，而前面的程序有时会由于I/O操作、网络等原因阻塞，所以<strong>批处理操作效率也不高</strong>。</p>
@@ -1846,6 +1831,19 @@ obj <span class="token operator">=</span> <span class="token keyword">null</span
 <li>原子更新引用</li>
 <li>原子更新字段（属性）</li>
 </ul>
+<h3 id="java线程池用过没有？"><a href="#java线程池用过没有？" class="headerlink" title="java线程池用过没有？"></a><font color="green">java线程池用过没有？</font></h3><blockquote>
+<p>Executors提供了四种方法来创建线程池。</p>
+</blockquote>
+<ol>
+<li>newFixedThreadPool() :创建固定大小的线程池。</li>
+<li>newCachedThreadPool(): 创建无限大小的线程池，线程池中线程数量不固定，可根据需求自动更改。</li>
+<li>newSingleThreadPool() : 创建单个线程池，线程池中只有一个线程。</li>
+<li>newScheduledThreadPool() 创建固定大小的线程池，可以延迟或定时的执行任务。</li>
+</ol>
+<h5 id="线程池作用"><a href="#线程池作用" class="headerlink" title="线程池作用"></a>线程池作用</h5><ol>
+<li>限制线程个数，避免线程过多导致系统运行缓慢或崩溃。</li>
+<li>不需要频繁的创建和销毁，节约资源、响应更快。</li>
+</ol>
 <h3 id="Synchronized与ReetrantLock锁区别"><a href="#Synchronized与ReetrantLock锁区别" class="headerlink" title="Synchronized与ReetrantLock锁区别"></a><font color="green">Synchronized与ReetrantLock锁区别</font></h3><p>Synchronized 和ReetrantLock都是阻塞式同步。</p>
 <p>其中Synchronized是Java关键字，需要jvm实现。它进入编译，会在同步块前后形成<code>monitorenter</code>和<code>monitorexit</code>两个字节码指令。执行<code>monitorenter</code>指令时，首先要尝试获取对象锁，如果这个对象锁没被锁定，或者当前线程已经拥有了那个对象锁，把锁的计算器加1。相应的，在执行monitorexit指令时会将锁计算器减1，当计算器为0时，锁被释放。如果对象所获得失败，就要阻塞。</p>
 <p>ReentrantLock 是juc(java.util.concurrent)包下提供的一套互斥锁，属于API层面。它有以下Synchronized没有的功能：</p>
@@ -2021,8 +2019,7 @@ Owner：获得锁的线程称为Owner
 </tbody></table>
 <p>泛型</p>
 <p><strong>把类型明确的工作推迟到创建对象或调用方法的时候</strong></p>
-<p><font color="red"> 通配符不会用</font></p>
-<h3 id="Servelet没看、HTTP、数据库"><a href="#Servelet没看、HTTP、数据库" class="headerlink" title="Servelet没看、HTTP、数据库"></a><font color="red">Servelet没看、HTTP、数据库</font></h3><h3 id="JAVA-8-新特性"><a href="#JAVA-8-新特性" class="headerlink" title="JAVA 8 新特性"></a>JAVA 8 新特性</h3><p>接口中的<code>default</code>新方法、<code>static</code>可以修饰方法了，并且提供实现。</p>
+<h2 id="4-JAVA-8-新特性"><a href="#4-JAVA-8-新特性" class="headerlink" title="4. JAVA 8 新特性"></a>4. JAVA 8 新特性</h2><p>接口中的<code>default</code>新方法、<code>static</code>可以修饰方法了，并且提供实现。</p>
 <pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">interface</span> <span class="token class-name">Formula</span><span class="token punctuation">{</span>
     <span class="token keyword">double</span> <span class="token function">calculate</span><span class="token punctuation">(</span><span class="token keyword">int</span> a<span class="token punctuation">)</span><span class="token punctuation">;</span>
     
@@ -2036,7 +2033,7 @@ Owner：获得锁的线程称为Owner
 <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>通过使用<code>default</code>方法可以在接口中实现具体方法（非抽象方法）<font color="red"> <code>default</code>方法不能被子类重写，只能继承</font>。</p>
-<h4 id="Stream"><a href="#Stream" class="headerlink" title="Stream"></a>Stream</h4><p><code>1. 中间操作</code>（返回<code>Stream&lt;T&gt;</code>和<code>终端操作</code>（返回定义类型的结果）。</p>
+<h4 id="1-Stream"><a href="#1-Stream" class="headerlink" title="1. Stream"></a>1. Stream</h4><p><code>1. 中间操作</code>（返回<code>Stream&lt;T&gt;</code>和<code>终端操作</code>（返回定义类型的结果）。</p>
 <pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">long</span> count <span class="token operator">=</span> list<span class="token punctuation">.</span><span class="token function">stream</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">distinct</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">count</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 
