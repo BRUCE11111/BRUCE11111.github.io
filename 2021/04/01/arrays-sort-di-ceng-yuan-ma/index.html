@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="cookies和session, 小灰的博客">
+    <meta name="keywords" content="Arrays.sort底层源码, 小灰的博客">
     <meta name="description" content="技术记录">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>cookies和session | 小灰的博客</title>
+    <title>Arrays.sort底层源码 | 小灰的博客</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -313,12 +313,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/23.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/0.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">cookies和session</h1>
+                    <h1 class="description center-align post-title">Arrays.sort底层源码</h1>
                 </div>
             </div>
         </div>
@@ -434,8 +434,8 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/HTTP/">
-                                <span class="chip bg-color">HTTP</span>
+                            <a href="/tags/java/">
+                                <span class="chip bg-color">java</span>
                             </a>
                         
                     </div>
@@ -446,8 +446,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/network/" class="post-category">
-                                network
+                            <a href="/categories/java/" class="post-category">
+                                java
                             </a>
                         
                     </div>
@@ -459,7 +459,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2021-03-31
+                    2021-04-01
                 </div>
                 
 
@@ -483,60 +483,77 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="简述"><a href="#简述" class="headerlink" title="简述"></a>简述</h2><p> (referentce to <a target="_blank" rel="noopener" href="https://segmentfault.com/a/1190000017831088">https://segmentfault.com/a/1190000017831088</a>)</p>
-<h2 id="http是一个无状态协议"><a href="#http是一个无状态协议" class="headerlink" title="http是一个无状态协议"></a>http是一个无状态协议</h2><p>什么是无状态呢？就是说这一次请求和上一次请求是没有任何关系的，互不认识的，没有关联的。这种无状态的的好处是快速。坏处是假如我们想要把<code>www.zhihu.com/login.html</code>和<code>www.zhihu.com/index.html</code>关联起来，必须使用某些手段和工具</p>
-<h2 id="cookie和session"><a href="#cookie和session" class="headerlink" title="cookie和session"></a>cookie和session</h2><p>由于http的无状态性，为了使某个域名下的所有网页能够共享某些数据，session和cookie出现了。客户端访问服务器的流程如下</p>
-<ul>
-<li>首先，客户端会发送一个http请求到服务器端。</li>
-<li>服务器端接受客户端请求后，建立一个session，并发送一个http响应到客户端，这个响应头，其中就包含Set-Cookie头部。该头部包含了sessionId。Set-Cookie格式如下，具体请看<a target="_blank" rel="noopener" href="http://bubkoo.com/2014/04/21/http-cookies-explained/">Cookie详解</a><br><code>Set-Cookie: value[; expires=date][; domain=domain][; path=path][; secure]</code></li>
-<li>在客户端发起的第二次请求，假如服务器给了set-Cookie，浏览器会自动在请求头中添加cookie</li>
-<li>服务器接收请求，分解cookie，验证信息，核对成功后返回response给客户端</li>
-</ul>
-<p><img src="/2021/03/31/cookies-he-session/bVbmYbQ" alt="请求流程"></p>
-<h3 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h3><ul>
-<li>cookie只是实现session的其中一种方案。虽然是最常用的，但并不是唯一的方法。禁用cookie后还有其他方法存储，比如放在url中</li>
-<li>现在大多都是Session + Cookie，但是只用session不用cookie，或是只用cookie，不用session在理论上都可以保持会话状态。可是实际中因为多种原因，一般不会单独使用</li>
-<li>用session只需要在客户端保存一个id，实际上大量数据都是保存在服务端。如果全部用cookie，数据量大的时候客户端是没有那么多空间的。</li>
-<li>如果只用cookie不用session，那么账户信息全部保存在客户端，一旦被劫持，全部信息都会泄露。并且客户端数据量变大，网络传输的数据量也会变大</li>
-</ul>
-<h3 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h3><p><strong>简而言之, session 有如用户信息档案表, 里面包含了用户的认证信息和登录状态等信息. 而 cookie 就是用户通行证</strong></p>
-<h2 id="token"><a href="#token" class="headerlink" title="token"></a>token</h2><p>token 也称作令牌，由uid+time+sign[+固定参数]<br>token 的认证方式类似于<strong>临时的证书签名</strong>, 并且是一种服务端无状态的认证方式, 非常适合于 REST API 的场景. 所谓无状态就是服务端并不会保存身份认证相关的数据。</p>
-<h3 id="组成"><a href="#组成" class="headerlink" title="组成"></a>组成</h3><ul>
-<li>uid: 用户唯一身份标识</li>
-<li>time: 当前时间的时间戳</li>
-<li>sign: 签名, 使用 hash/encrypt 压缩成定长的十六进制字符串，以防止第三方恶意拼接</li>
-<li>固定参数(可选): 将一些常用的固定参数加入到 token 中是为了避免重复查库</li>
-</ul>
-<h3 id="存放"><a href="#存放" class="headerlink" title="存放"></a>存放</h3><p>token在客户端一般存放于localStorage，cookie，或sessionStorage中。在服务器一般存于数据库中</p>
-<h3 id="token认证流程"><a href="#token认证流程" class="headerlink" title="token认证流程"></a>token认证流程</h3><p>token 的认证流程与cookie很相似</p>
-<ul>
-<li>用户登录，成功后服务器返回Token给客户端。</li>
-<li>客户端收到数据后保存在客户端</li>
-<li>客户端再次访问服务器，将token放入headers中</li>
-<li>服务器端采用filter过滤器校验。校验成功则返回请求数据，校验失败则返回错误码</li>
-</ul>
-<h2 id="token可以抵抗csrf，cookie-session不行"><a href="#token可以抵抗csrf，cookie-session不行" class="headerlink" title="token可以抵抗csrf，cookie+session不行"></a>token可以抵抗csrf，cookie+session不行</h2><p>假如用户正在登陆银行网页，同时登陆了攻击者的网页，并且银行网页未对csrf攻击进行防护。攻击者就可以在网页放一个表单，该表单提交src为<code>http://www.bank.com/api/transfer</code>，body为<code>count=1000&amp;to=Tom</code>。倘若是session+cookie，用户打开网页的时候就已经转给Tom1000元了.因为form 发起的 POST 请求并不受到浏览器同源策略的限制，因此可以任意地使用其他域的 Cookie 向其他域发送 POST 请求，形成 CSRF 攻击。在post请求的瞬间，cookie会被浏览器自动添加到请求头中。但token不同，token是开发者为了防范csrf而特别设计的令牌，浏览器不会自动添加到headers里，攻击者也无法访问用户的token，所以提交的表单无法通过服务器过滤，也就无法形成攻击。</p>
-<h2 id="分布式情况下的session和token"><a href="#分布式情况下的session和token" class="headerlink" title="分布式情况下的session和token"></a>分布式情况下的session和token</h2><p>我们已经知道session时有状态的，一般存于服务器内存或硬盘中，当服务器采用分布式或集群时，session就会面对负载均衡问题。</p>
-<ul>
-<li>负载均衡多服务器的情况，不好确认当前用户是否登录，因为多服务器不共享session。这个问题也可以将session存在一个服务器中来解决，但是就不能完全达到负载均衡的效果。当今的几种<a target="_blank" rel="noopener" href="http://blog.51cto.com/zhibeiwang/1965018">解决session负载均衡</a>的方法。</li>
-</ul>
-<p>而token是无状态的，token字符串里就保存了所有的用户信息</p>
-<ul>
-<li>客户端登陆传递信息给服务端，服务端收到后把用户信息加密（token）传给客户端，客户端将token存放于localStroage等容器中。客户端每次访问都传递token，服务端解密token，就知道这个用户是谁了。通过cpu加解密，服务端就不需要存储session占用存储空间，就很好的解决负载均衡多服务器的问题了。这个方法叫做[JWT(Json Web Token)](<a target="_blank" rel="noopener" href="https://huanqiang.wang/2017/12/28/JWT">https://huanqiang.wang/2017/12/28/JWT</a> 介绍/)</li>
-</ul>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ul>
-<li>session存储于服务器，可以理解为一个状态列表，拥有一个唯一识别符号sessionId，通常存放于cookie中。服务器收到cookie后解析出sessionId，再去session列表中查找，才能找到相应session。依赖cookie</li>
-<li>cookie类似一个令牌，装有sessionId，存储在客户端，浏览器通常会自动添加。</li>
-<li>token也类似一个令牌，无状态，用户信息都被加密到token中，服务器收到token后解密就可知道是哪个用户。需要开发者手动添加。</li>
-<li>jwt只是一个跨域认证的方案</li>
-</ul>
-<p>Cookie是保存在浏览器上的一些数据，一般通过HTTP响应头set cookie来设置，当然也可以通过JS脚本来直接设置，Cookie是按照网站来进行组织和保存的，每一个网站都可以在浏览器中保存一些Cookie，保存好了之后，浏览器向这个网站发出的请求都会携带这些Cookie，然后后台就可以分析这些Cookie。Session这个单词在不同的语境下可以有不同的含义。它可以理解为一个抽象概念，即会话，会话用于记录一个用户在我们网站上的一些行为、一些状态，可以理解为一个上下文，Context。这些用户状态可以利用Cookie直接保存在前端，也可以保存在后台，然后利用Cookie中的Session ID来标识。在另外的一些语境下，Session又可以指在后台保存用户状态来实现会话的方式，它把用户状态存储在后台的内存、数据库等介质中，然后我们利用请求的Cookie中保存的Session ID来为这个请求找到它对应的会话。</p>
-<p>Session在一些语境下还可能专指后台保存的用户状态</p>
-<ol>
-<li>由于HTTP协议是无状态的协议，所以服务端需要记录用户的状态时，就需要用某种机制来识具体的用户，这个机制就是Session.典型的场景比如购物车，当你点击下单按钮时，由于HTTP协议无状态，所以并不知道是哪个用户操作的，所以服务端要为特定的用户创建了特定的Session，用用于标识这个用户，并且跟踪用户，这样才知道购物车里面有几本书。这个Session是保存在服务端的，有一个唯一标识。在服务端保存Session的方法很多，内存、数据库、文件都有。集群的时候也要考虑Session的转移，在大型的网站，一般会有专门的Session服务器集群，用来保存用户会话，这个时候 Session 信息都是放在内存的，使用一些缓存服务比如Memcached之类的来放 Session。</li>
-<li>思考一下服务端如何识别特定的客户？这个时候Cookie就登场了。每次HTTP请求的时候，客户端都会发送相应的Cookie信息到服务端。实际上大多数的应用都是用 Cookie 来实现Session跟踪的，第一次创建Session的时候，服务端会在HTTP协议中告诉客户端，需要在 Cookie 里面记录一个Session ID，以后每次请求把这个会话ID发送到服务器，我就知道你是谁了。有人问，如果客户端的浏览器禁用了 Cookie 怎么办？一般这种情况下，会使用一种叫做URL重写的技术来进行会话跟踪，即每次HTTP交互，URL后面都会被附加上一个诸如 sid=xxxxx 这样的参数，服务端据此来识别用户。</li>
-<li>Cookie其实还可以用在一些方便用户的场景下，设想你某次登陆过一个网站，下次登录的时候不想再次输入账号了，怎么办？这个信息可以写到Cookie里面，访问网站的时候，网站页面的脚本可以读取这个信息，就自动帮你把用户名给填了，能够方便一下用户。这也是Cookie名称的由来，给用户的一点甜头。<br>所以，总结一下：<br>Session是在服务端保存的一个数据结构，用来跟踪用户的状态，这个数据可以保存在集群、数据库、文件中；<br>Cookie是客户端保存用户信息的一种机制，用来记录用户的一些信息，也是实现Session的一种方式。</li>
-</ol>
+                <h1 id="Java的Arrays-sort-方法到底用的什么排序算法"><a href="#Java的Arrays-sort-方法到底用的什么排序算法" class="headerlink" title="Java的Arrays.sort()方法到底用的什么排序算法"></a>Java的Arrays.sort()方法到底用的什么排序算法</h1><p>数组一进来，会碰到第一个阀值QUICKSORT_THRESHOLD（286），注解上说，小过这个阀值的进入Quicksort （快速排序），其实并不全是，点进去sort(a, left, right, true);方法：</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">// Use Quicksort on small arrays</span>
+<span class="token keyword">if</span> <span class="token punctuation">(</span>right <span class="token operator">-</span> left <span class="token operator">&lt;</span> QUICKSORT_THRESHOLD<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+       <span class="token comment">//QUICKSORT_THRESHOLD = 286</span>
+        <span class="token function">sort</span><span class="token punctuation">(</span>a<span class="token punctuation">,</span> left<span class="token punctuation">,</span> right<span class="token punctuation">,</span> <span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span><span class="token punctuation">;</span>
+ <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="1-元素少于47用插入排序"><a href="#1-元素少于47用插入排序" class="headerlink" title="1. 元素少于47用插入排序"></a>1. 元素少于47用插入排序</h2><p>点进去后我们看到第二个阀值INSERTION_SORT_THRESHOLD（47），如果元素少于47这个阀值，就用插入排序，往下看确实如此：</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">// Use insertion sort on tiny arrays</span>
+<span class="token keyword">if</span> <span class="token punctuation">(</span>length <span class="token operator">&lt;</span> INSERTION_SORT_THRESHOLD<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>leftmost<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">/*
+ * Traditional (without sentinel) insertion sort,
+ * optimized for server VM, is used in case of
+ * the leftmost part.
+ */</span>
+<span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> left<span class="token punctuation">,</span> j <span class="token operator">=</span> i<span class="token punctuation">;</span> i <span class="token operator">&lt;</span> right<span class="token punctuation">;</span> j <span class="token operator">=</span> <span class="token operator">++</span>i<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+     <span class="token keyword">int</span> ai <span class="token operator">=</span> a<span class="token punctuation">[</span>i <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+     <span class="token keyword">while</span> <span class="token punctuation">(</span>ai <span class="token operator">&lt;</span> a<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">)</span>
+     <span class="token punctuation">{</span>
+          a<span class="token punctuation">[</span>j <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">=</span> a<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">;</span>
+          <span class="token keyword">if</span> <span class="token punctuation">(</span>j<span class="token operator">--</span> <span class="token operator">==</span> left<span class="token punctuation">)</span>
+          <span class="token punctuation">{</span>
+               <span class="token keyword">break</span><span class="token punctuation">;</span>
+           <span class="token punctuation">}</span>
+      <span class="token punctuation">}</span>
+      a<span class="token punctuation">[</span>j <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">=</span> ai<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="2-快速排序（Quick-Sort）47-286"><a href="#2-快速排序（Quick-Sort）47-286" class="headerlink" title="2. 快速排序（Quick Sort）47-286"></a>2. 快速排序（Quick Sort）47-286</h2><p>　　至于大过INSERTION_SORT_THRESHOLD（47）的，用一种快速排序的方法：</p>
+<p>　　1.从数列中挑出五个元素，称为 “基准”（pivot）；</p>
+<p>　　2.重新排序数列，所有元素比基准值小的摆放在基准前面，所有元素比基准值大的摆在基准的后面（相同的数可以到任一边）。在这个分区退出之后，该基准就处于数列的中间位置。这个称为分区（partition）操作；</p>
+<p>　　3.递归地（recursive）把小于基准值元素的子数列和大于基准值元素的子数列排序。</p>
+<p>这是少于阀值QUICKSORT_THRESHOLD（286）的两种情况，至于大于286的，它会进入归并排序（Merge Sort），但在此之前，它有个小动作：</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">// Check if the array is nearly sorted</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> k <span class="token operator">=</span> left<span class="token punctuation">;</span> k <span class="token operator">&lt;</span> right<span class="token punctuation">;</span> run<span class="token punctuation">[</span>count<span class="token punctuation">]</span> <span class="token operator">=</span> k<span class="token punctuation">)</span> <span class="token punctuation">{</span>        <span class="token keyword">if</span> <span class="token punctuation">(</span>a<span class="token punctuation">[</span>k<span class="token punctuation">]</span> <span class="token operator">&lt;</span> a<span class="token punctuation">[</span>k <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token comment">// ascending</span>
+            <span class="token keyword">while</span> <span class="token punctuation">(</span><span class="token operator">++</span>k <span class="token operator">&lt;=</span> right <span class="token operator">&amp;&amp;</span> a<span class="token punctuation">[</span>k <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">&lt;=</span> a<span class="token punctuation">[</span>k<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>a<span class="token punctuation">[</span>k<span class="token punctuation">]</span> <span class="token operator">&gt;</span> a<span class="token punctuation">[</span>k <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token comment">// descending</span>
+            <span class="token keyword">while</span> <span class="token punctuation">(</span><span class="token operator">++</span>k <span class="token operator">&lt;=</span> right <span class="token operator">&amp;&amp;</span> a<span class="token punctuation">[</span>k <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">&gt;=</span> a<span class="token punctuation">[</span>k<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>            <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> lo <span class="token operator">=</span> run<span class="token punctuation">[</span>count<span class="token punctuation">]</span> <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">,</span> hi <span class="token operator">=</span> k<span class="token punctuation">;</span> <span class="token operator">++</span>lo <span class="token operator">&lt;</span> <span class="token operator">--</span>hi<span class="token punctuation">;</span> <span class="token punctuation">)</span> <span class="token punctuation">{</span>                <span class="token keyword">int</span> t <span class="token operator">=</span> a<span class="token punctuation">[</span>lo<span class="token punctuation">]</span><span class="token punctuation">;</span> a<span class="token punctuation">[</span>lo<span class="token punctuation">]</span> <span class="token operator">=</span> a<span class="token punctuation">[</span>hi<span class="token punctuation">]</span><span class="token punctuation">;</span> a<span class="token punctuation">[</span>hi<span class="token punctuation">]</span> <span class="token operator">=</span> t<span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span> <span class="token comment">// equal</span>
+            <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> m <span class="token operator">=</span> MAX_RUN_LENGTH<span class="token punctuation">;</span> <span class="token operator">++</span>k <span class="token operator">&lt;=</span> right <span class="token operator">&amp;&amp;</span> a<span class="token punctuation">[</span>k <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">==</span> a<span class="token punctuation">[</span>k<span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token punctuation">)</span> <span class="token punctuation">{</span>                <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">--</span>m <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                    <span class="token function">sort</span><span class="token punctuation">(</span>a<span class="token punctuation">,</span> left<span class="token punctuation">,</span> right<span class="token punctuation">,</span> <span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">;</span>                    <span class="token keyword">return</span><span class="token punctuation">;</span>
+                <span class="token punctuation">}</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>        <span class="token comment">/*
+         * The array is not highly structured,
+         * use Quicksort instead of merge sort.
+         */</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">++</span>count <span class="token operator">==</span> MAX_RUN_COUNT<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token function">sort</span><span class="token punctuation">(</span>a<span class="token punctuation">,</span> left<span class="token punctuation">,</span> right<span class="token punctuation">,</span> <span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">;</span>            <span class="token keyword">return</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>这里主要作用是看他数组具不具备结构：实际逻辑是分组排序，每降序为一个组，像1,9,8,7,6,8。9到6是降序，为一个组，然后把降序的一组排成升序：1,6,7,8,9,8。然后最后的8后面继续往后面找。</p>
+<p>　　每遇到这样一个降序组，++count，当count大于MAX_RUN_COUNT（67），被判断为这个数组不具备结构（也就是这数据时而升时而降），然后送给之前的sort(里面的快速排序)的方法（The array is not highly structured,use Quicksort instead of merge sort.）</p>
+<p>　　如果count少于MAX_RUN_COUNT（67）的，说明这个数组还有点结构，就继续往下走下面的归并排序。</p>
+<p>总结：</p>
+<p>　　从上面分析，Arrays.sort并不是单一的排序，而是插入排序，快速排序，归并排序三种排序的组合，为此我画了个流程图：</p>
+<p><img src="/2021/04/01/arrays-sort-di-ceng-yuan-ma/1701765-20191126153931611-191817306.png" alt="img"></p>
+<h2 id="3-归并排序-gt-286"><a href="#3-归并排序-gt-286" class="headerlink" title="3. 归并排序 >286"></a>3. 归并排序 &gt;286</h2><p>O(nlogn)只代表增长量级，同一个量级前面的常数也可以不一样，不同数量下面的实际运算时间也可以不一样。</p>
+<p>　　数量非常小的情况下（就像上面说到的，少于47的），插入排序等可能会比快速排序更快。 所以数组少于47的会进入插入排序。  </p>
+<p>　　快排数据越无序越快（加入随机化后基本不会退化），平均常数最小，不需要额外空间，不稳定排序。</p>
+<p>　　归排速度稳定，常数比快排略大，需要额外空间，稳定排序。</p>
+<p>　　所以大于或等于47或少于286会进入快排，而在大于或等于286后，会有个小动作：“// Check if the array is nearly sorted”。这里第一个作用是先梳理一下数据方便后续的归并排序，第二个作用就是即便大于286，但在降序组太多的时候（被判断为没有结构的数据，The array is not highly structured,use Quicksort instead of merge sort.），要转回快速排序。</p>
 
                 
             </div>
@@ -563,7 +580,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://bruce11111.github.io/2021/03/31/cookies-he-session/">http://bruce11111.github.io/2021/03/31/cookies-he-session/</a>
+                    <a href="http://bruce11111.github.io/2021/04/01/arrays-sort-di-ceng-yuan-ma/">http://bruce11111.github.io/2021/04/01/arrays-sort-di-ceng-yuan-ma/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -601,8 +618,8 @@
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/HTTP/">
-                                    <span class="chip bg-color">HTTP</span>
+                                <a href="/tags/java/">
+                                    <span class="chip bg-color">java</span>
                                 </a>
                             
                         </div>
@@ -773,7 +790,7 @@
         repo: '',
         owner: '',
         admin: null,
-        id: '2021-03-31T21-00-56',
+        id: '2021-04-01T20-28-06',
         distractionFreeMode: false  // Facebook-like distraction free mode
     });
 
@@ -799,9 +816,60 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
+            <div class="card">
+                <a href="/2021/04/01/arrays-sort-di-ceng-yuan-ma/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/0.jpg" class="responsive-img" alt="Arrays.sort底层源码">
+                        
+                        <span class="card-title">Arrays.sort底层源码</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-04-01
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/java/" class="post-category">
+                                    java
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/java/">
+                        <span class="chip bg-color">java</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
             <div class="card">
                 <a href="/2021/04/01/arraylist-kuo-rong-ji-zhi/">
                     <div class="card-image">
@@ -819,9 +887,9 @@
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2021-04-01
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-04-01
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -841,47 +909,6 @@
                         <span class="chip bg-color">java</span>
                     </a>
                     
-                </div>
-                
-            </div>
-        </div>
-        
-        
-        <div class="article col s12 m6" data-aos="fade-up">
-            <div class="article-badge right-badge text-color">
-                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
-            </div>
-            <div class="card">
-                <a href="/2021/03/31/spring-zhu-jie-yuan-li/">
-                    <div class="card-image">
-                        
-                        
-                        <img src="/medias/featureimages/1.jpg" class="responsive-img" alt="spring注解原理">
-                        
-                        <span class="card-title">spring注解原理</span>
-                    </div>
-                </a>
-                <div class="card-content article-content">
-                    <div class="summary block-with-text">
-                        
-                            
-                        
-                    </div>
-                    <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-03-31
-                            </span>
-                        <span class="publish-author">
-                            
-                            <i class="fas fa-bookmark fa-fw icon-category"></i>
-                            
-                            <a href="/categories/Spring/" class="post-category">
-                                    Spring
-                                </a>
-                            
-                            
-                        </span>
-                    </div>
                 </div>
                 
             </div>
