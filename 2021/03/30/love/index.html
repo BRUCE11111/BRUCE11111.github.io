@@ -310,6 +310,19 @@
 </header>
 
     
+<script src="/libs/cryptojs/crypto-js.min.js"></script>
+<script>
+    (function() {
+        let pwd = '123654';
+        if (pwd && pwd.length > 0) {
+            if (pwd !== CryptoJS.SHA256(prompt('请输入访问本文章的密码')).toString(CryptoJS.enc.Hex)) {
+                alert('密码错误，将返回主页！');
+                location.href = '/';
+            }
+        }
+    })();
+</script>
+
 
 
 
@@ -521,7 +534,7 @@
 <li>酱大骨（吃坏了肚子，湖南大学天马公寓那个地方，千万不要去）</li>
 <li>酸辣粉（后街，味道不错）</li>
 <li>湖南大学牛肉饼（小陈说好吃，我觉得一般）</li>
-<li></li>
+<li>中南大学麓山南路新开的烤鱼烤牛蛙，点的鲈鱼，挺好吃</li>
 </ol>
 <h2 id="2-去过的地方"><a href="#2-去过的地方" class="headerlink" title="2.去过的地方"></a>2.去过的地方</h2><ol>
 <li>长沙海底世界</li>

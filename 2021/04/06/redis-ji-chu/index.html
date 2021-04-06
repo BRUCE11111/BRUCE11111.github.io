@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="System类源码分析, 小灰的博客">
+    <meta name="keywords" content="Redis基础, 小灰的博客">
     <meta name="description" content="技术记录">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>System类源码分析 | 小灰的博客</title>
+    <title>Redis基础 | 小灰的博客</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -331,7 +331,7 @@
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">System类源码分析</h1>
+                    <h1 class="description center-align post-title">Redis基础</h1>
                 </div>
             </div>
         </div>
@@ -447,8 +447,8 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/java/">
-                                <span class="chip bg-color">java</span>
+                            <a href="/tags/database/">
+                                <span class="chip bg-color">database</span>
                             </a>
                         
                     </div>
@@ -459,8 +459,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/java/" class="post-category">
-                                java
+                            <a href="/categories/database/" class="post-category">
+                                database
                             </a>
                         
                     </div>
@@ -472,7 +472,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2021-03-31
+                    2021-04-06
                 </div>
                 
 
@@ -496,21 +496,12 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="The-Security-Manager"><a href="#The-Security-Manager" class="headerlink" title="The Security Manager"></a>The Security Manager</h2><ol>
-<li>定义</li>
+                <h2 id="1-NoSQL-数据模型"><a href="#1-NoSQL-数据模型" class="headerlink" title="1. NoSQL 数据模型"></a>1. NoSQL 数据模型</h2><h3 id="1-1聚合模型"><a href="#1-1聚合模型" class="headerlink" title="1.1聚合模型"></a>1.1聚合模型</h3><ol>
+<li>KV键值</li>
+<li>Bson</li>
+<li>列族 （列的形式扩展）</li>
+<li>图形 （网络结构）</li>
 </ol>
-<p>官方：</p>
-<p>A security manager is an object that defines a security policy for an application. This policy specifies actions that are unsafe or sensitive. Any actions not allowed by the security policy cause a <code>SecurityException</code> to be thrown. An application can also query its security manager to discover which actions are allowed.</p>
-<p>理解：</p>
-<p>它是一个应用的安全策略。这个策略指定当前的动作是安全or不安全or敏感。</p>
-<ol start="2">
-<li>示例</li>
-</ol>
-<p>官方：</p>
-<p>Typically, a web applet runs with a security manager provided by the browser or Java Web Start plugin. Other kinds of applications normally run without a security manager, unless the application itself defines one. If no security manager is present, the application has no security policy and acts without restrictions.</p>
-<p>理解：</p>
-<p>web 程序中的安全管理类是由浏览器或者启动插件提供的。其他应用程序通常没有安全管理类，除非我们自己去定义。</p>
-<p>在</p>
 
                 
             </div>
@@ -537,7 +528,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://bruce11111.github.io/2021/03/31/system-lei-yuan-ma-fen-xi/">http://bruce11111.github.io/2021/03/31/system-lei-yuan-ma-fen-xi/</a>
+                    <a href="http://bruce11111.github.io/2021/04/06/redis-ji-chu/">http://bruce11111.github.io/2021/04/06/redis-ji-chu/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -575,8 +566,8 @@
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/java/">
-                                    <span class="chip bg-color">java</span>
+                                <a href="/tags/database/">
+                                    <span class="chip bg-color">database</span>
                                 </a>
                             
                         </div>
@@ -747,7 +738,7 @@
         repo: '',
         owner: '',
         admin: null,
-        id: '2021-03-31T11-38-47',
+        id: '2021-04-06T16-26-29',
         distractionFreeMode: false  // Facebook-like distraction free mode
     });
 
@@ -773,17 +764,18 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2021/03/31/spring-zhu-jie-yuan-li/">
+                <a href="/2021/04/06/redis-ji-chu/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/1.jpg" class="responsive-img" alt="spring注解原理">
+                        <img src="/medias/featureimages/23.jpg" class="responsive-img" alt="Redis基础">
                         
-                        <span class="card-title">spring注解原理</span>
+                        <span class="card-title">Redis基础</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -793,20 +785,29 @@
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2021-03-31
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-04-06
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/Spring/" class="post-category">
-                                    Spring
+                            <a href="/categories/database/" class="post-category">
+                                    database
                                 </a>
                             
                             
                         </span>
                     </div>
+                </div>
+
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/database/">
+                        <span class="chip bg-color">database</span>
+                    </a>
+                    
                 </div>
                 
             </div>
@@ -818,13 +819,13 @@
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2021/03/31/javaunderlying/">
+                <a href="/2021/04/01/java-zhong-hash-yuan-li/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/7.jpg" class="responsive-img" alt="javaunderlying">
+                        <img src="/medias/featureimages/8.jpg" class="responsive-img" alt="java中hash原理">
                         
-                        <span class="card-title">javaunderlying</span>
+                        <span class="card-title">java中hash原理</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -835,15 +836,27 @@
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-03-31
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-04-01
                             </span>
                         <span class="publish-author">
                             
-                            <i class="fas fa-user fa-fw"></i>
-                            小灰灰
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/java/" class="post-category">
+                                    java
+                                </a>
+                            
                             
                         </span>
                     </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/java/">
+                        <span class="chip bg-color">java</span>
+                    </a>
+                    
                 </div>
                 
             </div>

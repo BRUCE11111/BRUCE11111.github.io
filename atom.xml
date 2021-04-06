@@ -6,7 +6,7 @@
   <link href="http://bruce11111.github.io/atom.xml" rel="self"/>
   
   <link href="http://bruce11111.github.io/"/>
-  <updated>2021-04-01T12:40:54.411Z</updated>
+  <updated>2021-04-06T09:08:36.157Z</updated>
   <id>http://bruce11111.github.io/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Redis基础</title>
+    <link href="http://bruce11111.github.io/2021/04/06/redis-ji-chu/"/>
+    <id>http://bruce11111.github.io/2021/04/06/redis-ji-chu/</id>
+    <published>2021-04-06T08:26:29.000Z</published>
+    <updated>2021-04-06T09:08:36.157Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;1-NoSQL-数据模型&quot;&gt;&lt;a href=&quot;#1-NoSQL-数据模型&quot; class=&quot;headerlink&quot; title=&quot;1. NoSQL 数据模型&quot;&gt;&lt;/a&gt;1. NoSQL 数据模型&lt;/h2&gt;&lt;h3 id=&quot;1-1聚合模型&quot;&gt;&lt;a</summary>
+        
+      
+    
+    
+    
+    <category term="database" scheme="http://bruce11111.github.io/categories/database/"/>
+    
+    
+    <category term="database" scheme="http://bruce11111.github.io/tags/database/"/>
+    
+  </entry>
   
   <entry>
     <title>java中hash原理</title>
@@ -191,7 +216,7 @@
     <link href="http://bruce11111.github.io/2021/03/30/love/"/>
     <id>http://bruce11111.github.io/2021/03/30/love/</id>
     <published>2021-03-30T12:45:30.000Z</published>
-    <updated>2021-04-01T13:20:39.107Z</updated>
+    <updated>2021-04-06T09:05:48.241Z</updated>
     
     
       
@@ -281,7 +306,7 @@
     <link href="http://bruce11111.github.io/2021/03/15/database/"/>
     <id>http://bruce11111.github.io/2021/03/15/database/</id>
     <published>2021-03-15T07:51:32.000Z</published>
-    <updated>2021-03-31T01:04:40.488Z</updated>
+    <updated>2021-04-04T09:16:40.629Z</updated>
     
     
       
@@ -304,7 +329,7 @@
     <link href="http://bruce11111.github.io/2021/03/15/java/"/>
     <id>http://bruce11111.github.io/2021/03/15/java/</id>
     <published>2021-03-15T07:47:03.000Z</published>
-    <updated>2021-03-31T03:38:53.035Z</updated>
+    <updated>2021-04-06T02:29:40.796Z</updated>
     
     
       
