@@ -608,7 +608,7 @@
 <p>关系数据库：所有关系的集合。</p>
 <p>关系操作：查询和插入、删除、修改。</p>
 <p>查询操作可以分为选择、投影、连接、除、并、差、交、笛卡尔积等。其中选择、投影、并、差、笛卡尔积是5中基本操作。操作的对象和结果都是集合。非关系数据模型的数据操作方式则为一次一记录的方式。</p>
-<h3 id="面试题"><a href="#面试题" class="headerlink" title="面试题"></a>面试题</h3><h2 id="基础查询"><a href="#基础查询" class="headerlink" title="基础查询"></a>基础查询</h2><h3 id="1、Select"><a href="#1、Select" class="headerlink" title="1、Select"></a>1、<code>Select</code></h3><pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">Select 查询列表 from 表名;
+<h2 id="基础查询"><a href="#基础查询" class="headerlink" title="基础查询"></a>基础查询</h2><h3 id="1、Select"><a href="#1、Select" class="headerlink" title="1、Select"></a>1、<code>Select</code></h3><pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">Select 查询列表 from 表名;
 SELECT last_name,email,salary from employees; #查询多个字段
 SELECT 100*98;#查询表达式
 SELECT VERSION();#查询函数
@@ -1066,6 +1066,28 @@ ALTER mytable ADD [UNIQUE] INDEX [indexname] ON (columnname(length))<span aria-h
 <li>关联查询太多join</li>
 <li>服务器调优及各个参数的设置。</li>
 </ol>
+<h3 id="1-7-row-gap-lock-next-key-lock"><a href="#1-7-row-gap-lock-next-key-lock" class="headerlink" title="1.7 row\gap lock\next_key lock"></a>1.7 row\gap lock\next_key lock</h3><p>首先，要明白锁是建立在索引上的，所以如果不是索引，那么就会锁住整张表。</p>
+<p>其次，分情况讨论索引类型：</p>
+<p>比如我数据库中有这么一张表user2：</p>
+<p><img src="/2021/03/15/database/rowlock.PNG"></p>
+<ol>
+<li><p>UNIQUE （唯一键索引 id）</p>
+<p>执行 <code>select * from user2 where id = 5 for update</code>；</p>
+<ol>
+<li>锁有此纪录（5），next_key lock退化成行锁，只锁定这一行。</li>
+<li>锁无此记录（比如将上面的语句改为id=6），唯一索引都是确定的不用边界，退化成gap 锁，锁定这个范围（开区间 （5，7））。</li>
+</ol>
+</li>
+<li><p>普通索引 （val）</p>
+<p>执行 <code>select * from user2 where val = 3 for update</code>；</p>
+<ol>
+<li>锁有记录(val = 3)，锁定范围是(1,3] [3,6]</li>
+<li>锁无记录(上面语句 val = 4) ,锁定范围是(3,6]。</li>
+</ol>
+<p>普通索引锁定范围+下边界。</p>
+</li>
+</ol>
+<p>这句话是别人的总结：<br>1，Record Lock：单个行记录上的锁<br>2，Gap Lock：间隙锁，锁定一个范围，但不包括记录本身。GAP锁的目的，是为了防止同一事务的两次当前读，出现幻读的情况<br>3，Next-Key Lock：1+2，锁定一个范围，并且锁定记录本身。对于行的查询，都是采用该方法，主要目的是解决幻读的问题。</p>
 <h2 id="2-7种JOIN"><a href="#2-7种JOIN" class="headerlink" title="2. 7种JOIN"></a>2. 7种JOIN</h2><pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">SELECT DISTINCT 
 	&lt;select_list&gt;
 FROM
@@ -1281,7 +1303,7 @@ LIMIT &lt; limit_number &gt;<span aria-hidden="true" class="line-numbers-rows"><
 <li>单路排序</li>
 </ol>
 <p>从磁盘读取查询需要的所有列，按照orderby列在buffer对它们进行排序，然后扫描排序后的列表进行输出，它的效率更快一些，避免出现了第二次读取数据。并且把随机IO变成了顺序IO，但是它会使用更多空间，因为把每一行都保存在内存。</p>
-<p><font color="red">MYSQL两种排序：文件排序和扫描有序索引排序。</font></p>
+<p><font color="red">MYSQL两种排序：文件排序和扫描有序索引排序。</font></p><font color="red">
 <h3 id="7-6-慢查询日志"><a href="#7-6-慢查询日志" class="headerlink" title="7.6 慢查询日志"></a>7.6 慢查询日志</h3><p>mysql默认没有开启慢查询日志，需要手动设置。如果不是调优，一般不开启。</p>
 <p><code>SHOW VARIABLES LIKE '%slow_query_log%'</code></p>
 <p>由<code>long_query_time</code>控制，默认情况下<code>long_query_time</code>的值为10秒。</p>
@@ -1535,7 +1557,7 @@ commit;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></s
 <p>表锁（偏向MYISAM引擎。</p>
 <h3 id="25-日志系统"><a href="#25-日志系统" class="headerlink" title="25. 日志系统"></a>25. 日志系统</h3><p><code>binlog</code> ——》 MYSQL服务的   <code>undo log</code> 和  <code>redo log</code> ——》innodb存储引擎的</p>
 <h3 id="26-MYSQL-结构"><a href="#26-MYSQL-结构" class="headerlink" title="26. MYSQL 结构"></a>26. MYSQL 结构</h3><p><img src="/2021/03/15/database/MYSQL%E7%BB%93%E6%9E%84.PNG"></p>
-
+</font>
                 
             </div>
             <hr/>

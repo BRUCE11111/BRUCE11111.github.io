@@ -840,8 +840,7 @@
 <p>并发清理 ：内存回收阶段，将死亡的内存对象占用的空间增加到一个空闲列表(free list),供以后的分配使用。</p>
 <p>重置 ：清理数据结构,为下一个并发收集做准备。</p>
 <p><strong>7）G1回收器</strong></p>
-<p>G1是 JDK 1.7中正式投入使用的用于取代CMS的压缩回收器。<strong>基于标记整理</strong>的垃圾回收器。年轻代分为Eden和Survivor两个区，老年代分为Old和Humongous（大对象，占用的空间超过了分区容量50%）两个区。</p>
-<p>回答逻辑：</p>
+<p>以前的回收器，都需要完全回收整个年轻代和老年代，随着技术的发展，垃圾越来越大，处理垃圾需要很大延迟。G1是 JDK 1.7中正式投入使用的用于取代CMS的压缩回收器。<strong>基于标记整理</strong>的垃圾回收器。年轻代分为Eden和Survivor两个区，老年代分为Old和Humongous（大对象，占用的空间超过了分区容量50%）两个区。</p>
 <ol>
 <li><p>G1首先将堆分为大小相等的 Region，避免全区域的垃圾回收。</p>
 <ul>
@@ -855,6 +854,7 @@
 <p><img src="/2021/03/15/java/G1%E5%9B%9E%E6%94%B6%E5%99%A8.png" alt="句柄"></p>
 <p>G1把堆内存分为大小相等的内存分段，默认情况下会把内存分为2048个内存分段。比如32G堆内存，2048个内存分段每段的大小为16M。这相当于把内存化整为零。内存分段是物理概念，代表实际的物理内存空间。每个内存分段都可以被标记为Eden区，Survivor区，Old区，或者Humongous区。</p>
 <p>这样划分有问题，不同的区域之间存在互相引用，造成跨代引用的问题。如何去标记另外一个区域引用了当前这个对象，引入了卡表和RS。每个区域内每个卡表占512byte，当此卡表对应的对象发生改变时，标记为dirty。每个对象的RS（RememberSet)记录谁引用了此对象。如下图所示：卡表引用Region1引用Region2区域的对象，Region2区域的RS记录Region1引用了它本身。</p>
+<p><img src="/2021/03/15/java/G1RS.png" alt="句柄"></p>
 <p><img src="/2021/03/15/java/G1.PNG"></p>
 <p>如何去实现这个RS记录的过程？G1中有<code>Write Barrier</code>机制，这个机制由编译器动态生成一小段代码。</p>
 <p><strong>Write Barrier机制</strong></p>
@@ -877,8 +877,9 @@
 <ul>
 <li>无需回收整个堆，而是选择一个<code>Collection Set(CS)</code></li>
 </ul>
-<p><img src="/2021/03/15/java/G1RS.png" alt="句柄"></p>
 <p>当一个地址空间被引用时，这个地址空间对应的数组索引的值被标记为”0″，即标记为脏被引用，此外RSet也将这个数组下标记录下来。一般情况下，这个RSet其实是一个Hash Table，Key是别的Region的起始地址，Value是一个集合，里面的元素是Card Table的Index。</p>
+<p>Mixed GC （老年代和年轻代一起回收） 不一定立即发生，选择若干个Region进行，默认1/8的Old Region（选择垃圾最多的老年代优先进行）。STW,Parallel,Copying回收，它和年轻代是完全相同的做法。</p>
+<p>总结：</p>
 <p>G1垃圾回收过程主要包括三个：</p>
 <ul>
 <li>年轻代回收（young gc）过程，这个过程是<code>stop the world</code>方法，需要暂停应用程序，通过上述的卡表和RS更新引用对象。</li>
