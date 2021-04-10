@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="Redis基础, 小灰的博客">
+    <meta name="keywords" content="pythonBase, 小灰的博客">
     <meta name="description" content="技术记录">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>Redis基础 | 小灰的博客</title>
+    <title>pythonBase | 小灰的博客</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -326,12 +326,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/23.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/13.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">Redis基础</h1>
+                    <h1 class="description center-align post-title">pythonBase</h1>
                 </div>
             </div>
         </div>
@@ -447,8 +447,8 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/database/">
-                                <span class="chip bg-color">database</span>
+                            <a href="/tags/python/">
+                                <span class="chip bg-color">python</span>
                             </a>
                         
                     </div>
@@ -459,8 +459,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/database/" class="post-category">
-                                database
+                            <a href="/categories/python/" class="post-category">
+                                python
                             </a>
                         
                     </div>
@@ -472,7 +472,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2021-04-06
+                    2021-04-09
                 </div>
                 
 
@@ -496,218 +496,75 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="1-NoSQL-数据模型"><a href="#1-NoSQL-数据模型" class="headerlink" title="1. NoSQL 数据模型"></a>1. NoSQL 数据模型</h2><h3 id="1-1聚合模型"><a href="#1-1聚合模型" class="headerlink" title="1.1聚合模型"></a>1.1聚合模型</h3><ol>
-<li>KV键值</li>
-<li>Bson</li>
-<li>列族 （列的形式扩展）</li>
-<li>图形 （网络结构）</li>
-</ol>
-<h3 id="1-2-四大分类"><a href="#1-2-四大分类" class="headerlink" title="1.2 四大分类"></a>1.2 四大分类</h3><ol>
-<li><p>KV键值</p>
-</li>
-<li><p>文档型数据库（bson格式比较多）</p>
-<ol>
-<li><p>CouchDB</p>
-</li>
-<li><p>MongoDB</p>
-<p>基于分布式文件存储的数据库。由C++语言编写，旨在为WEB应用提供可扩展的高性能数据存储解决方案。MongoDB是一个介于关系数据库和非关系数据库之间的产品，是非关系数据库当中功能最丰富，最像关系数据库的。</p>
-</li>
-</ol>
-</li>
-<li><p>列存储数据库</p>
-<ol>
-<li>Cassandra,HBase</li>
-<li>分布式文件系统</li>
-</ol>
-</li>
-<li><p>图关系数据库</p>
-<ol>
-<li>Neo4J,InfoGrid</li>
-<li>不是放图形的，放的是关系比如：朋友圈社交网络、广告推荐系统。构建关系图谱。</li>
-</ol>
-</li>
-</ol>
-<h3 id="1-3-CAP-BASE"><a href="#1-3-CAP-BASE" class="headerlink" title="1.3 CAP + BASE"></a>1.3 CAP + BASE</h3><p>C：Consistency（强一致性）</p>
-<p>A：Availability（可用性）</p>
-<p>P：Partition tolerance（分区容错性）</p>
-<p>三选二。在分布式中，P是必须要实现的。</p>
-<p><img src="/2021/04/06/redis-ji-chu/CAP.PNG"></p>
-<p><strong>BASE</strong>：为了解决关系数据库强一致性引起的问题而引起的可用性降低而提出的解决方案。</p>
-<p>基本可用(Basically Available)</p>
-<p>软状态(Soft state)</p>
-<p>最终一致(Eventually consistent)</p>
-<p>它的思想是通过让系统放松对某一时刻数据一致性的要求来换取系统整体伸缩性和性能上改观。缘由就在于大型系统往往由于地域分布和极高性能的要求，不可能采用分布式事务来完成这些指标，要想获得这些指标，base是一种解决方案。</p>
-<h1 id="Redis"><a href="#Redis" class="headerlink" title="Redis"></a>Redis</h1><h2 id="1-benchmark-性能测试"><a href="#1-benchmark-性能测试" class="headerlink" title="1. benchmark 性能测试"></a>1. benchmark 性能测试</h2><p><img src="/2021/04/06/redis-ji-chu/redis%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95%E5%8F%82%E6%95%B0.PNG"></p>
-<h2 id="2-基础"><a href="#2-基础" class="headerlink" title="2. 基础"></a>2. 基础</h2><p>Redis默认16个数据库。默认使用第0个数据库。</p>
-<p>Redis是单线程的，Redis是基于内存操作，CPU不是Redis性能瓶颈，Redis的瓶颈是根据机器的内存和网络带宽，既然可以使用单线程，就是用了单线程。</p>
-<p>Redis是c语言写的，官方提供的数据是100000+的QPS，这个不比Memecache差！</p>
-<h3 id="2-1-Redis数据类型"><a href="#2-1-Redis数据类型" class="headerlink" title="2.1 Redis数据类型"></a>2.1 Redis数据类型</h3><h4 id="2-1-1-Redis-Key"><a href="#2-1-1-Redis-Key" class="headerlink" title="2.1.1 Redis-Key"></a>2.1.1 Redis-Key</h4><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">keys * <span class="token comment">#查看所有</span>
-EXPIRE name <span class="token number">10</span> <span class="token comment">#过期时间</span>
-ttl name <span class="token comment">#剩余时间</span>
-<span class="token builtin class-name">type</span> name <span class="token comment"># 查看类型</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+                <h2 id="1-Python线程模块"><a href="#1-Python线程模块" class="headerlink" title="1. Python线程模块"></a>1. Python线程模块</h2><p>GIL（Global Interpreter Lock，全局解释器锁）不是Python独有的特性，它只是在实现CPython（Python解释器）时，引入的一个概念。在官方网站中定义如下：</p>
+<blockquote>
+<p>In CPython, the global interpreter lock, or GIL, is a mutex that prevents multiple native threads from executing Python bytecodes at once. This lock is necessary mainly because CPython’s memory management is not thread-safe. (However, since the GIL exists, other features have grown to depend on the guarantees that it enforces.)</p>
+</blockquote>
+<p>由定义可知，GIL是一个互斥锁（mutex）。它阻止了 多个线程同时执行Python字节码，毫无疑问，这降低了执行效率。理解GIL的必要性，需要了解CPython对于线程安全的内存管理机制。</p>
+<p>首先，我们来看看单核CPU下，多线程任务是如何调度的。</p>
+<p><img src="/2021/04/09/pythonbase/v2-036bb273ba382803c29bfe075ed07b8d_1440w.jpg" alt="img"></p>
+<p>由图可知，由于GIL的机制，单核CPU在同一时刻只有一个线程在运行。当线程遇到IO操作或Timer Tick到期，释放GIL锁。其他的两个线程去竞争这把锁，得到锁之后，才开始运行。</p>
+<p>线程释放GIL锁有两种情况，一是遇到IO操作，二是Time Tick到期。IO操作很好理解，比如发出一个http请求，等待响应。那么Time Tick到期是什么呢？Time Tick规定了线程的最长执行时间，超过时间后自动释放GIL锁。</p>
+<p>虽然都是释放GIL锁，但这两种情况是不一样的。比如，Thread1遇到IO操作释放GIL，由Thread2和Thread3来竞争这个GIL锁，Thread1不再参与这次竞争。如果是Thread1因为Time Tick到期释放GIL，那么三个线程可以同时竞争这把GIL锁，可能出现Thread1在竞争中胜出，再次执行的情况。单核CPU下，这种情况不算特别糟糕。因为只有1个CPU，所以CPU的利用率是很高的。</p>
+<p>在多核CPU下，由于GIL锁的全局特性，无法发挥多核的特性，GIL锁会使得多线程任务的效率大大降低。</p>
+<p><img src="/2021/04/09/pythonbase/v2-3577df8b9dd94d4f2075e34a67aaa919_1440w.jpg" alt="img"></p>
+<p>Thread1在CPU1上运行，Thread2在CPU2上运行。GIL是全局的，CPU2上的Thread2需要等待CPU1上的Thread1让出GIL锁，才有可能执行。如果在多次竞争中，Thread1都胜出，Thread2没有得到GIL锁，意味着CPU2一直是闲置的，无法发挥多核的优势。</p>
+<p>为了避免同一线程霸占CPU，在python3.x中，线程会自动的调整自己的优先级，使得多线程任务执行效率更高。</p>
+<p>既然GIL降低了多核的效率，那保留它的目的是什么呢？这就和线程执行的安全有关。</p>
+<p>准确的说，GIL的线程安全是粗粒度的。也就是说，有GIL都不意味着线程安全。比如下面这个例子:</p>
+<pre class="line-numbers language-python3" data-language="python3"><code class="language-python3">def add():
+    global n
+    for i in range(10**1000):
+        n = n +1
+def sub():
+    global n
+    for i in range(10**1000):
+        n = n - 1
+n = 0
+import threading
+a = threading.Thread(target=add,)
+b = threading.Thread(target=sub,)
+a.start()
+b.start()
+#join 用于阻塞主线程，避免过早打印n
+a.join()
+b.join()
+print n<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<h4 id="2-1-2-String"><a href="#2-1-2-String" class="headerlink" title="2.1.2 String"></a>2.1.2 String</h4><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">步长
-<span class="token builtin class-name">set</span> views <span class="token number">1</span> <span class="token comment">#设置</span>
-get views
-incr views	<span class="token comment">#增加</span>
-decr views <span class="token comment">#减少</span>
-decrby views <span class="token number">10</span>
-incrby views <span class="token number">10</span>
-getrange views <span class="token number">0</span> <span class="token number">3</span> <span class="token comment">#截取views中的1-3位字符</span>
-getrange views <span class="token number">0</span> -1 <span class="token comment">#获得全部字符</span>
-setnx views <span class="token comment">#不存在则设置成功</span>
-setex views <span class="token comment">#设置过期时间 (分布式锁中常用)</span>
-mset k1 v1 k2 v2 k3 v3 <span class="token comment">#同时设置多个值</span>
-mget k1 k2 k3 <span class="token comment"># 同时得到</span>
-msetnx k1 v1 k4 v4<span class="token comment"># 原子操作，要么一起成功，要么一起失败</span>
-<span class="token comment"># 对象</span>
-<span class="token builtin class-name">set</span> user:1<span class="token punctuation">{</span>name:zhangsan,age:3<span class="token punctuation">}</span>
-<span class="token comment">#或这么写 user:{id}:{filed}，如此设计是Redis完全ok的</span>
-mset user:1:name zhangsan user:1:age <span class="token number">3</span>
-<span class="token comment">###########</span>
-getset db redis <span class="token comment">#如果存在值，获取原来值，设置新的值，没有的话得到nil，并set db redis</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>上面的程序对n做了同样数量的加法和减法，那么n理论上是0。但运行程序，打印n，发现它不是0。问题出在哪里呢，问题在于python的每行代码不是原子化的操作。比如n = n+1这步，不是一次性执行的。如果去查看python编译后的字节码执行过程，可以看到如下结果。</p>
+<pre class="line-numbers language-text" data-language="text"><code class="language-text">19 LOAD_GLOBAL              1 (n)
+22 LOAD_CONST               3 (1)
+25 BINARY_ADD          
+26 STORE_GLOBAL             1 (n)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 
-<p>String类似的场景：value除了是字符串还可以是数字</p>
-<h4 id="2-1-3-List"><a href="#2-1-3-List" class="headerlink" title="2.1.3 List"></a>2.1.3 List</h4><p>列表。list可以玩成栈、队列、或阻塞队列。</p>
-<p>所有list命令都是l开头的。</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">LPUSH list one
-LPUSH list two
-LPUSH list three
-LRANGE list <span class="token number">0</span> -1 <span class="token comment">#全部</span>
-LRANGE list <span class="token number">0</span> <span class="token number">1</span> <span class="token comment"># three two</span>
-RPUSH list four <span class="token comment">#右边</span>
-LPOP
-RPOP
-<span class="token comment">############</span>
-LINDEX list <span class="token number">0</span> <span class="token comment">#左侧第一个值</span>
-Llen list <span class="token comment">#长度</span>
-Lrem list <span class="token number">1</span> one <span class="token comment"># 移除 one 1个</span>
-ltrim list <span class="token number">1</span> <span class="token number">2</span> <span class="token comment"># 通过截取指定的长度</span>
-rpoplpush list anotherlist <span class="token comment"># 移除list中右侧第一个数据然后放入anotherlist中</span>
-exists list <span class="token comment">#判断列表是否存在</span>
-<span class="token comment">####</span>
-lset list <span class="token number">0</span> item <span class="token comment">#将列表中对应下标的值替换</span>
-linsert list before <span class="token string">"item"</span> <span class="token string">"other"</span> <span class="token comment"># 在item值前面插入other这个值</span>
-linsert list after <span class="token string">"item"</span> <span class="token string">"new"</span> <span class="token comment"># 在item值后面插入new这个值</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>总结：L</p>
-<ul>
-<li>是一个链表，before Node after left right 都可以插入值</li>
-<li>如果key不存在，创建新链表</li>
-<li>如果存在，新增内容</li>
-<li>如果移除了所有值，空链表，代表不存在</li>
-<li>在两边插入或改动，效率最高，中间元素，相对来说效率低一点。</li>
-</ul>
-<p>消息排队，消息队列 LPUSH RPOP 啥的</p>
-<h4 id="2-1-4-Set"><a href="#2-1-4-Set" class="headerlink" title="2.1.4 Set"></a>2.1.4 Set</h4><p>set开头都是s</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># set 值不能重复</span>
-sadd myset <span class="token string">"hello"</span>
-smembers myset <span class="token comment">#查看元素</span>
-sismember myset hello <span class="token comment">#查看元素是否存在</span>
-
-<span class="token comment">###</span>
-srem myset hello <span class="token comment">#移除set集合中的指定元素</span>
-scard myset <span class="token comment"># 获取set集合中的元素个数</span>
-
-<span class="token comment">###</span>
-srandmember myset <span class="token comment"># 无需不重复集合。抽随机</span>
-
-<span class="token comment">###</span>
-spop myset <span class="token comment"># 随机删除一个元素</span>
-
-<span class="token comment">###</span>
-<span class="token comment"># 差集 交集 并集</span>
-Sdiff set1 set2
-sinter set1 set2
-sunion set1 <span class="token builtin class-name">set</span> <span class="token number">2</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h4 id="2-1-5-Hash"><a href="#2-1-5-Hash" class="headerlink" title="2.1.5 Hash()"></a>2.1.5 Hash()</h4><p>Map集合。key-map，值是map集合</p>
-<p>命令以h开头</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">hset myhash field1 kuangshen
-hget myhash field1
-hmset myhash field1 hello field2 world <span class="token comment">#同时设置值</span>
-
-hgetall myhash <span class="token comment"># 得到全部的值</span>
-hdel myhash field1 <span class="token comment">#删除哈希指定的值字段！对应的value值也就消失了。</span>
-hlen myhash <span class="token comment">#获取hash长度</span>
-hexists myhash field1 <span class="token comment"># 判断hash中指定字段是否存在</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>hash保存变更数据 user name age </p>
-<h4 id="2-1-6-Zset（有序集合）"><a href="#2-1-6-Zset（有序集合）" class="headerlink" title="2.1.6 Zset（有序集合）"></a>2.1.6 Zset（有序集合）</h4><p>在set的基础上增加了一个值， set k1 v1 , zset k1 score v1</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment">#增加</span>
-zadd myset <span class="token number">1</span> one <span class="token comment"># 中间的是1序号，表示第一个序号，自动排序</span>
-zrange myset <span class="token number">0</span> -1 <span class="token comment"># 查看范围，这个-1就是看的全部了</span>
-<span class="token comment">#排序如何实现</span>
-zrangebyscore salary -inf +inf <span class="token comment"># 从最小值到最大值排序</span>
-zrevrange salary <span class="token number">0</span> -1 <span class="token comment"># 倒叙，从大到小排序</span>
-<span class="token comment"># 获取有序集合的个数</span>
-zcard myset 
-zcard myset <span class="token number">1</span> hello
-zcount myset <span class="token number">1</span> <span class="token number">3</span> <span class="token comment"># 获取指定区间的数量</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>其余的一些API，剩下的如果工作中有需要这个时候可以去查官方文档。</p>
-<h3 id="2-2-三种特殊的数据类型"><a href="#2-2-三种特殊的数据类型" class="headerlink" title="2.2 三种特殊的数据类型"></a>2.2 三种特殊的数据类型</h3><p>朋友的定位，附近的人，打车距离计算？</p>
-<h4 id="2-2-1-地理空间"><a href="#2-2-1-地理空间" class="headerlink" title="2.2.1 地理空间"></a>2.2.1 地理空间</h4><p>Redis的Geo在Redis 3.2 版本就推出了。这个功能可以推算地理位置的信息，两地之间的距离，方圆几里的人！</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">GEOADD <span class="token comment">#将指定的经度、纬度、名称添加到指定的key中。地球两极无法添加，通过java程序一次性导入 参数 key</span>
-
-geoadd china:city <span class="token number">116.40</span> <span class="token number">39.90</span> beijing
-
-<span class="token comment">#############</span>
-GEODIST <span class="token comment"># 给定两个位置之间的距离</span>
-<span class="token comment"># m 单位 米</span>
-<span class="token comment"># km 单位是千米</span>
-<span class="token comment"># mi 单位是英里</span>
-<span class="token comment"># ft 单位是英尺</span>
-geodist china:city beijing chongqin km 
-
-<span class="token comment">##############</span>
-GEOHASH <span class="token comment"># 返回一个或多个位置元素的Geohash表示</span>
-<span class="token comment"># 返回11个字符的Geohash字符串</span>
-geohash china:city beijing <span class="token comment"># 将当前经纬度转换为一维的字符串，如果两个字符串越接近，那么则距离越近！</span>
-
-<span class="token comment">#######################</span>
-GEOPOS <span class="token comment"># 获取当前定位：一定是一个坐标值</span>
-geopos china:city beijing <span class="token comment"># 获取指定的城市的经度和纬度</span>
+<p>从过程可以看出，n = n +1 操作分成了四步完成。因此，n = n+1不是一个原子化操作。</p>
+<p>1.加载全局变量n，2.加载常数1，3.进行二进制加法运算，4.将运算结果存入变量n。</p>
+<p>根据前面的线程释放GIL锁原则，线程a执行这四步的过程中，有可能会让出GIL。如果这样，n=n+1的运算过程就被打乱了。最后的结果中，得到一个非零的n也就不足为奇。</p>
+<p>这就是为什么我们说GIL是粗粒度的，它只保证了一定程度的安全。如果要做到线程的绝对安全，是不是所有的非IO操作，我们都需要自己再加一把锁呢？答案是否定的。在python中，有些操作是是原子级的，它本身就是一个字节码，GIL无法在执行过程中释放。对于这种原子级的方法操作，我们无需担心它的安全。比如sort方法，[1,4,2].sort()，翻译成字节码就是CALL METHOD 0。只有一行，无法再分，所以它是线程安全的。</p>
+<p><strong>总结</strong></p>
+<p>对于IO密集型应用，多线程的应用和多进程应用区别不大。即便有GIL存在，由于IO操作会导致GIL释放，其他线程能够获得执行权限。由于多线程的通讯成本低于多进程，因此偏向使用多线程。</p>
+<p>对于计算密集型应用，多线程处于绝对劣势，可以采用多进程或协程。</p>
+<h3 id="1-1-实际使用"><a href="#1-1-实际使用" class="headerlink" title="1.1 实际使用"></a>1.1 实际使用</h3><p>python主要通过<code>thread</code>和<code>threading</code>这两个模块来实现多线程支持。python的thread模块是比较底层的模块，<code>threding</code>是对thread做了一些封装，可以更方便的被使用。但是python由于GIL的存在无法使用threading充分利用GPU资源，如果想充分发挥多核CPU的计算能力需要使用<code>multiprocessing</code>模块。</p>
+<h3 id="1-1-1-如何创建线程"><a href="#1-1-1-如何创建线程" class="headerlink" title="1.1.1 如何创建线程"></a>1.1.1 如何创建线程</h3><p><code>python3.x</code>中已经放弃了<code>python2.x</code>中采用函数式<code>thread</code>模块中的<code>start_new_thread()</code>函数来产生新线程的方式。</p>
+<p>python3中通过threading模块创建新的线程有两种方法：</p>
+<p>第一种是通过threading.Thread(Target=executable Method)——即传递给Thread对象一个可执行方法（或对象）。</p>
+<p>第二种是继承threading.Thread定义子类并重写run()方法。</p>
+<p>（1）通过threading.Thread进行创建多线程</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 
-<span class="token comment">#########################</span>
-GEORADIUS <span class="token comment"># 以给定的经度纬度为中心，半径内的</span>
-georadius china:city <span class="token number">110</span> <span class="token number">30</span> <span class="token number">1000</span> km <span class="token comment"># 以 110 30 为中心，找方圆1000km内的城市</span>
-georadius china:city <span class="token number">110</span> <span class="token number">30</span> <span class="token number">1000</span> km <span class="token punctuation">[</span>withcoord<span class="token punctuation">]</span> <span class="token punctuation">[</span>withdist<span class="token punctuation">]</span> <span class="token comment"># withcode打印时带上经度纬度 withdist打印时带上距离</span>
 
 
-<span class="token comment">###########################</span>
-GEORADIUSBYMEMBER <span class="token comment"># 找出位于指定范围内的元素，中心点是由给定的位置元素决定的</span>
-georadiusbymember china:city shanghai <span class="token number">400</span> km <span class="token comment"># 找出上海附近400km的城市</span>
 
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<h4 id="2-2-2-Hyperloglog"><a href="#2-2-2-Hyperloglog" class="headerlink" title="2.2.2 Hyperloglog"></a>2.2.2 Hyperloglog</h4><p>基数：不重复的元素。比如A = {1,3,5,7,8}，基数（不重复的元素） = 5，可以接受误差。</p>
-<p>Redis 2.8.9版本就更新了 Hyperloglog数据结构。是基数统计的算法。</p>
-<p>网页UV（一个人访问一个网站多次，但是还是算作一个人）。我们的目的是为了计数，而不是保护用户id。</p>
-<ul>
-<li>优点：占用的内存是固定，2^64不同的元素的技术，只需要废12KB内存！如果要从内存的角度来比较的话，hyperloglog是首选！</li>
-<li>0.81%错误率。</li>
-</ul>
-<p>这个命令都以PF开头。</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># 添加</span>
-PFadd mykey a b c d e f g h i j
-<span class="token comment"># 计数</span>
-PFcount mykey
 
-<span class="token comment"># 合并</span>
-PFmerge mykey3 mykey
 
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<p>如果业务需求不能容错，那么就换成set。</p>
-<h3 id="2-2-3-Bitmaps"><a href="#2-2-3-Bitmaps" class="headerlink" title="2.2.3 Bitmaps"></a>2.2.3 Bitmaps</h3><p>位存储，操作二进制位进行操作，只有0和1两个状态。</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">setbit sign <span class="token number">5</span> <span class="token number">0</span>
 
-bitcount sign <span class="token comment"># 统计1的个数</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+
+
+
 
 
 
@@ -771,7 +628,7 @@ bitcount sign <span class="token comment"># 统计1的个数</span><span aria-hi
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://bruce11111.github.io/2021/04/06/redis-ji-chu/">http://bruce11111.github.io/2021/04/06/redis-ji-chu/</a>
+                    <a href="http://bruce11111.github.io/2021/04/09/pythonbase/">http://bruce11111.github.io/2021/04/09/pythonbase/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -809,8 +666,8 @@ bitcount sign <span class="token comment"># 统计1的个数</span><span aria-hi
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/database/">
-                                    <span class="chip bg-color">database</span>
+                                <a href="/tags/python/">
+                                    <span class="chip bg-color">python</span>
                                 </a>
                             
                         </div>
@@ -981,7 +838,7 @@ bitcount sign <span class="token comment"># 统计1的个数</span><span aria-hi
         repo: '',
         owner: '',
         admin: null,
-        id: '2021-04-06T16-26-29',
+        id: '2021-04-09T21-46-56',
         distractionFreeMode: false  // Facebook-like distraction free mode
     });
 
@@ -1007,17 +864,18 @@ bitcount sign <span class="token comment"># 统计1的个数</span><span aria-hi
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2021/04/08/python-flask/">
+                <a href="/2021/04/09/pythonbase/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/12.jpg" class="responsive-img" alt="python+flask">
+                        <img src="/medias/featureimages/13.jpg" class="responsive-img" alt="pythonBase">
                         
-                        <span class="card-title">python+flask</span>
+                        <span class="card-title">pythonBase</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -1027,16 +885,29 @@ bitcount sign <span class="token comment"># 统计1的个数</span><span aria-hi
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2021-04-08
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-04-09
+                            </span>
                         <span class="publish-author">
                             
-                            <i class="fas fa-user fa-fw"></i>
-                            小灰灰
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/python/" class="post-category">
+                                    python
+                                </a>
+                            
                             
                         </span>
                     </div>
+                </div>
+
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/python/">
+                        <span class="chip bg-color">python</span>
+                    </a>
+                    
                 </div>
                 
             </div>
@@ -1048,13 +919,13 @@ bitcount sign <span class="token comment"># 统计1的个数</span><span aria-hi
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2021/04/01/java-zhong-hash-yuan-li/">
+                <a href="/2021/04/09/socket/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/18.jpg" class="responsive-img" alt="java中hashMap原理">
+                        <img src="/medias/featureimages/5.jpg" class="responsive-img" alt="Socket">
                         
-                        <span class="card-title">java中hashMap原理</span>
+                        <span class="card-title">Socket</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -1065,7 +936,7 @@ bitcount sign <span class="token comment"># 统计1的个数</span><span aria-hi
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-04-01
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-04-09
                             </span>
                         <span class="publish-author">
                             
