@@ -626,7 +626,65 @@ while (1) {
 <li>reset每次不能复用，需要重新设置。从用户空间复制到内核空间，总是拷贝。</li>
 <li>fd_set 1024个大小限制。</li>
 </ol>
-<h4 id="2-epoll"><a href="#2-epoll" class="headerlink" title="2. epoll"></a>2. epoll</h4><p>是在2.6内核中提出的。</p>
+<h4 id="2-epoll"><a href="#2-epoll" class="headerlink" title="2. epoll"></a>2. epoll</h4><p>是在2.6内核中提出的。是之前<code>select</code>和<code>poll</code>的增强版本。epoll没有描述符大小限制，使用一个文件描述符管理多个文件描述符，将用户关心的文件描述符的时间存放到内核的一个事件表中，这样在用户空间和内核空间的copy只需要一次。</p>
+<p>大体结构：</p>
+<p><img src="/2021/04/09/socket/epoll%E7%BB%93%E6%9E%84.PNG"></p>
+<p>fd指定epoll里面哪个socket，epoll里面有个列表保存很多个事件（对应socket）。然后有很多个不同的epoll。</p>
+<p>每个epoll里面有事件列表和就绪列表。就绪列表里面保存已经注册的事件信息。就绪列表主要是由<code>epoll_wait()</code>进行访问，当就绪列表里面有信息时可以直接返回，当没有信息，则需要阻塞（指定的timeout，当timeout设定为 -1 时一直阻塞直到有信息）。</p>
+<p>————————————————</p>
+<p>epoll过程需要三个接口：</p>
+<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">#include &lt;sys/epoll.h&gt;
+//这个函数是个系统函数，函数将在内核空间内开辟一块新的空间，可以理解为epoll结构空间，返回值为epoll的文件描述符编号，方便后续操作使用。
+int epoll_create(int size);
+//是epoll函数的事件注册函数，把事件放到事件列表里面。这样事件的任何改动内核可以直到，不用来回改动。（实际上事件的注册与销毁频率不会太高，所以和内核态交互不会太频繁）。epoll与select不同，select函数是调用时指定需要监听的描述符和事件，epoll先将用户感兴趣的描述符事件注册到epoll空间，此函数//是非阻塞函数，作用仅仅是增删改epoll空间内的描述符信息。
+//参数：epfd，指定哪个epoll，从而可以让后面的进程fd编号找到匹配的socket，函数将依靠编号找到对应的epoll结构。
+//op，表示当前请求类型，由三个宏定义(EPOLL_CTL_ADD:注册新的fd到epfd中、EPOLL_CTL_MOD:修改已经注册的fd的监听事件、EPOLL_CTL_DEL：从epfd中删除一个fd)
+int epoll_ctl(int epfd, int op, int fd, struct epoll_event *event);
+//epoll_wait 等待事件的产生，类似于select()调用，根据参数timeout，来决定是否阻塞。
+//返回回来的事件都是就绪事件，不用像select一位一位检查是否就绪。
+//
+int epoll_wait(int epfd, struct epoll_event * events, int maxevents, int timeout);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>epoll_event结构：</p>
+<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">struct epoll_event {
+    _unit32_t events; //Epoll events
+    epoll_data_t data // User data variable
+}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>events可以是以下几个宏的集合：表明对哪种事件感兴趣</p>
+<p>EPOLLIN（读事件）、EPOLLOUT、EPOLLRPI、EPOLLERR、EPOLLHUP（挂断）、EPOLLET（边缘触发）、EPOLLONESHOT（只监听一次，事件触发后自动清除该fd，从epoll列表）。</p>
+<p><strong>工作模式：</strong></p>
+<p>1.LT（水平触发）和ET（边缘触发）。LT是默认模式，LT模式与ET模式的区别如下：</p>
+<p>LT：事件就绪后，用户可以选择处理或者不处理，如果用户本次未处理，那么下次调用epoll_wait时仍然会将未处理的事件打包给你。</p>
+<p>ET：事件就绪后，用户必须处理，因为内核不给你兜底了，内核把就绪事件打包给你后，就把对应的就绪事件删除。</p>
+<p>ET模式很大程度上减少了epoll事件被重复触发的次数，因此效率比LT模式高。</p>
+<p><strong>代码示例：</strong></p>
+<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">int epfd = epoll_create(10);
+
+struct epoll_event events[5];
+for (int i = 0; i &lt; 5; i++) {
+    static struct epoll_event ev;
+    memset(&amp;client, 0, sizeof(client));
+    addlen = sizeof(client);
+    ev.data.fd = accept(sockfd, (struct sockaddr*)&amp;client, &amp;addrlen);
+    ev.events = EPOLLIN;
+    epoll_ctl(epfd, EPOLL_CTL_ADD, ev.data.fd, &amp;ev);
+}
+
+while (1) {
+    print("round again");
+    nfds = epoll_wait(epfd, events, 5, 10000);
+
+    for (int i = 0; i &lt; nfds; i++) {
+        memset(buffer, 0, MAXBUF);
+        read(events[i].data.fd, buffer, MAXBUF);
+        prints(buffer);
+    }
+}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p><strong>epoll原理</strong>:</p>
+<p><img src="/2021/04/09/socket/epoll%E5%8E%9F%E7%90%86.PNG"></p>
+<p>监听事件列表是个红黑树，加快寻找速度。</p>
 <p>使用 select 或者 poll 等待数据，并且可以等待多个套接字中的任何一个变为可读。这一过程会被阻塞，当某一个套接字可读时返回，之后再使用 recvfrom 把数据从内核复制到进程中。</p>
 <p>它可以让单个进程具有处理多个 I/O 事件的能力。又被称为 Event Driven I/O，即事件驱动 I/O。</p>
 <p>如果一个 Web 服务器没有 I/O 复用，那么每一个 Socket 连接都需要创建一个线程去处理。如果同时有几万个连接，那么就需要创建相同数量的线程。相比于多进程和多线程技术，I/O 复用不需要进程线程创建和切换的开销，系统开销更小。</p>

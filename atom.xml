@@ -6,7 +6,7 @@
   <link href="http://bruce11111.github.io/atom.xml" rel="self"/>
   
   <link href="http://bruce11111.github.io/"/>
-  <updated>2021-04-09T14:26:30.933Z</updated>
+  <updated>2021-04-10T11:33:48.041Z</updated>
   <id>http://bruce11111.github.io/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>负载均衡</title>
+    <link href="http://bruce11111.github.io/2021/04/10/fu-zai-jun-heng/"/>
+    <id>http://bruce11111.github.io/2021/04/10/fu-zai-jun-heng/</id>
+    <published>2021-04-10T09:17:48.000Z</published>
+    <updated>2021-04-10T11:33:48.041Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;负载均衡&quot;&gt;&lt;a href=&quot;#负载均衡&quot; class=&quot;headerlink&quot; title=&quot;负载均衡&quot;&gt;&lt;/a&gt;负载均衡&lt;/h1&gt;&lt;p&gt;概念：LB (Load</summary>
+        
+      
+    
+    
+    
+    <category term="负载均衡 java" scheme="http://bruce11111.github.io/categories/%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1-java/"/>
+    
+    
+    <category term="负载均衡 java" scheme="http://bruce11111.github.io/tags/%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1-java/"/>
+    
+  </entry>
   
   <entry>
     <title>pythonBase</title>
@@ -46,7 +71,7 @@
     <link href="http://bruce11111.github.io/2021/04/09/socket/"/>
     <id>http://bruce11111.github.io/2021/04/09/socket/</id>
     <published>2021-04-09T13:25:28.000Z</published>
-    <updated>2021-04-10T03:52:25.295Z</updated>
+    <updated>2021-04-11T13:53:21.500Z</updated>
     
     
       
