@@ -6,7 +6,7 @@
   <link href="http://bruce11111.github.io/atom.xml" rel="self"/>
   
   <link href="http://bruce11111.github.io/"/>
-  <updated>2021-04-10T11:33:48.041Z</updated>
+  <updated>2021-04-12T00:26:22.432Z</updated>
   <id>http://bruce11111.github.io/</id>
   
   <author>
@@ -15,6 +15,27 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>计算代码内存消耗</title>
+    <link href="http://bruce11111.github.io/2021/04/12/ji-suan-dai-ma-nei-cun-xiao-hao/"/>
+    <id>http://bruce11111.github.io/2021/04/12/ji-suan-dai-ma-nei-cun-xiao-hao/</id>
+    <published>2021-04-12T00:25:16.000Z</published>
+    <updated>2021-04-12T00:26:22.432Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;不同语言的内存管理&quot;&gt;&lt;a href=&quot;#不同语言的内存管理&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    
+  </entry>
   
   <entry>
     <title>负载均衡</title>
@@ -109,7 +130,7 @@
     <link href="http://bruce11111.github.io/2021/04/06/redis-ji-chu/"/>
     <id>http://bruce11111.github.io/2021/04/06/redis-ji-chu/</id>
     <published>2021-04-06T08:26:29.000Z</published>
-    <updated>2021-04-09T09:35:36.408Z</updated>
+    <updated>2021-04-11T14:27:20.996Z</updated>
     
     
       
@@ -454,29 +475,6 @@
     
     
     <category term="operate" scheme="http://bruce11111.github.io/categories/operate/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>计算机网络</title>
-    <link href="http://bruce11111.github.io/2021/03/15/network/"/>
-    <id>http://bruce11111.github.io/2021/03/15/network/</id>
-    <published>2021-03-15T07:26:53.000Z</published>
-    <updated>2021-03-15T07:43:08.225Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h1 id=&quot;计算机网络&quot;&gt;&lt;a href=&quot;#计算机网络&quot; class=&quot;headerlink&quot; title=&quot;计算机网络&quot;&gt;&lt;/a&gt;计算机网络&lt;/h1&gt;&lt;h3 id=&quot;传输时延&quot;&gt;&lt;a href=&quot;#传输时延&quot; class=&quot;headerlink&quot;</summary>
-        
-      
-    
-    
-    
-    <category term="network" scheme="http://bruce11111.github.io/categories/network/"/>
     
     
   </entry>

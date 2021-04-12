@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="负载均衡, 小灰的博客">
+    <meta name="keywords" content="计算代码内存消耗, 小灰的博客">
     <meta name="description" content="技术记录">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>负载均衡 | 小灰的博客</title>
+    <title>计算代码内存消耗 | 小灰的博客</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -326,12 +326,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/0.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/18.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">负载均衡</h1>
+                    <h1 class="description center-align post-title">计算代码内存消耗</h1>
                 </div>
             </div>
         </div>
@@ -445,25 +445,12 @@
             <div class="row tag-cate">
                 <div class="col s7">
                     
-                    <div class="article-tag">
-                        
-                            <a href="/tags/%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1-java/">
-                                <span class="chip bg-color">负载均衡 java</span>
-                            </a>
-                        
-                    </div>
+                          <div class="article-tag">
+                            <span class="chip bg-color">无标签</span>
+                          </div>
                     
                 </div>
                 <div class="col s5 right-align">
-                    
-                    <div class="post-cate">
-                        <i class="fas fa-bookmark fa-fw icon-category"></i>
-                        
-                            <a href="/categories/%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1-java/" class="post-category">
-                                负载均衡 java
-                            </a>
-                        
-                    </div>
                     
                 </div>
             </div>
@@ -472,7 +459,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2021-04-10
+                    2021-04-12
                 </div>
                 
 
@@ -496,78 +483,87 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="负载均衡"><a href="#负载均衡" class="headerlink" title="负载均衡"></a>负载均衡</h1><p>概念：LB (Load Balance，负载均衡)是一种集群技术，它将特定的业务（网络服务、网络流量等）分担给多台网络设备（包括服务器、防火墙等）或多条链路，从而提高了业务处理能力，保证了业务的高可靠性。</p>
-<p>负载均衡计数具有以下优势：</p>
+                <h2 id="不同语言的内存管理"><a href="#不同语言的内存管理" class="headerlink" title="不同语言的内存管理"></a>不同语言的内存管理</h2><p>不同的编程语言各自的内存管理方式。</p>
+<ul>
+<li>C/C++这种内存堆空间的申请和释放完全靠自己管理</li>
+<li>Java 依赖JVM来做内存管理，不了解jvm内存管理的机制，很可能会因一些错误的代码写法而导致内存泄漏或内存溢出</li>
+<li>Python内存管理是由私有堆空间管理的，所有的python对象和数据结构都存储在私有堆空间中。程序员没有访问堆的权限，只有解释器才能操作。</li>
+</ul>
+<p>例如Python万物皆对象，并且将内存操作封装的很好，<strong>所以python的基本数据类型所用的内存会要远大于存放纯数据类型所占的内存</strong>，例如，我们都知道存储int型数据需要四个字节，但是使用Python 申请一个对象来存放数据的话，所用空间要远大于四个字节。</p>
+<h2 id="C-的内存管理"><a href="#C-的内存管理" class="headerlink" title="C++的内存管理"></a>C++的内存管理</h2><p>以C++为例来介绍一下编程语言的内存管理。</p>
+<p>如果我们写C++的程序，就要知道栈和堆的概念，程序运行时所需的内存空间分为 固定部分，和可变部分，如下：</p>
+<p><img src="/2021/04/12/ji-suan-dai-ma-nei-cun-xiao-hao/640" alt="图片"></p>
+<p>固定部分的内存消耗 是不会随着代码运行产生变化的， 可变部分则是会产生变化的</p>
+<p>更具体一些，一个由C/C++编译的程序占用的内存分为以下几个部分：</p>
+<ul>
+<li>栈区(Stack) ：由编译器自动分配释放，存放函数的参数值，局部变量的值等，其操作方式类似于数据结构中的栈。</li>
+<li>堆区(Heap) ：一般由程序员分配释放，若程序员不释放，程序结束时可能由OS收回</li>
+<li>未初始化数据区(Uninitialized Data)：存放未初始化的全局变量和静态变量</li>
+<li>初始化数据区(Initialized Data)：存放已经初始化的全局变量和静态变量</li>
+<li>程序代码区(Text)：存放函数体的二进制代码</li>
+</ul>
+<p>代码区和数据区所占空间都是固定的，而且占用的空间非常小，那么看运行时消耗的内存主要看可变部分。</p>
+<p>在可变部分中，栈区间的数据在代码块执行结束之后，系统会自动回收，而堆区间数据是需要程序员自己回收，所以也就是造成内存泄漏的发源地。</p>
+<p><strong>而Java、Python的话则不需要程序员去考虑内存泄漏的问题，虚拟机都做了这些事情</strong>。</p>
+<h2 id="如何计算程序占用多大内存"><a href="#如何计算程序占用多大内存" class="headerlink" title="如何计算程序占用多大内存"></a>如何计算程序占用多大内存</h2><p>想要算出自己程序会占用多少内存就一定要了解自己定义的数据类型的大小，如下：</p>
+<p><img src="/2021/04/12/ji-suan-dai-ma-nei-cun-xiao-hao/640" alt="图片"></p>
+<p>注意图中有两个不一样的地方，为什么64位的指针就占用了8个字节，而32位的指针占用4个字节呢？</p>
+<p>1个字节占8个比特，那么4个字节就是32个比特，可存放数据的大小为2^32，也就是4G空间的大小，即：可以寻找4G空间大小的内存地址。</p>
+<p>大家现在使用的计算机一般都是64位了，所以编译器也都是64位的。</p>
+<p>安装64位的操作系统的计算机内存都已经超过了4G，也就是指针大小如果还是4个字节的话，就已经不能寻址全部的内存地址，所以64位编译器使用8个字节的指针才能寻找所有的内存地址。</p>
+<p>注意2^64是一个非常巨大的数，对于寻找地址来说已经足够用了。</p>
+<h2 id="内存对齐"><a href="#内存对齐" class="headerlink" title="内存对齐"></a>内存对齐</h2><p>再介绍一下内存管理中另一个重要的知识点：<strong>内存对齐</strong>。</p>
+<p><strong>不要以为只有C/C++才会有内存对齐，只要可以跨平台的编程语言都需要做内存对齐，Java、Python都是一样的</strong>。</p>
+<p>而且这是面试中面试官非常喜欢问到的问题，就是：<strong>为什么会有内存对齐？</strong></p>
+<p>主要是两个原因</p>
 <ol>
-<li>高性能：负载均衡技术将业务较均衡地分担到多台设备或链路上，从而提高了整个系统的性能。</li>
-<li>可扩展性：负载均衡技术可以方便的增加集群中设备或链路的数量，在不降低业务质量的前提下满足不断增长的业务需求。</li>
-<li>高可靠性：单个设置多个设备或链路故障也不会导致业务中断，提高了系统的可靠性。</li>
-<li>可管理性：大量的管理共组都集中在使用负载均衡技术的设备上，设备集群或链路集群只需要维护通过的配置即可。</li>
-<li>透明性：对用户而言，集群等于一个或多个高可靠性、高性能的设备或链路，用户感知不到，也不关心具体的网络结构，增加或减少设备或链路数量都不会影响正常的业务。</li>
+<li>平台原因：不是所有的硬件平台都能访问任意内存地址上的任意数据，某些硬件平台只能在某些地址处取某些特定类型的数据，否则抛出硬件异常。为了同一个程序可以在多平台运行，需要内存对齐。</li>
+<li>硬件原因：经过内存对齐后，CPU访问内存的速度大大提升。</li>
 </ol>
-<p>负载均衡技术分类：</p>
+<p>可以看一下这段C++代码输出的各个数据类型大小是多少？</p>
+<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">struct node{
+   int num;
+   char cha;
+}st;
+int main() {
+    int a[100];
+    char b[100];
+    cout &lt;&lt; sizeof(int) &lt;&lt; endl;
+    cout &lt;&lt; sizeof(char) &lt;&lt; endl;
+    cout &lt;&lt; sizeof(a) &lt;&lt; endl;
+    cout &lt;&lt; sizeof(b) &lt;&lt; endl;
+    cout &lt;&lt; sizeof(st) &lt;&lt; endl;
+}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>看一下和自己想的结果一样么， 我们来逐一分析一下。</p>
+<p>其输出的结果依次为：</p>
+<pre class="line-numbers language-none"><code class="language-none">4
+1
+400
+100
+8<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>此时会发现，和单纯计算字节数的话是有一些误差的。</p>
+<p>这就是因为内存对齐的原因。</p>
+<p>来看一下内存对齐和非内存对齐产生的效果区别。</p>
+<p>CPU读取内存不是一次读取单个字节，而是一块一块的来读取内存，块的大小可以是2，4，8，16个字节，具体取多少个字节取决于硬件。</p>
+<p>假设CPU把内存划分为4字节大小的块，要读取一个4字节大小的int型数据，来看一下这两种情况下CPU的工作量：</p>
+<p>第一种就是内存对齐的情况，如图：</p>
+<p><img src="/2021/04/12/ji-suan-dai-ma-nei-cun-xiao-hao/640" alt="图片">内存对齐</p>
+<p>一字节的char占用了四个字节，空了三个字节的内存地址，int数据从地址4开始。</p>
+<p>此时，直接将地址4，5，6，7处的四个字节数据读取到即可。</p>
+<p>第二种是没有内存对齐的情况如图：</p>
+<p><img src="/2021/04/12/ji-suan-dai-ma-nei-cun-xiao-hao/640" alt="图片">非内存对齐</p>
+<p>char型的数据和int型的数据挨在一起，该int数据从地址1开始，那么CPU想要读这个数据的话来看看需要几步操作：</p>
 <ol>
-<li>服务器负载均衡：在数据中心等组网环境中，可以采用服务器负载均衡，将网络服务分担给多台服务器进行处理，提高数据中心的业务处理能力。</li>
-<li>链路负载均衡：在有多个运营商出接口的组网环境中，可以采用出方向多链路动态负载均衡，实现链路的动态选择，提高服务的可靠性。</li>
-<li>防火墙负载均衡：在防火墙处理能力成为瓶颈的组网环境中，可以采用防火墙负载均衡，将网络流量分担给多态防火墙设备，提高防火墙的处理能力。</li>
+<li>因为CPU是四个字节四个字节来寻址，首先CPU读取0，1，2，3处的四个字节数据</li>
+<li>CPU读取4，5，6，7处的四个字节数据</li>
+<li>合并地址1，2，3，4处四个字节的数据才是本次操作需要的int数据</li>
 </ol>
-<h2 id="负载均衡算法"><a href="#负载均衡算法" class="headerlink" title="负载均衡算法"></a>负载均衡算法</h2><p>最简单的负载均衡算法是随机算法和轮询算法。</p>
-<p>模拟加权随机算法</p>
-<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token class-name">List</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">String</span><span class="token punctuation">&gt;</span></span> deviceList <span class="token operator">=</span> <span class="token class-name">Arrays</span><span class="token punctuation">.</span><span class="token function">asList</span><span class="token punctuation">(</span>
-            <span class="token string">"192.168.0.1"</span><span class="token punctuation">,</span>
-            <span class="token string">"192.168.0.2"</span><span class="token punctuation">,</span>
-            <span class="token string">"192.168.0.3"</span><span class="token punctuation">,</span>
-            <span class="token string">"192.168.0.4"</span><span class="token punctuation">,</span>
-            <span class="token string">"192.168.0.5"</span><span class="token punctuation">,</span>
-            <span class="token string">"192.168.0.6"</span>
-    <span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-<span class="token class-name">Map</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">String</span><span class="token punctuation">,</span> <span class="token class-name">Integer</span><span class="token punctuation">&gt;</span></span> weightMap <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">HashMap</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token punctuation">&gt;</span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-<span class="token keyword">public</span> <span class="token class-name">String</span> <span class="token function">getServer</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-
-    <span class="token class-name">ArrayList</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">String</span><span class="token punctuation">&gt;</span></span> list <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ArrayList</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token punctuation">&gt;</span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token class-name">String</span> ip <span class="token operator">:</span> weightMap<span class="token punctuation">.</span><span class="token function">keySet</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        <span class="token class-name">Integer</span> integer <span class="token operator">=</span> weightMap<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span>ip<span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> integer<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-            list<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span>ip<span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token punctuation">}</span>
-    <span class="token punctuation">}</span>
-    <span class="token class-name">Random</span> random <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Random</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token keyword">return</span> list<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span>random<span class="token punctuation">.</span><span class="token function">nextInt</span><span class="token punctuation">(</span>list<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
-
-<span class="token annotation punctuation">@Test</span>
-<span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">runTest</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-
-    <span class="token class-name">Random</span> random <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Random</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    deviceList<span class="token punctuation">.</span><span class="token function">forEach</span><span class="token punctuation">(</span> <span class="token punctuation">(</span>a<span class="token punctuation">)</span> <span class="token operator">-&gt;</span> <span class="token punctuation">{</span>weightMap<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span>a<span class="token punctuation">,</span> random<span class="token punctuation">.</span><span class="token function">nextInt</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> <span class="token number">10</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token function">getServer</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-
-<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>简单的轮询就是依次遍历每台机子，把业务放在当前遍历的机子上就行。</p>
-<p>模拟轮询：</p>
-<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+<p>此时一共需要两次寻址，一次合并的操作。</p>
+<p><strong>大家可能会发现内存对齐岂不是浪费的内存资源么？</strong></p>
+<p>是这样的，但事实上，相对来说计算机内存资源一般都是充足的，我们更希望的是提高运行速度。</p>
+<p><strong>编译器一般都会做内存对齐的优化操作，也就是说当考虑程序真正占用的内存大小的时候，也需要认识到内存对齐的影响</strong>。</p>
 
                 
             </div>
@@ -594,7 +590,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://bruce11111.github.io/2021/04/10/fu-zai-jun-heng/">http://bruce11111.github.io/2021/04/10/fu-zai-jun-heng/</a>
+                    <a href="http://bruce11111.github.io/2021/04/12/ji-suan-dai-ma-nei-cun-xiao-hao/">http://bruce11111.github.io/2021/04/12/ji-suan-dai-ma-nei-cun-xiao-hao/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -631,11 +627,7 @@
                 <div class="post-meta__tag-list" style="display: inline-block;">
                     
                         <div class="article-tag">
-                            
-                                <a href="/tags/%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1-java/">
-                                    <span class="chip bg-color">负载均衡 java</span>
-                                </a>
-                            
+                            <span class="chip bg-color">无标签</span>
                         </div>
                     
                 </div>
@@ -804,7 +796,7 @@
         repo: '',
         owner: '',
         admin: null,
-        id: '2021-04-10T17-17-48',
+        id: '2021-04-12T08-25-16',
         distractionFreeMode: false  // Facebook-like distraction free mode
     });
 
@@ -830,9 +822,10 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
                 <a href="/2021/04/12/ji-suan-dai-ma-nei-cun-xiao-hao/">
                     <div class="card-image">
@@ -850,9 +843,9 @@
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2021-04-12
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-04-12
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-user fa-fw"></i>
@@ -861,6 +854,7 @@
                         </span>
                     </div>
                 </div>
+
                 
             </div>
         </div>
@@ -871,13 +865,13 @@
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2021/04/09/pythonbase/">
+                <a href="/2021/04/10/fu-zai-jun-heng/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/13.jpg" class="responsive-img" alt="pythonBase">
+                        <img src="/medias/featureimages/0.jpg" class="responsive-img" alt="负载均衡">
                         
-                        <span class="card-title">pythonBase</span>
+                        <span class="card-title">负载均衡</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -888,14 +882,14 @@
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-04-09
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-04-10
                             </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/python/" class="post-category">
-                                    python
+                            <a href="/categories/%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1-java/" class="post-category">
+                                    负载均衡 java
                                 </a>
                             
                             
@@ -905,8 +899,8 @@
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/python/">
-                        <span class="chip bg-color">python</span>
+                    <a href="/tags/%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1-java/">
+                        <span class="chip bg-color">负载均衡 java</span>
                     </a>
                     
                 </div>
