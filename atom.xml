@@ -6,7 +6,7 @@
   <link href="http://bruce11111.github.io/atom.xml" rel="self"/>
   
   <link href="http://bruce11111.github.io/"/>
-  <updated>2021-04-12T00:26:22.432Z</updated>
+  <updated>2021-04-13T08:11:06.687Z</updated>
   <id>http://bruce11111.github.io/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>进程间的通信IPC</title>
+    <link href="http://bruce11111.github.io/2021/04/13/jin-cheng-jian-de-tong-xin-ipc/"/>
+    <id>http://bruce11111.github.io/2021/04/13/jin-cheng-jian-de-tong-xin-ipc/</id>
+    <published>2021-04-13T08:01:41.000Z</published>
+    <updated>2021-04-13T08:11:06.687Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h4 id=&quot;一、进程间通信的概念&quot;&gt;&lt;a href=&quot;#一、进程间通信的概念&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="操作系统" scheme="http://bruce11111.github.io/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"/>
+    
+    
+    <category term="操作系统" scheme="http://bruce11111.github.io/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"/>
+    
+  </entry>
   
   <entry>
     <title>计算代码内存消耗</title>
@@ -130,7 +155,7 @@
     <link href="http://bruce11111.github.io/2021/04/06/redis-ji-chu/"/>
     <id>http://bruce11111.github.io/2021/04/06/redis-ji-chu/</id>
     <published>2021-04-06T08:26:29.000Z</published>
-    <updated>2021-04-11T14:27:20.996Z</updated>
+    <updated>2021-04-12T03:38:06.149Z</updated>
     
     
       
@@ -452,29 +477,6 @@
     
     
     <category term="java" scheme="http://bruce11111.github.io/categories/java/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>操作系统</title>
-    <link href="http://bruce11111.github.io/2021/03/15/operate/"/>
-    <id>http://bruce11111.github.io/2021/03/15/operate/</id>
-    <published>2021-03-15T07:46:44.000Z</published>
-    <updated>2021-04-10T01:12:18.494Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h1 id=&quot;操作系统&quot;&gt;&lt;a href=&quot;#操作系统&quot; class=&quot;headerlink&quot; title=&quot;操作系统&quot;&gt;&lt;/a&gt;操作系统&lt;/h1&gt;&lt;h2 id=&quot;1-操作系统的概念&quot;&gt;&lt;a href=&quot;#1-操作系统的概念&quot; class=&quot;headerlink&quot;</summary>
-        
-      
-    
-    
-    
-    <category term="operate" scheme="http://bruce11111.github.io/categories/operate/"/>
     
     
   </entry>
