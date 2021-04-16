@@ -749,7 +749,7 @@ unwatch 进行解锁
 
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependencies</span><span class="token punctuation">&gt;</span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<h2 id="SpringBoot-整合"><a href="#SpringBoot-整合" class="headerlink" title="SpringBoot 整合"></a>SpringBoot 整合</h2><p>SpringBoot操作数据:spring-data jpa jdbc mongodb redis！</p>
+<h2 id="4-SpringBoot-整合"><a href="#4-SpringBoot-整合" class="headerlink" title="4. SpringBoot 整合"></a>4. SpringBoot 整合</h2><p>SpringBoot操作数据:spring-data jpa jdbc mongodb redis！</p>
 <p>SpringData 也是和 SpringBoot齐名的项目。</p>
 <p>在springBoot2.x之后，原来使用的jedis被替换成了lettuce</p>
 <p>jedis:采用直连，多个线程操作不安全。如果避免不安全，需要使用jedis pool连接池！BIO</p>
@@ -781,50 +781,221 @@ unwatch 进行解锁
 
 
 
+<h2 id="5-Config"><a href="#5-Config" class="headerlink" title="5. Config"></a>5. Config</h2><ul>
+<li>配置文件对大小写不敏感</li>
+</ul>
+<blockquote>
+<p>网络</p>
+</blockquote>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token builtin class-name">bind</span> <span class="token number">127.0</span>.0.1 <span class="token comment">#绑定ip</span>
+protected-mode <span class="token function">yes</span> <span class="token comment"># 保护模式</span>
+port <span class="token number">6379</span> <span class="token comment"># 端口设置</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 
+<blockquote>
+<p>通用</p>
+</blockquote>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">daemonize <span class="token function">yes</span> <span class="token comment"># 以守护进程的方式运行，默认是no，我们需要自己开启为yes</span>
+pidfile /var/run/redis_6379.pid <span class="token comment"># 如果以后台方式运行，我们就要指定一个 pid 进程文件</span>
 
+<span class="token comment"># Specify the server verbosity level.</span>
+<span class="token comment"># This can be one of:</span>
+<span class="token comment"># debug (a lot of information, useful for development/testing)</span>
+<span class="token comment"># verbose (many rarely useful info, but not a mess like the debug level)</span>
+<span class="token comment"># notice (moderately verbose, what you want in production probably) 生产环境适用</span>
+<span class="token comment"># warning (only very important / critical messages are logged)</span>
+loglevel notice
+logfile <span class="token string">""</span> <span class="token comment"># 日志的文件位置名</span>
+databases <span class="token number">16</span> <span class="token comment"># 数据库的数量，默认16个数据库</span>
+always-show-logo <span class="token function">yes</span> <span class="token comment">#是否显示logo</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
+<blockquote>
+<p>快照</p>
+</blockquote>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">save <span class="token number">900</span> <span class="token number">1</span> <span class="token comment"># 900s内如何至少有一个key进行了修改，我们就进行持久化操作</span>
+<span class="token comment"># 300s内至少10个key 进行了修改，我们及进行持久化操作</span>
+save <span class="token number">300</span> <span class="token number">10</span>
+<span class="token comment"># 60s内至少10000个key进行了修改，持久化</span>
+save <span class="token number">60</span> <span class="token number">10000</span>
 
+stop-writes-on-bgsave-error <span class="token function">yes</span> <span class="token comment"># 持久化如果错误了，Redis是否还继续工作</span>
+rdbcompression <span class="token function">yes</span> <span class="token comment"># 是否压缩 rdb 文件，需要消耗一些cpu资源。</span>
 
+rdbchecksum <span class="token function">yes</span> <span class="token comment"># 保存rdb文件的时候，进行错误的检查校验</span>
 
+<span class="token function">dir</span> ./ <span class="token comment"># rdb 文件保存的目录</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
+<p>持久化，在规定的时间内，执行了多少次操作，则会持久化到文件 .rdb .aof</p>
+<p>redis是内存数据库，如果没有持久化，那么数据断电即失。</p>
+<blockquote>
+<p>security</p>
+</blockquote>
+<p>可以修改密码，默认没有设置密码！</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">config get requirepass
 
+config <span class="token builtin class-name">set</span> requirepass <span class="token string">"123456"</span> <span class="token comment"># 设置redis密码</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 
+<blockquote>
+<p>限制clients</p>
+</blockquote>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">maxclients <span class="token number">10000</span> <span class="token comment"># 最大连接数量</span>
+maxmemory <span class="token operator">&lt;</span>bytes<span class="token operator">&gt;</span> <span class="token comment"># redis 配置最大的内存容量</span>
+maxmemory-policy noeviction <span class="token comment"># 内存到达上限之后的处理策略，移除一些过期的key</span>
+maxmemory-policy 六种方式：
+<span class="token number">1</span>、volatile-lru：只对设置了过期时间的key进行LRU（默认值） 
 
+<span class="token number">2</span>、allkeys-lru ： 删除lru算法的key   
 
+<span class="token number">3</span>、volatile-random：随机删除即将过期key   
 
+<span class="token number">4</span>、allkeys-random：随机删除   
 
+<span class="token number">5</span>、volatile-ttl ： 删除即将过期的   
 
+<span class="token number">6</span>、noeviction ： 永不过期，返回错误<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
+<blockquote>
+<p>APPEND ONLY 模式 aof配置</p>
+</blockquote>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">appendonly no <span class="token comment"># 默认不开启，因为rdb大部分场景够用了，这个还特别慢</span>
+appendfilename <span class="token string">"appendonly.aof"</span> <span class="token comment"># 持久化的文件的名字 .rdb</span>
+appendfsync always <span class="token comment"># 每次修改都会sync，消耗性能。</span>
+appendfsync everysec <span class="token comment"># 每秒执行一次 sync，可能会丢失这1s的数据</span>
+appendfsync no <span class="token comment"># 不执行 sync，这个时候操作系统自己同步数据，速度最快</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
+<h2 id="6-持久化"><a href="#6-持久化" class="headerlink" title="6. 持久化"></a>6. 持久化</h2><p>Redis是内存数据库。</p>
+<h3 id="6-1-rdb"><a href="#6-1-rdb" class="headerlink" title="6.1 rdb"></a>6.1 rdb</h3><h4 id="6-1-1-是什么"><a href="#6-1-1-是什么" class="headerlink" title="6.1.1 是什么"></a>6.1.1 是什么</h4><p>rdb(Redis Database)是Redis持久化的最常用的方式。redis将内存中的数据库快照（以数据结构的形式保存数据）以二进制形式保存到磁盘上。</p>
+<h4 id="6-1-2-为什么"><a href="#6-1-2-为什么" class="headerlink" title="6.1.2 为什么"></a>6.1.2 为什么</h4><p>防止下一次使用数据库时，当前数据库的数据仍然可以使用。</p>
+<h4 id="6-1-3-怎么做"><a href="#6-1-3-怎么做" class="headerlink" title="6.1.3 怎么做"></a>6.1.3 怎么做</h4><p><img src="/2021/04/06/redis-ji-chu/graphviz-cd96bfa5c61ef2b8dd69a9b0a97cde047cb722a8.svg" alt="digraph persistent {      rankdir = LR;      node [shape = circle, style = filled];      edge [style = bold];      redis_object [label = &quot;内存中的\n数据对象&quot;, fillcolor = &quot;#A8E270&quot;];      rdb [label = &quot;磁盘中的\nRDB文件&quot;, fillcolor = &quot;#95BBE3&quot;];      redis_object -> rdb [label = &quot;rdbSave&quot;];      rdb -> redis_object [label = &quot;rdbLoad&quot;]; }"></p>
+<p><img src="/2021/04/06/redis-ji-chu/rdb.PNG"></p>
+<p>在指定的时间间隔内将内存中的数据集快照写入磁盘，也就是Snapshot快照，它恢复时是将快照文件直接读到内存里。</p>
+<p>Redis会单独创建（fork）一个子进程来进行持久化，会先将数据写入到一个临时文件中，待持久化过程都结束了，再用这个临时文件替换上次持久化好的文件。整个过程中，主进程是不进行任何IO操作的。这就确保了极高的性能。如果需要进行大规模数据的回复，且对于数据恢复的完整性不是非常敏感，那么RDB方式要比AOF方式更加高效。RDB的缺点是最后一次持久化后的数据可能丢失。</p>
+<p>rdb保存的文件是dump.rdb的。</p>
+<blockquote>
+<p>触发机制</p>
+</blockquote>
+<ol>
+<li>save的规则满足的情况下，会自动触发rdb规则。</li>
+<li>执行flushall命令，也会触发我们的rdb规则。</li>
+<li>推出redis，产生rdb文件。</li>
+</ol>
+<blockquote>
+<p>恢复rdb文件</p>
+</blockquote>
+<p>只需要将rdb文件放在redis启动目录即可，redis启动的时候就会自动检查dump.rdb恢复其中的数据。</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">config get <span class="token function">dir</span> <span class="token comment"># 查看启动目录</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
+<h3 id="6-2-AOF-（Append-Only-File"><a href="#6-2-AOF-（Append-Only-File" class="headerlink" title="6.2 AOF （Append Only File)"></a>6.2 AOF （Append Only File)</h3><p>默认不开启，手动进行配置。如果aof有错误，可以使用命令 <code>redis-check-aof --fix</code>即可。（会丢弃错误的数据）</p>
+<p>将我们所有命令都记录，</p>
+<p><img src="/2021/04/06/redis-ji-chu/aof.PNG"></p>
+<p>以日志形式来记录每个写操作，将Redis执行过的所有指令记录下来（读操作不记录），只许追加文件但不可以改写文件，redis启动之初会根据该文件读取重新构建数据，redis重启的话就是根据日志文件的内容将写指令从前到后执行一次以完成数据的恢复工作。</p>
+<h2 id="7-Redis发布订阅"><a href="#7-Redis发布订阅" class="headerlink" title="7. Redis发布订阅"></a>7. Redis发布订阅</h2><h3 id="7-1-是什么"><a href="#7-1-是什么" class="headerlink" title="7.1 是什么"></a>7.1 是什么</h3><p>发布订阅(pub/sub)是一种消息通信模式：发送者（pub）发送消息，订阅者（sub）接收消息。</p>
+<h3 id="7-2-为什么"><a href="#7-2-为什么" class="headerlink" title="7.2 为什么"></a>7.2 为什么</h3><p>因为我们日常中微信公众号、微博订阅号，需要推送给订阅的客户端信息，这种行为就需要Redis的发布订阅。</p>
+<h3 id="7-3-怎么做"><a href="#7-3-怎么做" class="headerlink" title="7.3 怎么做"></a>7.3 怎么做</h3><p>Redis客户端可以订阅任意数量的频道。</p>
+<p>订阅/发布消息图：</p>
+<p>第一个：消息发送者，第二个：频道 第三个：消息订阅者。</p>
+<p><img src="/2021/04/06/redis-ji-chu/%E5%8F%91%E5%B8%83%E8%AE%A2%E9%98%85.PNG"></p>
+<p>作为例子， 下图展示了频道 <code>channel1</code> ， 以及订阅这个频道的三个客户端 —— <code>client2</code> 、 <code>client5</code> 和 <code>client1</code> 之间的关系：</p>
+<p><img src="/2021/04/06/redis-ji-chu/graphviz-58f7b1f1f52b28f59291d194555fc9f4b1462a4c.svg" alt="digraph pubsub_relation {      rankdir = BT;      node [style = filled];      edge [style = bold];      channel1 [label = &quot;channel1&quot;, fillcolor = &quot;#A8E270&quot;];      node [shape = box, fillcolor = &quot;#95BBE3&quot;];      client2 [label = &quot;client2&quot;];     client5 [label = &quot;client5&quot;];     client1 [label = &quot;client1&quot;];      client2 -> channel1 [label = &quot;subscribe&quot;];     client5 -> channel1 [label = &quot;subscribe&quot;];     client1 -> channel1 [label = &quot;subscribe&quot;]; }"></p>
+<p>当有新消息通过 <a target="_blank" rel="noopener" href="http://redis.readthedocs.org/en/latest/pub_sub/publish.html#publish">PUBLISH</a> 命令发送给频道 <code>channel1</code> 时， 这个消息就会被发送给订阅它的三个客户端：</p>
+<p><img src="/2021/04/06/redis-ji-chu/graphviz-84c95abf88d6c0ac55b007da08805a4b9a582fdf.svg"></p>
+<p>在后面的内容中， 我们将探讨 <a target="_blank" rel="noopener" href="http://redis.readthedocs.org/en/latest/pub_sub/subscribe.html#subscribe">SUBSCRIBE</a> 和 <a target="_blank" rel="noopener" href="http://redis.readthedocs.org/en/latest/pub_sub/publish.html#publish">PUBLISH</a> 命令的实现， 以及这套订阅与发布机制的运作原理。</p>
+<h4 id="7-3-1-订阅机制"><a href="#7-3-1-订阅机制" class="headerlink" title="7.3.1 订阅机制"></a>7.3.1 订阅机制</h4><p>每个 Redis 服务器进程都维持着一个表示服务器状态的 <code>redis.h/redisServer</code> 结构， 结构的 <code>pubsub_channels</code> 属性是一个字典， 这个字典就用于保存订阅频道的信息：</p>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token keyword">struct</span> <span class="token class-name">redisServer</span> <span class="token punctuation">{</span>
+    <span class="token comment">// ...</span>
+    dict <span class="token operator">*</span>pubsub_channels<span class="token punctuation">;</span>
+    <span class="token comment">// ...</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
+<p>其中，字典的键为正在被订阅的频道， 而字典的值则是一个链表， 链表中保存了所有订阅这个频道的客户端。</p>
+<p>比如说，在下图展示的这个 <code>pubsub_channels</code> 示例中， <code>client2</code> 、 <code>client5</code> 和 <code>client1</code> 就订阅了 <code>channel1</code> ， 而其他频道也分别被别的客户端所订阅：</p>
+<p><img src="/2021/04/06/redis-ji-chu/graphviz-241c988b86bb9bed6bf26537e654baaab4eef77b.svg" alt="digraph pubsub {      rankdir = LR;      node [shape = record, style = filled];      edge [style = bold];      // keys      pubsub [label = &quot;pubsub_channels |<channel1> channel1 |<channel2> channel2 |<channel3> channel3 | ... |<channelN> channelN&quot;, fillcolor = &quot;#A8E270&quot;];      // clients blocking for channel1     client1 [label = &quot;client1&quot;, fillcolor = &quot;#95BBE3&quot;];     client5 [label = &quot;client5&quot;, fillcolor = &quot;#95BBE3&quot;];     client2 [label = &quot;client2&quot;, fillcolor = &quot;#95BBE3&quot;];     null_1 [label = &quot;NULL&quot;, shape = plaintext];          pubsub:channel1 -> client2;     client2 -> client5;     client5 -> client1;     client1 -> null_1;      // clients blocking for channel2     client7 [label = &quot;client7&quot;, fillcolor = &quot;#95BBE3&quot;];     null_2 [label = &quot;NULL&quot;, shape = plaintext];      pubsub:channel2 -> client7;     client7 -> null_2;      // channel      client3 [label = &quot;client3&quot;, fillcolor = &quot;#95BBE3&quot;];     client4 [label = &quot;client4&quot;, fillcolor = &quot;#95BBE3&quot;];     client6 [label = &quot;client6&quot;, fillcolor = &quot;#95BBE3&quot;];     null_3 [label = &quot;NULL&quot;, shape = plaintext];      pubsub:channel3 -> client3;     client3 -> client4;     client4 -> client6;     client6 -> null_3; }"></p>
+<p>当客户端调用 <a target="_blank" rel="noopener" href="http://redis.readthedocs.org/en/latest/pub_sub/subscribe.html#subscribe">SUBSCRIBE</a> 命令时， 程序就将客户端和要订阅的频道在 <code>pubsub_channels</code> 字典中关联起来。</p>
+<p>举个例子，如果客户端 <code>client10086</code> 执行命令 <code>SUBSCRIBE channel1 channel2 channel3</code> ，那么前面展示的 <code>pubsub_channels</code> 将变成下面这个样子：</p>
+<p><img src="/2021/04/06/redis-ji-chu/graphviz-cb250b1be4aaaedc9d5ddde113a80998d7f9c480.svg" alt="digraph new_subscribe {      rankdir = LR;      node [shape = record, style = filled];      edge [style = bold];      // keys      pubsub [label = &quot;pubsub_channels |<channel1> channel1 |<channel2> channel2 |<channel3> channel3 | ... |<channelN> channelN&quot;, fillcolor = &quot;#A8E270&quot;];      // clients blocking for channel1     client1 [label = &quot;client1&quot;, fillcolor = &quot;#95BBE3&quot;];     client5 [label = &quot;client5&quot;, fillcolor = &quot;#95BBE3&quot;];     client2 [label = &quot;client2&quot;, fillcolor = &quot;#95BBE3&quot;];     client10086 [label = &quot;client10086&quot;, fillcolor = &quot;#FFC1C1&quot;];     client10086_1 [label = &quot;client10086&quot;, fillcolor = &quot;#FFC1C1&quot;];     client10086_2 [label = &quot;client10086&quot;, fillcolor = &quot;#FFC1C1&quot;];     null_1 [label = &quot;NULL&quot;, shape = plaintext];     null_2 [label = &quot;NULL&quot;, shape = plaintext];     null_3 [label = &quot;NULL&quot;, shape = plaintext];          pubsub:channel1 -> client2;     client2 -> client5;     client5 -> client1;     client1 -> client10086;     client10086 -> null_1;      // clients blocking for channel2     client7 [label = &quot;client7&quot;, fillcolor = &quot;#95BBE3&quot;];      pubsub:channel2 -> client7;     client7 -> client10086_1;     client10086_1 -> null_2;      // channel      client3 [label = &quot;client3&quot;, fillcolor = &quot;#95BBE3&quot;];     client4 [label = &quot;client4&quot;, fillcolor = &quot;#95BBE3&quot;];     client6 [label = &quot;client6&quot;, fillcolor = &quot;#95BBE3&quot;];      pubsub:channel3 -> client3;     client3 -> client4;     client4 -> client6;     client6 -> client10086_2;     client10086_2 -> null_3; }"></p>
+<p><a target="_blank" rel="noopener" href="http://redis.readthedocs.org/en/latest/pub_sub/subscribe.html#subscribe">SUBSCRIBE</a> 命令的行为可以用伪代码表示如下：</p>
+<pre class="line-numbers language-none"><code class="language-none">def SUBSCRIBE(client, channels):
 
+    # 遍历所有输入频道
+    for channel in channels:
 
+        # 将客户端添加到链表的末尾
+        redisServer.pubsub_channels[channel].append(client)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
+<p>通过 <code>pubsub_channels</code> 字典， 程序只要检查某个频道是否为字典的键， 就可以知道该频道是否正在被客户端订阅； 只要取出某个键的值， 就可以得到所有订阅该频道的客户端的信息。</p>
+<h4 id="7-3-2-发送信息到频道"><a href="#7-3-2-发送信息到频道" class="headerlink" title="7.3.2 发送信息到频道"></a>7.3.2 发送信息到频道</h4><p>了解了 <code>pubsub_channels</code> 字典的结构之后， 解释 <a target="_blank" rel="noopener" href="http://redis.readthedocs.org/en/latest/pub_sub/publish.html#publish">PUBLISH</a> 命令的实现就非常简单了： 当调用 <code>PUBLISH channel message</code> 命令， 程序首先根据 <code>channel</code> 定位到字典的键， 然后将信息发送给字典值链表中的所有客户端。</p>
+<p>比如说，对于以下这个 <code>pubsub_channels</code> 实例， 如果某个客户端执行命令 <code>PUBLISH channel1 "hello moto"</code> ，那么 <code>client2</code> 、 <code>client5</code> 和 <code>client1</code> 三个客户端都将接收到 <code>"hello moto"</code> 信息：</p>
+<p><img src="https://redisbook.readthedocs.io/en/latest/_images/graphviz-241c988b86bb9bed6bf26537e654baaab4eef77b.svg" alt="digraph pubsub {      rankdir = LR;      node [shape = record, style = filled];      edge [style = bold];      // keys      pubsub [label = &quot;pubsub_channels |<channel1> channel1 |<channel2> channel2 |<channel3> channel3 | ... |<channelN> channelN&quot;, fillcolor = &quot;#A8E270&quot;];      // clients blocking for channel1     client1 [label = &quot;client1&quot;, fillcolor = &quot;#95BBE3&quot;];     client5 [label = &quot;client5&quot;, fillcolor = &quot;#95BBE3&quot;];     client2 [label = &quot;client2&quot;, fillcolor = &quot;#95BBE3&quot;];     null_1 [label = &quot;NULL&quot;, shape = plaintext];          pubsub:channel1 -> client2;     client2 -> client5;     client5 -> client1;     client1 -> null_1;      // clients blocking for channel2     client7 [label = &quot;client7&quot;, fillcolor = &quot;#95BBE3&quot;];     null_2 [label = &quot;NULL&quot;, shape = plaintext];      pubsub:channel2 -> client7;     client7 -> null_2;      // channel      client3 [label = &quot;client3&quot;, fillcolor = &quot;#95BBE3&quot;];     client4 [label = &quot;client4&quot;, fillcolor = &quot;#95BBE3&quot;];     client6 [label = &quot;client6&quot;, fillcolor = &quot;#95BBE3&quot;];     null_3 [label = &quot;NULL&quot;, shape = plaintext];      pubsub:channel3 -> client3;     client3 -> client4;     client4 -> client6;     client6 -> null_3; }"></p>
+<p><a target="_blank" rel="noopener" href="http://redis.readthedocs.org/en/latest/pub_sub/publish.html#publish">PUBLISH</a> 命令的实现可以用以下伪代码来描述：</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">PUBLISH</span><span class="token punctuation">(</span>channel<span class="token punctuation">,</span> message<span class="token punctuation">)</span><span class="token punctuation">:</span>
 
+    <span class="token comment"># 遍历所有订阅频道 channel 的客户端</span>
+    <span class="token keyword">for</span> client <span class="token keyword">in</span> server<span class="token punctuation">.</span>pubsub_channels<span class="token punctuation">[</span>channel<span class="token punctuation">]</span><span class="token punctuation">:</span>
 
+        <span class="token comment"># 将信息发送给它们</span>
+        send_message<span class="token punctuation">(</span>client<span class="token punctuation">,</span> message<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
+<h4 id="7-3-3-退订频道"><a href="#7-3-3-退订频道" class="headerlink" title="7.3.3 退订频道"></a>7.3.3 退订频道</h4><p>使用 <a target="_blank" rel="noopener" href="http://redis.readthedocs.org/en/latest/pub_sub/unsubscribe.html#unsubscribe">UNSUBSCRIBE</a> 命令可以退订指定的频道， 这个命令执行的是订阅的反操作： 它从 <code>pubsub_channels</code> 字典的给定频道（键）中， 删除关于当前客户端的信息， 这样被退订频道的信息就不会再发送给这个客户端。</p>
+<h4 id="7-3-4-模式的订阅与信息发送"><a href="#7-3-4-模式的订阅与信息发送" class="headerlink" title="7.3.4 模式的订阅与信息发送"></a>7.3.4 模式的订阅与信息发送</h4><p>当使用 <a target="_blank" rel="noopener" href="http://redis.readthedocs.org/en/latest/pub_sub/publish.html#publish">PUBLISH</a> 命令发送信息到某个频道时， 不仅所有订阅该频道的客户端会收到信息， 如果有某个/某些模式和这个频道匹配的话， 那么所有订阅这个/这些频道的客户端也同样会收到信息。</p>
+<p>下图展示了一个带有频道和模式的例子， 其中 <code>tweet.shop.*</code> 模式匹配了 <code>tweet.shop.kindle</code> 频道和 <code>tweet.shop.ipad</code> 频道， 并且有不同的客户端分别订阅它们三个：</p>
+<p><img src="https://redisbook.readthedocs.io/en/latest/_images/graphviz-49c2b60cc3c2b52ec1623fbd8a9002eb6f335a54.svg" alt="digraph pattern_relation {          rankdir = BT;      node [style = filled];     edge [style = bold];      kindle [label = &quot;tweet.shop.kindle&quot;, fillcolor = &quot;#A8E270&quot;];      ipad [label = &quot;tweet.shop.ipad&quot;, fillcolor = &quot;#A8E270&quot;];      node [shape = octagon];     pattern [label = &quot;tweet.shop.*&quot;];      pattern -> kindle [label = &quot;match&quot;];     pattern -> ipad [label = &quot;match&quot;];      node [shape = box];      client123 [fillcolor = &quot;#95BBE3&quot;];     client256 [fillcolor = &quot;#95BBE3&quot;];      clientX [fillcolor = &quot;#95BBE3&quot;];     clientY [fillcolor = &quot;#95BBE3&quot;];      client3333 [fillcolor = &quot;#95BBE3&quot;];     client4444 [fillcolor = &quot;#95BBE3&quot;];     client5555 [fillcolor = &quot;#95BBE3&quot;];      client123 -> pattern [label = &quot;subscribe&quot;];     client256 -> pattern [label = &quot;subscribe&quot;];      clientX -> kindle [label = &quot;subscribe&quot;];     clientY -> kindle [label = &quot;subscribe&quot;];      client3333 -> ipad [label = &quot;subscribe&quot;];     client4444 -> ipad [label = &quot;subscribe&quot;];     client5555 -> ipad [label = &quot;subscribe&quot;]; }"></p>
+<p>当有信息发送到 <code>tweet.shop.kindle</code> 频道时， 信息除了发送给 <code>clientX</code> 和 <code>clientY</code> 之外， 还会发送给订阅 <code>tweet.shop.*</code> 模式的 <code>client123</code> 和 <code>client256</code> ：</p>
+<p><img src="https://redisbook.readthedocs.io/en/latest/_images/graphviz-3d1f513ee0718a326d53152b2b97f82977e38ad6.svg" alt="digraph send_message_to_pattern {        node [style = filled];     edge [style = bold];      // tweet.shop.ipad      ipad [label = &quot;tweet.shop.ipad&quot;, fillcolor = &quot;#A8E270&quot;];     ipad -> pattern [label = &quot;match&quot;, dir = back];      node [shape = box];     ipad -> client3333 [label = &quot;subscribe&quot;, dir = back];     ipad -> client4444 [label = &quot;subscribe&quot;, dir = back];     ipad -> client5555 [label = &quot;subscribe&quot;, dir = back];      node [shape = plaintext];     message [label = &quot;PUBLISH tweet.shop.kindle message&quot;, fillcolor = &quot;#FADCAD&quot;];      kindle [label = &quot;tweet.shop.kindle&quot;, shape = ellipse, fillcolor = &quot;#A8E270&quot;];     pattern [label = &quot;tweet.shop.*&quot;, shape = octagon];      message -> kindle [style = &quot;bold, dashed&quot;, color = &quot;#B22222&quot;];     kindle -> pattern [style = &quot;bold, dashed&quot;, color = &quot;#B22222&quot;];      node [shape = box];     kindle -> clientX [style = &quot;bold, dashed&quot;, color = &quot;#B22222&quot;, label = &quot;message&quot;];     kindle -> clientY [style = &quot;bold, dashed&quot;, color = &quot;#B22222&quot;, label = &quot;message&quot;];      pattern -> client123 [label = &quot;message&quot;, style = &quot;bold, dashed&quot;, color = &quot;#B22222&quot;];     pattern -> client256 [label = &quot;message&quot;, style = &quot;bold, dashed&quot;, color = &quot;#B22222&quot;];      // client color      client123 [fillcolor = &quot;#95BBE3&quot;];     client256 [fillcolor = &quot;#95BBE3&quot;];      clientX [fillcolor = &quot;#95BBE3&quot;];     clientY [fillcolor = &quot;#95BBE3&quot;];      client3333 [fillcolor = &quot;#95BBE3&quot;];     client4444 [fillcolor = &quot;#95BBE3&quot;];     client5555 [fillcolor = &quot;#95BBE3&quot;];   }"></p>
+<p>另一方面， 如果接收到信息的是频道 <code>tweet.shop.ipad</code> ， 那么 <code>client123</code> 和 <code>client256</code> 同样会收到信息：</p>
+<p><img src="https://redisbook.readthedocs.io/en/latest/_images/graphviz-ba8c4d4dd538464659aeb52d6c366f23ad3d0dc1.svg" alt="digraph pattern_relation {          rankdir = BT;      node [style = filled];     edge [style = bold];      kindle [label = &quot;tweet.shop.kindle&quot;, fillcolor = &quot;#A8E270&quot;];      ipad [label = &quot;tweet.shop.ipad&quot;, fillcolor = &quot;#A8E270&quot;];      node [shape = octagon];     pattern [label = &quot;tweet.shop.*&quot;];      pattern -> kindle [label = &quot;match&quot;];     pattern -> ipad [style = &quot;bold, dashed&quot;, color = &quot;#B22222&quot;, dir = back];      node [shape = box];      client123 -> pattern [label = &quot;message&quot;, dir = back, style= &quot;bold, dashed&quot;, color = &quot;#B22222&quot;];     client256 -> pattern [label = &quot;message&quot;, dir = back, style= &quot;bold, dashed&quot;, color = &quot;#B22222&quot;];      clientX -> kindle [label = &quot;subscribe&quot;];     clientY -> kindle [label = &quot;subscribe&quot;];      client3333 -> ipad [label = &quot;message&quot;, style = &quot;bold, dashed&quot;, color = &quot;#B22222&quot;, dir = back];     client4444 -> ipad [label = &quot;message&quot;, style = &quot;bold, dashed&quot;, color = &quot;#B22222&quot;, dir = back];     client5555 -> ipad [label = &quot;message&quot;, style = &quot;bold, dashed&quot;, color = &quot;#B22222&quot;, dir = back];      // new      publish [label = &quot;PUBLISH tweet.shop.ipad message&quot;, shape = plaintext, fillcolor = &quot;#FADCAD&quot;];      ipad -> publish [style = &quot;bold, dashed&quot;, color = &quot;#B22222&quot;, dir = back];      // client color      client123 [fillcolor = &quot;#95BBE3&quot;];     client256 [fillcolor = &quot;#95BBE3&quot;];      clientX [fillcolor = &quot;#95BBE3&quot;];     clientY [fillcolor = &quot;#95BBE3&quot;];      client3333 [fillcolor = &quot;#95BBE3&quot;];     client4444 [fillcolor = &quot;#95BBE3&quot;];     client5555 [fillcolor = &quot;#95BBE3&quot;];    }"></p>
+<h4 id="7-3-5-订阅模式"><a href="#7-3-5-订阅模式" class="headerlink" title="7.3.5 订阅模式"></a>7.3.5 订阅模式</h4><p><code>redisServer.pubsub_patterns</code> 属性是一个链表，链表中保存着所有和模式相关的信息：</p>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token keyword">struct</span> <span class="token class-name">redisServer</span> <span class="token punctuation">{</span>
+    <span class="token comment">// ...</span>
+    list <span class="token operator">*</span>pubsub_patterns<span class="token punctuation">;</span>
+    <span class="token comment">// ...</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
+<p>链表中的每个节点都包含一个 <code>redis.h/pubsubPattern</code> 结构：</p>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token keyword">typedef</span> <span class="token keyword">struct</span> <span class="token class-name">pubsubPattern</span> <span class="token punctuation">{</span>
+    redisClient <span class="token operator">*</span>client<span class="token punctuation">;</span>
+    robj <span class="token operator">*</span>pattern<span class="token punctuation">;</span>
+<span class="token punctuation">}</span> pubsubPattern<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 
+<p><code>client</code> 属性保存着订阅模式的客户端，而 <code>pattern</code> 属性则保存着被订阅的模式。</p>
+<p>每当调用 <code>PSUBSCRIBE</code> 命令订阅一个模式时， 程序就创建一个包含客户端信息和被订阅模式的 <code>pubsubPattern</code> 结构， 并将该结构添加到 <code>redisServer.pubsub_patterns</code> 链表中。</p>
+<p>作为例子，下图展示了一个包含两个模式的 <code>pubsub_patterns</code> 链表， 其中 <code>client123</code> 和 <code>client256</code> 都正在订阅 <code>tweet.shop.*</code> 模式：</p>
+<p><img src="https://redisbook.readthedocs.io/en/latest/_images/graphviz-b8d101c1b582531bce2b0daef87adbaf30ebc195.svg" alt="digraph publish_pattern {          rankdir = LR;      node [shape = record, style = filled];      edge [style = bold];      redisServer [label = &quot;redisServer| ... |<pubsub_patterns> pubsub_patterns | ...&quot;, fillcolor = &quot;#A8E270&quot;];      pubsubPattern_1 [label = &quot;pubsubPattern | client \n client123 | pattern \n tweet.shop.*&quot;, fillcolor = &quot;#95BBE3&quot;];      pubsubPattern_2 [label = &quot;pubsubPattern | client \n client256 | pattern \n tweet.shop.*&quot;, fillcolor = &quot;#95BBE3&quot;];      redisServer:pubsub_patterns -> pubsubPattern_1;     pubsubPattern_1 -> pubsubPattern_2; }"></p>
+<p>如果这时客户端 <code>client10086</code> 执行 <code>PSUBSCRIBE broadcast.list.*</code> ， 那么 <code>pubsub_patterns</code> 链表将被更新成这样：</p>
+<p><img src="https://redisbook.readthedocs.io/en/latest/_images/graphviz-a84f3abf466ca19297faaa4e11d37f9257355c60.svg" alt="digraph pubsub_pattern {          rankdir = LR;      node [shape = record, style = filled];      edge [style = bold];      redisServer [label = &quot;redisServer| ... |<pubsub_patterns> pubsub_patterns | ...&quot;, fillcolor = &quot;#A8E270&quot;];      pubsubPattern_1 [label = &quot;pubsubPattern | client \n client123 | pattern \n tweet.shop.*&quot;, fillcolor = &quot;#95BBE3&quot;];      pubsubPattern_2 [label = &quot;pubsubPattern | client \n client256 | pattern \n tweet.shop.*&quot;, fillcolor = &quot;#95BBE3&quot;];      pubsubPattern_3 [label = &quot;pubsubPattern | client \n client10086 | pattern \n broadcast.live.*&quot;, fillcolor = &quot;#FFC1C1&quot;];      redisServer:pubsub_patterns -> pubsubPattern_1;     pubsubPattern_1 -> pubsubPattern_2;     pubsubPattern_2 -> pubsubPattern_3; }"></p>
+<p>通过遍历整个 <code>pubsub_patterns</code> 链表，程序可以检查所有正在被订阅的模式，以及订阅这些模式的客户端。</p>
+<h4 id="7-3-6-发送信息到模式"><a href="#7-3-6-发送信息到模式" class="headerlink" title="7.3.6 发送信息到模式"></a>7.3.6 发送信息到模式</h4><p>发送信息到模式的工作也是由 <a target="_blank" rel="noopener" href="http://redis.readthedocs.org/en/latest/pub_sub/publish.html#publish">PUBLISH</a> 命令进行的， 在前面讲解频道的时候， 我们给出了这样一段伪代码， 说它定义了 <a target="_blank" rel="noopener" href="http://redis.readthedocs.org/en/latest/pub_sub/publish.html#publish">PUBLISH</a> 命令的行为：</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">PUBLISH</span><span class="token punctuation">(</span>channel<span class="token punctuation">,</span> message<span class="token punctuation">)</span><span class="token punctuation">:</span>
 
+    <span class="token comment"># 遍历所有订阅频道 channel 的客户端</span>
+    <span class="token keyword">for</span> client <span class="token keyword">in</span> server<span class="token punctuation">.</span>pubsub_channels<span class="token punctuation">[</span>channel<span class="token punctuation">]</span><span class="token punctuation">:</span>
 
+        <span class="token comment"># 将信息发送给它们</span>
+        send_message<span class="token punctuation">(</span>client<span class="token punctuation">,</span> message<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
+<p>但是，这段伪代码并没有完整描述 <a target="_blank" rel="noopener" href="http://redis.readthedocs.org/en/latest/pub_sub/publish.html#publish">PUBLISH</a> 命令的行为， 因为 <a target="_blank" rel="noopener" href="http://redis.readthedocs.org/en/latest/pub_sub/publish.html#publish">PUBLISH</a> 除了将 <code>message</code> 发送到所有订阅 <code>channel</code> 的客户端之外， 它还会将 <code>channel</code> 和 <code>pubsub_patterns</code> 中的模式进行对比， 如果 <code>channel</code> 和某个模式匹配的话， 那么也将 <code>message</code> 发送到订阅那个模式的客户端。</p>
+<p>完整描述 <a target="_blank" rel="noopener" href="http://redis.readthedocs.org/en/latest/pub_sub/publish.html#publish">PUBLISH</a> 功能的伪代码定于如下：</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">PUBLISH</span><span class="token punctuation">(</span>channel<span class="token punctuation">,</span> message<span class="token punctuation">)</span><span class="token punctuation">:</span>
 
+    <span class="token comment"># 遍历所有订阅频道 channel 的客户端</span>
+    <span class="token keyword">for</span> client <span class="token keyword">in</span> server<span class="token punctuation">.</span>pubsub_channels<span class="token punctuation">[</span>channel<span class="token punctuation">]</span><span class="token punctuation">:</span>
 
+        <span class="token comment"># 将信息发送给它们</span>
+        send_message<span class="token punctuation">(</span>client<span class="token punctuation">,</span> message<span class="token punctuation">)</span>
 
+    <span class="token comment"># 取出所有模式，以及订阅模式的客户端</span>
+    <span class="token keyword">for</span> pattern<span class="token punctuation">,</span> client <span class="token keyword">in</span> server<span class="token punctuation">.</span>pubsub_patterns<span class="token punctuation">:</span>
 
+        <span class="token comment"># 如果 channel 和模式匹配</span>
+        <span class="token keyword">if</span> match<span class="token punctuation">(</span>channel<span class="token punctuation">,</span> pattern<span class="token punctuation">)</span><span class="token punctuation">:</span>
 
+            <span class="token comment"># 那么也将信息发给订阅这个模式的客户端</span>
+            send_message<span class="token punctuation">(</span>client<span class="token punctuation">,</span> message<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-
-
-
-
-
-
-
-
-
+<p>举个例子，如果 Redis 服务器的 <code>pubsub_patterns</code> 状态如下：</p>
+<p><img src="https://redisbook.readthedocs.io/en/latest/_images/graphviz-a84f3abf466ca19297faaa4e11d37f9257355c60.svg" alt="digraph pubsub_pattern {          rankdir = LR;      node [shape = record, style = filled];      edge [style = bold];      redisServer [label = &quot;redisServer| ... |<pubsub_patterns> pubsub_patterns | ...&quot;, fillcolor = &quot;#A8E270&quot;];      pubsubPattern_1 [label = &quot;pubsubPattern | client \n client123 | pattern \n tweet.shop.*&quot;, fillcolor = &quot;#95BBE3&quot;];      pubsubPattern_2 [label = &quot;pubsubPattern | client \n client256 | pattern \n tweet.shop.*&quot;, fillcolor = &quot;#95BBE3&quot;];      pubsubPattern_3 [label = &quot;pubsubPattern | client \n client10086 | pattern \n broadcast.live.*&quot;, fillcolor = &quot;#FFC1C1&quot;];      redisServer:pubsub_patterns -> pubsubPattern_1;     pubsubPattern_1 -> pubsubPattern_2;     pubsubPattern_2 -> pubsubPattern_3; }"></p>
+<p>那么当某个客户端发送信息 <code>"Amazon Kindle, $69."</code> 到 <code>tweet.shop.kindle</code> 频道时， 除了所有订阅了 <code>tweet.shop.kindle</code> 频道的客户端会收到信息之外， 客户端 <code>client123</code> 和 <code>client256</code> 也同样会收到信息， 因为这两个客户端订阅的 <code>tweet.shop.*</code> 模式和 <code>tweet.shop.kindle</code> 频道匹配。</p>
+<h4 id="7-3-7-退订模式"><a href="#7-3-7-退订模式" class="headerlink" title="7.3.7 退订模式"></a>7.3.7 退订模式</h4><p>使用 <a target="_blank" rel="noopener" href="http://redis.readthedocs.org/en/latest/pub_sub/punsubscribe.html#punsubscribe">PUNSUBSCRIBE</a> 命令可以退订指定的模式， 这个命令执行的是订阅模式的反操作： 程序会删除 <code>redisServer.pubsub_patterns</code> 链表中， 所有和被退订模式相关联的 <code>pubsubPattern</code> 结构， 这样客户端就不会再收到和模式相匹配的频道发来的信息。</p>
 
                 
             </div>
