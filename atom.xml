@@ -6,7 +6,7 @@
   <link href="http://bruce11111.github.io/atom.xml" rel="self"/>
   
   <link href="http://bruce11111.github.io/"/>
-  <updated>2021-04-13T08:11:06.687Z</updated>
+  <updated>2021-04-18T14:20:27.463Z</updated>
   <id>http://bruce11111.github.io/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>HTTPS深入理解</title>
+    <link href="http://bruce11111.github.io/2021/04/18/https-shen-ru-li-jie/"/>
+    <id>http://bruce11111.github.io/2021/04/18/https-shen-ru-li-jie/</id>
+    <published>2021-04-18T14:19:15.000Z</published>
+    <updated>2021-04-18T14:20:27.463Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;HTTPS是什么&quot;&gt;&lt;a href=&quot;#HTTPS是什么&quot; class=&quot;headerlink&quot; title=&quot;HTTPS是什么&quot;&gt;&lt;/a&gt;HTTPS是什么&lt;/h2&gt;&lt;h3 id=&quot;HTTP存在问题&quot;&gt;&lt;a href=&quot;#HTTP存在问题&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="网络" scheme="http://bruce11111.github.io/categories/%E7%BD%91%E7%BB%9C/"/>
+    
+    
+    <category term="网络" scheme="http://bruce11111.github.io/tags/%E7%BD%91%E7%BB%9C/"/>
+    
+  </entry>
   
   <entry>
     <title>进程间的通信IPC</title>
@@ -155,7 +180,7 @@
     <link href="http://bruce11111.github.io/2021/04/06/redis-ji-chu/"/>
     <id>http://bruce11111.github.io/2021/04/06/redis-ji-chu/</id>
     <published>2021-04-06T08:26:29.000Z</published>
-    <updated>2021-04-17T07:22:11.889Z</updated>
+    <updated>2021-04-17T07:25:14.663Z</updated>
     
     
       
@@ -350,7 +375,7 @@
     <link href="http://bruce11111.github.io/2021/03/30/love/"/>
     <id>http://bruce11111.github.io/2021/03/30/love/</id>
     <published>2021-03-30T12:45:30.000Z</published>
-    <updated>2021-04-07T14:20:30.729Z</updated>
+    <updated>2021-04-18T07:33:59.830Z</updated>
     
     
       
@@ -454,29 +479,6 @@
     
     
     <category term="database" scheme="http://bruce11111.github.io/categories/database/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>java</title>
-    <link href="http://bruce11111.github.io/2021/03/15/java/"/>
-    <id>http://bruce11111.github.io/2021/03/15/java/</id>
-    <published>2021-03-15T07:47:03.000Z</published>
-    <updated>2021-04-06T12:19:50.044Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h1 id=&quot;JAVA-常问知识点&quot;&gt;&lt;a href=&quot;#JAVA-常问知识点&quot; class=&quot;headerlink&quot; title=&quot;JAVA 常问知识点&quot;&gt;&lt;/a&gt;JAVA 常问知识点&lt;/h1&gt;&lt;h3 id=&quot;求时间复杂度&quot;&gt;&lt;a href=&quot;#求时间复杂度&quot;</summary>
-        
-      
-    
-    
-    
-    <category term="java" scheme="http://bruce11111.github.io/categories/java/"/>
     
     
   </entry>

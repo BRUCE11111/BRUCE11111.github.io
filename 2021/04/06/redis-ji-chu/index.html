@@ -29,9 +29,9 @@
 
     <script src="/libs/jquery/jquery.min.js"></script>
 
-<meta name="generator" content="Hexo 5.4.0">
+<meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="小灰的博客" type="application/atom+xml">
+
 <style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
-<link rel="alternate" href="/atom.xml" title="小灰的博客" type="application/atom+xml">
 </head>
 
 
@@ -1009,7 +1009,7 @@ appendfsync no <span class="token comment"># 不执行 sync，这个时候操作
 <p>增量复制：Master继续将新的所有收集到的修改命令依次传给slave，完成同步。</p>
 <h2 id="9-哨兵模式"><a href="#9-哨兵模式" class="headerlink" title="9. 哨兵模式"></a>9. 哨兵模式</h2><h3 id="9-1-是什么"><a href="#9-1-是什么" class="headerlink" title="9.1 是什么"></a>9.1 是什么</h3><p>自动选择Master。能够让后台监控主机是否故障，如果故障了根据投票数自动将从库转换为主库。</p>
 <h3 id="9-2-为什么"><a href="#9-2-为什么" class="headerlink" title="9.2 为什么"></a>9.2 为什么</h3><p>主从切换技术，当主服务器宕机后，需要手动把一台服务器切换为主服务器，这就需要人工干预，费时费力，还会造成一段时间内服务不可用。这不是一种推荐的方式，更多时候，优先考虑哨兵模式。Redis2.8正式提供了Sentinel（哨兵）架构来解决这个问题。</p>
-<h2 id="9-3-怎么做"><a href="#9-3-怎么做" class="headerlink" title="9.3 怎么做"></a>9.3 怎么做</h2><p><img src="/2021/04/06/redis-ji-chu/%E5%93%A8%E5%85%B5%E6%A8%A1%E5%BC%8F.PNG"></p>
+<h3 id="9-3-怎么做"><a href="#9-3-怎么做" class="headerlink" title="9.3 怎么做"></a>9.3 怎么做</h3><p><img src="/2021/04/06/redis-ji-chu/%E5%93%A8%E5%85%B5%E6%A8%A1%E5%BC%8F.PNG"></p>
 <p>假设主服务器宕机，哨兵1先检测到这个结果，系统并不会马上进行failover过程，仅仅是哨兵1主观的认为主服务器不可用，这个现象称为主观下线。</p>
 <p>当后面的哨兵也检测到主服务器不可用，并且数量达到一定值时，那么哨兵之间就会进行一次投票，投票的结果由一个哨兵发起，进行failover（故障转移）操作。切换成功后，就会发布订阅模式，让各个哨兵把自己监控的从服务器实现切换主机，这个过程称为客观下线。</p>
 <h2 id="10-Redis-缓存穿透和雪崩"><a href="#10-Redis-缓存穿透和雪崩" class="headerlink" title="10. Redis 缓存穿透和雪崩"></a>10. Redis 缓存穿透和雪崩</h2><p>都是高可用问题。</p>

@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="cookies和session, 小灰的博客">
+    <meta name="keywords" content="HTTPS深入理解, 小灰的博客">
     <meta name="description" content="技术记录">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>cookies和session | 小灰的博客</title>
+    <title>HTTPS深入理解 | 小灰的博客</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -326,12 +326,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/23.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/20.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">cookies和session</h1>
+                    <h1 class="description center-align post-title">HTTPS深入理解</h1>
                 </div>
             </div>
         </div>
@@ -447,8 +447,8 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/HTTP/">
-                                <span class="chip bg-color">HTTP</span>
+                            <a href="/tags/%E7%BD%91%E7%BB%9C/">
+                                <span class="chip bg-color">网络</span>
                             </a>
                         
                     </div>
@@ -459,8 +459,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/network/" class="post-category">
-                                network
+                            <a href="/categories/%E7%BD%91%E7%BB%9C/" class="post-category">
+                                网络
                             </a>
                         
                     </div>
@@ -472,7 +472,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2021-03-31
+                    2021-04-18
                 </div>
                 
 
@@ -496,60 +496,157 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="简述"><a href="#简述" class="headerlink" title="简述"></a>简述</h2><p> (referentce to <a target="_blank" rel="noopener" href="https://segmentfault.com/a/1190000017831088">https://segmentfault.com/a/1190000017831088</a>)</p>
-<h2 id="http是一个无状态协议"><a href="#http是一个无状态协议" class="headerlink" title="http是一个无状态协议"></a>http是一个无状态协议</h2><p>什么是无状态呢？就是说这一次请求和上一次请求是没有任何关系的，互不认识的，没有关联的。这种无状态的的好处是快速。坏处是假如我们想要把<code>www.zhihu.com/login.html</code>和<code>www.zhihu.com/index.html</code>关联起来，必须使用某些手段和工具</p>
-<h2 id="cookie和session"><a href="#cookie和session" class="headerlink" title="cookie和session"></a>cookie和session</h2><p>由于http的无状态性，为了使某个域名下的所有网页能够共享某些数据，session和cookie出现了。客户端访问服务器的流程如下</p>
+                <h2 id="HTTPS是什么"><a href="#HTTPS是什么" class="headerlink" title="HTTPS是什么"></a>HTTPS是什么</h2><h3 id="HTTP存在问题"><a href="#HTTP存在问题" class="headerlink" title="HTTP存在问题"></a>HTTP存在问题</h3><p>由于HTTP协议过于简单：</p>
 <ul>
-<li>首先，客户端会发送一个http请求到服务器端。</li>
-<li>服务器端接受客户端请求后，建立一个session，并发送一个http响应到客户端，这个响应头，其中就包含Set-Cookie头部。该头部包含了sessionId。Set-Cookie格式如下，具体请看<a target="_blank" rel="noopener" href="http://bubkoo.com/2014/04/21/http-cookies-explained/">Cookie详解</a><br><code>Set-Cookie: value[; expires=date][; domain=domain][; path=path][; secure]</code></li>
-<li>在客户端发起的第二次请求，假如服务器给了set-Cookie，浏览器会自动在请求头中添加cookie</li>
-<li>服务器接收请求，分解cookie，验证信息，核对成功后返回response给客户端</li>
+<li>通信使用明文（不加密），内容可能会被窃听。</li>
+<li>不验证通信方的身份，因此可能遭遇伪装</li>
+<li>无法验证报文的完整性，所以有可能已遭篡改。</li>
 </ul>
-<p><img src="/2021/03/31/cookies-he-session/bVbmYbQ" alt="请求流程"></p>
-<h3 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h3><ul>
-<li>cookie只是实现session的其中一种方案。虽然是最常用的，但并不是唯一的方法。禁用cookie后还有其他方法存储，比如放在url中</li>
-<li>现在大多都是Session + Cookie，但是只用session不用cookie，或是只用cookie，不用session在理论上都可以保持会话状态。可是实际中因为多种原因，一般不会单独使用</li>
-<li>用session只需要在客户端保存一个id，实际上大量数据都是保存在服务端。如果全部用cookie，数据量大的时候客户端是没有那么多空间的。</li>
-<li>如果只用cookie不用session，那么账户信息全部保存在客户端，一旦被劫持，全部信息都会泄露。并且客户端数据量变大，网络传输的数据量也会变大</li>
-</ul>
-<h3 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h3><p><strong>简而言之, session 有如用户信息档案表, 里面包含了用户的认证信息和登录状态等信息. 而 cookie 就是用户通行证</strong></p>
-<h2 id="token"><a href="#token" class="headerlink" title="token"></a>token</h2><p>token 也称作令牌，由uid+time+sign[+固定参数]<br>token 的认证方式类似于<strong>临时的证书签名</strong>, 并且是一种服务端无状态的认证方式, 非常适合于 REST API 的场景. 所谓无状态就是服务端并不会保存身份认证相关的数据。</p>
-<h3 id="组成"><a href="#组成" class="headerlink" title="组成"></a>组成</h3><ul>
-<li>uid: 用户唯一身份标识</li>
-<li>time: 当前时间的时间戳</li>
-<li>sign: 签名, 使用 hash/encrypt 压缩成定长的十六进制字符串，以防止第三方恶意拼接</li>
-<li>固定参数(可选): 将一些常用的固定参数加入到 token 中是为了避免重复查库</li>
-</ul>
-<h3 id="存放"><a href="#存放" class="headerlink" title="存放"></a>存放</h3><p>token在客户端一般存放于localStorage，cookie，或sessionStorage中。在服务器一般存于数据库中</p>
-<h3 id="token认证流程"><a href="#token认证流程" class="headerlink" title="token认证流程"></a>token认证流程</h3><p>token 的认证流程与cookie很相似</p>
+<p>为了解决诸多问题，HTTPS应运而生。</p>
+<h3 id="HTTPS的实质"><a href="#HTTPS的实质" class="headerlink" title="HTTPS的实质"></a>HTTPS的实质</h3><p>HTTP加上<strong>加密处理</strong>、<strong>认证机制</strong>、以及<strong>完整性保护</strong>后的就是HTTPS。</p>
+<p>需要知道的是，HTTPS并非是应用层的一种新的协议。只是HTTP通信接口部分用SSL或TLS协议代替而已。也就是说，所谓的HTTPS，<strong>其实就是身披SSL协议外壳的HTTP。</strong></p>
+<p><img src="/2021/04/18/https-shen-ru-li-jie/1460000012196647" alt="img"></p>
+<p>值得一提的是，SSL是独立于HTTP协议的，也就是说其他运行在应用层的协议均可配合SSL协议使用。现今SSL是最为广泛的网络安全技术。</p>
+<h3 id="SSL和TLS"><a href="#SSL和TLS" class="headerlink" title="SSL和TLS"></a>SSL和TLS</h3><p>HTTPS中使用了SSL和TLS这两个协议。</p>
+<p>TLS以SSL3.0为基准，后又制定了TLS1.0、TLS1.1和TLS1.2。当前主流的版本是SSL3.0和TLS1.0。</p>
+<p><strong>TLS是以SSL为原型开发的协议，有时候会统称该协议为SSL。</strong></p>
+<h2 id="HTTPS的加密原理"><a href="#HTTPS的加密原理" class="headerlink" title="HTTPS的加密原理"></a>HTTPS的加密原理</h2><p>近代的加密算法中加密算法是公开的，而密钥是保密的。通过这种方式来保持加密方法的安全性。</p>
+<p>加密和解密要用到密钥，如果没有密钥就没有办法对密码解密。换句话来说，任何人只要持有密钥就能够对密文进行解密。</p>
+<p>HTTPS在加密过程中使用了<strong>非对称加密技术</strong>和<strong>对称加密技术</strong>。</p>
+<h3 id="对称加密算法"><a href="#对称加密算法" class="headerlink" title="对称加密算法"></a>对称加密算法</h3><blockquote>
+<p>采用单钥密码系统的加密方式，同一个密钥可以同时做信息的加密和解密，这种加密的方法称为对称加密，也称为单密钥加密。</p>
+</blockquote>
+<p>下面会把对称加密算法称为共享密钥加密算法。</p>
+<p>假如现在，SSL在通信过程中，使用了对称加密算法，也就是说客户端和服务器同时共享一个密钥。</p>
+<p>于是，以共享密钥的方式加密，必须将密钥发给对方。这个时候，假如通信过程被监听，密钥被攻击者获取了，那么这个时候也就失去了加密的意义了。</p>
+<p><img src="/2021/04/18/https-shen-ru-li-jie/1460000012196648" alt="img"></p>
+<p>那么，有没有办法解决这个问题呢？答案是肯定的，也就是使用两把密钥。</p>
+<p>下面先看使用两把密钥的非对称加密算法。</p>
+<h3 id="非对称加密算法"><a href="#非对称加密算法" class="headerlink" title="非对称加密算法"></a>非对称加密算法</h3><blockquote>
+<p>与对称加密算法相反，非对称加密算法需要两个密钥来进行加密和解密，这两个密钥是配对的，分别是公开密钥（公钥）和私有密钥（私钥）。</p>
+</blockquote>
+<p>一般情况下，公钥是可以被<strong>公开</strong>的，它主要用来加密明文。而相应的，私钥<strong>不能被公开</strong>，用来解密公钥加密的密文。</p>
+<p>值得注意的是：<strong>公钥加密后的密文只能通过对应的私钥来解密，而私钥加密的密文却可以通过对应的公钥来解密。</strong></p>
+<p>以上，公钥加密私钥解密用来加密，私钥加密公钥解密用来签名。相关用途后面会讲到。</p>
+<p>下面会把非对称加密算法称为公开密钥加密算法。</p>
+<p>于是现在，假设现在由服务器来生成一对公钥和私钥。</p>
+<p>当客户端第一次发请求和服务器协商的时候，<strong>服务器就生成了一对公钥和私钥</strong>。</p>
+<p>紧接着，服务器把公钥发给客户端（明文，不需要做任何加密），客户端接收后，随机生成一个密钥，<strong>使用服务器发过来的公钥进行加密</strong>。</p>
+<p>再接着，客户端把使用公钥加密的密钥发给服务器，服务器接收到了以后，<strong>用配对的私钥进行解密</strong>，就得到了客户端随机生成的那个密钥。</p>
+<p>这个时候，客户端和服务端所持的密钥都是相同的。此时，交换密钥环节就完成了。</p>
+<p>于是<strong>通信</strong>开始时就可进行上面所述的<strong>共享密钥加密方式</strong>来进行加密。</p>
+<h3 id="同时使用"><a href="#同时使用" class="headerlink" title="同时使用"></a>同时使用</h3><p>可能，有小伙伴就会问，为什么要大费周章使用非对称加密的方式，然后再得到相同的密钥，进行共享密钥加密的通信呢？</p>
+<p>由于公开密钥加密处理起来比共享密钥加密方式更为复杂，因此在通信的时候使用公开密钥加密的方式，效率很低。</p>
+<p>于是，我们需要使用非对称加密的方式来保证密钥共享的过程中密钥的安全性，而后在通信的过程中使用对称加密算法，这是最合理的设计方式，在保证安全性的同时又保证了性能。</p>
+<p>所以，HTTPS采用共享密钥加密和公开密钥加密两者并用的混合加密机制。<strong>在交换密钥使用环节使用公开密钥加密方式，之后建立的通信交换报文阶段则使用共享密钥加密方式。</strong></p>
+<p>以上，大概就是使用对称加密和非对称加密的过程。看似过程很完美，其实还存在着一个问题，就是：<strong>如何保证服务器传过来的公开密钥的正确性。换句话说，就是保证它不被拦截篡改。</strong></p>
+<h2 id="使用证书保证公钥的正确性"><a href="#使用证书保证公钥的正确性" class="headerlink" title="使用证书保证公钥的正确性"></a>使用证书保证公钥的正确性</h2><p>假如现在正准备和某台服务器建立公开密钥加密方式下的通信，如何证明客户端收到的公开密钥就是原本预想的那台服务器发行的公开密钥呢？或许，在公开密钥传输的过程中，真正的公开密钥可能已经被攻击者替换掉了。</p>
+<p>为了解决这个问题，可以使用由数字证书机构和其相关颁发的公开密钥证书。</p>
+<p>下面阐述一下数字证书认证机构（简称CA）的业务流程：</p>
+<p>首先，服务器的运营人员向数字证书机构提出公开密钥的申请。数字证书认证机构在判明提出申请者的身份之后，会对已申请的公开密钥做数字签名，然后分配这个已签名的公开密钥，并将该公开密钥放入公钥证书后绑定在一起。<br>我们用<strong>白话文</strong>来翻译一下上面这段话：</p>
 <ul>
-<li>用户登录，成功后服务器返回Token给客户端。</li>
-<li>客户端收到数据后保存在客户端</li>
-<li>客户端再次访问服务器，将token放入headers中</li>
-<li>服务器端采用filter过滤器校验。校验成功则返回请求数据，校验失败则返回错误码</li>
+<li>首先，CA会向申请者颁发一个证书，这个证书里面的内容有：签发者、证书用途、使用的HASH算法、签名所使用的算法、证书到期的时间等等。</li>
+<li>紧接着，把上面所提到的内容，做一次HASH求值，得到一个HASH值。</li>
+<li>再接着，用CA的<strong>私钥</strong>对这个HASH值和所使用的HASH算法加密，这样就完成了数字签名。而用CA的私钥加密后，就生成了类似人体指纹的签名，任何篡改证书的尝试，都会被数字签名发现。</li>
+<li>最后，把数字签名，附在数字证书的末尾，传输给服务器。</li>
 </ul>
-<h2 id="token可以抵抗csrf，cookie-session不行"><a href="#token可以抵抗csrf，cookie-session不行" class="headerlink" title="token可以抵抗csrf，cookie+session不行"></a>token可以抵抗csrf，cookie+session不行</h2><p>假如用户正在登陆银行网页，同时登陆了攻击者的网页，并且银行网页未对csrf攻击进行防护。攻击者就可以在网页放一个表单，该表单提交src为<code>http://www.bank.com/api/transfer</code>，body为<code>count=1000&amp;to=Tom</code>。倘若是session+cookie，用户打开网页的时候就已经转给Tom1000元了.因为form 发起的 POST 请求并不受到浏览器同源策略的限制，因此可以任意地使用其他域的 Cookie 向其他域发送 POST 请求，形成 CSRF 攻击。在post请求的瞬间，cookie会被浏览器自动添加到请求头中。但token不同，token是开发者为了防范csrf而特别设计的令牌，浏览器不会自动添加到headers里，攻击者也无法访问用户的token，所以提交的表单无法通过服务器过滤，也就无法形成攻击。</p>
-<h2 id="分布式情况下的session和token"><a href="#分布式情况下的session和token" class="headerlink" title="分布式情况下的session和token"></a>分布式情况下的session和token</h2><p>我们已经知道session时有状态的，一般存于服务器内存或硬盘中，当服务器采用分布式或集群时，session就会面对负载均衡问题。</p>
+<p>接下来，服务器会把这份由数字证书认证机构颁发的公钥证书发给客户端。这个时候，客户端可以使用数字证书机构的公开密钥对其进行验证。一旦验证成功，客户端便能够确定这个公开密钥是可信的。<br>我们再用<strong>白话文</strong>来翻译一下：</p>
 <ul>
-<li>负载均衡多服务器的情况，不好确认当前用户是否登录，因为多服务器不共享session。这个问题也可以将session存在一个服务器中来解决，但是就不能完全达到负载均衡的效果。当今的几种<a target="_blank" rel="noopener" href="http://blog.51cto.com/zhibeiwang/1965018">解决session负载均衡</a>的方法。</li>
+<li>客户端拿到这个数字证书以后，用CA私钥对应的公钥，可以解密数字证书末尾的数字签名，得到HASH值和所采用的HASH算法。</li>
+<li>紧接着，客户端按照解密到的这个HASH算法，对证书的内容求HASH值。如果通过CA公钥解密的HASH和通过计算求得的HASH值相同，那么认证通过，否则失败。</li>
+<li>如果认证通过，就可以取得服务器的公开密钥。</li>
 </ul>
-<p>而token是无状态的，token字符串里就保存了所有的用户信息</p>
-<ul>
-<li>客户端登陆传递信息给服务端，服务端收到后把用户信息加密（token）传给客户端，客户端将token存放于localStroage等容器中。客户端每次访问都传递token，服务端解密token，就知道这个用户是谁了。通过cpu加解密，服务端就不需要存储session占用存储空间，就很好的解决负载均衡多服务器的问题了。这个方法叫做[JWT(Json Web Token)](<a target="_blank" rel="noopener" href="https://huanqiang.wang/2017/12/28/JWT">https://huanqiang.wang/2017/12/28/JWT</a> 介绍/)</li>
-</ul>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ul>
-<li>session存储于服务器，可以理解为一个状态列表，拥有一个唯一识别符号sessionId，通常存放于cookie中。服务器收到cookie后解析出sessionId，再去session列表中查找，才能找到相应session。依赖cookie</li>
-<li>cookie类似一个令牌，装有sessionId，存储在客户端，浏览器通常会自动添加。</li>
-<li>token也类似一个令牌，无状态，用户信息都被加密到token中，服务器收到token后解密就可知道是哪个用户。需要开发者手动添加。</li>
-<li>jwt只是一个跨域认证的方案</li>
-</ul>
-<p>Cookie是保存在浏览器上的一些数据，一般通过HTTP响应头set cookie来设置，当然也可以通过JS脚本来直接设置，Cookie是按照网站来进行组织和保存的，每一个网站都可以在浏览器中保存一些Cookie，保存好了之后，浏览器向这个网站发出的请求都会携带这些Cookie，然后后台就可以分析这些Cookie。Session这个单词在不同的语境下可以有不同的含义。它可以理解为一个抽象概念，即会话，会话用于记录一个用户在我们网站上的一些行为、一些状态，可以理解为一个上下文，Context。这些用户状态可以利用Cookie直接保存在前端，也可以保存在后台，然后利用Cookie中的Session ID来标识。在另外的一些语境下，Session又可以指在后台保存用户状态来实现会话的方式，它把用户状态存储在后台的内存、数据库等介质中，然后我们利用请求的Cookie中保存的Session ID来为这个请求找到它对应的会话。</p>
-<p>Session在一些语境下还可能专指后台保存的用户状态</p>
+<p>那客户端上面的CA公钥是从哪里来的呢？</p>
+<p>其实，CA除了给申请者发布证书，它自己本身也有自己的证书。CA自身的数字证书（一般由它自己生成）在我们操作系统刚安装好的时候，这些CA自身的数字证书就已经被微软（或者其它操作系统的开发机构）安装在操作系统中了。而CA的公钥就包含在其中。这样，CA就可以通过自身的私钥对发布的数字证书进行签名，而在客户端就能够用对应的公钥来对其进行解密。</p>
+<p>其具体过程是这样子的（图中简化了数字签名的过程）：</p>
+<p><img src="/2021/04/18/https-shen-ru-li-jie/1460000012196649" alt="img"></p>
+<p>这里其实就用到了<strong>非对称加密算法</strong>，只不过现在这个加密算法用来<strong>签名</strong>而不是<strong>加密</strong>。</p>
+<p>使用私钥加密，公钥解密，用于公钥的持有者验证通过私钥加密的内容是否被篡改，但是不用来保证内容是否被他人获得。</p>
+<p>而使用公钥加密，私钥解密，则是相反的，它不保证信息被他人截获篡改，但是保证信息无法被中间人获得。</p>
+<h3 id="客户端证书"><a href="#客户端证书" class="headerlink" title="客户端证书"></a>客户端证书</h3><p>HTTPS中不仅可以使用服务器证书，还可以使用客户端证书。以客户端证书进行客户端认证，它的作用与服务器证书是相同的。</p>
+<p>由于客户端获取证书需要用户自行安装客户端证书，同时也面临着费用的问题。</p>
+<p>因此，现状是，安全性极高的认证机构可办法客户端证书但是仅用于特殊用途的业务。比如那些可支撑客户端证书支出费用的业务。</p>
+<p>例如，银行的网上银行就采用了客户端证书。在登录网银时不仅要求用户确认输入ID和密码，还会要求用户的客户端证书，以确认用户是否从特定的终端访问网银。</p>
+<h2 id="HTTPS通信的过程"><a href="#HTTPS通信的过程" class="headerlink" title="HTTPS通信的过程"></a>HTTPS通信的过程</h2><p><img src="/2021/04/18/https-shen-ru-li-jie/1460000012196650" alt="img"></p>
+<p>现在我们来理清一下SSL建立的过程：</p>
 <ol>
-<li>由于HTTP协议是无状态的协议，所以服务端需要记录用户的状态时，就需要用某种机制来识具体的用户，这个机制就是Session.典型的场景比如购物车，当你点击下单按钮时，由于HTTP协议无状态，所以并不知道是哪个用户操作的，所以服务端要为特定的用户创建了特定的Session，用用于标识这个用户，并且跟踪用户，这样才知道购物车里面有几本书。这个Session是保存在服务端的，有一个唯一标识。在服务端保存Session的方法很多，内存、数据库、文件都有。集群的时候也要考虑Session的转移，在大型的网站，一般会有专门的Session服务器集群，用来保存用户会话，这个时候 Session 信息都是放在内存的，使用一些缓存服务比如Memcached之类的来放 Session。</li>
-<li>思考一下服务端如何识别特定的客户？这个时候Cookie就登场了。每次HTTP请求的时候，客户端都会发送相应的Cookie信息到服务端。实际上大多数的应用都是用 Cookie 来实现Session跟踪的，第一次创建Session的时候，服务端会在HTTP协议中告诉客户端，需要在 Cookie 里面记录一个Session ID，以后每次请求把这个会话ID发送到服务器，我就知道你是谁了。有人问，如果客户端的浏览器禁用了 Cookie 怎么办？一般这种情况下，会使用一种叫做URL重写的技术来进行会话跟踪，即每次HTTP交互，URL后面都会被附加上一个诸如 sid=xxxxx 这样的参数，服务端据此来识别用户。</li>
-<li>Cookie其实还可以用在一些方便用户的场景下，设想你某次登陆过一个网站，下次登录的时候不想再次输入账号了，怎么办？这个信息可以写到Cookie里面，访问网站的时候，网站页面的脚本可以读取这个信息，就自动帮你把用户名给填了，能够方便一下用户。这也是Cookie名称的由来，给用户的一点甜头。<br>所以，总结一下：<br>Session是在服务端保存的一个数据结构，用来跟踪用户的状态，这个数据可以保存在集群、数据库、文件中；<br>Cookie是客户端保存用户信息的一种机制，用来记录用户的一些信息，也是实现Session的一种方式。</li>
+<li><p>客户端通过发送Client Hello报文开始SSL通信。报文中包含客户端支持的SSL的指定版本、加密组件（Cipher Suite）列表（所使用的加密算法及密钥长度等）。<br>注意：客户端还会附加一个<strong>随机数</strong>，这里记为A。</p>
+</li>
+<li><p>服务器可进行SSL通信时，会以Server Hello报文作为应答。和客户端一样，在报文中包含SSL版本以及加密组件。服务器的加密组件内容是从接收到的客户端加密组件内筛选出来的。<br>注意：这里服务器同样会附加一个<strong>随机数</strong>，发给客户端，这里记为B。</p>
+</li>
+<li><p>之后服务器发送Certificate报文。报文中包含公开密钥证书。（具体的数字签名请看证书一节）</p>
+</li>
+<li><p>最后服务器发送Server Hello Done报文通知客户端，最初阶段的SSL握手协商部分结束。</p>
+</li>
+<li><p>SSL第一次握手结束后，客户端会对服务器发过来的证书进行验证，如果验证成功，解密取出证书中的公钥。（具体查看证书一节）<br>接着，客户端以Client Key Exchange报文作为回应。报文中包含通信加密中使用的一种被称为<code>Pre-master secret</code>的随机密码串。该报文使用从证书中解密获得的公钥进行加密（其实就是服务器的公钥）。</p>
+</li>
+<li><p>客户端继续发送Change Cipher Spec报文。用于告知服务端，客户端已经切换到之前协商好的加密套件（Cipher Suite）的状态，准备使用之前协商好的加密套件加密数据并传输了。</p>
+</li>
+<li><p>客户端发送Finished报文。该报文包含连接至今全部报文的整体校验值（也就是HASH值），用来供服务器校验。</p>
+</li>
+<li><p>服务器接收到客户端的请求之后，使用私钥解密报文，把<code>Pre-master secret</code>取出来。接着，服务器同样发送Change Cipher Spec报文。</p>
+</li>
+<li><p>服务器同样发送Finished报文，用来供客户端校验。</p>
+</li>
+<li><p>服务器和客户端的Finished报文交换完毕之后，SSL连接就算建立完成。当然，通信会受到SSL的保护。从此处开始进行应用层协议的通信，即发送HTTP请求。</p>
+</li>
+<li><p>应用层协议通信，即发送HTTP响应。</p>
+</li>
+<li><p>最后由客户端断开连接。断开连接时，发送close_notify报文。上图做了一些省略，这步之后再发送TCP FIN报文来关闭与TCP的通信。</p>
+</li>
 </ol>
+<p>读到这里，你可能会对上面的一些细节产生很多疑惑，现在我们一个个来理清楚？</p>
+<h4 id="问题一"><a href="#问题一" class="headerlink" title="问题一"></a>问题一</h4><p>为什么最后客户端和服务端都要发送一个Finish报文？</p>
+<p>上面已经提及，Finish报文是对至今全部报文的整体校验值（也就是HASH值）。当客户端把这个值通过得到的公钥进行加密的时候，服务器得到之后对其进行解密，然后再对全部报文进行一个HASH求值。如果这个值跟解密得到的值相等的话，那么说明客户端是可信赖的。<br>同样的，服务器发送这样的一个整体校验值，用来客户端验证服务器是否是真正要进行通信的那一个。<br>综上，这个Finish报文就是用来校验双方的身份的。</p>
+<h4 id="问题二"><a href="#问题二" class="headerlink" title="问题二"></a>问题二</h4><p>整个过程中产生的三个<strong>随机数</strong>有什么用呢？还有，后面进行HTTP通信的时候，是用哪一个密钥进行加密，还有怎么保证报文的完整性。</p>
+<p>看下面这张图。</p>
+<p><img src="/2021/04/18/https-shen-ru-li-jie/1460000012196651" alt="img"></p>
+<p>对于<strong>客户端</strong>：<br>当其生成了<code>Pre-master secret</code>之后，会结合原来的A、B随机数，用DH算法计算出一个<code>master secret</code>，紧接着根据这个<code>master secret</code>推导出<code>hash secret</code>和<code>session secret</code>。</p>
+<p>对于<strong>服务端</strong>：<br>当其解密获得了<code>Pre-master secret</code>之后，会结合原来的A、B随机数，用DH算法计算出一个<code>master secret</code>，紧接着根据这个<code>master secret</code>推导出<code>hash secret</code>和<code>session secret</code>。</p>
+<blockquote>
+<p>在客户端和服务端的<code>master secret</code>是依据三个随机数推导出来的，它是不会在网络上传输的，只有双方知道，不会有第三者知道。同时，客户端推导出来的<code>session secret</code>和<code>hash secret</code>与服务端也是完全一样的。</p>
+</blockquote>
+<p>那么现在双方如果开始使用对称算法加密来进行通讯，使用哪个作为共享的密钥呢？过程是这样子的：</p>
+<p>双方使用对称加密算法进行加密，用<code>hash secret</code>对HTTP报文做一次运算生成一个<code>MAC</code>，附在HTTP报文的后面，然后用<code>session-secret</code>加密所有数据（<code>HTTP+MAC</code>），然后发送。</p>
+<p>接收方则先用<code>session-secret</code>解密数据，然后得到<code>HTTP+MAC</code>，再用相同的算法计算出自己的<code>MAC</code>，如果两个<code>MAC</code>相等，证明数据没有被篡改。</p>
+<blockquote>
+<p>MAC(Message Authentication Code)称为报文摘要，能够查知报文是否遭到篡改，从而保护报文的完整性。</p>
+</blockquote>
+<h4 id="问题三"><a href="#问题三" class="headerlink" title="问题三"></a>问题三</h4><p>为什么要使用三个随机数呢？</p>
+<p>网友dog250是这么解释的：</p>
+<blockquote>
+<p>“不管是客户端还是服务器，都需要随机数，这样生成的密钥才不会每次都一样。由于SSL协议中证书是静态的，因此十分有必要引入一种随机因素来保证协商出来的密钥的随机性。<br>对于RSA密钥交换算法来说，<code>pre-master secret</code>本身就是一个随机数，再加上hello消息中的随机，三个随机数通过一个密钥导出器最终导出一个对称密钥。<br><code>pre-master secret</code>的存在在于SSL协议不信任每个主机都能产生完全随机的随机数，如果随机数不随机，那么<code>pre-master secret</code>就有可能被猜出来，那么仅适用<code>pre-master secret</code>作为密钥就不合适了，因此必须引入新的随机因素，那么客户端和服务器加上<code>pre-master secret</code>三个随机数一同生成的密钥就不容易被猜出了，一个伪随机可能完全不随机，可是是三个伪随机就十分接近随机了，每增加一个自由度，随机性增加的可不是一。”</p>
+</blockquote>
+<p>注：我们在计算机所使用的随机数都是伪随机，而不是物理上所说的真正随机。</p>
+<p>另外，黑客可能拦截了这样的一个加密的报文，他不对报文进行修改，而是不停的向报文的接受者发送重复的报文，以扰乱通信的建立。于是，就可以加这么一个随机数。只要任何一个通信方，接收到的报文中的随机数出现重复的情况，就可以知道有中间者对通信的过程进行了扰乱，可以立即中断通信。</p>
+<h4 id="问题四"><a href="#问题四" class="headerlink" title="问题四"></a>问题四</h4><p>如果黑客拦截了服务器把证书发送给客户端，并对证书进行恶意修改，会出现什么情况？</p>
+<p>第一种情况，假如黑客只是单纯的修改数字证书中的内容，那么由于数字签名的存在，客户端会很容易的判断出报文是否被篡改。</p>
+<p>第二种情况，黑客不仅修改了数字证书的内容，并且把数字签名替换掉了，由于黑客不可能知道CA的私钥，于是在客户端用CA的公钥进行解密的时候，解密之后得不到正确的信息，也很容易判断出报文是否被修改。</p>
+<p>第三种情况，黑客恶意的从相同的第三方CA申请了一个数字证书。由于这个CA是真实存在的，所以客户端是可以用CA的公钥进行解密，得到了黑客提供的数字证书中的公钥。但是，由于数字证书在申请的时候，会绑定一个<strong>域名</strong>，当客户端比如说浏览器，检测到这个数字证书中的域名和我们现在网页访问的域名不一致，便会发出警告，此时我们也能得知数字证书被替换了。发出的警告如下：</p>
+<p><img src="/2021/04/18/https-shen-ru-li-jie/bV0FNg" alt="89294765.jpg"></p>
+<h2 id="一定要用HTTPS吗"><a href="#一定要用HTTPS吗" class="headerlink" title="一定要用HTTPS吗"></a>一定要用HTTPS吗</h2><p>当HTTP披上SSL外壳之后，由于加入了诸多验证的机制，虽然安全性大大提高了，但是它的处理速度会变慢。慢的原因分以下两种：</p>
+<ul>
+<li>服务器在与客户端协商次数增多，也就是说整体上处理<strong>通信量</strong>会不可避免的增加。</li>
+<li>SSL进行加密处理，在服务端和客户端都需要进行加密和解密的<strong>运算处理</strong>。结果会消耗更多的硬件资源，导致负载增加。</li>
+</ul>
+<p>可见，使用HTTPS会消耗更多的资源。如果每次通信都加密，那么平摊到一台计算机上，能够处理的请求数量也必定会减少。</p>
+<p>同时，使用HTTPS需要向CA购买证书，于是<strong>开销</strong>也成为考虑是否使用HTTPS的原因之一。</p>
+<p>所以，大部分的Web网站都采取了一个折中的方法。对于一些需要隐藏、私密的信息进行加密，而普通的信息不进行加密处理，以节省资源。</p>
+<h2 id="fiddler拦截HTTPS请求的原理"><a href="#fiddler拦截HTTPS请求的原理" class="headerlink" title="fiddler拦截HTTPS请求的原理"></a>fiddler拦截HTTPS请求的原理</h2><p>很多时候我们可以通过fiddler来进行抓HTTP包，但是当遇到连接采用的是HTTPS的时候，过程可能就不那么愉快了。但实际上实现拦截也十分简单。</p>
+<p>fiddler拦截HTTPS请求最核心的地方在于真正的<strong>客户端</strong>需要<strong>安装fiddler的证书</strong>。这样子的话，fiddler能够伪造出CA证书，达到欺骗客户端，拿到需要的信息并推算出之后双方正常通信的对称加密密钥。</p>
+<h2 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h2><p>这学期刚好有《信息安全》这门课程，那就简明的介绍一下公钥密码密码体系RSA算法原理是什么。</p>
+<p>它是这样子工作的：</p>
+<ol>
+<li>选取两个大素数<code>p</code>和<code>q</code>，相乘得到<code>n</code>。</li>
+<li><code>p-1</code>和<code>q-1</code>相乘，得到<code>f(n)</code>。</li>
+<li>随机选取一个<code>e</code>与<code>f(n)</code>互质，然后得到公钥<code>(e, n)</code>。</li>
+<li>私钥的求法为<code>ed = 1 mod f(n)</code>。 [这是一个等价关系而不是一个表达式！也就是<code>ed</code>模<code>fn(n)</code>的结果是1，这是求模运算的逆运算，可以用欧几里德辗转相除法求得]</li>
+<li>最后得到的私钥为<code>(d, n)</code>。</li>
+</ol>
+<blockquote>
+<p>整个RSA公钥密码算法的难度其实在于分解这一个大数<code>n</code>，<code>pq=n</code>正向运算很容易，逆向运算很困难，随着这个数越来越大，想要逆向分解需要很多年的时间。</p>
+</blockquote>
+<p><img src="/2021/04/18/https-shen-ru-li-jie/1460000012630692" alt="img"></p>
 
                 
             </div>
@@ -576,7 +673,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://bruce11111.github.io/2021/03/31/cookies-he-session/">http://bruce11111.github.io/2021/03/31/cookies-he-session/</a>
+                    <a href="http://bruce11111.github.io/2021/04/18/https-shen-ru-li-jie/">http://bruce11111.github.io/2021/04/18/https-shen-ru-li-jie/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -614,8 +711,8 @@
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/HTTP/">
-                                    <span class="chip bg-color">HTTP</span>
+                                <a href="/tags/%E7%BD%91%E7%BB%9C/">
+                                    <span class="chip bg-color">网络</span>
                                 </a>
                             
                         </div>
@@ -786,7 +883,7 @@
         repo: '',
         owner: '',
         admin: null,
-        id: '2021-03-31T21-00-56',
+        id: '2021-04-18T22-19-15',
         distractionFreeMode: false  // Facebook-like distraction free mode
     });
 
@@ -812,17 +909,18 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2021/04/01/arraylist-kuo-rong-ji-zhi/">
+                <a href="/2021/04/18/https-shen-ru-li-jie/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/11.jpg" class="responsive-img" alt="ArrayList扩容机制">
+                        <img src="/medias/featureimages/20.jpg" class="responsive-img" alt="HTTPS深入理解">
                         
-                        <span class="card-title">ArrayList扩容机制</span>
+                        <span class="card-title">HTTPS深入理解</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -832,26 +930,27 @@
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2021-04-01
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-04-18
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/java/" class="post-category">
-                                    java
+                            <a href="/categories/%E7%BD%91%E7%BB%9C/" class="post-category">
+                                    网络
                                 </a>
                             
                             
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/java/">
-                        <span class="chip bg-color">java</span>
+                    <a href="/tags/%E7%BD%91%E7%BB%9C/">
+                        <span class="chip bg-color">网络</span>
                     </a>
                     
                 </div>
@@ -865,13 +964,13 @@
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2021/03/31/spring-zhu-jie-yuan-li/">
+                <a href="/2021/04/13/jin-cheng-jian-de-tong-xin-ipc/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/1.jpg" class="responsive-img" alt="spring注解原理">
+                        <img src="/medias/featureimages/19.jpg" class="responsive-img" alt="进程间的通信IPC">
                         
-                        <span class="card-title">spring注解原理</span>
+                        <span class="card-title">进程间的通信IPC</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -882,19 +981,27 @@
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-03-31
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-04-13
                             </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/Spring/" class="post-category">
-                                    Spring
+                            <a href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" class="post-category">
+                                    操作系统
                                 </a>
                             
                             
                         </span>
                     </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">
+                        <span class="chip bg-color">操作系统</span>
+                    </a>
+                    
                 </div>
                 
             </div>
