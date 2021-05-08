@@ -29,9 +29,9 @@
 
     <script src="/libs/jquery/jquery.min.js"></script>
 
-<meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="小灰的博客" type="application/atom+xml">
-
+<meta name="generator" content="Hexo 5.4.0">
 <style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+<link rel="alternate" href="/atom.xml" title="小灰的博客" type="application/atom+xml">
 </head>
 
 
@@ -608,6 +608,19 @@
 <p>关系数据库：所有关系的集合。</p>
 <p>关系操作：查询和插入、删除、修改。</p>
 <p>查询操作可以分为选择、投影、连接、除、并、差、交、笛卡尔积等。其中选择、投影、并、差、笛卡尔积是5中基本操作。操作的对象和结果都是集合。非关系数据模型的数据操作方式则为一次一记录的方式。</p>
+<h1 id="InnoDB-技术内幕"><a href="#InnoDB-技术内幕" class="headerlink" title="InnoDB 技术内幕"></a>InnoDB 技术内幕</h1><p>连接MySQL操作是一个连接进程和MySQL数据库实例进行通信。比如通过TCP/IP连接到MySQL实例，数据库会先检查一张权限视图，用来判断发起请求的客户端IP是否允许连接到Mysql实例。</p>
+<h3 id="1-InnoDB体系架构"><a href="#1-InnoDB体系架构" class="headerlink" title="1. InnoDB体系架构"></a>1. InnoDB体系架构</h3><ol>
+<li>Master Thread</li>
+</ol>
+<p>核心的后台线程，主要负责将缓冲池中的数据异步刷新到磁盘，保证数据的一致性，包括脏页的刷新、合并插入缓冲、UNDO页的回收。</p>
+<ol start="2">
+<li>IO Thread</li>
+</ol>
+<p>InnoDB存储引擎大量使用AIO（Async IO）来处理写IO请求，这样可以大大提高数据库的性能。InnoDB 1.0 版本之前共有4个IO Tread。write、read、insert buffer、log IO thread。</p>
+<ol start="3">
+<li>Purge Thread</li>
+</ol>
+<p>PurgeThread来回收已经使用并分配的undo页。</p>
 <h2 id="基础查询"><a href="#基础查询" class="headerlink" title="基础查询"></a>基础查询</h2><h3 id="1、Select"><a href="#1、Select" class="headerlink" title="1、Select"></a>1、<code>Select</code></h3><pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">Select 查询列表 from 表名;
 SELECT last_name,email,salary from employees; #查询多个字段
 SELECT 100*98;#查询表达式
@@ -700,7 +713,16 @@ SELECT SUBSTR("李莫愁爱上了陆展元"，1，3) output //李莫愁<span ari
 <p><img src="/2021/03/15/database/limit%E5%85%AC%E5%BC%8F.PNG"></p>
 <h3 id="Explain-SQL-语句优化"><a href="#Explain-SQL-语句优化" class="headerlink" title="Explain + SQL 语句优化"></a>Explain + SQL 语句优化</h3><h4 id="id"><a href="#id" class="headerlink" title="id"></a>id</h4><p><img src="/2021/03/15/database/explainID.PNG"></p>
 <h4 id="TYPE"><a href="#TYPE" class="headerlink" title="TYPE"></a>TYPE</h4><p><img src="/2021/03/15/database/explainTYPE.PNG"></p>
-<h3 id="2-六大约束"><a href="#2-六大约束" class="headerlink" title="2.六大约束"></a>2.六大约束</h3><h4 id="2-1-事务"><a href="#2-1-事务" class="headerlink" title="2.1 事务"></a>2.1 事务</h4><p>一条或多条sql语句组成的一个执行单位。</p>
+<h3 id="2-六大约束"><a href="#2-六大约束" class="headerlink" title="2.六大约束"></a>2.六大约束</h3><h4 id="2-1-事务"><a href="#2-1-事务" class="headerlink" title="2.1 事务"></a>2.1 事务</h4><h3 id="2-1-1-是什么"><a href="#2-1-1-是什么" class="headerlink" title="2.1.1 是什么"></a>2.1.1 是什么</h3><p>一组原子性的SQL查询，后者说是一个独立的工作单元。</p>
+<h3 id="2-1-2-为什么"><a href="#2-1-2-为什么" class="headerlink" title="2.1.2 为什么"></a>2.1.2 为什么</h3><p>比如现实生活中银行的转账操作，必须打包在一个事务中（从转账方减去，收款方加上）。</p>
+<h3 id="2-1-3-怎么做"><a href="#2-1-3-怎么做" class="headerlink" title="2.1.3 怎么做"></a>2.1.3 怎么做</h3><p>通过满足ACID的要求。</p>
+<p>数据库中有四种隔离级别：</p>
+<ol>
+<li>READ UNCOMMITED （未提交读）</li>
+<li>READ COMMMITTED （提交读）</li>
+<li>REPEATABLE READ （可重复读）MYSQL默认的隔离级别。</li>
+<li>SERIALIZABLE （可串行化）</li>
+</ol>
 <p>设置回滚点</p>
 <pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">savepoint 回滚点名
 rollback to 回滚点名<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
@@ -1303,7 +1325,7 @@ LIMIT &lt; limit_number &gt;<span aria-hidden="true" class="line-numbers-rows"><
 <li>单路排序</li>
 </ol>
 <p>从磁盘读取查询需要的所有列，按照orderby列在buffer对它们进行排序，然后扫描排序后的列表进行输出，它的效率更快一些，避免出现了第二次读取数据。并且把随机IO变成了顺序IO，但是它会使用更多空间，因为把每一行都保存在内存。</p>
-<p><font color="red">MYSQL两种排序：文件排序和扫描有序索引排序。</font></p><font color="red">
+<p><font color="red">MYSQL两种排序：文件排序和扫描有序索引排序。</font></p>
 <h3 id="7-6-慢查询日志"><a href="#7-6-慢查询日志" class="headerlink" title="7.6 慢查询日志"></a>7.6 慢查询日志</h3><p>mysql默认没有开启慢查询日志，需要手动设置。如果不是调优，一般不开启。</p>
 <p><code>SHOW VARIABLES LIKE '%slow_query_log%'</code></p>
 <p>由<code>long_query_time</code>控制，默认情况下<code>long_query_time</code>的值为10秒。</p>
@@ -1557,7 +1579,7 @@ commit;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></s
 <p>表锁（偏向MYISAM引擎。</p>
 <h3 id="25-日志系统"><a href="#25-日志系统" class="headerlink" title="25. 日志系统"></a>25. 日志系统</h3><p><code>binlog</code> ——》 MYSQL服务的   <code>undo log</code> 和  <code>redo log</code> ——》innodb存储引擎的</p>
 <h3 id="26-MYSQL-结构"><a href="#26-MYSQL-结构" class="headerlink" title="26. MYSQL 结构"></a>26. MYSQL 结构</h3><p><img src="/2021/03/15/database/MYSQL%E7%BB%93%E6%9E%84.PNG"></p>
-</font>
+
                 
             </div>
             <hr/>

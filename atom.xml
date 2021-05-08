@@ -6,7 +6,7 @@
   <link href="http://bruce11111.github.io/atom.xml" rel="self"/>
   
   <link href="http://bruce11111.github.io/"/>
-  <updated>2021-04-18T14:20:27.463Z</updated>
+  <updated>2021-05-08T12:51:19.333Z</updated>
   <id>http://bruce11111.github.io/</id>
   
   <author>
@@ -15,6 +15,106 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Java堆栈内存与堆外内存</title>
+    <link href="http://bruce11111.github.io/2021/05/08/java-dui-zhan-nei-cun-yu-dui-wai-nei-cun/"/>
+    <id>http://bruce11111.github.io/2021/05/08/java-dui-zhan-nei-cun-yu-dui-wai-nei-cun/</id>
+    <published>2021-05-08T12:48:12.000Z</published>
+    <updated>2021-05-08T12:51:19.333Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;Java堆栈内存与堆外内存&quot;&gt;&lt;a href=&quot;#Java堆栈内存与堆外内存&quot; class=&quot;headerlink&quot; title=&quot;Java堆栈内存与堆外内存&quot;&gt;&lt;/a&gt;Java堆栈内存与堆外内存&lt;/h2&gt;&lt;p&gt;参考至：&lt;a</summary>
+        
+      
+    
+    
+    
+    <category term="java" scheme="http://bruce11111.github.io/categories/java/"/>
+    
+    
+    <category term="java" scheme="http://bruce11111.github.io/tags/java/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>netty</title>
+    <link href="http://bruce11111.github.io/2021/05/01/netty/"/>
+    <id>http://bruce11111.github.io/2021/05/01/netty/</id>
+    <published>2021-05-01T01:25:12.000Z</published>
+    <updated>2021-05-08T12:32:13.130Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;Netty&quot;&gt;&lt;a href=&quot;#Netty&quot; class=&quot;headerlink&quot; title=&quot;Netty&quot;&gt;&lt;/a&gt;Netty&lt;/h1&gt;&lt;h2 id=&quot;1-IO模型&quot;&gt;&lt;a href=&quot;#1-IO模型&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="netty" scheme="http://bruce11111.github.io/categories/netty/"/>
+    
+    
+    <category term="netty" scheme="http://bruce11111.github.io/tags/netty/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Properties类Java</title>
+    <link href="http://bruce11111.github.io/2021/04/27/properties-lei-java/"/>
+    <id>http://bruce11111.github.io/2021/04/27/properties-lei-java/</id>
+    <published>2021-04-27T02:31:58.000Z</published>
+    <updated>2021-04-27T03:20:07.215Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;Properties&quot;&gt;&lt;a href=&quot;#Properties&quot; class=&quot;headerlink&quot; title=&quot;Properties&quot;&gt;&lt;/a&gt;Properties&lt;/h1&gt;&lt;p&gt;&lt;img</summary>
+        
+      
+    
+    
+    
+    <category term="java" scheme="http://bruce11111.github.io/categories/java/"/>
+    
+    
+    <category term="java" scheme="http://bruce11111.github.io/tags/java/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>dubbo</title>
+    <link href="http://bruce11111.github.io/2021/04/23/dubbo/"/>
+    <id>http://bruce11111.github.io/2021/04/23/dubbo/</id>
+    <published>2021-04-23T13:42:09.000Z</published>
+    <updated>2021-04-30T12:23:59.207Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;Dubbo&quot;&gt;&lt;a href=&quot;#Dubbo&quot; class=&quot;headerlink&quot; title=&quot;Dubbo&quot;&gt;&lt;/a&gt;Dubbo&lt;/h1&gt;&lt;h3 id=&quot;幂等&quot;&gt;&lt;a href=&quot;#幂等&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="dubbo" scheme="http://bruce11111.github.io/categories/dubbo/"/>
+    
+    
+    <category term="dubbo" scheme="http://bruce11111.github.io/tags/dubbo/"/>
+    
+  </entry>
   
   <entry>
     <title>HTTPS深入理解</title>
@@ -396,90 +496,6 @@
     
     
     <category term="life" scheme="http://bruce11111.github.io/tags/life/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Network Interview</title>
-    <link href="http://bruce11111.github.io/2021/03/24/interview-1/"/>
-    <id>http://bruce11111.github.io/2021/03/24/interview-1/</id>
-    <published>2021-03-24T08:21:36.000Z</published>
-    <updated>2021-03-24T09:01:48.255Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h2 id=&quot;1-TIME-WAIT过多&quot;&gt;&lt;a href=&quot;#1-TIME-WAIT过多&quot; class=&quot;headerlink&quot; title=&quot;1. TIME_WAIT过多&quot;&gt;&lt;/a&gt;1. TIME_WAIT过多&lt;/h2&gt;&lt;h3 id=&quot;1-1原因&quot;&gt;&lt;a</summary>
-        
-      
-    
-    
-    
-    <category term="network" scheme="http://bruce11111.github.io/categories/network/"/>
-    
-    
-    <category term="interview" scheme="http://bruce11111.github.io/tags/interview/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Interview</title>
-    <link href="http://bruce11111.github.io/2021/03/24/interview/"/>
-    <id>http://bruce11111.github.io/2021/03/24/interview/</id>
-    <published>2021-03-24T08:21:28.000Z</published>
-    <updated>2021-03-24T08:21:28.159Z</updated>
-    
-    
-    
-    
-    
-  </entry>
-  
-  <entry>
-    <title>在线教育项目实战</title>
-    <link href="http://bruce11111.github.io/2021/03/23/project/"/>
-    <id>http://bruce11111.github.io/2021/03/23/project/</id>
-    <published>2021-03-23T02:54:31.000Z</published>
-    <updated>2021-04-01T03:00:15.503Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h1 id=&quot;在线教育平台&quot;&gt;&lt;a href=&quot;#在线教育平台&quot; class=&quot;headerlink&quot; title=&quot;在线教育平台&quot;&gt;&lt;/a&gt;在线教育平台&lt;/h1&gt;&lt;h2 id=&quot;1-结构&quot;&gt;&lt;a href=&quot;#1-结构&quot; class=&quot;headerlink&quot;</summary>
-        
-      
-    
-    
-    
-    <category term="project" scheme="http://bruce11111.github.io/categories/project/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>MYSQL</title>
-    <link href="http://bruce11111.github.io/2021/03/15/database/"/>
-    <id>http://bruce11111.github.io/2021/03/15/database/</id>
-    <published>2021-03-15T07:51:32.000Z</published>
-    <updated>2021-04-07T12:11:21.519Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h1 id=&quot;数据库&quot;&gt;&lt;a href=&quot;#数据库&quot; class=&quot;headerlink&quot; title=&quot;数据库&quot;&gt;&lt;/a&gt;数据库&lt;/h1&gt;&lt;h2 id=&quot;一、绪论&quot;&gt;&lt;a href=&quot;#一、绪论&quot; class=&quot;headerlink&quot;</summary>
-        
-      
-    
-    
-    
-    <category term="database" scheme="http://bruce11111.github.io/categories/database/"/>
-    
     
   </entry>
   
