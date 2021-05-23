@@ -502,7 +502,7 @@
 <li>AIO 适用于连接数目多且连接时间长（重操作）的架构，比如相册服务器，充分调用OS参与并发操作，编程比较复杂，JDK7开始支持。</li>
 </ul>
 <p>netty基于NIO。</p>
-<h3 id="1-1-NIO"><a href="#1-1-NIO" class="headerlink" title="1.1 NIO"></a>1.1 NIO</h3><h4 id="1-buffer"><a href="#1-buffer" class="headerlink" title="1.buffer"></a><strong>1.buffer</strong></h4><p>（为什么）它是为了实现缓冲区的概念而产生的。</p>
+<h3 id="1-1-NIO"><a href="#1-1-NIO" class="headerlink" title="1.1 NIO"></a>1.1 NIO</h3><h4 id="1-1-1-buffer"><a href="#1-1-1-buffer" class="headerlink" title="1.1.1 buffer"></a><strong>1.1.1 buffer</strong></h4><p>（为什么）它是为了实现缓冲区的概念而产生的。</p>
 <p>（是什么）是一种缓冲区的抽象类（<code>abstract class</code>）。本质上是一个可以读写数据的内存块，可以理解成是一个容器对象（含数组），该对象提供了一组方法，可以更轻松地使用内存块，缓冲区对象内置了一些机制，能够跟踪和记录缓冲区的状态变化情况。</p>
 <p>（怎么做）四个属性：</p>
 <p><img src="/2021/05/01/netty/Buffer_nio.PNG"></p>
@@ -544,12 +544,9 @@ readOnlyBuffer<span class="token punctuation">.</span><span class="token functio
 
         accessFile<span class="token punctuation">.</span><span class="token function">close</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-    <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-##### <span class="token number">3.</span> buffer分散和聚集
-
-```java
-<span class="token annotation punctuation">@Test</span>
+<h5 id="3-buffer分散和聚集"><a href="#3-buffer分散和聚集" class="headerlink" title="3. buffer分散和聚集"></a>3. buffer分散和聚集</h5><pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token annotation punctuation">@Test</span>
     <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">run</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">throws</span> <span class="token class-name">Exception</span><span class="token punctuation">{</span>
         <span class="token comment">// 使用ServerSocketChannel 和 SocketChannel</span>
         <span class="token class-name">ServerSocketChannel</span> serverSocketChannel <span class="token operator">=</span> <span class="token class-name">ServerSocketChannel</span><span class="token punctuation">.</span><span class="token keyword">open</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -587,11 +584,7 @@ readOnlyBuffer<span class="token punctuation">.</span><span class="token functio
                 <span class="token class-name">Arrays</span><span class="token punctuation">.</span><span class="token function">asList</span><span class="token punctuation">(</span>byteBuffers<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">forEach</span><span class="token punctuation">(</span>byteBuffer <span class="token operator">-&gt;</span> byteBuffer<span class="token punctuation">.</span><span class="token function">clear</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
                 <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"byteRead:="</span> <span class="token operator">+</span> byteRead <span class="token operator">+</span> <span class="token string">" byteWrite = "</span> <span class="token operator">+</span> byteWrite<span class="token punctuation">)</span><span class="token punctuation">;</span>
             <span class="token punctuation">}</span>
-        <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-
-
-
+        <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p><strong>1.2 Channel</strong> 通道</p>
 <p>（是什么）是一个接口(interface)</p>
@@ -632,6 +625,59 @@ readOnlyBuffer<span class="token punctuation">.</span><span class="token functio
 
 <p>常用的<code>Channel</code>类有：<code>FileChannel</code>、<code>DatagramChannel</code>、<code>ServerSocketChannel</code>和<code>SocketChannel</code>。</p>
 <p><code>FileChannel</code>用于文件的读写，<code>DatagramChannel</code>用于UDP的数据读写，<code>ServerSocketChannel</code>和<code>SocketChannel</code>用于TCP的数据读写。</p>
+<h3 id="1-2-Selector"><a href="#1-2-Selector" class="headerlink" title="1.2 Selector"></a><strong>1.2 Selector</strong></h3><p>是什么？</p>
+<p>Selector能够检测多个注册的通道上是否有事件发生。注意：多个Channel以事件的方式可以注册到同一个Selector。如果有事件发生，便获取事件然后针对每个事件进行相应的处理。这样就可以只用一个单线程去管理多个通道，也就是管理多个连接和请求。</p>
+<p>怎么做？</p>
+<p>Netty的IO线程<code>NioEventLoop</code>聚合了<code>Selector（选择器）</code>（也叫多路复用器），可以同时并发处理成百上千个客户端连接。</p>
+<p>当线程从某客户端Socket通道进行读写数据时，若没有数据可用时，该线程可以进行其他任务。</p>
+<h5 id="1-实现"><a href="#1-实现" class="headerlink" title="1. 实现"></a>1. 实现</h5><p>Selector类是一个抽象类</p>
+<ul>
+<li><p>select()阻塞。</p>
+</li>
+<li><p>select(long timeout) 监控所有注册的通道，当其中有IO操作可以进行时，将对应的<code>SelectionKey</code>加入到内部集合中并返回，参数用来设置超时时间。</p>
+</li>
+<li><p>wakeup() 唤醒selector</p>
+</li>
+<li><p>selectNow() 不阻塞，立马返回。</p>
+</li>
+<li><p>Set<selectionkey> selectedKeys(); //从内部集合中得到所有的SelectionKey。</selectionkey></p>
+</li>
+</ul>
+<h5 id="2-NIO-非阻塞网络编程原理分析图"><a href="#2-NIO-非阻塞网络编程原理分析图" class="headerlink" title="2. NIO 非阻塞网络编程原理分析图"></a>2. NIO 非阻塞网络编程原理分析图</h5><ol>
+<li>当客户端连接时，会通过<code>ServerSocketChannel</code>得到<code>SocketChannel</code>。</li>
+<li>将socketChannel注册到Selector上，register(Selector sel, int ops)， 一个selector上可以注册多个SocketChannel。</li>
+<li>注册后返回一个SelectionKey，会和该Selector关联（集合）。</li>
+<li>Selector进行监听select方法，返回有事件发生的通道的个数。</li>
+<li>进一步得到各个SelectionKey。</li>
+<li>再通过SelectionKey得到注册的Channel。</li>
+<li>通过得到的Channel完成业务处理。</li>
+</ol>
+<h2 id="2-零拷贝"><a href="#2-零拷贝" class="headerlink" title="2. 零拷贝"></a>2. 零拷贝</h2><p>零拷贝指的是从操作系统角度看的，没有CPU拷贝。</p>
+<p>传统IO，四次拷贝，三次切换。</p>
+<h3 id="3-1-mmap优化"><a href="#3-1-mmap优化" class="headerlink" title="3.1 mmap优化"></a>3.1 mmap优化</h3><ul>
+<li>mmap通过内存映射，将文件映射到内核缓冲区，同时，用户空间可以共享内核空间的数据。这样，在进行网络传输时，就可以减少内核空间到用户空间的拷贝次数。</li>
+</ul>
+<p>拷贝减少为3次，内核态和用户态的切换仍然为3次。</p>
+<p>适合小数据量。</p>
+<h3 id="3-2-sendfile-优化"><a href="#3-2-sendfile-优化" class="headerlink" title="3.2 sendfile 优化"></a>3.2 sendfile 优化</h3><p>基本原理：直接从内核缓冲区进入到Socket Buffer。同时，由于和用户态完全无关，减少了一次上下文切换。</p>
+<p>适合大文件传输。</p>
+<p>只需要一次系统调用，最少2次数据拷贝。</p>
+<h2 id="3-netty-架构"><a href="#3-netty-架构" class="headerlink" title="3. netty 架构"></a>3. netty 架构</h2><h3 id="3-1-其他线程模型"><a href="#3-1-其他线程模型" class="headerlink" title="3.1 其他线程模型"></a>3.1 其他线程模型</h3><ul>
+<li>传统阻塞IO模式</li>
+<li>Reactor模式<ul>
+<li>单Reactor单线程</li>
+<li>单Reactor多线程</li>
+<li>主从Reactor多线程</li>
+</ul>
+</li>
+</ul>
+<h4 id=""><a href="#" class="headerlink" title=""></a></h4><h3 id="3-2-netty线程模型"><a href="#3-2-netty线程模型" class="headerlink" title="3.2 netty线程模型"></a>3.2 netty线程模型</h3><p>基于主从Reactor多线程模型，并且对其进行了一定的改进，其中主从Reactor多线程模型有多个Reactor。</p>
+<p><img src="/2021/05/01/netty/Reactor%E6%95%B4%E4%BD%93%E6%A8%A1%E5%BC%8F.PNG"></p>
+<ol>
+<li>Reactor模式，通过一个或多个输入同时传递给服务处理器的模式（基于事件驱动）</li>
+<li>服务器端程序处理传入的多个请求，并将它们同步分派到相应的处理线程，因此Reactor模式也叫Dispatcher模式。</li>
+<li>Reactor模式使用IO复用监听事件，收到事件后，分发给某个线程（进程），这点就是网络服务器高并发处理关键。</li>
+</ol>
 
                 
             </div>

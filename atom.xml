@@ -6,7 +6,7 @@
   <link href="http://bruce11111.github.io/atom.xml" rel="self"/>
   
   <link href="http://bruce11111.github.io/"/>
-  <updated>2021-05-08T12:51:19.333Z</updated>
+  <updated>2021-05-23T12:57:27.614Z</updated>
   <id>http://bruce11111.github.io/</id>
   
   <author>
@@ -15,6 +15,176 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>nginx</title>
+    <link href="http://bruce11111.github.io/2021/05/23/nginx/"/>
+    <id>http://bruce11111.github.io/2021/05/23/nginx/</id>
+    <published>2021-05-23T10:43:47.000Z</published>
+    <updated>2021-05-23T12:57:27.614Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;NIGNX&quot;&gt;&lt;a href=&quot;#NIGNX&quot; class=&quot;headerlink&quot; title=&quot;NIGNX&quot;&gt;&lt;/a&gt;NIGNX&lt;/h1&gt;&lt;h2 id=&quot;1-基本概念&quot;&gt;&lt;a href=&quot;#1-基本概念&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="nginx" scheme="http://bruce11111.github.io/categories/nginx/"/>
+    
+    <category term="java" scheme="http://bruce11111.github.io/categories/nginx/java/"/>
+    
+    
+    <category term="nginx" scheme="http://bruce11111.github.io/tags/nginx/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>springboot</title>
+    <link href="http://bruce11111.github.io/2021/05/19/springboot/"/>
+    <id>http://bruce11111.github.io/2021/05/19/springboot/</id>
+    <published>2021-05-19T09:53:35.000Z</published>
+    <updated>2021-05-20T04:21:05.948Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;SpringBoot&quot;&gt;&lt;a href=&quot;#SpringBoot&quot; class=&quot;headerlink&quot; title=&quot;SpringBoot&quot;&gt;&lt;/a&gt;SpringBoot&lt;/h1&gt;&lt;h2 id=&quot;1-1-自动装配原理&quot;&gt;&lt;a</summary>
+        
+      
+    
+    
+    
+    <category term="springboot" scheme="http://bruce11111.github.io/categories/springboot/"/>
+    
+    <category term="java" scheme="http://bruce11111.github.io/categories/springboot/java/"/>
+    
+    
+    <category term="springboot" scheme="http://bruce11111.github.io/tags/springboot/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>什么是高可用</title>
+    <link href="http://bruce11111.github.io/2021/05/18/shi-me-shi-gao-ke-yong/"/>
+    <id>http://bruce11111.github.io/2021/05/18/shi-me-shi-gao-ke-yong/</id>
+    <published>2021-05-18T09:07:21.000Z</published>
+    <updated>2021-05-18T09:31:15.826Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;什么是高可用&quot;&gt;&lt;a href=&quot;#什么是高可用&quot; class=&quot;headerlink&quot; title=&quot;什么是高可用&quot;&gt;&lt;/a&gt;什么是高可用&lt;/h1&gt;&lt;p&gt;为什么就不说了吧，系统都要保证这一点的，否则经常奔溃那这系统还能用吗？&lt;/p&gt;
+&lt;h2</summary>
+        
+      
+    
+    
+    
+    <category term="讨论" scheme="http://bruce11111.github.io/categories/%E8%AE%A8%E8%AE%BA/"/>
+    
+    
+    <category term="讨论" scheme="http://bruce11111.github.io/tags/%E8%AE%A8%E8%AE%BA/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>docker</title>
+    <link href="http://bruce11111.github.io/2021/05/16/docker/"/>
+    <id>http://bruce11111.github.io/2021/05/16/docker/</id>
+    <published>2021-05-16T13:49:59.000Z</published>
+    <updated>2021-05-16T14:07:12.470Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;Docker&quot;&gt;&lt;a href=&quot;#Docker&quot; class=&quot;headerlink&quot; title=&quot;Docker&quot;&gt;&lt;/a&gt;Docker&lt;/h1&gt;&lt;h2 id=&quot;1-概述&quot;&gt;&lt;a href=&quot;#1-概述&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="docker" scheme="http://bruce11111.github.io/categories/docker/"/>
+    
+    
+    <category term="docker" scheme="http://bruce11111.github.io/tags/docker/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>post</title>
+    <link href="http://bruce11111.github.io/2021/05/16/post/"/>
+    <id>http://bruce11111.github.io/2021/05/16/post/</id>
+    <published>2021-05-16T13:49:16.000Z</published>
+    <updated>2021-05-16T13:49:16.484Z</updated>
+    
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>git</title>
+    <link href="http://bruce11111.github.io/2021/05/16/git/"/>
+    <id>http://bruce11111.github.io/2021/05/16/git/</id>
+    <published>2021-05-16T10:59:22.000Z</published>
+    <updated>2021-05-16T13:48:33.840Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;Git&quot;&gt;&lt;a href=&quot;#Git&quot; class=&quot;headerlink&quot; title=&quot;Git&quot;&gt;&lt;/a&gt;Git&lt;/h1&gt;&lt;h2 id=&quot;1-简介&quot;&gt;&lt;a href=&quot;#1-简介&quot; class=&quot;headerlink&quot; title=&quot;1.</summary>
+        
+      
+    
+    
+    
+    <category term="git" scheme="http://bruce11111.github.io/categories/git/"/>
+    
+    
+    <category term="git" scheme="http://bruce11111.github.io/tags/git/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>springcloud</title>
+    <link href="http://bruce11111.github.io/2021/05/16/springcloud/"/>
+    <id>http://bruce11111.github.io/2021/05/16/springcloud/</id>
+    <published>2021-05-16T09:01:57.000Z</published>
+    <updated>2021-05-17T14:24:07.982Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;Springcloud&quot;&gt;&lt;a href=&quot;#Springcloud&quot; class=&quot;headerlink&quot; title=&quot;Springcloud&quot;&gt;&lt;/a&gt;Springcloud&lt;/h1&gt;&lt;h2 id=&quot;1-微服务架构&quot;&gt;&lt;a href=&quot;#1-微服务架构&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="springcloud" scheme="http://bruce11111.github.io/categories/springcloud/"/>
+    
+    <category term="java" scheme="http://bruce11111.github.io/categories/springcloud/java/"/>
+    
+    
+    <category term="springcloud" scheme="http://bruce11111.github.io/tags/springcloud/"/>
+    
+  </entry>
   
   <entry>
     <title>Java堆栈内存与堆外内存</title>
@@ -46,7 +216,7 @@
     <link href="http://bruce11111.github.io/2021/05/01/netty/"/>
     <id>http://bruce11111.github.io/2021/05/01/netty/</id>
     <published>2021-05-01T01:25:12.000Z</published>
-    <updated>2021-05-08T12:32:13.130Z</updated>
+    <updated>2021-05-12T13:54:39.774Z</updated>
     
     
       
@@ -96,14 +266,14 @@
     <link href="http://bruce11111.github.io/2021/04/23/dubbo/"/>
     <id>http://bruce11111.github.io/2021/04/23/dubbo/</id>
     <published>2021-04-23T13:42:09.000Z</published>
-    <updated>2021-04-30T12:23:59.207Z</updated>
+    <updated>2021-05-16T07:43:18.221Z</updated>
     
     
       
       
         
         
-    <summary type="html">&lt;h1 id=&quot;Dubbo&quot;&gt;&lt;a href=&quot;#Dubbo&quot; class=&quot;headerlink&quot; title=&quot;Dubbo&quot;&gt;&lt;/a&gt;Dubbo&lt;/h1&gt;&lt;h3 id=&quot;幂等&quot;&gt;&lt;a href=&quot;#幂等&quot; class=&quot;headerlink&quot;</summary>
+    <summary type="html">&lt;h1 id=&quot;Dubbo&quot;&gt;&lt;a href=&quot;#Dubbo&quot; class=&quot;headerlink&quot; title=&quot;Dubbo&quot;&gt;&lt;/a&gt;Dubbo&lt;/h1&gt;&lt;h2 id=&quot;1-分布式基础&quot;&gt;&lt;a href=&quot;#1-分布式基础&quot; class=&quot;headerlink&quot;</summary>
         
       
     
@@ -121,14 +291,14 @@
     <link href="http://bruce11111.github.io/2021/04/18/https-shen-ru-li-jie/"/>
     <id>http://bruce11111.github.io/2021/04/18/https-shen-ru-li-jie/</id>
     <published>2021-04-18T14:19:15.000Z</published>
-    <updated>2021-04-18T14:20:27.463Z</updated>
+    <updated>2021-05-16T07:28:53.079Z</updated>
     
     
       
       
         
         
-    <summary type="html">&lt;h2 id=&quot;HTTPS是什么&quot;&gt;&lt;a href=&quot;#HTTPS是什么&quot; class=&quot;headerlink&quot; title=&quot;HTTPS是什么&quot;&gt;&lt;/a&gt;HTTPS是什么&lt;/h2&gt;&lt;h3 id=&quot;HTTP存在问题&quot;&gt;&lt;a href=&quot;#HTTP存在问题&quot;</summary>
+    <summary type="html">&lt;h2 id=&quot;HTTPS是什么&quot;&gt;&lt;a href=&quot;#HTTPS是什么&quot; class=&quot;headerlink&quot; title=&quot;HTTPS是什么&quot;&gt;&lt;/a&gt;HTTPS是什么&lt;/h2&gt;&lt;h1 id=&quot;1-HTTP&quot;&gt;&lt;a href=&quot;#1-HTTP&quot;</summary>
         
       
     
@@ -280,7 +450,7 @@
     <link href="http://bruce11111.github.io/2021/04/06/redis-ji-chu/"/>
     <id>http://bruce11111.github.io/2021/04/06/redis-ji-chu/</id>
     <published>2021-04-06T08:26:29.000Z</published>
-    <updated>2021-04-17T07:25:14.663Z</updated>
+    <updated>2021-05-13T13:48:53.676Z</updated>
     
     
       
@@ -322,180 +492,6 @@
     
     
     <category term="java" scheme="http://bruce11111.github.io/tags/java/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Arrays.sort底层源码</title>
-    <link href="http://bruce11111.github.io/2021/04/01/arrays-sort-di-ceng-yuan-ma/"/>
-    <id>http://bruce11111.github.io/2021/04/01/arrays-sort-di-ceng-yuan-ma/</id>
-    <published>2021-04-01T12:28:06.000Z</published>
-    <updated>2021-04-01T12:50:03.595Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h1 id=&quot;Java的Arrays-sort-方法到底用的什么排序算法&quot;&gt;&lt;a href=&quot;#Java的Arrays-sort-方法到底用的什么排序算法&quot; class=&quot;headerlink&quot;</summary>
-        
-      
-    
-    
-    
-    <category term="java" scheme="http://bruce11111.github.io/categories/java/"/>
-    
-    
-    <category term="java" scheme="http://bruce11111.github.io/tags/java/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>ArrayList扩容机制</title>
-    <link href="http://bruce11111.github.io/2021/04/01/arraylist-kuo-rong-ji-zhi/"/>
-    <id>http://bruce11111.github.io/2021/04/01/arraylist-kuo-rong-ji-zhi/</id>
-    <published>2021-04-01T12:17:42.000Z</published>
-    <updated>2021-04-01T12:28:23.135Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;p&gt;&lt;a href=&quot;https://www.cnblogs.com/baichunyu/p/12965241.html&quot;&gt;ArrayList扩容机制&lt;/a&gt;&lt;/p&gt;
-&lt;h1 id=&quot;一、先从-ArrayList-的构造函数说起&quot;&gt;&lt;a</summary>
-        
-      
-    
-    
-    
-    <category term="java" scheme="http://bruce11111.github.io/categories/java/"/>
-    
-    
-    <category term="java" scheme="http://bruce11111.github.io/tags/java/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>cookies和session</title>
-    <link href="http://bruce11111.github.io/2021/03/31/cookies-he-session/"/>
-    <id>http://bruce11111.github.io/2021/03/31/cookies-he-session/</id>
-    <published>2021-03-31T13:00:56.000Z</published>
-    <updated>2021-04-01T01:28:26.031Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h2 id=&quot;简述&quot;&gt;&lt;a href=&quot;#简述&quot; class=&quot;headerlink&quot; title=&quot;简述&quot;&gt;&lt;/a&gt;简述&lt;/h2&gt;&lt;p&gt; (referentce to &lt;a</summary>
-        
-      
-    
-    
-    
-    <category term="network" scheme="http://bruce11111.github.io/categories/network/"/>
-    
-    
-    <category term="HTTP" scheme="http://bruce11111.github.io/tags/HTTP/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>spring注解原理</title>
-    <link href="http://bruce11111.github.io/2021/03/31/spring-zhu-jie-yuan-li/"/>
-    <id>http://bruce11111.github.io/2021/03/31/spring-zhu-jie-yuan-li/</id>
-    <published>2021-03-31T07:36:33.000Z</published>
-    <updated>2021-03-31T09:22:41.215Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h1 id=&quot;Spring-注解驱动开发&quot;&gt;&lt;a href=&quot;#Spring-注解驱动开发&quot; class=&quot;headerlink&quot; title=&quot;Spring 注解驱动开发&quot;&gt;&lt;/a&gt;Spring</summary>
-        
-      
-    
-    
-    
-    <category term="Spring" scheme="http://bruce11111.github.io/categories/Spring/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>System类源码分析</title>
-    <link href="http://bruce11111.github.io/2021/03/31/system-lei-yuan-ma-fen-xi/"/>
-    <id>http://bruce11111.github.io/2021/03/31/system-lei-yuan-ma-fen-xi/</id>
-    <published>2021-03-31T03:38:47.000Z</published>
-    <updated>2021-03-31T03:52:54.735Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h2 id=&quot;The-Security-Manager&quot;&gt;&lt;a href=&quot;#The-Security-Manager&quot; class=&quot;headerlink&quot; title=&quot;The Security Manager&quot;&gt;&lt;/a&gt;The Security</summary>
-        
-      
-    
-    
-    
-    <category term="java" scheme="http://bruce11111.github.io/categories/java/"/>
-    
-    
-    <category term="java" scheme="http://bruce11111.github.io/tags/java/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>javaunderlying</title>
-    <link href="http://bruce11111.github.io/2021/03/31/javaunderlying/"/>
-    <id>http://bruce11111.github.io/2021/03/31/javaunderlying/</id>
-    <published>2021-03-31T01:05:47.000Z</published>
-    <updated>2021-03-31T02:24:11.219Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h3 id=&quot;1-栈帧中的变量作用域&quot;&gt;&lt;a href=&quot;#1-栈帧中的变量作用域&quot; class=&quot;headerlink&quot; title=&quot;1. 栈帧中的变量作用域&quot;&gt;&lt;/a&gt;&lt;font color=&quot;green&quot;&gt;1.</summary>
-        
-      
-    
-    
-    
-    
-  </entry>
-  
-  <entry>
-    <title>小陈和我</title>
-    <link href="http://bruce11111.github.io/2021/03/30/love/"/>
-    <id>http://bruce11111.github.io/2021/03/30/love/</id>
-    <published>2021-03-30T12:45:30.000Z</published>
-    <updated>2021-04-18T07:33:59.830Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h1 id=&quot;小陈和我的生活记录&quot;&gt;&lt;a href=&quot;#小陈和我的生活记录&quot; class=&quot;headerlink&quot; title=&quot;小陈和我的生活记录&quot;&gt;&lt;/a&gt;小陈和我的生活记录&lt;/h1&gt;&lt;p&gt;身份介绍：&lt;/p&gt;
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th</summary>
-        
-      
-    
-    
-    
-    <category term="life" scheme="http://bruce11111.github.io/categories/life/"/>
-    
-    
-    <category term="life" scheme="http://bruce11111.github.io/tags/life/"/>
     
   </entry>
   

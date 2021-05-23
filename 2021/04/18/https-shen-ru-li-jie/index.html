@@ -496,7 +496,135 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="HTTPS是什么"><a href="#HTTPS是什么" class="headerlink" title="HTTPS是什么"></a>HTTPS是什么</h2><h3 id="HTTP存在问题"><a href="#HTTP存在问题" class="headerlink" title="HTTP存在问题"></a>HTTP存在问题</h3><p>由于HTTP协议过于简单：</p>
+                <h2 id="HTTPS是什么"><a href="#HTTPS是什么" class="headerlink" title="HTTPS是什么"></a>HTTPS是什么</h2><h1 id="1-HTTP"><a href="#1-HTTP" class="headerlink" title="1. HTTP"></a>1. HTTP</h1><h2 id="1-1-HTTP-状态码"><a href="#1-1-HTTP-状态码" class="headerlink" title="1.1 HTTP 状态码"></a>1.1 HTTP 状态码</h2><table>
+<thead>
+<tr>
+<th>分类</th>
+<th>分类描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1**</td>
+<td>信息，服务器收到请求，需要请求者继续执行</td>
+</tr>
+<tr>
+<td>2**</td>
+<td>成功，操作被成功接收并处理</td>
+</tr>
+<tr>
+<td>3**</td>
+<td>重定向，需要进一步的操作以完成请求</td>
+</tr>
+<tr>
+<td>4**</td>
+<td>客户端错误，请求包含语法错误或无法完成请求</td>
+</tr>
+<tr>
+<td>5**</td>
+<td>服务器错误，服务器在处理请求的过程中发生了错误</td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th>状态码</th>
+<th>状态码英文名称</th>
+<th>中文描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>100</td>
+<td>Continue</td>
+<td>继续，客户端应继续其请求</td>
+</tr>
+<tr>
+<td>101</td>
+<td>Switching Protocols</td>
+<td>切换协议</td>
+</tr>
+<tr>
+<td>200</td>
+<td>OK</td>
+<td>请求成功。一般用于GET与POST请求。</td>
+</tr>
+<tr>
+<td>201</td>
+<td>Created</td>
+<td>已创建，成功请求并创建新的资源</td>
+</tr>
+<tr>
+<td>202</td>
+<td>Accepted</td>
+<td>已接受，已经接收请求，但未处理完成</td>
+</tr>
+<tr>
+<td>203</td>
+<td>Non-Authoritative Information</td>
+<td>非授权信息。请求成功，但返回的meta信息不在原始服务器，而是一个副本</td>
+</tr>
+<tr>
+<td>204</td>
+<td>No Content</td>
+<td>无内容。服务器处理成功，但未返回内容。在未更新网页的情况下，可确保浏览器继续显示当前文档。</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th>状态码</th>
+<th>状态码英文名称</th>
+<th></th>
+<th>中文描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>500</td>
+<td>Internal Server Error</td>
+<td></td>
+<td>服务器内部错误，无法完成请求。</td>
+</tr>
+<tr>
+<td>501</td>
+<td>Not Implemented</td>
+<td></td>
+<td>服务器不支持请求的功能，无法完成请求。</td>
+</tr>
+<tr>
+<td>502</td>
+<td>Bad Gateway</td>
+<td></td>
+<td>作为网关或者代理工作</td>
+</tr>
+<tr>
+<td>503</td>
+<td>Service Unavailable</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>504</td>
+<td>HTTP Version not supported</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>505</td>
+<td>GateWay Time-out</td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<h3 id="HTTP存在问题"><a href="#HTTP存在问题" class="headerlink" title="HTTP存在问题"></a>HTTP存在问题</h3><p>由于HTTP协议过于简单：</p>
 <ul>
 <li>通信使用明文（不加密），内容可能会被窃听。</li>
 <li>不验证通信方的身份，因此可能遭遇伪装</li>

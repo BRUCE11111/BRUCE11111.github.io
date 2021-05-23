@@ -1066,6 +1066,51 @@ appendfsync no <span class="token comment"># 不执行 sync，这个时候操作
 <li>方案三：数据预热</li>
 </ul>
 <p>在正式部署之前，把所有可能加载到的数据预先访问一遍，这样部分可能大量访问的数据就会加载到缓存中。即将发生大并发访问前手动触发加载缓存不同的key，设置不同的过期时间，让缓存的时间点尽量均匀。</p>
+<h2 id="11-数据不一致问题"><a href="#11-数据不一致问题" class="headerlink" title="11. 数据不一致问题"></a>11. 数据不一致问题</h2><p>Redis和MySQL的数据不一致产生的根源是业务需要进行更新(写入)操作。</p>
+<p>先操作Redis 还是 先操作MySQL是个问题，操作时序不同产生的影响也不同。</p>
+<p>尺有所短，寸有所长，说到底是一种权衡，哪一种组合产生的负面影响对业务最小，就倾向于哪种方案。</p>
+<p>缓存系统的数据不一致问题，是个经典的问题，因此肯定有很多解决问题的套路，所以让我们带着分析和思考去看看，各个方案的利弊。</p>
+<p><strong>思路一：设置缓存过期时间</strong></p>
+<p>当向Redis写入一条数据时，同时设置过期时间x秒，业务不同过期时间不同。</p>
+<p>过期时间到达时Redis就会删掉这条数据，后续读请求Redis出现Cache Miss，进而读取MySQL，然后把数据写到Redis。</p>
+<p>如果发生更新操作时，只操作MySQL，那么Redis中的数据更新就只是依赖于过期时间来保底，淘汰后再被加载就是新数据了。</p>
+<p>画外音：这种方案是最简单的，如果业务对短时间不一致问题并不在意，设置过期时间的方案就足够了，没有必要搞太复杂。</p>
+<p><strong>思路二：先淘汰缓存&amp;再更新主存</strong></p>
+<p>进行更新操作时，为了防止其他线程读到缓存中的旧数据，干脆淘汰掉，然后把数据更新到主存储，后续的请求再次读取时触发Cache Miss，从而读取MySQL再将新数据更新到Redis。</p>
+<p><a target="_blank" rel="noopener" href="https://s5.51cto.com/oss/202104/18/32ced2ae2665c3a2482d7eaa2d880cfa.png"><img src="/2021/04/06/redis-ji-chu/32ced2ae2665c3a2482d7eaa2d880cfa.png" alt="img"></a></p>
+<ul>
+<li>在T1时刻：Redis和MySQL对于age的值都是18，二者一致;</li>
+<li>在T2时刻：有更新请求需要设置age=20，此时Redis中就没有age这个数据了;在完成Redis淘汰后，进行MySQL数据更新age=20;</li>
+</ul>
+<p>这个方案听着还不错的样子，但是读写请求都是并发的，先后顺序完全无法预测，甚至后发出的请求先处理完成，也是很常见的。</p>
+<p>可见一个明显的漏洞：在淘汰Redis的数据完成后，更新MySQL完成之前，这个时间段内如果有新的读请求过来，发现Cache Miss了，就会把旧数据重新写到Redis中，再次造成不一致，并且毫无察觉后续读的都是旧数据。</p>
+<p><a target="_blank" rel="noopener" href="https://s3.51cto.com/oss/202104/18/222bab6d0ea863ad4e2e97c39c4ed5e4.png"><img src="/2021/04/06/redis-ji-chu/222bab6d0ea863ad4e2e97c39c4ed5e4.png" alt="img"></a></p>
+<p>画外音：这个方案其实不能说完全没有用，但是至少不完美吧。</p>
+<h3 id="思路三：先更新主存-amp-再淘汰缓存"><a href="#思路三：先更新主存-amp-再淘汰缓存" class="headerlink" title="思路三：先更新主存&amp;再淘汰缓存"></a>思路三：先更新主存&amp;再淘汰缓存</h3><p>进行更新操作时，先更新MySQL，成功之后，淘汰缓存，后续读取请求时触发Cache Miss再将新数据回写Redis。</p>
+<p><a target="_blank" rel="noopener" href="https://s5.51cto.com/oss/202104/18/7b22bb7a62cff14508fd7009905828d7.png"><img src="/2021/04/06/redis-ji-chu/7b22bb7a62cff14508fd7009905828d7.png" alt="img"></a></p>
+<p>这种模式在更新MySQL和淘汰Redis这段时间内，请求读取的还是Redis的旧数据，不过等MySQL更新完成，就可以立刻恢复一致，影响相对比较小。</p>
+<p><a target="_blank" rel="noopener" href="https://s4.51cto.com/oss/202104/18/4d460d288713e562d017f8f2cdb2cb8b.png"><img src="/2021/04/06/redis-ji-chu/4d460d288713e562d017f8f2cdb2cb8b.png" alt="img"></a></p>
+<p>上述是在缓存中有数据的情况，也就是T2时刻的读请求没有触发Cache Miss，也就不会更新缓存，因此问题不大。</p>
+<p>但是，假如T2时刻读取的数据在缓存没有，那么触发Cache Miss后会产生回写，假如这个回写动作是在T4时刻完成，那么写入的还是老数据，如图：</p>
+<p><a target="_blank" rel="noopener" href="https://s4.51cto.com/oss/202104/18/5985e39605da8ddbe03ebfe3dffd8946.png-wh_600x-s_290050075.png"><img src="/2021/04/06/redis-ji-chu/5985e39605da8ddbe03ebfe3dffd8946.png-wh_600x-s_290050075.png" alt="img"></a></p>
+<p>这种情况确实有问题，但是真是太巧了吧，分析一下：</p>
+<ul>
+<li>事件A：淘汰Redis前来了一个读请求;</li>
+<li>事件B：T2时刻的读请求触发了Cache Miss;</li>
+<li>事件C：回写Redis发生在淘汰缓存之后;</li>
+</ul>
+<p>那么发生问题的概率就是P(A)*P(B)*P(C)，从实际考虑这种综合事件发生的概率非常低，因为写操作远慢于读操作，也就是图上的T4事件大概率是发生在T3事件之前的。</p>
+<p>画外音：先更新MySQL再淘汰Redis的方案，虽然存在小概率不一致问题，但是总体来说工程上是可用的，比如非要说写完MySQL挂了，Redis就没淘汰，这种情况只能说确实有问题。</p>
+<h3 id="思路四：延时双删-淘汰"><a href="#思路四：延时双删-淘汰" class="headerlink" title="思路四：延时双删(淘汰)"></a>思路四：延时双删(淘汰)</h3><p>前面提到的思路二和思路三都只有一次Redis淘汰操作，这里要说的延时双删本质上是思路二和思路三的结合：</p>
+<p><a target="_blank" rel="noopener" href="https://s2.51cto.com/oss/202104/18/debdfb9c6c6e7d93e0959d240ce75d54.png-wh_600x-s_3948280338.png"><img src="/2021/04/06/redis-ji-chu/debdfb9c6c6e7d93e0959d240ce75d54.png-wh_600x-s_3948280338.png" alt="img"></a></p>
+<p>说实话个人觉得，这个方案有点堆操作的感觉，而且设置延时的目的是为了避免思路三的小概率问题，延时设置多久不好确定，二来延时降低了并发性能，同时前置的删除缓存操作起到的作用并不大。</p>
+<p>这个方案倒是透露出一种思想：多删几次，可能一致性更有保证，那确实如此，但是命中率也就低了，命中率和一致性看来也是一对矛盾。</p>
+<p>画外音：这个方案也不是说不行，其实有点麻烦，并且在复杂高并发场景中反而影响性能，要是一般的场景或许也能用起来。</p>
+<h3 id="思路五：异步更新缓存"><a href="#思路五：异步更新缓存" class="headerlink" title="思路五：异步更新缓存"></a>思路五：异步更新缓存</h3><p>既然直接操作MySQL和Redis都多少存在一些问题，那么能不能引入中间层来解决问题呢?</p>
+<p>把MySQL的更新操作完成后不直接操作Redis，而是把这个操作命令(消息)扔到一个中间层，然后由Redis自己来消费更新数据，这是一种解耦的异步方案。</p>
+<p><a target="_blank" rel="noopener" href="https://s5.51cto.com/oss/202104/18/a098eb9f48abb2d5e3be936259d1ee56.png-wh_600x-s_2588560741.png"><img src="/2021/04/06/redis-ji-chu/a098eb9f48abb2d5e3be936259d1ee56.png-wh_600x-s_2588560741.png" alt="img"></a></p>
+<p>单纯为了更新缓存引入中间件确实有些复杂，但是像MySQL提供了binlog的同步机制，此时Redis就作为Slave进行主从同步，实现数据的更新，成本也还可以接受。</p>
+<h3 id="12-面试题（1）"><a href="#12-面试题（1）" class="headerlink" title="12. 面试题（1）"></a>12. 面试题（1）</h3><h4 id="12-1-Redis与Memcached"><a href="#12-1-Redis与Memcached" class="headerlink" title="12.1 Redis与Memcached"></a>12.1 Redis与Memcached</h4><p>我叫许晓晖，来自河北石家庄。很高兴能够在这里向大佬们学习~</p>
 
                 
             </div>

@@ -492,8 +492,19 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="Spring-注解驱动开发"><a href="#Spring-注解驱动开发" class="headerlink" title="Spring 注解驱动开发"></a>Spring 注解驱动开发</h1><p>1、配置文件的形式中，标注了<code>@component-scan</code>,<code>@Controller</code>,<code>@Service</code>,<code>@Repository</code>,<code>@Component</code>就会自动扫描包。</p>
+                <h1 id="Spring-注解驱动开发"><a href="#Spring-注解驱动开发" class="headerlink" title="Spring 注解驱动开发"></a>Spring 注解驱动开发</h1><h2 id="1-配置文件"><a href="#1-配置文件" class="headerlink" title="1. 配置文件"></a>1. 配置文件</h2><p>1、配置文件的形式中，标注了<code>@component-scan</code>,<code>@Controller</code>,<code>@Service</code>,<code>@Repository</code>,<code>@Component</code>就会自动扫描包。</p>
 <p>2、<code>@ComponentScan(value="com.atguigu")</code>,</p>
+<h3 id="1-1-配置"><a href="#1-1-配置" class="headerlink" title="1.1 配置"></a>1.1 配置</h3><h2 id="2-常用注解"><a href="#2-常用注解" class="headerlink" title="2. 常用注解"></a>2. 常用注解</h2><p><code>@Controller</code> 注解的bean会被spring-mvc框架所使用。<br><code>@Repository</code> 会被作为持久层操作（数据库）的bean来使用<br>如果想使用自定义的组件注解，那么只要在你定义的新注解中加上@Component即可：</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token annotation punctuation">@Component</span> 
+<span class="token annotation punctuation">@Scope</span><span class="token punctuation">(</span><span class="token string">"prototype"</span><span class="token punctuation">)</span>
+<span class="token keyword">public</span> <span class="token annotation punctuation">@interface</span> <span class="token class-name">ScheduleJob</span> <span class="token punctuation">{</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">}</span><span class="token number">123</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p>这样，所有被<code>@ScheduleJob</code>注解的类就都可以注入到spring容器来进行管理。我们所需要做的，就是写一些新的代码来处理这个自定义注解（译者注：可以用反射的方法），进而执行我们想要执行的工作。</p>
+<p><code>@Component</code>就是跟<code>&lt;bean&gt;</code>一样，可以托管到Spring容器进行管理。</p>
+<p><code>@Service</code>, <code>@Controller</code> , <code>@Repository</code> = {<code>@Component</code> + 一些特定的功能}。这个就意味着这些注解在部分功能上是一样的。</p>
+<p>当然，下面三个注解被用于为我们的应用进行分层：</p>
+<p><code>@Controller</code>注解类进行前端请求的处理，转发，重定向。包括调用Service层的方法 （requestMapping + componnet)<br><code>@Service</code>注解类处理业务逻辑<br><code>@Repository</code>注解类作为DAO对象（数据访问对象，Data Access Objects），这些类可以直接对数据库进行操作<br>有这些分层操作的话，代码之间就实现了松耦合，代码之间的调用也清晰明朗，便于项目的管理；假想一下，如果只用<code>@Controller</code>注解，那么所有的请求转发，业务处理，数据库操作代码都糅合在一个地方，那这样的代码该有多难拓展和维护。</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p><code>@Component</code>, <code>@Service</code>, <code>@Controller</code>, <code>@Repository</code>是spring注解，注解后可以被spring框架所扫描并注入到spring容器来进行管理<br><code>@Component</code>是通用注解，其他三个注解是这个注解的拓展，并且具有了特定的功能<br><code>@Repository</code>注解在持久层中，具有将数据库操作抛出的原生异常翻译转化为spring的持久层异常的功能。<br><code>@Controller</code>层是spring-mvc的注解，具有将请求进行转发，重定向的功能。<br><code>@Service</code>层是业务逻辑层注解，这个注解只是标注该类处于业务逻辑层。<br>用这些注解对应用进行分层之后，就能将请求处理，义务逻辑处理，数据库操作处理分离出来，为代码解耦，也方便了以后项目的维护和开发。</p>
 
                 
             </div>
