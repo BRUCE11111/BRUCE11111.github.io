@@ -526,12 +526,13 @@
 
 
 
-
-
-
-
-
-
+<h2 id="2-Shiro"><a href="#2-Shiro" class="headerlink" title="2. Shiro"></a>2. Shiro</h2><p>一个Java安全（权限）框架。</p>
+<p><img src="/2021/05/19/springboot/shiro%E7%BB%93%E6%9E%84.PNG"></p>
+<ul>
+<li>subject：直接交互的对象是subject。</li>
+<li>SecurityManager：安全管理器，所有与安全相关的操作都与此交互，并且管理所有的Subject，相当于SpringMVC中的DispatcherServlet的角色。</li>
+<li>Realm：Shiro从Realm获取安全数据（如用户，角色，权限），就是说SecurityManager要验证用户身份，那么它需要从Realm获取相应的用户进行比较，来确定用户的身份是否合法，可以把Realm看成是DataSource。</li>
+</ul>
 
                 
             </div>
