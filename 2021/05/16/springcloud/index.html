@@ -29,9 +29,9 @@
 
     <script src="/libs/jquery/jquery.min.js"></script>
 
-<meta name="generator" content="Hexo 5.4.0">
+<meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="小灰的博客" type="application/atom+xml">
+
 <style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
-<link rel="alternate" href="/atom.xml" title="小灰的博客" type="application/atom+xml">
 </head>
 
 
@@ -503,6 +503,16 @@
                 <h1 id="Springcloud"><a href="#Springcloud" class="headerlink" title="Springcloud"></a>Springcloud</h1><h2 id="1-微服务架构"><a href="#1-微服务架构" class="headerlink" title="1. 微服务架构"></a>1. 微服务架构</h2><h3 id="1-1-为什么"><a href="#1-1-为什么" class="headerlink" title="1.1 为什么"></a>1.1 为什么</h3><h3 id="2-2-是什么"><a href="#2-2-是什么" class="headerlink" title="2.2 是什么"></a>2.2 是什么</h3><p>将单一应用划分成一组小的服务，服务之间相互协调、互相配合，为用户提供最终价值。</p>
 <p>springcloud=多种微服务架构落地技术的集合体，微服务全家桶</p>
 <p><img src="/2021/05/16/springcloud/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%A8%A1%E5%9D%97.PNG"></p>
+<h3 id="1-3-pom文件"><a href="#1-3-pom文件" class="headerlink" title="1.3 pom文件"></a>1.3 pom文件</h3><p><code>dependencyManagement</code> 是maven提供的一种管理依赖版本号的方式。</p>
+<p>使用<code>pom.xml</code>中的dependencyManagement元素能让所有在子项目中引用一个依赖而不用显示的列出版本号。Maven会沿着父子层次向上走，直到找到一个拥有dependencyManagement元素的项目，然后它会使用这个dependencymanagement元素中指定的版本号。</p>
+<p><font color="red"><code>dependencyManagement</code> 只是声明依赖，并不实现引入，因此子项目需要显示的声明需要用的依赖。</font></p>
+<h2 id="2-服务注册中心"><a href="#2-服务注册中心" class="headerlink" title="2.服务注册中心"></a>2.服务注册中心</h2><h3 id="2-1-Zookeeper"><a href="#2-1-Zookeeper" class="headerlink" title="2.1 Zookeeper"></a>2.1 Zookeeper</h3><h3 id="2-2-Consul"><a href="#2-2-Consul" class="headerlink" title="2.2 Consul"></a>2.2 Consul</h3><h3 id="2-3-Nacos"><a href="#2-3-Nacos" class="headerlink" title="2.3 Nacos"></a>2.3 Nacos</h3><h3 id="2-4-Eureka"><a href="#2-4-Eureka" class="headerlink" title="2.4 Eureka"></a>2.4 Eureka</h3><h4 id="2-4-1-基础知识"><a href="#2-4-1-基础知识" class="headerlink" title="2.4.1 基础知识"></a>2.4.1 基础知识</h4><ul>
+<li>服务治理</li>
+</ul>
+<p>Spring Cloud封装了Netflic公司开发的Eureka模块来实现服务治理。</p>
+<p>在传统的rpc远程调用框架中，管理每个服务与服务之间的依赖关系比较复杂，需要使用服务治理管理服务与服务之间的依赖关系，可以实现服务调用、负载均衡、容错等，实现服务的注册与发现。</p>
+<h4 id="2-4-2-单机Eureka构建步骤"><a href="#2-4-2-单机Eureka构建步骤" class="headerlink" title="2.4.2 单机Eureka构建步骤"></a>2.4.2 单机Eureka构建步骤</h4><h4 id="2-4-3-集群Eureka构建步骤"><a href="#2-4-3-集群Eureka构建步骤" class="headerlink" title="2.4.3  集群Eureka构建步骤"></a>2.4.3  集群Eureka构建步骤</h4><h3 id="2-4-4-Eureka-理论"><a href="#2-4-4-Eureka-理论" class="headerlink" title="2.4.4 Eureka 理论"></a>2.4.4 Eureka 理论</h3><p>保护模式主要用于一组客户端和Eureka Server之间存在网络分区场景下的保护。一旦进入保护模式，Eureka Server将会尝试保护其服务注册表中的信息，不再删除服务注册表中的数据，也就是不会注销任何微服务。</p>
+<p>其实就是某时刻某一个微服务不可用，Eureka不会立即清理，依旧会对该微服务的信息进行保存。</p>
 
                 
             </div>

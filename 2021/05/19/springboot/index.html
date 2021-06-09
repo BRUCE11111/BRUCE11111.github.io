@@ -29,9 +29,9 @@
 
     <script src="/libs/jquery/jquery.min.js"></script>
 
-<meta name="generator" content="Hexo 5.4.0">
+<meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="小灰的博客" type="application/atom+xml">
+
 <style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
-<link rel="alternate" href="/atom.xml" title="小灰的博客" type="application/atom+xml">
 </head>
 
 
@@ -506,7 +506,7 @@
 <li>以前需要自动配置的东西，springboot帮我们做了。</li>
 <li>整合javaEE解决方案和自动配置的东西都在<code>springbootautoconfiguration</code>下面</li>
 </ol>
-<h2 id="2-1-yaml"><a href="#2-1-yaml" class="headerlink" title="2.1 yaml"></a>2.1 yaml</h2><pre class="line-numbers language-yaml" data-language="yaml"><code class="language-yaml"><span class="token comment"># 普通</span>
+<h2 id="2-yaml"><a href="#2-yaml" class="headerlink" title="2 yaml"></a>2 yaml</h2><pre class="line-numbers language-yaml" data-language="yaml"><code class="language-yaml"><span class="token comment"># 普通</span>
 <span class="token key atrule">name</span><span class="token punctuation">:</span> qinjiang
 
 <span class="token comment"># 对象</span>
@@ -526,13 +526,17 @@
 
 
 
-<h2 id="2-Shiro"><a href="#2-Shiro" class="headerlink" title="2. Shiro"></a>2. Shiro</h2><p>一个Java安全（权限）框架。</p>
+<h2 id="3-Shiro"><a href="#3-Shiro" class="headerlink" title="3. Shiro"></a>3. Shiro</h2><p>一个Java安全（权限）框架。</p>
 <p><img src="/2021/05/19/springboot/shiro%E7%BB%93%E6%9E%84.PNG"></p>
 <ul>
 <li>subject：直接交互的对象是subject。</li>
 <li>SecurityManager：安全管理器，所有与安全相关的操作都与此交互，并且管理所有的Subject，相当于SpringMVC中的DispatcherServlet的角色。</li>
 <li>Realm：Shiro从Realm获取安全数据（如用户，角色，权限），就是说SecurityManager要验证用户身份，那么它需要从Realm获取相应的用户进行比较，来确定用户的身份是否合法，可以把Realm看成是DataSource。</li>
 </ul>
+<h2 id="4-RestTemplate"><a href="#4-RestTemplate" class="headerlink" title="4.RestTemplate"></a>4.RestTemplate</h2><p>提供了多种便捷访问远程Http服务的方法。</p>
+<p>是一种简单便捷的访问resful服务模板类，是Spring提供的用于访问Rest服务的客户端模板工具集。</p>
+<p>（url，requestMap，ResponseBean.class）这三个参数分别代表：</p>
+<p>Rest请求地址、请求参数、HTTP响应转换被转换成的对象类型。</p>
 
                 
             </div>
