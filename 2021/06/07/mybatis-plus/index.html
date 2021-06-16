@@ -647,7 +647,25 @@
 		<span class="token key atrule">logic-not-delete-value</span><span class="token punctuation">:</span> <span class="token number">0</span>
 		<span class="token key atrule">logic-delete-value</span> <span class="token punctuation">:</span> <span class="token number">1</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<h2 id="4-CRUD"><a href="#4-CRUD" class="headerlink" title="4. CRUD"></a>4. CRUD</h2><h3 id="4-1-查询"><a href="#4-1-查询" class="headerlink" title="4.1 查询"></a>4.1 查询</h3><h2 id="5-自动生成"><a href="#5-自动生成" class="headerlink" title="5. 自动生成"></a>5. 自动生成</h2><h2 id="6-自定义SQL、多表关联"><a href="#6-自定义SQL、多表关联" class="headerlink" title="6. 自定义SQL、多表关联"></a>6. 自定义SQL、多表关联</h2><h3 id="7-SpringBoot-Mybatis-Plus-打包直接发布"><a href="#7-SpringBoot-Mybatis-Plus-打包直接发布" class="headerlink" title="7. SpringBoot + Mybatis Plus 打包直接发布"></a>7. SpringBoot + Mybatis Plus 打包直接发布</h3>
+<h2 id="4-CRUD"><a href="#4-CRUD" class="headerlink" title="4. CRUD"></a>4. CRUD</h2><h3 id="4-1-查询"><a href="#4-1-查询" class="headerlink" title="4.1 查询"></a>4.1 查询</h3><h2 id="5-自动生成"><a href="#5-自动生成" class="headerlink" title="5. 自动生成"></a>5. 自动生成</h2><pre class="line-numbers language-xml" data-language="xml"><code class="language-xml"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">&gt;</span></span>com.baomidou<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">&gt;</span></span>mybatis-plus-generator<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>version</span><span class="token punctuation">&gt;</span></span>3.4.0<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>version</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">&gt;</span></span>
+
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">&gt;</span></span>org.apache.velocity<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">&gt;</span></span>velocity<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>version</span><span class="token punctuation">&gt;</span></span>1.7<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>version</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">&gt;</span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ol>
+<li><p>自动生成器的包和velocity都需要，因为自动生成器根据velocity模板导入的。</p>
+</li>
+<li><p>启动类</p>
+</li>
+</ol>
+<h2 id="6-自定义SQL、多表关联"><a href="#6-自定义SQL、多表关联" class="headerlink" title="6. 自定义SQL、多表关联"></a>6. 自定义SQL、多表关联</h2><h3 id="7-SpringBoot-Mybatis-Plus-打包直接发布"><a href="#7-SpringBoot-Mybatis-Plus-打包直接发布" class="headerlink" title="7. SpringBoot + Mybatis Plus 打包直接发布"></a>7. SpringBoot + Mybatis Plus 打包直接发布</h3>
                 
             </div>
             <hr/>
@@ -909,18 +927,17 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="far fa-dot-circle"></i>&nbsp;本篇
-            </div>
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2021/06/07/mybatis-plus/">
+                <a href="/2021/06/10/mysql-ji-chu/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/4.jpg" class="responsive-img" alt="mybatis-plus">
+                        <img src="/medias/featureimages/8.jpg" class="responsive-img" alt="mysql基础">
                         
-                        <span class="card-title">mybatis-plus</span>
+                        <span class="card-title">mysql基础</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -930,31 +947,26 @@
                         
                     </div>
                     <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-06-07
-                            </span>
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2021-06-10
+                        </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/java/" class="post-category">
-                                    java
-                                </a>
-                            
-                            <a href="/categories/java/mybatis-plus/" class="post-category">
-                                    mybatis plus
+                            <a href="/categories/mysql/" class="post-category">
+                                    mysql
                                 </a>
                             
                             
                         </span>
                     </div>
                 </div>
-
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/java/">
-                        <span class="chip bg-color">java</span>
+                    <a href="/tags/mysql/">
+                        <span class="chip bg-color">mysql</span>
                     </a>
                     
                 </div>

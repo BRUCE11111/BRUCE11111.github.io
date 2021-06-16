@@ -6,7 +6,7 @@
   <link href="http://bruce11111.github.io/atom.xml" rel="self"/>
   
   <link href="http://bruce11111.github.io/"/>
-  <updated>2021-06-08T14:12:56.200Z</updated>
+  <updated>2021-06-10T07:09:49.233Z</updated>
   <id>http://bruce11111.github.io/</id>
   
   <author>
@@ -17,11 +17,88 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>maven打包</title>
+    <link href="http://bruce11111.github.io/2021/06/10/maven-da-bao/"/>
+    <id>http://bruce11111.github.io/2021/06/10/maven-da-bao/</id>
+    <published>2021-06-10T06:36:59.000Z</published>
+    <updated>2021-06-10T07:09:49.233Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;1-打包问题&quot;&gt;&lt;a href=&quot;#1-打包问题&quot; class=&quot;headerlink&quot; title=&quot;1.打包问题&quot;&gt;&lt;/a&gt;1.打包问题&lt;/h2&gt;&lt;p&gt;项目结构如下：&lt;/p&gt;
+&lt;p&gt;parent（父类工程）&lt;/p&gt;
+&lt;p&gt;| - - - - -</summary>
+        
+      
+    
+    
+    
+    <category term="maven" scheme="http://bruce11111.github.io/categories/maven/"/>
+    
+    
+    <category term="maven" scheme="http://bruce11111.github.io/tags/maven/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>linux基础</title>
+    <link href="http://bruce11111.github.io/2021/06/10/linux-ji-chu/"/>
+    <id>http://bruce11111.github.io/2021/06/10/linux-ji-chu/</id>
+    <published>2021-06-10T03:28:08.000Z</published>
+    <updated>2021-06-10T03:52:39.761Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;1-命令1&quot;&gt;&lt;a href=&quot;#1-命令1&quot; class=&quot;headerlink&quot; title=&quot;1.命令1&quot;&gt;&lt;/a&gt;1.命令1&lt;/h2&gt;&lt;h3 id=&quot;1-重命名文件夹&quot;&gt;&lt;a href=&quot;#1-重命名文件夹&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="linux" scheme="http://bruce11111.github.io/categories/linux/"/>
+    
+    
+    <category term="linux" scheme="http://bruce11111.github.io/tags/linux/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>mysql基础</title>
+    <link href="http://bruce11111.github.io/2021/06/10/mysql-ji-chu/"/>
+    <id>http://bruce11111.github.io/2021/06/10/mysql-ji-chu/</id>
+    <published>2021-06-10T02:58:01.000Z</published>
+    <updated>2021-06-10T03:19:52.449Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;1-安装&quot;&gt;&lt;a href=&quot;#1-安装&quot; class=&quot;headerlink&quot; title=&quot;1.安装&quot;&gt;&lt;/a&gt;1.安装&lt;/h2&gt;&lt;h3 id=&quot;1-1-centos-mysql-5-7&quot;&gt;&lt;a href=&quot;#1-1-centos-mysql-5-7&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="mysql" scheme="http://bruce11111.github.io/categories/mysql/"/>
+    
+    
+    <category term="mysql" scheme="http://bruce11111.github.io/tags/mysql/"/>
+    
+  </entry>
+  
+  <entry>
     <title>mybatis-plus</title>
     <link href="http://bruce11111.github.io/2021/06/07/mybatis-plus/"/>
     <id>http://bruce11111.github.io/2021/06/07/mybatis-plus/</id>
     <published>2021-06-07T07:59:52.000Z</published>
-    <updated>2021-06-08T14:12:56.200Z</updated>
+    <updated>2021-06-09T13:05:30.812Z</updated>
     
     
       
@@ -171,7 +248,7 @@
     <link href="http://bruce11111.github.io/2021/05/16/docker/"/>
     <id>http://bruce11111.github.io/2021/05/16/docker/</id>
     <published>2021-05-16T13:49:59.000Z</published>
-    <updated>2021-06-06T09:36:41.240Z</updated>
+    <updated>2021-06-09T13:44:41.379Z</updated>
     
     
       
@@ -424,81 +501,6 @@
     
     
     
-    
-  </entry>
-  
-  <entry>
-    <title>负载均衡</title>
-    <link href="http://bruce11111.github.io/2021/04/10/fu-zai-jun-heng/"/>
-    <id>http://bruce11111.github.io/2021/04/10/fu-zai-jun-heng/</id>
-    <published>2021-04-10T09:17:48.000Z</published>
-    <updated>2021-04-10T11:33:48.041Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h1 id=&quot;负载均衡&quot;&gt;&lt;a href=&quot;#负载均衡&quot; class=&quot;headerlink&quot; title=&quot;负载均衡&quot;&gt;&lt;/a&gt;负载均衡&lt;/h1&gt;&lt;p&gt;概念：LB (Load</summary>
-        
-      
-    
-    
-    
-    <category term="负载均衡 java" scheme="http://bruce11111.github.io/categories/%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1-java/"/>
-    
-    
-    <category term="负载均衡 java" scheme="http://bruce11111.github.io/tags/%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1-java/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>pythonBase</title>
-    <link href="http://bruce11111.github.io/2021/04/09/pythonbase/"/>
-    <id>http://bruce11111.github.io/2021/04/09/pythonbase/</id>
-    <published>2021-04-09T13:46:56.000Z</published>
-    <updated>2021-04-09T14:26:30.933Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h2 id=&quot;1-Python线程模块&quot;&gt;&lt;a href=&quot;#1-Python线程模块&quot; class=&quot;headerlink&quot; title=&quot;1. Python线程模块&quot;&gt;&lt;/a&gt;1. Python线程模块&lt;/h2&gt;&lt;p&gt;GIL（Global Interpreter</summary>
-        
-      
-    
-    
-    
-    <category term="python" scheme="http://bruce11111.github.io/categories/python/"/>
-    
-    
-    <category term="python" scheme="http://bruce11111.github.io/tags/python/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Socket</title>
-    <link href="http://bruce11111.github.io/2021/04/09/socket/"/>
-    <id>http://bruce11111.github.io/2021/04/09/socket/</id>
-    <published>2021-04-09T13:25:28.000Z</published>
-    <updated>2021-04-11T13:53:21.500Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h1 id=&quot;Socket&quot;&gt;&lt;a href=&quot;#Socket&quot; class=&quot;headerlink&quot; title=&quot;Socket&quot;&gt;&lt;/a&gt;Socket&lt;/h1&gt;&lt;h3 id=&quot;1-socket读写缓冲区的工作机制&quot;&gt;&lt;a</summary>
-        
-      
-    
-    
-    
-    <category term="java" scheme="http://bruce11111.github.io/categories/java/"/>
-    
-    
-    <category term="java" scheme="http://bruce11111.github.io/tags/java/"/>
     
   </entry>
   
