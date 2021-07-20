@@ -6,7 +6,7 @@
   <link href="http://bruce11111.github.io/atom.xml" rel="self"/>
   
   <link href="http://bruce11111.github.io/"/>
-  <updated>2021-06-10T07:09:49.233Z</updated>
+  <updated>2021-07-20T12:33:57.102Z</updated>
   <id>http://bruce11111.github.io/</id>
   
   <author>
@@ -15,6 +15,71 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>MybatisPlus</title>
+    <link href="http://bruce11111.github.io/2021/07/20/mybatisplus/"/>
+    <id>http://bruce11111.github.io/2021/07/20/mybatisplus/</id>
+    <published>2021-07-20T12:33:57.000Z</published>
+    <updated>2021-07-20T12:33:57.102Z</updated>
+    
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>HAPI原理</title>
+    <link href="http://bruce11111.github.io/2021/07/19/hapi-yuan-li/"/>
+    <id>http://bruce11111.github.io/2021/07/19/hapi-yuan-li/</id>
+    <published>2021-07-19T12:17:52.000Z</published>
+    <updated>2021-07-19T14:16:15.921Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;HAPI 主要是两种东西构成的：&lt;/p&gt;
+&lt;p&gt;第一个：数据模型。&lt;/p&gt;
+&lt;p&gt;医疗相关数据的数据模型。这些数据模型需要放到java中定义的数据结构里面。数据结构的实现是基于HL7机构约定的标准。为了使用方便，HAPI 将JAVA中的一些基本数据类型比如string</summary>
+        
+      
+    
+    
+    
+    <category term="HAPI" scheme="http://bruce11111.github.io/categories/HAPI/"/>
+    
+    
+    <category term="HAPI" scheme="http://bruce11111.github.io/tags/HAPI/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>在线教育平台</title>
+    <link href="http://bruce11111.github.io/2021/07/15/zai-xian-jiao-yu-ping-tai/"/>
+    <id>http://bruce11111.github.io/2021/07/15/zai-xian-jiao-yu-ping-tai/</id>
+    <published>2021-07-15T09:14:06.000Z</published>
+    <updated>2021-07-16T08:19:03.310Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;在线教育平台&quot;&gt;&lt;a href=&quot;#在线教育平台&quot; class=&quot;headerlink&quot; title=&quot;在线教育平台&quot;&gt;&lt;/a&gt;在线教育平台&lt;/h1&gt;&lt;h2 id=&quot;1-结构&quot;&gt;&lt;a href=&quot;#1-结构&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="项目" scheme="http://bruce11111.github.io/categories/%E9%A1%B9%E7%9B%AE/"/>
+    
+    
+    <category term="项目" scheme="http://bruce11111.github.io/tags/%E9%A1%B9%E7%9B%AE/"/>
+    
+  </entry>
   
   <entry>
     <title>maven打包</title>
@@ -125,7 +190,7 @@
     <link href="http://bruce11111.github.io/2021/05/24/mybatis/"/>
     <id>http://bruce11111.github.io/2021/05/24/mybatis/</id>
     <published>2021-05-24T08:49:54.943Z</published>
-    <updated>2021-05-24T08:46:14.494Z</updated>
+    <updated>2021-07-04T12:16:36.915Z</updated>
     
     
       
@@ -195,7 +260,7 @@
     <link href="http://bruce11111.github.io/2021/05/19/springboot/"/>
     <id>http://bruce11111.github.io/2021/05/19/springboot/</id>
     <published>2021-05-19T09:53:35.000Z</published>
-    <updated>2021-05-30T13:28:49.475Z</updated>
+    <updated>2021-07-16T12:50:05.145Z</updated>
     
     
       
@@ -222,7 +287,7 @@
     <link href="http://bruce11111.github.io/2021/05/18/shi-me-shi-gao-ke-yong/"/>
     <id>http://bruce11111.github.io/2021/05/18/shi-me-shi-gao-ke-yong/</id>
     <published>2021-05-18T09:07:21.000Z</published>
-    <updated>2021-05-18T09:31:15.826Z</updated>
+    <updated>2021-07-20T12:36:46.489Z</updated>
     
     
       
@@ -248,7 +313,7 @@
     <link href="http://bruce11111.github.io/2021/05/16/docker/"/>
     <id>http://bruce11111.github.io/2021/05/16/docker/</id>
     <published>2021-05-16T13:49:59.000Z</published>
-    <updated>2021-06-09T13:44:41.379Z</updated>
+    <updated>2021-07-20T13:41:23.171Z</updated>
     
     
       
@@ -430,77 +495,6 @@
     
     
     <category term="dubbo" scheme="http://bruce11111.github.io/tags/dubbo/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>HTTPS深入理解</title>
-    <link href="http://bruce11111.github.io/2021/04/18/https-shen-ru-li-jie/"/>
-    <id>http://bruce11111.github.io/2021/04/18/https-shen-ru-li-jie/</id>
-    <published>2021-04-18T14:19:15.000Z</published>
-    <updated>2021-05-16T07:28:53.079Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h2 id=&quot;HTTPS是什么&quot;&gt;&lt;a href=&quot;#HTTPS是什么&quot; class=&quot;headerlink&quot; title=&quot;HTTPS是什么&quot;&gt;&lt;/a&gt;HTTPS是什么&lt;/h2&gt;&lt;h1 id=&quot;1-HTTP&quot;&gt;&lt;a href=&quot;#1-HTTP&quot;</summary>
-        
-      
-    
-    
-    
-    <category term="网络" scheme="http://bruce11111.github.io/categories/%E7%BD%91%E7%BB%9C/"/>
-    
-    
-    <category term="网络" scheme="http://bruce11111.github.io/tags/%E7%BD%91%E7%BB%9C/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>进程间的通信IPC</title>
-    <link href="http://bruce11111.github.io/2021/04/13/jin-cheng-jian-de-tong-xin-ipc/"/>
-    <id>http://bruce11111.github.io/2021/04/13/jin-cheng-jian-de-tong-xin-ipc/</id>
-    <published>2021-04-13T08:01:41.000Z</published>
-    <updated>2021-04-13T08:11:06.687Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h4 id=&quot;一、进程间通信的概念&quot;&gt;&lt;a href=&quot;#一、进程间通信的概念&quot; class=&quot;headerlink&quot;</summary>
-        
-      
-    
-    
-    
-    <category term="操作系统" scheme="http://bruce11111.github.io/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"/>
-    
-    
-    <category term="操作系统" scheme="http://bruce11111.github.io/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>计算代码内存消耗</title>
-    <link href="http://bruce11111.github.io/2021/04/12/ji-suan-dai-ma-nei-cun-xiao-hao/"/>
-    <id>http://bruce11111.github.io/2021/04/12/ji-suan-dai-ma-nei-cun-xiao-hao/</id>
-    <published>2021-04-12T00:25:16.000Z</published>
-    <updated>2021-04-12T00:26:22.432Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h2 id=&quot;不同语言的内存管理&quot;&gt;&lt;a href=&quot;#不同语言的内存管理&quot; class=&quot;headerlink&quot;</summary>
-        
-      
-    
-    
-    
     
   </entry>
   

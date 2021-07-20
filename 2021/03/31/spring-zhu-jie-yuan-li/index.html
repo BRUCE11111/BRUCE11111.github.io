@@ -29,9 +29,9 @@
 
     <script src="/libs/jquery/jquery.min.js"></script>
 
-<meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="小灰的博客" type="application/atom+xml">
-
+<meta name="generator" content="Hexo 5.4.0">
 <style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+<link rel="alternate" href="/atom.xml" title="小灰的博客" type="application/atom+xml">
 </head>
 
 
@@ -505,6 +505,19 @@
 <p>当然，下面三个注解被用于为我们的应用进行分层：</p>
 <p><code>@Controller</code>注解类进行前端请求的处理，转发，重定向。包括调用Service层的方法 （requestMapping + componnet)<br><code>@Service</code>注解类处理业务逻辑<br><code>@Repository</code>注解类作为DAO对象（数据访问对象，Data Access Objects），这些类可以直接对数据库进行操作<br>有这些分层操作的话，代码之间就实现了松耦合，代码之间的调用也清晰明朗，便于项目的管理；假想一下，如果只用<code>@Controller</code>注解，那么所有的请求转发，业务处理，数据库操作代码都糅合在一个地方，那这样的代码该有多难拓展和维护。</p>
 <h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p><code>@Component</code>, <code>@Service</code>, <code>@Controller</code>, <code>@Repository</code>是spring注解，注解后可以被spring框架所扫描并注入到spring容器来进行管理<br><code>@Component</code>是通用注解，其他三个注解是这个注解的拓展，并且具有了特定的功能<br><code>@Repository</code>注解在持久层中，具有将数据库操作抛出的原生异常翻译转化为spring的持久层异常的功能。<br><code>@Controller</code>层是spring-mvc的注解，具有将请求进行转发，重定向的功能。<br><code>@Service</code>层是业务逻辑层注解，这个注解只是标注该类处于业务逻辑层。<br>用这些注解对应用进行分层之后，就能将请求处理，义务逻辑处理，数据库操作处理分离出来，为代码解耦，也方便了以后项目的维护和开发。</p>
+<h3 id="1-RequestMapping"><a href="#1-RequestMapping" class="headerlink" title="1.@RequestMapping"></a>1.@RequestMapping</h3><p>1）遍历Handler中的所有方法，找出其中被@RequestMapping注解标记的方法。</p>
+<p>2）遍历这些方法，生成RequestMappingInfo实例。</p>
+<p>3）将RequestMappingInfo实例以及处理器方法注册到缓存中。</p>
+<p>当请求到达时，去urlMap中找匹配的url，以及获取对应的mapping实例，然后去handlerMethods中获取匹配HandlerMethod实例。</p>
+<h3 id="2-Autowired"><a href="#2-Autowired" class="headerlink" title="2. @Autowired"></a>2. @Autowired</h3><p>autowired是用来装配bean的，和bean的初始化有关。当执行refresh方法后，在触发了bean的初始化后，创建BeanWrapper，它的内部成员变量wrappedObject存放的就是实例化的MyService对象，然后进行属性注入。</p>
+<p>获取需要处理的目标类，传入目标类参数，通过反射获取该类的所有字段，遍历每行一个字段，判断是否被autowired修饰，返回所有带有autowired注解修饰的一个集合。有了目标类和刚才返回的这个需要注入的集合。</p>
+<p>注入：</p>
+<ul>
+<li><p>先使用反射技术对对象进行实例化和赋值，然后这个bean就生成了。</p>
+</li>
+<li><p>根据bean的名字去拿到bean进行注入。</p>
+</li>
+</ul>
 
                 
             </div>
