@@ -506,11 +506,11 @@
 <li>iptable 对网络请求重定向</li>
 </ol>
 <p>Docker 默认的网络设置模式：网桥模式。在这种模式下，除了分配隔离的网络命名空间之外，Docker 还会为所有的容器设置 IP 地址。当 Docker 服务器在主机上启动之后会创建新的虚拟网桥 docker0，随后在该主机上启动的全部服务在默认情况下都与该网桥相连。网桥 docker0 通过 iptables 中的配置与宿主机器上的网卡相连，所有符合条件的请求都会通过 iptables 转发到 docker0 并由网桥分发给对应的机器</p>
-<p><img src="https://img.draveness.me/2017-11-30-docker-network-forward.png" alt="docker-network-forward"></p>
+<p><img src="/2021/05/16/docker/1.PNG"></p>
 <h3 id="1-2-控制组-CGroups-（Control-Groups）"><a href="#1-2-控制组-CGroups-（Control-Groups）" class="headerlink" title="1.2 控制组 CGroups （Control Groups）"></a>1.2 控制组 CGroups （Control Groups）</h3><p>对进程资源进行控制，实现了CPU内存等资源的隔离。</p>
-<p><img src="https://img.draveness.me/2017-11-30-docker-shared-resources.png" alt="docker-shared-resources"></p>
+<p><img src="/2021/05/16/docker/2.PNG"></p>
 <p>某个容器执行CPU密集型任务，那么就会影响其他容器任务的性能和效率，导致多个容器相互影响并抢占资源。如何对多个容器的资源使用进行限制，CGroups能够隔离宿主机器上的物理资源。</p>
-<p><img src="https://img.draveness.me/2017-11-30-cgroups-inheritance.png" alt="cgroups-inheritance"></p>
+<p><img src="/2021/05/16/docker/3.PNG"></p>
 <p>每一个CGroup都是一组被相同标准和参数限制的过程，不同的CGroup之间有层级关系，也就是它们之间可以从父类继承一些用于限制资源使用的标准和参数。</p>
 <p>所有的资源控制都是以 CGroup 作为单位实现的，每一个进程都可以随时加入一个 CGroup 也可以随时退出一个 CGroup。</p>
 <h3 id="1-3-UnionFS"><a href="#1-3-UnionFS" class="headerlink" title="1.3 UnionFS"></a>1.3 UnionFS</h3><p>UnionFS 其实是一种为Linux操作系统设计的把多个文件系统联合到同一个挂载点的文件系统服务。</p>
