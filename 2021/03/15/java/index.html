@@ -29,9 +29,9 @@
 
     <script src="/libs/jquery/jquery.min.js"></script>
 
-<meta name="generator" content="Hexo 5.4.0">
+<meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="小灰的博客" type="application/atom+xml">
+
 <style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
-<link rel="alternate" href="/atom.xml" title="小灰的博客" type="application/atom+xml">
 </head>
 
 
@@ -507,6 +507,26 @@
 <h2 id="1-JVM虚拟机"><a href="#1-JVM虚拟机" class="headerlink" title="1. JVM虚拟机"></a>1. JVM虚拟机</h2><p>虚拟机的启动是通过引导类加载器（bootstrap class loader）创建一个初始类（initial class）来完成的，这个类是由虚拟机的具体实现指定的。</p>
 <p>执行引擎：</p>
 <p><img src="/2021/03/15/java/%E6%89%A7%E8%A1%8C%E5%BC%95%E6%93%8E.PNG"></p>
+<p><img src="/2021/03/15/java/image-20210814220124329.png" alt="image-20210814220124329"></p>
+<p><img src="/2021/03/15/java/image-20210815153306305.png" alt="image-20210815153306305"></p>
+<h3 id="gt-类加载子系统"><a href="#gt-类加载子系统" class="headerlink" title="> 类加载子系统"></a>&gt; 类加载子系统</h3><ol>
+<li>加载 引导类加载器、扩展类加载器、系统类加载器</li>
+<li>链接 验证、准备、解析</li>
+<li>初始化阶段 初始化</li>
+</ol>
+<p>加载：</p>
+<p>类加载子系统负责从文件系统或者网络中加载Class文件，class文件在文件开头有特定的标识。</p>
+<p>ClassLoader只负责class文件的加载，至于它是否可以运行，由Execution Engine决定。</p>
+<p>加载的类信息存放于一块被称为方法区的内存空间。</p>
+<p>链接：</p>
+<ol>
+<li>验证 确保class文件的字节流信息符合当前虚拟机要求。文件格式、元数据、字节码和符号引用验证。</li>
+<li>准备。为类变量分配内存并设置该类默认初始值。这里不包括final，final在编译就分配了，准备阶段回显式初始化。这里不会为实例变量分配初始化，类变量会分配在方法区中，而实例变量是会随着对象一起分配到Java堆中。</li>
+<li>解析。将常量池内符号引用转换为直接引用的过程。符号引用就是一组符号来描述所引用的目标。直接引用就是直接指向目标的指针、相对偏移量或一个间接定位。</li>
+</ol>
+<p>初始化：</p>
+<p>cinit()方法会把显示初始化和静态代码块中的初始化放到一起的方法。类构造器会生成方法cinit（）过程。JVM自动手机所有类变量和赋值动作和静态代码块中的语句合并而来。</p>
+<p>虚拟机必须保证一个类的<cinit>()方法在多线程环境下被同步加锁。</cinit></p>
 <p>常见的虚拟机有：</p>
 <ol>
 <li>Sun Classic VM。</li>
@@ -514,6 +534,25 @@
 <li>Sum HotSpot VM</li>
 <li>BEA JRockit</li>
 <li>IBM J9</li>
+</ol>
+<p>架构：基于栈式架构的。</p>
+<ol>
+<li><p>设计和实现更简单，适用于资源受限的系统。</p>
+</li>
+<li><p>避开了寄存器的分配难题：使用零地址指令方式分配。</p>
+</li>
+<li><p>指令流中的指令大部分是零地址指令，其执行流程依赖于操作栈。</p>
+</li>
+<li><p>指令更多。</p>
+</li>
+</ol>
+<h3 id="gt-JVM生命周期"><a href="#gt-JVM生命周期" class="headerlink" title=">JVM生命周期"></a>&gt;JVM生命周期</h3><ol>
+<li><p>启动通过引导类加载器bootstrap class loader创建一个初始类 initial class 来完成的。</p>
+</li>
+<li><p>执行。</p>
+</li>
+<li><p>退出。正常执行结束、运行时异常。</p>
+</li>
 </ol>
 <h3 id="gt-面向对象和面向过程的区别"><a href="#gt-面向对象和面向过程的区别" class="headerlink" title="&nbsp;> 面向对象和面向过程的区别"></a><font color="green">&nbsp;&gt; 面向对象和面向过程的区别</font></h3><ul>
 <li>面向过程 ： 面向过程性能很好。类调用时需要实例化，开销大消耗资源。但是面向过程没有面向对象易于维护、复扩展。</li>
@@ -551,7 +590,7 @@
 </ol>
 <p>加载<code>java</code>核心库 <code>java.*</code>,构造<code>ExtClassLoader</code>和<code>AppClassLoader</code>。涉及到虚拟机本地实现细节，开发者无法获取到启动类加载器的引用，不允许直接通过引用进行操作。</p>
 <ol start="2">
-<li>标准扩展类加载器（ExtClassLoader）<code>java</code> 编写</li>
+<li>标准扩展类加载器（ExtClassLoader）<code>java</code> 编写 (java官方其实从这里就开始叫做自定义加载器了，所有继承自classloader的类都是自定义加载器)</li>
 </ol>
 <p>加载扩展库如<code>classpath</code>中的<code>jre</code> ，<code>javax.*</code>或者<br><code>java.ext.dir</code> 指定位置中的类，开发者可使用标准扩展类加载器。</p>
 <ol start="3">
@@ -561,10 +600,12 @@
 <ol start="4">
 <li>用户自定义类加载器（CustomClassLoader）<code>java</code> 编写</li>
 </ol>
-<p>用户自定义的类加载器,可加载指定路径的<code>class</code>文件</p>
+<p>用户自定义的类加载器,可加载指定路径的<code>class</code>文件。 需要隔离加载类、修改类加载方式、扩展加载源、防止源码泄露等需要自定义加载器。</p>
 <p>作用：</p>
 <p>1.防止重复加载同一个类。</p>
 <p>2.防止代码被篡改。（只能有一个被加载的类，已经加载的类不能被篡改）。</p>
+<p>注意，这4种是包含关系，不是上下级关系。</p>
+<p>双亲委派机制保证了Java的沙箱安全机制。比如你自定义String类，但是在加载自定义String类的时候会率先使用引导类加载器加载，而引导类加载器在加载的过程中会先加载jdk自带的文件。</p>
 <h3 id="lt-JVM结构"><a href="#lt-JVM结构" class="headerlink" title="< JVM结构"></a><font color="green">&lt; JVM结构</font></h3><p>HotSpot是使用指针的方式来访问对象：java堆中存放访问类元数据（描述数据的数据，也就是模板）的地址，reference存储的就直接是对象的地址。</p>
 <p><img src="/2021/03/15/java/JVM1.7.png" alt="句柄"></p>
 <p><img src="/2021/03/15/java/JVM%E5%86%85%E5%AD%98%E7%BB%93%E6%9E%84.png" alt="句柄"></p>
@@ -841,6 +882,52 @@
 <p>重置 ：清理数据结构,为下一个并发收集做准备。</p>
 <p><strong>7）G1回收器</strong></p>
 <p>以前的回收器，都需要完全回收整个年轻代和老年代，随着技术的发展，垃圾越来越大，处理垃圾需要很大延迟。G1是 JDK 1.7中正式投入使用的用于取代CMS的压缩回收器。<strong>基于标记整理</strong>的垃圾回收器。年轻代分为Eden和Survivor两个区，老年代分为Old和Humongous（大对象，占用的空间超过了分区容量50%）两个区。</p>
+<ul>
+<li><p>无需回收整个堆，而是选择一个Collection Set(CS)。</p>
+</li>
+<li><p>两种GC： Full yong GC Mixed GC</p>
+</li>
+<li><p>估计每个region中的垃圾比例，优先回收垃圾多的Region。</p>
+</li>
+</ul>
+<p>为了解决跨代引用，发明了Card Table 和 Remember Set（用c语言写的HashTable）。Card Table 指， 比如我将某个内存区域大小划分为512个，Rememberset保存是指向Card Table中的entry。 在实际写代码时，每次=这种赋值代码，JVM其实会使用write barrier，它注入一小段代码，用于记录这种变化从而更新rememberset。因为我们程序经常是多线程的 ，所以我们需要一种更新RS的机制：</p>
+<p>这种更新RS的线程被定义为Refinement线程。</p>
+<p><img src="/2021/03/15/java/image-20210815150945568.png" alt="image-20210815150945568"></p>
+<p>G1的基本流程：</p>
+<ol>
+<li><p>YOUG GC</p>
+<p>STW（stop the world 收集）</p>
+<ul>
+<li><p>构建CS （Eden + Survivor)</p>
+</li>
+<li><p>扫描GC Roots</p>
+</li>
+<li><p>Update RS：排空Dirty Card Queue</p>
+</li>
+<li><p>Process RS：找到被老年代对象引用</p>
+</li>
+<li><p>Object copy</p>
+</li>
+<li><p>reference processing</p>
+<p>G1记录每个阶段的时间，用于自动调优。记录Eden、Survivor的数量和GC时间，根据暂停目标自动调整Region的数量。</p>
+<p>暂停目标越短，Eden数量越少（回收的次数多了）。</p>
+</li>
+</ul>
+</li>
+<li><p>MIXED GC</p>
+<p>当堆的用量达到一定程度时触发：</p>
+<p>如何在不停止应用程序的情况下能够标记所有活对象。使用<strong>三色标记算法</strong>（黑色、灰色和白色），不暂停应用线程的情况下进行标记。比如：</p>
+<p>一开始都是白色，然后GC ROOT变成黑色，他们所引用的对象变成灰色，这些灰色的变成队列，接下来从灰色队列里拿出来活的对象，然后把它引用的对象标记成灰色。 有时会发生Lost Object问题，活对象没有被标记出来：</p>
+<p><img src="/2021/03/15/java/image-20210815152507837.png" alt="image-20210815152507837"></p>
+</li>
+</ol>
+<p>每当C被从B删除（B=null），把它记录下来（write barrier），也认为是活对象，最后会STW进行判断是否真的是活的还是清除。</p>
+<ul>
+<li>利用年轻代信息（会进行一次yong gc）STW</li>
+<li>恢复线程，并发标记</li>
+<li>STW 重新标记，进行回收全空的区。</li>
+<li>恢复应用线程。</li>
+</ul>
 <ol>
 <li><p>G1首先将堆分为大小相等的 Region，避免全区域的垃圾回收。</p>
 <ul>
@@ -1670,7 +1757,25 @@ obj <span class="token operator">=</span> <span class="token keyword">null</span
 <h3 id="lt-switch语句能否作用在byte上，能否作用在long上，能否作用在String上"><a href="#lt-switch语句能否作用在byte上，能否作用在long上，能否作用在String上" class="headerlink" title="< switch语句能否作用在byte上，能否作用在long上，能否作用在String上?"></a><font color="green">&lt; switch语句能否作用在byte上，能否作用在long上，能否作用在String上?</font></h3><p>在switch（e）中，e只能是一个整数表达式或者枚举常量（更大字体），整数表达式可以是int基本类型或Integer包装类型，由于byte,short,char都可以隐含转换为int，所以，这些类型以及这些类型的包装类型也是可以的。显然，long和String类型都不符合switch的语法规定，并且不能被隐式转换成int类型，所以，它们不能作用于swtich语句中。</p>
 <p><em>switch语句能否作用在String上说错了，Java1.7之后已经支持这种写法了！</em></p>
 <h3 id="lt-a-hashCode-有什么用？与-a-equals-b-有什么关系？"><a href="#lt-a-hashCode-有什么用？与-a-equals-b-有什么关系？" class="headerlink" title="<&nbsp;**a.hashCode() 有什么用？与 a.equals(b) 有什么关系？**"></a><font color="green">&lt;&nbsp;**a.hashCode() 有什么用？与 a.equals(b) 有什么关系？**</font></h3><p>hashCode() 方法对应对象整型的 hash 值。它常用于基于 hash 的集合类，如 Hashtable、HashMap、LinkedHashMap等等。它与 equals() 方法关系特别紧密。根据 Java 规范，两个使用 equal() 方法来判断相等的对象，必须具有相同的 hash code。</p>
-<h3 id="3-多线程"><a href="#3-多线程" class="headerlink" title=" 3. 多线程"></a><font color="green"> 3. 多线程</font></h3><h3 id="gt-volatile关键字"><a href="#gt-volatile关键字" class="headerlink" title="> volatile关键字"></a><font color="green">&gt; volatile关键字</font></h3><p>MESI缓存一致性协议。</p>
+<h3 id="3-多线程"><a href="#3-多线程" class="headerlink" title=" 3. 多线程"></a><font color="green"> 3. 多线程</font></h3><h3 id="gt-notify和wait"><a href="#gt-notify和wait" class="headerlink" title=">notify和wait"></a>&gt;notify和wait</h3><ol>
+<li><p>这两个的使用必须放到同一个代码块里面，否则会报IllegalMonitorStateException异常，因为它底层是根据monitor进行判断的。</p>
+</li>
+<li><p>notify不能放在wait，否则调用wait的方法会不停的阻塞。</p>
+</li>
+</ol>
+<p>await和notify方法同理</p>
+<p>所以，这中锁的等待唤醒机制会有问题。发明了LockSupport类。</p>
+<h3 id="gt-LockSupport类"><a href="#gt-LockSupport类" class="headerlink" title="> LockSupport类"></a>&gt; LockSupport类</h3><p>用来创建锁和其他同步类的基本线程阻塞原语。</p>
+<p>主要是park()和unpart()方法。</p>
+<p>阻塞：park（）</p>
+<p>底层是UNSAFE类。将当前的permit设置为0。直到别的线程将当前线程的permit设置为1。</p>
+<p>唤醒：unpark（）</p>
+<p>底层是UNSAFE类。发放许可证。</p>
+<p>unpark可以在park之前执行，unpark之后，park会失去作用，直接绕过执行，因为有了许可证。permit许可证是不可以累计的，There is at most one.</p>
+<p>使用方法：</p>
+<p>LockSupport.park();</p>
+<p>LockSupport.unpark(threadname);</p>
+<h3 id="gt-volatile关键字"><a href="#gt-volatile关键字" class="headerlink" title="> volatile关键字"></a><font color="green">&gt; volatile关键字</font></h3><p>MESI缓存一致性协议。</p>
 <p>多CPU从主存读取同一数据到各自缓存区中，该数据在lock前缀指令执行期间已经在处理器内存的缓存中被锁定，缓存被锁定期间其他CPU无法读写该数据，直到该缓存数据被修改同步回主存后，其他CPU通过总线嗅探机制感知数据变化及时失效自己缓存中的数据，在下一轮指令周期从主存重新load数据。</p>
 <p>缓存一致性协议,也就是说的MESI，目前大多数cpu就是采用的缓存一致性协议，于是就</p>
 <p>有了以下的架构。</p>
@@ -2089,6 +2194,9 @@ Owner：获得锁的线程称为Owner
 <td>追求吞吐量。同步块执行时间较长。</td>
 </tr>
 </tbody></table>
+<h3 id="CountDownLatch和Semaphore的区别和底层原理"><a href="#CountDownLatch和Semaphore的区别和底层原理" class="headerlink" title="CountDownLatch和Semaphore的区别和底层原理"></a><font color="green">CountDownLatch和Semaphore的区别和底层原理</font></h3><p>CountDownLatch是计数器，给它设置一个数字，一个线程调用CountDownLatch的await()将会阻塞，其他线程可以调用CountDownLatch的countDown()方法来对数字减一，当数字减为0后，所以偶await线程都将会被唤醒。</p>
+<p>对应的底层原理是：调用await（）方法的线程会利用AQS排队，一旦数字被减为0，则会被AQS中排队的线程依次唤醒。</p>
+<p>Semophore表示信号量，可以设置许可的个数，表示同时允许最多多少个线程使用该信号量，通过acquire()来获取许可，如果没有许可则用线程阻塞，并通过AQS来排队，可以通过release()方法来释放许可，当某个线程释放许可后，会从AQS中正在排队的第一个线程依次唤醒，直到没有空闲许可。</p>
 <p>泛型</p>
 <p><strong>把类型明确的工作推迟到创建对象或调用方法的时候</strong></p>
 <h2 id="4-JAVA-8-新特性"><a href="#4-JAVA-8-新特性" class="headerlink" title="4. JAVA 8 新特性"></a>4. JAVA 8 新特性</h2><p>接口中的<code>default</code>新方法、<code>static</code>可以修饰方法了，并且提供实现。</p>

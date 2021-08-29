@@ -29,9 +29,9 @@
 
     <script src="/libs/jquery/jquery.min.js"></script>
 
-<meta name="generator" content="Hexo 5.4.0">
+<meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="小灰的博客" type="application/atom+xml">
+
 <style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
-<link rel="alternate" href="/atom.xml" title="小灰的博客" type="application/atom+xml">
 </head>
 
 
@@ -541,7 +541,37 @@
 <h2 id="2-基础"><a href="#2-基础" class="headerlink" title="2. 基础"></a>2. 基础</h2><p>Redis默认16个数据库。默认使用第0个数据库。</p>
 <p>Redis是单线程的，Redis是基于内存操作，CPU不是Redis性能瓶颈，Redis的瓶颈是根据机器的内存和网络带宽，既然可以使用单线程，就是用了单线程。</p>
 <p>Redis是c语言写的，官方提供的数据是100000+的QPS，这个不比Memecache差！</p>
-<h3 id="2-1-Redis数据类型"><a href="#2-1-Redis数据类型" class="headerlink" title="2.1 Redis数据类型"></a>2.1 Redis数据类型</h3><h4 id="2-1-1-Redis-Key"><a href="#2-1-1-Redis-Key" class="headerlink" title="2.1.1 Redis-Key"></a>2.1.1 Redis-Key</h4><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">keys * <span class="token comment">#查看所有</span>
+<h3 id="2-1-Redis数据类型"><a href="#2-1-Redis数据类型" class="headerlink" title="2.1 Redis数据类型"></a>2.1 Redis数据类型</h3><ol>
+<li>String的应用场景：</li>
+</ol>
+<p>商品编号、订单号可以使用INCR KEY 这个命令生成</p>
+<p>是否喜欢某个文章，点一下加个1。</p>
+<p>分布式锁： setnx key value </p>
+<ol start="2">
+<li>hash的应用场景：</li>
+</ol>
+<p>hash 对应 java中的 map&lt;String, map&lt;object, object&gt;&gt;</p>
+<p>购物车：点击购买数量，对某个键的值加1。</p>
+<p>新增商品就直接hset KV即可。</p>
+<p>全部选择 hgetAll即可。</p>
+<ol start="3">
+<li>list</li>
+</ol>
+<p>微信公众号 订阅公众号。谁订阅了我，那么就加进list。</p>
+<p>喜欢的文章列表啥的。</p>
+<ol start="4">
+<li>set</li>
+</ol>
+<p>微信抽奖小程序 抽取一个幸运用户。 srandmember set 1 抽取一个。 Scard len 看几个人参与抽奖。SPOP key 3 元素删除。</p>
+<p>微信朋友圈点赞 点赞的就加到set集合里面， 取消点赞 srem 用户id。 展现所有点赞用户 Smembers 用户数统计 Scard。</p>
+<p>好友的关注社交关系 共同关注 sadd sinter</p>
+<p>QQ可能认识的人 Sdiff 差集</p>
+<ol start="5">
+<li>zset</li>
+</ol>
+<p>定义销售排行榜 zadd 100 id1 90 id2 </p>
+<p>点击量增加 zincrby name 2 id id就会增加2</p>
+<h4 id="2-1-1-Redis-Key"><a href="#2-1-1-Redis-Key" class="headerlink" title="2.1.1 Redis-Key"></a>2.1.1 Redis-Key</h4><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">keys * <span class="token comment">#查看所有</span>
 EXPIRE name <span class="token number">10</span> <span class="token comment">#过期时间</span>
 ttl name <span class="token comment">#剩余时间</span>
 <span class="token builtin class-name">type</span> name <span class="token comment"># 查看类型</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
@@ -1110,7 +1140,54 @@ appendfsync no <span class="token comment"># 不执行 sync，这个时候操作
 <p>把MySQL的更新操作完成后不直接操作Redis，而是把这个操作命令(消息)扔到一个中间层，然后由Redis自己来消费更新数据，这是一种解耦的异步方案。</p>
 <p><a target="_blank" rel="noopener" href="https://s5.51cto.com/oss/202104/18/a098eb9f48abb2d5e3be936259d1ee56.png-wh_600x-s_2588560741.png"><img src="/2021/04/06/redis-ji-chu/a098eb9f48abb2d5e3be936259d1ee56.png-wh_600x-s_2588560741.png" alt="img"></a></p>
 <p>单纯为了更新缓存引入中间件确实有些复杂，但是像MySQL提供了binlog的同步机制，此时Redis就作为Slave进行主从同步，实现数据的更新，成本也还可以接受。</p>
-<h3 id="12-面试题（1）"><a href="#12-面试题（1）" class="headerlink" title="12. 面试题（1）"></a>12. 面试题（1）</h3><h4 id="12-1-Redis与Memcached"><a href="#12-1-Redis与Memcached" class="headerlink" title="12.1 Redis与Memcached"></a>12.1 Redis与Memcached</h4>
+<h3 id="12-面试题（1）"><a href="#12-面试题（1）" class="headerlink" title="12. 面试题（1）"></a>12. 面试题（1）</h3><h4 id="12-1-Redis与Memcached"><a href="#12-1-Redis与Memcached" class="headerlink" title="12.1 Redis与Memcached"></a>12.1 Redis与Memcached</h4><h3 id="12-2-redis分布式锁"><a href="#12-2-redis分布式锁" class="headerlink" title="12.2 redis分布式锁"></a>12.2 redis分布式锁</h3><p>多个服务间，保证同一时刻内同一个用户只能由一个请求，防止关键业务出现数据冲突。</p>
+<p>电商库存 会出现超卖现象。</p>
+<p>redis做分布式锁要注意哪些问题？</p>
+<ol>
+<li>单机版的JVM 锁解决不了同时并发访问redis的问题，比如电商库存会出现超卖现象。</li>
+<li>使用set锁时，不加过期时间，如果程序业务逻辑崩了，那么后面的程序都无法继续业务逻辑。</li>
+<li>set必须加过期时间，并且过期时间和获得锁的语句是原子性的才行，防止获得锁了但是崩了没设置过期时间。</li>
+<li>如果业务执行超过了过期时间，锁自动过期了，然后另外一个线程拿到了锁，结果刚才那个业务执行完把锁删了。（<strong>我正在在上厕所，明明记得锁厕所门了。结果突然锁没了，另外一个人又进来了，那我。。。哦不好像那个线程也尴尬</strong>）。所以只能删除自己的锁。</li>
+<li>当前线程判断是不是删除的自己的锁。key是锁，value是UUID和当前线程名字。</li>
+<li>但是finally中的delete删除操作不是原子性的 lua脚本，保证原子性删除。<strong>如果不用lua脚本，开启redis的事务。</strong></li>
+</ol>
+<p>redis事务是个集合队列，会把队列中的命令执行完毕(multi exec watch discard)。</p>
+<ol start="7">
+<li>还有一个解决的问题，确保redisLock过期时间大于业务执行时间的问题。redis分布式锁要续期。<strong>使用redisson</strong>如果直接使用lock和unlock，那么会出现illegalmonitor状态异常，上锁和解锁的不是同一个线程。</li>
+</ol>
+<p>所以需要：</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">if</span> <span class="token punctuation">(</span>redissonLock<span class="token punctuation">.</span><span class="token function">isLocked</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+	<span class="token keyword">if</span> <span class="token punctuation">(</span>redissonLock<span class="token punctuation">.</span><span class="token function">isHeldByCurrentThread</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token comment">// 判断是不是当前线程进行解锁</span>
+        redissonLock<span class="token punctuation">.</span><span class="token function">unlock</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+
+
+
+<p>redis单点部署，会有什么问题？</p>
+<p>集群模式下，比如主从模式，有没有问题？</p>
+<p>CAP集群故障。master和slave模式下，redis本身是AP，master刚刚加上锁，master宕机了但是slave没来得及锁同步。从机成了master导致了锁丢失。Zookeeper 是CP，全部同步完成了才会告诉对方有锁了。</p>
+<p>然后为了redis牛逼这种情况下也牛逼，出现了redisson。</p>
+<p>redissson 的redlock。</p>
+<p>RedLock redission 谈一谈</p>
+<p>redis分布式锁如何续期 看门狗知道吗？</p>
+<p>这是redisson的一些操作，看门狗机制。</p>
+<h3 id="12-3-redis设置内存"><a href="#12-3-redis设置内存" class="headerlink" title="12.3 redis设置内存"></a>12.3 redis设置内存</h3><p>redis 配置文件 maxmemory byte （859行） </p>
+<p>64位机子默认 占用全部内存 32位 3G大小</p>
+<p>还可以动态修改， <code>config get maxmemory</code> <code>config set maxmeroty xxx</code></p>
+<h3 id="12-4-如果redis内存大于设定的"><a href="#12-4-如果redis内存大于设定的" class="headerlink" title="12.4 如果redis内存大于设定的"></a>12.4 如果redis内存大于设定的</h3><p>redis会OOM报错，报错大于maxmerory。</p>
+<h3 id="12-5-过期策略"><a href="#12-5-过期策略" class="headerlink" title="12.5 过期策略"></a>12.5 过期策略</h3><p>如果一个键过期时间到了，不会立马删除。立即删除对CPU不友好。</p>
+<p>它会：</p>
+<p>定时删除，定期删除，惰性删除。 定期是对另外两种操作的折中。每间隔一段时间执行删除操作做，通过限制删除操作执行的时长和频率来减少删除操作对CPU时间的影响（周期性抽查存储空间，随机抽查，重点抽查）。</p>
+<p>定期删除会产生漏网之鱼，定期删除时某个key一直没有被抽查过，会有大量的key堆积内存中。</p>
+<p>所以有了内存淘汰策略产生了。</p>
+<p><img src="/2021/04/06/redis-ji-chu/image-20210817101710454.png" alt="image-20210817101710454"></p>
+<p><img src="/2021/04/06/redis-ji-chu/image-20210817101846479.png" alt="image-20210817101846479"></p>
+<p>一般都是用LRU算法。随机的不可控啊。</p>
+<p>通过命令和配置文件进行修改。 配置文件中<code>maxmemory policy all-keys-lru</code> `config  </p>
+
                 
             </div>
             <hr/>

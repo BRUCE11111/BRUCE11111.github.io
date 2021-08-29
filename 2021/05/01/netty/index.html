@@ -29,9 +29,9 @@
 
     <script src="/libs/jquery/jquery.min.js"></script>
 
-<meta name="generator" content="Hexo 5.4.0">
+<meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="小灰的博客" type="application/atom+xml">
+
 <style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
-<link rel="alternate" href="/atom.xml" title="小灰的博客" type="application/atom+xml">
 </head>
 
 
@@ -652,17 +652,23 @@ readOnlyBuffer<span class="token punctuation">.</span><span class="token functio
 <li>再通过SelectionKey得到注册的Channel。</li>
 <li>通过得到的Channel完成业务处理。</li>
 </ol>
-<h2 id="2-零拷贝"><a href="#2-零拷贝" class="headerlink" title="2. 零拷贝"></a>2. 零拷贝</h2><p>零拷贝指的是从操作系统角度看的，没有CPU拷贝。</p>
+<h2 id="2-零拷贝"><a href="#2-零拷贝" class="headerlink" title="2. 零拷贝"></a>2. 零拷贝</h2><p>零拷贝指的是从操作系统角度看的，<strong>不是不拷贝，而是没有CPU拷贝</strong>。</p>
 <p>传统IO，四次拷贝，三次切换。</p>
+<p><img src="/2021/05/01/netty/image-20210814204450894.png" alt="image-20210814204450894"></p>
 <h3 id="3-1-mmap优化"><a href="#3-1-mmap优化" class="headerlink" title="3.1 mmap优化"></a>3.1 mmap优化</h3><ul>
 <li>mmap通过内存映射，将文件映射到内核缓冲区，同时，用户空间可以共享内核空间的数据。这样，在进行网络传输时，就可以减少内核空间到用户空间的拷贝次数。</li>
 </ul>
-<p>拷贝减少为3次，内核态和用户态的切换仍然为3次。</p>
+<p>拷贝减少为3次，内核态和用户态的切换仍然为3次。这是由于用户buffer和内核buffer共享，所以少了一次kennel buffer拷贝到user buffer的拷贝。</p>
 <p>适合小数据量。</p>
-<h3 id="3-2-sendfile-优化"><a href="#3-2-sendfile-优化" class="headerlink" title="3.2 sendfile 优化"></a>3.2 sendfile 优化</h3><p>基本原理：直接从内核缓冲区进入到Socket Buffer。同时，由于和用户态完全无关，减少了一次上下文切换。</p>
+<h3 id="3-2-sendfile-优化（这个函数）"><a href="#3-2-sendfile-优化（这个函数）" class="headerlink" title="3.2 sendfile 优化（这个函数）"></a>3.2 sendfile 优化（这个函数）</h3><p><img src="/2021/05/01/netty/image-20210814204743936.png" alt="image-20210814204743936"></p>
+<p>基本原理：直接从内核缓冲区进入到Socket Buffer。同时，由于和用户态完全无关，减少了一次上下文切换。</p>
 <p>适合大文件传输。</p>
 <p>只需要一次系统调用，最少2次数据拷贝。</p>
-<h2 id="3-netty-架构"><a href="#3-netty-架构" class="headerlink" title="3. netty 架构"></a>3. netty 架构</h2><h3 id="3-1-其他线程模型"><a href="#3-1-其他线程模型" class="headerlink" title="3.1 其他线程模型"></a>3.1 其他线程模型</h3><ul>
+<p>（注意，这里其实也进行了CPU拷贝，kernel buffer到socket buffer但是拷贝的信息很少，比如kernel buffer的length和offset，只不过消耗低可以忽略，相当于这次拷贝动作没有了。</p>
+<h3 id="3-3-java中的Reactor和Proactor"><a href="#3-3-java中的Reactor和Proactor" class="headerlink" title="3.3 java中的Reactor和Proactor"></a>3.3 java中的Reactor和Proactor</h3><p>java中的NIO就是Reactor，当有时间发生时，服务端得到通知，进行相应的处理。</p>
+<p>AIO使用Proactor模式，有效的请求才启动线程，它的特点是先由操作系统完成后才通知服务端程序启动线程去处理，一般适用于连接数较多且连接时间较长的应用。</p>
+<h2 id="3-netty-架构"><a href="#3-netty-架构" class="headerlink" title="3. netty 架构"></a>3. netty 架构</h2><h3 id="3-1-其他线程模型"><a href="#3-1-其他线程模型" class="headerlink" title="3.1 其他线程模型"></a>3.1 其他线程模型</h3><p>不同的线程模型对程序的性能影响很大。</p>
+<ul>
 <li>传统阻塞IO模式</li>
 <li>Reactor模式<ul>
 <li>单Reactor单线程</li>
@@ -671,13 +677,38 @@ readOnlyBuffer<span class="token punctuation">.</span><span class="token functio
 </ul>
 </li>
 </ul>
-<h4 id=""><a href="#" class="headerlink" title=""></a></h4><h3 id="3-2-netty线程模型"><a href="#3-2-netty线程模型" class="headerlink" title="3.2 netty线程模型"></a>3.2 netty线程模型</h3><p>基于主从Reactor多线程模型，并且对其进行了一定的改进，其中主从Reactor多线程模型有多个Reactor。</p>
-<p><img src="/2021/05/01/netty/Reactor%E6%95%B4%E4%BD%93%E6%A8%A1%E5%BC%8F.PNG"></p>
-<ol>
-<li>Reactor模式，通过一个或多个输入同时传递给服务处理器的模式（基于事件驱动）</li>
-<li>服务器端程序处理传入的多个请求，并将它们同步分派到相应的处理线程，因此Reactor模式也叫Dispatcher模式。</li>
-<li>Reactor模式使用IO复用监听事件，收到事件后，分发给某个线程（进程），这点就是网络服务器高并发处理关键。</li>
+<h4 id=""><a href="#" class="headerlink" title=""></a></h4><p><img src="/2021/05/01/netty/image-20210819201348411.png" alt="image-20210819201348411"></p>
+<p>蓝色的框子表示线程，白色的框子表示方法，黄色的框子表示对象。</p>
+<h4 id="传统的存在的问题"><a href="#传统的存在的问题" class="headerlink" title="传统的存在的问题"></a>传统的存在的问题</h4><ol>
+<li>当并发数很大，就会创建大量的线程，占用很大系统资源。</li>
+<li>连接创建后，如果当前线程暂时没有数据可读，该线程会阻塞在read操作，造成线程资源浪费。</li>
 </ol>
+<h4 id="Reactor"><a href="#Reactor" class="headerlink" title="Reactor"></a>Reactor</h4><p><img src="/2021/05/01/netty/image-20210819202453405.png" alt="image-20210819202453405"></p>
+<ol>
+<li>基于IO复用模型：多个连接共用一个阻塞对象，应用程序只需要在一个阻塞对象等待，无需阻塞等待所有连接。当某个连接有新的数据可以处理时，操作系统通知应用程序，线程从阻塞状态返回，开始进行业务处理。</li>
+<li>通过一个或多个输入请求，同时传递给服务处理器的模式（基于事件驱动）</li>
+<li>服务器端程序会处理传入的多个多个请求，并将它们同步分派相应的处理线程。因此Reactor模式也叫Dispatcher模式。</li>
+</ol>
+<h3 id="3-2-netty线程模型"><a href="#3-2-netty线程模型" class="headerlink" title="3.2 netty线程模型"></a>3.2 netty线程模型</h3><h4 id="3-3-2-单Reactor单线程"><a href="#3-3-2-单Reactor单线程" class="headerlink" title="3.3.2 单Reactor单线程"></a>3.3.2 单Reactor单线程</h4><p><img src="/2021/05/01/netty/image-20210819202920042.png" alt="image-20210819202920042"></p>
+<p>只有一个线程，再来一个请求，另外一个线程正在处理业务，那么就会造成阻塞。于是产生了单Reactor多线程模型。</p>
+<h4 id="3-3-3-单Reactor多线程"><a href="#3-3-3-单Reactor多线程" class="headerlink" title="3.3.3 单Reactor多线程"></a>3.3.3 单Reactor多线程</h4><p><img src="/2021/05/01/netty/image-20210819204412985.png" alt="image-20210819204412985"></p>
+<p>通过select监控客户端请求，收到事件后，通过dispatcher进行分发。</p>
+<p>如果建立连接请求，则通过Acceptor通过accept处理连接请求，创建Handler对象处理完成连接后的各种事件。如果不是连接请求，则由reactor分发调用连接对应的handler来处理。worker线程池会分配线程处理真正的业务，并将结果返回给handler。</p>
+<p>优点：可以充分利用多核CPU的处理能力。</p>
+<p>缺点：多线程会数据共享和访问比较复杂。reactor会处理所有事件的监听和响应，在高并发场景容易出现性能瓶颈。</p>
+<p>基于主从Reactor多线程模型，</p>
+<p>并且对其进行了一定的改进，其中主从Reactor多线程模型有多个Reactor。</p>
+<p><img src="/2021/05/01/netty/image-20210819210103212.png" alt="image-20210819210103212"></p>
+<ol>
+<li>Reactor主线程MainReactor对象通过select监听连接事件，收到事件后，MainReactor将连接分配给SubReactor。</li>
+<li>SubReactor将连接加入到连接队列进行监听，并创建handler进行处理。</li>
+<li>当有新事件发生时，subreactor就会调用对应的handler处理。</li>
+<li>handler通过read读取数据，分发给后面的worker线程处理。</li>
+<li>线程池中的线程对业务进行处理并返回给handler，handler将结果给客户端。</li>
+</ol>
+<h4 id="netty模型的介绍："><a href="#netty模型的介绍：" class="headerlink" title="netty模型的介绍："></a>netty模型的介绍：</h4><p><img src="/2021/05/01/netty/image-20210820190525188.png" alt="image-20210820190525188"></p>
+<p>个人感觉还是和主从类似，但是这个分了两个group = Boss group + worker group。Bossgroup里面可以有多个线程，每个线程Accept和处理selector，将selector注册到Workergroup中。</p>
+<p>然后Workergroup里面也有很多线程，每个线程去处理read write 和执行业务逻辑。</p>
 
                 
             </div>

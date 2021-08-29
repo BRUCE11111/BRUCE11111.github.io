@@ -29,9 +29,9 @@
 
     <script src="/libs/jquery/jquery.min.js"></script>
 
-<meta name="generator" content="Hexo 5.4.0">
+<meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="小灰的博客" type="application/atom+xml">
+
 <style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
-<link rel="alternate" href="/atom.xml" title="小灰的博客" type="application/atom+xml">
 </head>
 
 
@@ -514,7 +514,27 @@
 <p>在传统的rpc远程调用框架中，管理每个服务与服务之间的依赖关系比较复杂，需要使用服务治理管理服务与服务之间的依赖关系，可以实现服务调用、负载均衡、容错等，实现服务的注册与发现。</p>
 <h4 id="2-4-2-单机Eureka构建步骤"><a href="#2-4-2-单机Eureka构建步骤" class="headerlink" title="2.4.2 单机Eureka构建步骤"></a>2.4.2 单机Eureka构建步骤</h4><h4 id="2-4-3-集群Eureka构建步骤"><a href="#2-4-3-集群Eureka构建步骤" class="headerlink" title="2.4.3  集群Eureka构建步骤"></a>2.4.3  集群Eureka构建步骤</h4><h4 id="2-4-4-Eureka-理论"><a href="#2-4-4-Eureka-理论" class="headerlink" title="2.4.4 Eureka 理论"></a>2.4.4 Eureka 理论</h4><p>保护模式主要用于一组客户端和Eureka Server之间存在网络分区场景下的保护。一旦进入保护模式，Eureka Server将会尝试保护其服务注册表中的信息，不再删除服务注册表中的数据，也就是不会注销任何微服务。</p>
 <p>其实就是某时刻某一个微服务不可用，Eureka不会立即清理，依旧会对该微服务的信息进行保存。</p>
-<h3 id="2-5-zookeaper"><a href="#2-5-zookeaper" class="headerlink" title="2.5 zookeaper"></a>2.5 zookeaper</h3>
+<h3 id="2-5-zookeaper"><a href="#2-5-zookeaper" class="headerlink" title="2.5 zookeaper"></a>2.5 zookeaper</h3><h2 id="3-Hytrix"><a href="#3-Hytrix" class="headerlink" title="3.Hytrix"></a>3.Hytrix</h2><p>Hytrix可以防止服务的级联故障：雪崩效应。</p>
+<h4 id="3-1-工作流程"><a href="#3-1-工作流程" class="headerlink" title="3.1 工作流程"></a>3.1 工作流程</h4><ol>
+<li>当调用出现错误的时候，开启一个时间窗，默认10s。</li>
+<li>在这个时间窗内，统计调用次数是否达到最小请求数。如果没有达到，则重置回到第一步。如果达到了，则统计失败的请求数占所有请求数的百分比，是否达到阈值？达到阈值则不再请求对应服务，则跳闸。如果没有达到则回到第一步。</li>
+<li>如果跳闸，则开启活动窗口（默认5s），每隔5sHystrix会让一个请求通过，到达那个服务，看是否调用成功。成功则回到第一步，失败则回到第三步。</li>
+</ol>
+<p><img src="/2021/05/16/springcloud/image-20210829103536402.png" alt="image-20210829103536402"></p>
+<h4 id="3-2-线程池隔离"><a href="#3-2-线程池隔离" class="headerlink" title="3.2 线程池隔离"></a>3.2 线程池隔离</h4><p>一个业务出现故障不会影响其他接口的业务。如果需要隔离上千个，不推荐。毕竟上下文切换开销等大。</p>
+<h4 id="3-3-信号量隔离"><a href="#3-3-信号量隔离" class="headerlink" title="3.3 信号量隔离"></a>3.3 信号量隔离</h4><p>每次调用线程，当前请求通过计数信号量进行限制，当信号量大于了最大请求数<code>maxConcurrentRequest</code>时，进行限制，调用fallback接口快速返回。信号量的调用是异步的，每次调用都得阻塞调用方的线程，直到结果返回。导致无法对访问做超时（只能调用协议超时，无法主动释放）。</p>
+<p>一般用来非网络请求，因为网络有超时，信号量无法处理超时。</p>
+<p><img src="/2021/05/16/springcloud/image-20210829192941272.png" alt="image-20210829192941272"></p>
+<h3 id="4-雪崩的解决方案"><a href="#4-雪崩的解决方案" class="headerlink" title="4. 雪崩的解决方案"></a>4. 雪崩的解决方案</h3><p>雪崩是系统的蝴蝶效应导致，其发生的原因多种多样，从源头我们无法完全杜绝雪崩的发生。</p>
+<p>可以有：</p>
+<ol>
+<li>请求缓存：将请求与返回结果做缓存处理。</li>
+<li>请求合并：将相同的请求进行合并然后调用批处理接口。</li>
+<li>服务隔离：限制调用分布式服务的资源，某一个调用的服务出现问题不会影响其他服务调用。</li>
+<li>服务熔断：牺牲局部服务，保全整体系统稳定性的措施。</li>
+<li>服务降级：服务熔断以后，客户端用自己本地方法返回缺省值。</li>
+</ol>
+
                 
             </div>
             <hr/>
