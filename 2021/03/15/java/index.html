@@ -29,9 +29,9 @@
 
     <script src="/libs/jquery/jquery.min.js"></script>
 
-<meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="小灰的博客" type="application/atom+xml">
-
+<meta name="generator" content="Hexo 5.4.0">
 <style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+<link rel="alternate" href="/atom.xml" title="小灰的博客" type="application/atom+xml">
 </head>
 
 
@@ -492,7 +492,35 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="JAVA-常问知识点"><a href="#JAVA-常问知识点" class="headerlink" title="JAVA 常问知识点"></a>JAVA 常问知识点</h1><h3 id="求时间复杂度"><a href="#求时间复杂度" class="headerlink" title=" 求时间复杂度 "></a><font color="green"> 求时间复杂度 </font></h3><ol>
+                <h1 id="JAVA-常问知识点"><a href="#JAVA-常问知识点" class="headerlink" title="JAVA 常问知识点"></a>JAVA 常问知识点</h1><h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>首先下载jdk进官网下载jdk</p>
+<p><a target="_blank" rel="noopener" href="http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html">http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html</a></p>
+<p>本篇文章下载1.8的</p>
+<p><img src="https://images2018.cnblogs.com/blog/1313907/201805/1313907-20180505150858787-1466797424.png" alt="img"></p>
+<p>选择相应的系统。</p>
+<p>一键安装即可。</p>
+<p>安装后会有两个jre，一个jdk内部的，和jdk外部的</p>
+<p>关于两套jre的解释</p>
+<p>一个jre文件在JDK的外部，一个jre文件在JDK内部，这就是所谓的专用JRE和公用JRE</p>
+<ul>
+<li><ul>
+<li>专用 JRE<br>安装 JDK 时，会安装一个专用 JRE，并且您可以选择安装一个公共副本。需要专用 JRE 才能运行 JDK 中包含的工具。专用 JRE 没有注册表设置，并且完全包含在仅对 JDK 已知的 Java 目录位置（通常位于 C:\Program Files\Java\jdk1.8.0_162\jre）中。</li>
+<li>公共 JRE<br>可由其他 Java 应用程序使用，并且包含在 JDK 外部（通常位于C:\Program Files\Java\jre1.8.0_162）。公共 JRE 会注册到 Windows 注册表（位于 HKEY_LOCAL_MACHINE\SOFTWARE\JavaSoft）中。公共 JRE 可以使用“添加/删除程序”进行删除，并且还会注册到浏览器。</li>
+</ul>
+</li>
+</ul>
+<h3 id="配置环境变量"><a href="#配置环境变量" class="headerlink" title="配置环境变量"></a>配置环境变量</h3><p>对我的电脑点右键，然后选择属性</p>
+<p><img src="https://images2018.cnblogs.com/blog/1313907/201805/1313907-20180505151708817-878049841.png" alt="img"></p>
+<p> 进入之后选择高级系统设置，然后选择环境变量</p>
+<p>在打开的环境变量对话框后，单击下方【系统变量】下的【新建】按钮；</p>
+<p> 然后输入JAVA_HOME,对应的变量值为你jdk安装的目录。</p>
+<p><img src="https://images2018.cnblogs.com/blog/1313907/201805/1313907-20180505151930953-913534876.png" alt="img"></p>
+<p>点击确定。</p>
+<p>然后新建变量名：classpath     变量值：.;%JAVA_HOME%\lib;%JAVA_HOME%\lib\tools.jar点确定</p>
+<p><img src="https://images2018.cnblogs.com/blog/1313907/201805/1313907-20180505160714794-1912853159.png" alt="img"></p>
+<p>然后在系统变量中找到名为“Path”的变量并双击，新建变量为 %JAVA_HOME%\bin</p>
+<p> <img src="https://images2018.cnblogs.com/blog/1313907/201805/1313907-20180505152115707-154528137.png" alt="img"></p>
+<p>确定以后，分别输入“java”、“java -version”（java -version代表你安装的java的版本）和javac，若都正常运行则代表java已经正确安装。</p>
+<h3 id="求时间复杂度"><a href="#求时间复杂度" class="headerlink" title=" 求时间复杂度 "></a><font color="green"> 求时间复杂度 </font></h3><ol>
 <li>递归树法</li>
 </ol>
 <p>$T(n) = 2 * T(\frac{n}{2}) + n $</p>
@@ -1859,14 +1887,14 @@ instance <span class="token operator">=</span> memory<span class="token punctuat
 
 <p>当A线程上面132的顺序分配了对象，但是当A刚刚执行完毕3，B看到了instance已经不为<code>null</code>，B此时调用了空对象，发生<font color="red">错误</font>。</p>
 <h3 id="lt-happens-before原则"><a href="#lt-happens-before原则" class="headerlink" title="< happens-before原则"></a><font color="green">&lt; happens-before原则</font></h3><ul>
-<li>程序次序规则：一个线程内，按照代码顺序，书写在前面的操作先行发生于书写在后面的操作</li>
-<li>锁定规则：一个unLock操作先行发生于后面对同一个锁lock操作</li>
-<li>volatile变量规则：对一个变量的写操作先行发生于后面对这个变量的读操作</li>
-<li>传递规则：如果操作A先行发生于操作B，而操作B又先行发生于操作C，则可以得出操作A先行发生于操作C</li>
-<li>线程启动规则：Thread对象的start()方法先行发生于此线程的每个一个动作</li>
-<li>线程中断规则：对线程interrupt()方法的调用先行发生于被中断线程的代码检测到中断事件的发生</li>
-<li>线程终结规则：线程中所有的操作都先行发生于线程的终止检测，我们可以通过Thread.join()方法结束、Thread.isAlive()的返回值手段检测到线程已经终止执行</li>
-<li>对象终结规则：一个对象的初始化完成先行发生于他的finalize()方法的开始</li>
+<li>程序次序法则：线程中的每个动作A都happens-before于该线程中的每一个动作B，其中，在程序中，所有的动作B都能出现在A之后。</li>
+<li>监视器锁法则：对一个监视器锁的解锁 happens-before于每一个后续对同一监视器锁的加锁。</li>
+<li>volatile变量法则：对volatile域的写入操作happens-before于每一个后续对同一个域的读写操作。</li>
+<li>线程启动法则：在一个线程里，对Thread.start的调用会happens-before于每个启动线程的动作。</li>
+<li>线程终结法则：线程中的任何动作都happens-before于其他线程检测到这个线程已经终结、或者从Thread.join调用中成功返回，或Thread.isAlive返回false。</li>
+<li>中断法则：一个线程调用另一个线程的interrupt happens-before于被中断的线程发现中断。</li>
+<li>终结法则：一个对象的构造函数的结束happens-before于这个对象finalizer的开始。</li>
+<li>传递性：如果A happens-before于B，且B happens-before于C，则A happens-before于C</li>
 </ul>
 <h3 id="lt-JAVA-并发"><a href="#lt-JAVA-并发" class="headerlink" title="< JAVA 并发"></a><font color="green">&lt; JAVA 并发</font></h3><p>最初的计算机只能接受一些特定的指令，用户每输入一个指令，计算机就做出一个操作。当用户在思考或者输入时，计算机就在等待。这样效率非常低下，在很多时候，计算机都处在等待状态。</p>
 <p><strong>批处理操作系统</strong></p>
