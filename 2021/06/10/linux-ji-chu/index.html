@@ -445,13 +445,9 @@
             <div class="row tag-cate">
                 <div class="col s7">
                     
-                    <div class="article-tag">
-                        
-                            <a href="/tags/linux/">
-                                <span class="chip bg-color">linux</span>
-                            </a>
-                        
-                    </div>
+                          <div class="article-tag">
+                            <span class="chip bg-color">无标签</span>
+                          </div>
                     
                 </div>
                 <div class="col s5 right-align">
@@ -673,7 +669,78 @@ PATH="$HOME/bin:$HOME/.local/bin:$PATH"<span aria-hidden="true" class="line-numb
 <p><code>sys</code> 虚拟文件系统。和/proc目录相似，都是保存在内存当中的，主要是保存于内核相关信息的。</p>
 <p><code>usr</code> 系统软件资源目录。 unix software resource 的缩写，不是存放用户数据，而是存放系统软件资源的目录。系统中安装的大多数软件都存放在这里。</p>
 <p><code>var</code>动态数据（比如日志）保存的位置。缓存、日志以及软件运行所产生的文件。</p>
-
+<h3 id="4-1-文件处理"><a href="#4-1-文件处理" class="headerlink" title="4.1 文件处理"></a>4.1 文件处理</h3><h4 id="4-1-1-ls"><a href="#4-1-1-ls" class="headerlink" title="4.1.1 ls"></a>4.1.1 ls</h4><p><code>ls -la /etc</code> 命令 [-选项] [参数]</p>
+<p>ls -l (long 长格式显示)</p>
+<p>显示的格式如下：</p>
+<p>​                            用户    用户组 文件大小（字节） 时间 文件名</p>
+<p><code>-rw------- 1 root root 1205 3月 3 08:10 anaconda-ks.cfg</code></p>
+<p>- 文件类型（- 二进制文件 d目录 l 软链接文件）</p>
+<p>其后分别是 u g o</p>
+<p>u所有者 g所属组 o其他人</p>
+<p>r读 w写 x执行（最高权限）</p>
+<h4 id="4-1-2-mkdir"><a href="#4-1-2-mkdir" class="headerlink" title="4.1.2 mkdir"></a>4.1.2 mkdir</h4><p><code>mkdir -p</code> 递归创建目录。</p>
+<p><code>mkdir -p /tmp/japan/boduo</code></p>
+<p><code>mkdir /tmp/Japan/longze  /tmp/Japan/cangjing</code></p>
+<h4 id="4-1-3-cd-change-directory"><a href="#4-1-3-cd-change-directory" class="headerlink" title="4.1.3 cd (change directory)"></a>4.1.3 cd (change directory)</h4><p>打开目录</p>
+<h4 id="4-1-4-rmdir"><a href="#4-1-4-rmdir" class="headerlink" title="4.1.4 rmdir"></a>4.1.4 rmdir</h4><p>删除目录。</p>
+<h4 id="4-1-5-cp-copy"><a href="#4-1-5-cp-copy" class="headerlink" title="4.1.5 cp (copy)"></a>4.1.5 cp (copy)</h4><p>cp -rp [原文件或目录] [目标目录]</p>
+<p>-r 复制目录</p>
+<p>-p 保留文件属性</p>
+<h4 id="4-1-6-touch"><a href="#4-1-6-touch" class="headerlink" title="4.1.6 touch"></a>4.1.6 touch</h4><p>创建空文件</p>
+<h4 id="4-1-7-cat"><a href="#4-1-7-cat" class="headerlink" title="4.1.7 cat"></a>4.1.7 cat</h4><p><code>cat -n</code> 显示行号</p>
+<p>tac 反着显示</p>
+<h4 id="4-1-8-more"><a href="#4-1-8-more" class="headerlink" title="4.1.8 more"></a>4.1.8 more</h4><p>分页显示文件的命令。</p>
+<h4 id="4-1-9-less"><a href="#4-1-9-less" class="headerlink" title="4.1.9 less"></a>4.1.9 less</h4><p>less命令可以向上翻页。</p>
+<p>浏览状态下，某个关键词位置。/关键词 就会找到，然后n键可以往下走。</p>
+<h4 id="4-1-10-head"><a href="#4-1-10-head" class="headerlink" title="4.1.10 head"></a>4.1.10 head</h4><p>只看文件前几个部分。</p>
+<p><code>head -n 10 文件名</code> 看前10行</p>
+<h4 id="4-1-11-tail"><a href="#4-1-11-tail" class="headerlink" title="4.1.11 tail"></a>4.1.11 tail</h4><p>查看末尾的几行，同head。</p>
+<h4 id="4-1-12-ln"><a href="#4-1-12-ln" class="headerlink" title="4.1.12 ln"></a>4.1.12 ln</h4><p><code>ln -s /etc/issue /tmp/issue.soft</code></p>
+<p>创建/etc/issue的软连接/tmp/issue.soft</p>
+<p>硬链接：不能指向目录、不能跨分区。</p>
+<h4 id="4-1-13-locate"><a href="#4-1-13-locate" class="headerlink" title="4.1.13 locate"></a>4.1.13 locate</h4><p>find在某一个文件或者分区硬盘上全部遍历查找。</p>
+<p>locate是直接找资料库。系统有一个维护的文件资料库，</p>
+<p>如果使用<code>locate locate</code>寻找，那么就会发现打印出来的</p>
+<p><img src="/2021/06/10/linux-ji-chu/1\blog\source_posts\linux基础\image-20211013124132522.png" alt="image-20211013124132522"></p>
+<p>白色就是资料库。<code>但是如果新建立的文件，没有被收录到这个资料库，那么这个文件是找不到的</code>。</p>
+<p>我们需要更新资料库，<code>updatedb</code> （除了tmp临时文件夹下的文件无法更新）</p>
+<p>这个时候就会检索到新建立的文件。</p>
+<ul>
+<li>不区分大小写 -i</li>
+</ul>
+<h4 id="4-1-14-which"><a href="#4-1-14-which" class="headerlink" title="4.1.14 which"></a>4.1.14 which</h4><p>搜索命令所在的目录及别名信息</p>
+<h4 id="4-1-15-whereis"><a href="#4-1-15-whereis" class="headerlink" title="4.1.15 whereis"></a>4.1.15 whereis</h4><p>和which功能一样，区别在于还列出了帮助文档。</p>
+<h4 id="4-1-16-grep"><a href="#4-1-16-grep" class="headerlink" title="4.1.16 grep"></a>4.1.16 grep</h4><p>文件内容中进行搜索。</p>
+<p>执行权限 ： 所有用户。</p>
+<p><code>grep -iv [执行字串][文件]</code> <code>-i 不区分大小写 -v 排除指定字串</code></p>
+<p>在文件内，某个字串所在的行找出来</p>
+<p><img src="/2021/06/10/linux-ji-chu/1\blog\source_posts\linux基础\image-20211013130905308.png" alt="image-20211013130905308"></p>
+<p><code>grep -v ^# /etc/..file</code> 找到所有并排除以 # 开头的行</p>
+<h4 id="4-1-17-find"><a href="#4-1-17-find" class="headerlink" title="4.1.17 find"></a>4.1.17 find</h4><p><code>find /etc -name init</code> 在etc文件夹下寻找名字为init的文件，这个一般是精准搜索，全匹配。</p>
+<p>如果要模糊搜索，可以：<code>find /etc -name *init*</code> 使用通配符。</p>
+<p><code>find /etc/ -name init???</code> 匹配三个字符 问好匹配单个字符</p>
+<p><code>find / -size +204800</code> 在根目录下查找大于100MB的文件。 +n 大于 -n 小于 n 等于。 一个数据块0.5k。 然后 100MB = 102400KB * 2 = 204800</p>
+<p><code>find /home -user shenchao</code> 在home文件夹下找到所有者为shenchao的文件。</p>
+<p><code>fidn /etc -cmin -5</code> 在/etc目录下查找5分钟内（注意-号，是小于5分钟）被修改过的属性的文件和目录。</p>
+<p>-amin 访问时间 access</p>
+<p>-cmin 文件属性 change</p>
+<p>-mmin 文件内容 modify</p>
+<p><code>find /etc -size + 163840 -a -size -204800</code> 在etc下查找大于80MB小于100MB的文件。</p>
+<p>-a 两个文件同时满足 -o 两个条件满足任何一个即可。</p>
+<p>-type f 文件 d目录 l软连接文件</p>
+<p><code>find /etc -name inittab -exec ls -l {}\;</code> 在etc下查找inittab文件并显示其详细信息</p>
+<p>-exec/-ok 命令{}\ ，对搜索结果执行操作。</p>
+<p>-inum i节点， 根据i节点查找。</p>
+<p><code>find -inum 31531 -exec rm {} \</code> 删除i节点是31531的文件。</p>
+<h3 id="4-2-帮助命令"><a href="#4-2-帮助命令" class="headerlink" title="4.2 帮助命令"></a>4.2 帮助命令</h3><h4 id="4-2-1-man"><a href="#4-2-1-man" class="headerlink" title="4.2.1 man"></a>4.2.1 man</h4><p>命令和配置文件的帮助信息。</p>
+<p><code>man ls</code> 查看ls命令的帮助信息</p>
+<p>1 是命令的帮助 5 是配置文件的帮助。</p>
+<h4 id="4-2-2-whatis"><a href="#4-2-2-whatis" class="headerlink" title="4.2.2 whatis"></a>4.2.2 whatis</h4><p>简短地得到命令地信息</p>
+<h4 id="4-2-3-apropos"><a href="#4-2-3-apropos" class="headerlink" title="4.2.3 apropos"></a>4.2.3 apropos</h4><p>查看配置文件的信息 <code>apropos services</code> </p>
+<h4 id="4-2-4-help"><a href="#4-2-4-help" class="headerlink" title="4.2.4 help"></a>4.2.4 help</h4><p>有一部分是shell内置命令。找不到它存放的路径。需要使用help获取内置命令的帮助信息。</p>
+<h3 id="4-3-用户管理"><a href="#4-3-用户管理" class="headerlink" title="4.3 用户管理"></a>4.3 用户管理</h3><h4 id="4-3-1-useradd"><a href="#4-3-1-useradd" class="headerlink" title="4.3.1 useradd"></a>4.3.1 useradd</h4><p>添加用户命令。</p>
+<h4 id="4-3-2-passwd"><a href="#4-3-2-passwd" class="headerlink" title="4.3.2 passwd"></a>4.3.2 passwd</h4><p>更改密码 <code>passwd xxh</code></p>
+<h4 id="4-3-3"><a href="#4-3-3" class="headerlink" title="4.3.3"></a>4.3.3</h4>
                 
             </div>
             <hr/>
@@ -736,11 +803,7 @@ PATH="$HOME/bin:$HOME/.local/bin:$PATH"<span aria-hidden="true" class="line-numb
                 <div class="post-meta__tag-list" style="display: inline-block;">
                     
                         <div class="article-tag">
-                            
-                                <a href="/tags/linux/">
-                                    <span class="chip bg-color">linux</span>
-                                </a>
-                            
+                            <span class="chip bg-color">无标签</span>
                         </div>
                     
                 </div>
@@ -971,14 +1034,6 @@ PATH="$HOME/bin:$HOME/.local/bin:$PATH"<span aria-hidden="true" class="line-numb
                     </div>
                 </div>
                 
-                <div class="card-action article-tags">
-                    
-                    <a href="/tags/maven/">
-                        <span class="chip bg-color">maven</span>
-                    </a>
-                    
-                </div>
-                
             </div>
         </div>
         
@@ -1018,14 +1073,6 @@ PATH="$HOME/bin:$HOME/.local/bin:$PATH"<span aria-hidden="true" class="line-numb
                             
                         </span>
                     </div>
-                </div>
-                
-                <div class="card-action article-tags">
-                    
-                    <a href="/tags/mysql/">
-                        <span class="chip bg-color">mysql</span>
-                    </a>
-                    
                 </div>
                 
             </div>

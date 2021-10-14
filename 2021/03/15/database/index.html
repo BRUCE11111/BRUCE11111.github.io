@@ -1575,7 +1575,27 @@ commit;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></s
 <p>有主键或联合主键的情况下，count(*)略比count(1)快一些。<br>没有主键的情况下count(1)比count(*)快一些。<br>如果表只有一个字段，则count(*)是最快的。<br>2.使用count()聚合函数后，最好不要跟where age = 1；这样的条件，会导致不走索引，降低查询效率。除非该字段已经建立了索引。使用count()聚合函数后，若有where条件，且where条件的字段未建立索引，则查询不会走索引，直接扫描了全表。<br>3.count(字段),非主键字段，这样的使用方式最好不要出现。因为它不会走索引.</p>
 <h3 id="20-主从复制"><a href="#20-主从复制" class="headerlink" title="20. 主从复制"></a>20. 主从复制</h3><p>客户发请求给代理，代理给每个分库读或者写。要保证每个分库数据一致，binlog进行主从复制。master  和 slave 库，客户端操作master进行DML操作，</p>
 <h3 id="21-读写分离"><a href="#21-读写分离" class="headerlink" title="21 读写分离"></a>21 读写分离</h3><p>客户发请求给代理，代理给每个分库读或者写。要保证每个分库数据一致，binlog进行主从复制。master  和 slave 库，客户端操作master，</p>
-<h3 id="22-分库分表"><a href="#22-分库分表" class="headerlink" title="22. 分库分表"></a>22. 分库分表</h3><h3 id="23-MVCC"><a href="#23-MVCC" class="headerlink" title="23 MVCC"></a>23 MVCC</h3><h3 id="24-锁"><a href="#24-锁" class="headerlink" title="24. 锁"></a>24. 锁</h3><p>表锁、行锁、页锁。</p>
+<h3 id="22-分库分表"><a href="#22-分库分表" class="headerlink" title="22. 分库分表"></a>22. 分库分表</h3><p>水平切分和垂直切分</p>
+<h4 id="22-1-水平切分"><a href="#22-1-水平切分" class="headerlink" title="22.1 水平切分"></a>22.1 水平切分</h4><p>分为水平分表 和 水平分库。</p>
+<p>水平分表： </p>
+<p>就是两个表字段是一样的，但是数据不一样。比如id一个表存储奇数id的数据，一个表存储偶数id的数据。</p>
+<p>水平分库：</p>
+<p>分成好几个库，几个库里的表是一样的。按照数据对应到不同的库里去存放。</p>
+<p>垂直分表：</p>
+<p>将一张表里的字段切成两部分或者多个部分，每个部分用单独的一张表存放。</p>
+<p>垂直分库：</p>
+<p>将不同的表放到不同的数据库里。</p>
+<p><strong>应用</strong></p>
+<ol>
+<li>在数据库设计时候考虑垂直分库和垂直分表。</li>
+<li>随着数据库数据量增加，不要马上考虑做水平切分，首先考虑缓存处理，读写分离，使用索引等等方式，如果这些方式不能解决问题，再考虑水平分库和水平分表。</li>
+</ol>
+<p><strong>问题</strong></p>
+<ol>
+<li>跨节点连接查询问题（分页、排序）。比如垂直切分，但是我需要全部的数据，所以需要把每张表的数据查出来然后mysql合并再分页和排序，所以性能上出现了问题。</li>
+<li>多数据源管理的问题（操作管理比较慢）。</li>
+</ol>
+<h3 id="23-MVCC"><a href="#23-MVCC" class="headerlink" title="23 MVCC"></a>23 MVCC</h3><h3 id="24-锁"><a href="#24-锁" class="headerlink" title="24. 锁"></a>24. 锁</h3><p>表锁、行锁、页锁。</p>
 <p>表锁（偏向MYISAM引擎。</p>
 <h3 id="25-日志系统"><a href="#25-日志系统" class="headerlink" title="25. 日志系统"></a>25. 日志系统</h3><p><code>binlog</code> ——》 MYSQL服务的   <code>undo log</code> 和  <code>redo log</code> ——》innodb存储引擎的</p>
 <h3 id="26-MYSQL-结构"><a href="#26-MYSQL-结构" class="headerlink" title="26. MYSQL 结构"></a>26. MYSQL 结构</h3><p><img src="/2021/03/15/database/MYSQL%E7%BB%93%E6%9E%84.PNG"></p>

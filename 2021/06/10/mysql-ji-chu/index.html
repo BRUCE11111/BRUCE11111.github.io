@@ -445,13 +445,9 @@
             <div class="row tag-cate">
                 <div class="col s7">
                     
-                    <div class="article-tag">
-                        
-                            <a href="/tags/mysql/">
-                                <span class="chip bg-color">mysql</span>
-                            </a>
-                        
-                    </div>
+                          <div class="article-tag">
+                            <span class="chip bg-color">无标签</span>
+                          </div>
                     
                 </div>
                 <div class="col s5 right-align">
@@ -496,7 +492,7 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="1-安装"><a href="#1-安装" class="headerlink" title="1.安装"></a>1.安装</h2><h3 id="1-1-centos-mysql-5-7"><a href="#1-1-centos-mysql-5-7" class="headerlink" title="1.1 centos mysql 5.7"></a>1.1 centos mysql 5.7</h3><blockquote>
+                <h2 id="1-安装"><a href="#1-安装" class="headerlink" title="1.安装"></a>1.安装</h2><h1 id="1-centos"><a href="#1-centos" class="headerlink" title="1 centos"></a>1 centos</h1><h3 id="1-1-centos-mysql-5-7"><a href="#1-1-centos-mysql-5-7" class="headerlink" title="1.1 centos mysql 5.7"></a>1.1 centos mysql 5.7</h3><blockquote>
 <p>CentOS 7的默认yum仓库中并没有MySQL5.7，我们需要手动添加，好在MySQL官方提供了仓库的地址，所以我们能够比较简单地安装MySQL。</p>
 <p>本文我们将介绍CentOS 7下MySQL5.7的安装。</p>
 </blockquote>
@@ -520,7 +516,14 @@ mysql57-community/x86_64           MySQL <span class="token number">5.7</span> C
 </ol>
 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> yum -y <span class="token function">install</span> mysql-community-server<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
+<p>centos8.2安装mysql8.0时报错Error:Unable to find a match: mysql-community-server</p>
+<pre class="line-numbers language-none"><code class="language-none">yum module disable mysql
+yum -y install mysql-community-server<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+
+
 <ol>
+<li></li>
 <li><p>启动Mysql</p>
 <ol>
 <li>启动</li>
@@ -594,6 +597,73 @@ mysql -uroot -p000 db_tencent_health_data &lt; t_doctor_20210607.sql #在这个�
 <p>例:<br>备份整个数据库   –&gt;   mysqldump db1 &gt;/backup/db1.20060725<br>压缩备份        –&gt;   mysqldump db1 | gzip &gt;/backup/db1.20060725<br>分表备份        –&gt;   mysqldump db1 tab1 tab2 &gt;/backup/db1_tab1_tab2.sql<br>直接远程备份     –&gt;   mysqladmin -h boa.snake.net create db1<br>              –&gt;   mysqldump db1 | mysql -h boa.snake.net db1 </p>
 <p>复制备份表      –&gt;   cp tab.*   backup/ </p>
 <p>恢复<br>用最新的备份文件重装数据库。如果你用mysqldump产生的文件，将它作为mysql的输入。如果你用直接从数据库拷贝来的文件，将它们直接拷回数据库目录，然而，此时你需要在拷贝文件之前关闭数据库，然后重启它。  </p>
+<h3 id="3-彻底卸载（不保留数据）"><a href="#3-彻底卸载（不保留数据）" class="headerlink" title="3. 彻底卸载（不保留数据）"></a>3. 彻底卸载（不保留数据）</h3><p>1、 rpm -qa | grep -i mysql</p>
+<p>查找已经安装的mysql.</p>
+<p>MySQL-server-5.6.43-1.el6.x86_64 </p>
+<p>MySQL-client-5.6.43-1.el6.x86_64</p>
+<p>MySQL-devel-5.6.43-1.el6.x86_64</p>
+<p>以上三个就是我安装的mysql.</p>
+<p>2、 yum -y remove MySQL-*</p>
+<p>网上的一般用rpm -e 的命令删除mysql,这样表面上删除了mysql,可是mysql的一些残余程序仍然存在,并且通过第一步的方式也查找不到残余,而yum命令比较强大,可以完全删除mysql.(ps:用rpm删除后再次安装的时候会提示已经安装了,这就是rpm没删除干净的原因)</p>
+<p>3、 find / -name mysql</p>
+<p>查找mysql的一些目录,把所有出现的目录统统删除.可以使用rm -rf 路径，删除时请注意，一旦删除无法恢复。</p>
+<p>4、rm -rf /etc/my.cnf</p>
+<p>这个是删除配置文件</p>
+<p>5、 rm -rf /root/.mysql_sercret</p>
+<p>删除mysql的默认密码,如果不删除,以后安装mysql这个sercret中的默认密码不会变,使用其中的默认密码就可能会报类似Access denied for user ‘root@localhost’ (using password:yes)的错误.</p>
+<p>五步完成之后,这样mysql就全部删除干净了.</p>
+<h1 id="2-ubuntu18-04"><a href="#2-ubuntu18-04" class="headerlink" title="2. ubuntu18.04"></a>2. ubuntu18.04</h1><p>一，彻底删除mysql5.7<br>一，查看mysql的依赖项：</p>
+<p><code>dpkg --list | grep mysql</code><br>二，卸载</p>
+<p><code>sudo apt-get remove mysql-common</code><br>三，卸载（最后的版本数字根据自己具体的版本进行相应的修改）</p>
+<p><code>sudo apt-get autoremove --purge mysql-server-5.7</code><br>四，清楚残留数据</p>
+<p><code>dpkg -l|grep ^rc|awk '{print$2}'|sudo xargs dpkg -P</code><br>五，再次查看依赖项</p>
+<p><code>dpkg --list|grep mysql</code><br>若命令输入之后无反应直接出现命令提示符，则说明依赖项完全删除：（这里我重复输入了两边）</p>
+<p>若仍有其他内容，则继续清除剩余依赖项：（这里的命令与上一条清除命令不同）</p>
+<p><code>sudo apt-get autoremove --purge mysql-apt-config</code></p>
+<p>最后查看依赖项；无，完全删除；</p>
+<h2 id="2-1-安装"><a href="#2-1-安装" class="headerlink" title="2.1 安装"></a>2.1 安装</h2><p> <code>wget https://dev.mysql.com/get/mysql-apt-config_0.8.19-1_all.deb</code></p>
+<p><code>dpkg -i mysql-apt-config_0.8.11-1_all.deb</code></p>
+<p><code>apt-get update</code></p>
+<p><code>apt-get install mysql-server</code></p>
+<p>参考链接： <a target="_blank" rel="noopener" href="http://www.4k8k.xyz/article/weixin_43900412/85053662">Ubuntu18.04安装Mysql8.0_bird of paradise的博客-程序员资料_ubuntu安装mysql8.0 - 程序员资料 (4k8k.xyz)</a></p>
+<p><code>service mysql start</code></p>
+<p><code>mysql -uroot -p</code></p>
+<h3 id="2-1-1-配置"><a href="#2-1-1-配置" class="headerlink" title="2.1.1 配置"></a>2.1.1 配置</h3><p><code>use mysql</code></p>
+<p><code>update user set host=% where user=root;</code></p>
+<p><code>flush privileges</code></p>
+<h3 id="2-1-2-创建删除授权"><a href="#2-1-2-创建删除授权" class="headerlink" title="2.1.2 创建删除授权"></a>2.1.2 创建删除授权</h3><p>·创建用户</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">create</span> <span class="token keyword">user</span> <span class="token string">'test1'</span><span class="token variable">@'localhost'</span> identified <span class="token keyword">by</span> <span class="token string">'密码'</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>Mysql8.0默认采用caching-sha2-password加密，目前好多客户端不支持，可改为mysql_native_password;</p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">create user 'test'@'%' identified with mysql_native_password BY '密码';<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>其中localhost指本地才可连接</p>
+<p>可以将其换成%指任意ip都能连接</p>
+<p>也可以指定ip连接</p>
+<h2 id="修改密码"><a href="#修改密码" class="headerlink" title="修改密码"></a>修改密码</h2><pre class="line-numbers language-pgsql" data-language="pgsql"><code class="language-pgsql">Alter user 'test1'@'localhost' identified by '新密码';
+
+flush privileges;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="授权"><a href="#授权" class="headerlink" title="授权"></a>授权</h2><pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">grant all privileges on *.* to 'test1'@'localhost' with grant option;
+GRANT select,update,insert,create on *.* TO 'xxh'@'%' WITH GRANT OPTION;
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>with gran option表示该用户可给其它用户赋予权限，但不可能超过该用户已有的权限</p>
+<p>比如a用户有select,insert权限，也可给其它用户赋权，但它不可能给其它用户赋delete权限，除了select,insert以外的都不能</p>
+<p>这句话可加可不加，视情况而定。</p>
+<p>all privileges 可换成select,update,insert,delete,drop,create等操作 如：grant select,insert,update,delete on <em>.</em> to ‘test1’@’localhost’;</p>
+<p>第一个*表示通配数据库，可指定新建用户只可操作的数据库</p>
+<p>如：grant all privileges on 数据库.* to ‘test1’@’localhost’;</p>
+<p>第二个*表示通配表，可指定新建用户只可操作的数据库下的某个表</p>
+<p>如：grant all privileges on 数据库.指定表名 to ‘test1’@’localhost’;</p>
+<h2 id="刷新权限"><a href="#刷新权限" class="headerlink" title="刷新权限"></a>刷新权限</h2><pre class="line-numbers language-sql" data-language="sql"><code class="language-sql">flush <span class="token keyword">privileges</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h2 id="查看用户授权信息"><a href="#查看用户授权信息" class="headerlink" title="查看用户授权信息"></a>查看用户授权信息</h2><pre class="line-numbers language-ada" data-language="ada"><code class="language-ada"><span class="token variable">show</span> <span class="token variable">grants</span> <span class="token keyword">for</span> '<span class="token variable">test1</span><span class="token char">'@'</span><span class="token variable">localhost</span>'<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h2 id="撤销权限"><a href="#撤销权限" class="headerlink" title="撤销权限"></a>撤销权限</h2><pre class="line-numbers language-pgsql" data-language="pgsql"><code class="language-pgsql">revoke all privileges on *.* from 'test1'@'localhost';<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>用户有什么权限就撤什么权限</p>
+<h2 id="删除用户"><a href="#删除用户" class="headerlink" title="删除用户"></a>删除用户</h2><pre class="line-numbers language-n1ql" data-language="n1ql"><code class="language-n1ql"><span class="token keyword">drop</span> <span class="token keyword">user</span> <span class="token string">'test1'</span>@<span class="token string">'localhost'</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
                 
             </div>
@@ -657,11 +727,7 @@ mysql -uroot -p000 db_tencent_health_data &lt; t_doctor_20210607.sql #在这个�
                 <div class="post-meta__tag-list" style="display: inline-block;">
                     
                         <div class="article-tag">
-                            
-                                <a href="/tags/mysql/">
-                                    <span class="chip bg-color">mysql</span>
-                                </a>
-                            
+                            <span class="chip bg-color">无标签</span>
                         </div>
                     
                 </div>
@@ -892,14 +958,6 @@ mysql -uroot -p000 db_tencent_health_data &lt; t_doctor_20210607.sql #在这个�
                     </div>
                 </div>
                 
-                <div class="card-action article-tags">
-                    
-                    <a href="/tags/linux/">
-                        <span class="chip bg-color">linux</span>
-                    </a>
-                    
-                </div>
-                
             </div>
         </div>
         
@@ -943,14 +1001,6 @@ mysql -uroot -p000 db_tencent_health_data &lt; t_doctor_20210607.sql #在这个�
                             
                         </span>
                     </div>
-                </div>
-                
-                <div class="card-action article-tags">
-                    
-                    <a href="/tags/java/">
-                        <span class="chip bg-color">java</span>
-                    </a>
-                    
                 </div>
                 
             </div>

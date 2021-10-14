@@ -6,7 +6,7 @@
   <link href="http://bruce11111.github.io/atom.xml" rel="self"/>
   
   <link href="http://bruce11111.github.io/"/>
-  <updated>2021-07-20T12:33:57.102Z</updated>
+  <updated>2021-09-27T13:39:40.584Z</updated>
   <id>http://bruce11111.github.io/</id>
   
   <author>
@@ -15,6 +15,71 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>go</title>
+    <link href="http://bruce11111.github.io/2021/09/27/go/"/>
+    <id>http://bruce11111.github.io/2021/09/27/go/</id>
+    <published>2021-09-27T13:38:09.000Z</published>
+    <updated>2021-09-27T13:39:40.584Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;1-安装问题&quot;&gt;&lt;a href=&quot;#1-安装问题&quot; class=&quot;headerlink&quot; title=&quot;1. 安装问题&quot;&gt;&lt;/a&gt;1. 安装问题&lt;/h2&gt;&lt;h3 id=&quot;1-1-解决VSCode安装Go-tools失败的问题&quot;&gt;&lt;a</summary>
+        
+      
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>kafka</title>
+    <link href="http://bruce11111.github.io/2021/09/26/kafka/"/>
+    <id>http://bruce11111.github.io/2021/09/26/kafka/</id>
+    <published>2021-09-26T14:01:37.000Z</published>
+    <updated>2021-10-11T13:50:33.603Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;Kafka&quot;&gt;&lt;a href=&quot;#Kafka&quot; class=&quot;headerlink&quot; title=&quot;Kafka&quot;&gt;&lt;/a&gt;Kafka&lt;/h1&gt;&lt;h2 id=&quot;1-概念&quot;&gt;&lt;a href=&quot;#1-概念&quot; class=&quot;headerlink&quot; title=&quot;1.</summary>
+        
+      
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>raft算法</title>
+    <link href="http://bruce11111.github.io/2021/09/22/raft-suan-fa/"/>
+    <id>http://bruce11111.github.io/2021/09/22/raft-suan-fa/</id>
+    <published>2021-09-22T02:46:31.000Z</published>
+    <updated>2021-09-22T14:06:52.681Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;Raft算法&quot;&gt;&lt;a href=&quot;#Raft算法&quot; class=&quot;headerlink&quot; title=&quot;Raft算法&quot;&gt;&lt;/a&gt;Raft算法&lt;/h1&gt;&lt;h3 id=&quot;1、为什么&quot;&gt;&lt;a href=&quot;#1、为什么&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="分布式" scheme="http://bruce11111.github.io/categories/%E5%88%86%E5%B8%83%E5%BC%8F/"/>
+    
+    
+  </entry>
   
   <entry>
     <title>MybatisPlus</title>
@@ -52,8 +117,6 @@
     <category term="HAPI" scheme="http://bruce11111.github.io/categories/HAPI/"/>
     
     
-    <category term="HAPI" scheme="http://bruce11111.github.io/tags/HAPI/"/>
-    
   </entry>
   
   <entry>
@@ -76,8 +139,6 @@
     
     <category term="项目" scheme="http://bruce11111.github.io/categories/%E9%A1%B9%E7%9B%AE/"/>
     
-    
-    <category term="项目" scheme="http://bruce11111.github.io/tags/%E9%A1%B9%E7%9B%AE/"/>
     
   </entry>
   
@@ -104,8 +165,6 @@
     <category term="maven" scheme="http://bruce11111.github.io/categories/maven/"/>
     
     
-    <category term="maven" scheme="http://bruce11111.github.io/tags/maven/"/>
-    
   </entry>
   
   <entry>
@@ -113,7 +172,7 @@
     <link href="http://bruce11111.github.io/2021/06/10/linux-ji-chu/"/>
     <id>http://bruce11111.github.io/2021/06/10/linux-ji-chu/</id>
     <published>2021-06-10T03:28:08.000Z</published>
-    <updated>2021-08-03T13:55:58.250Z</updated>
+    <updated>2021-10-13T08:44:33.680Z</updated>
     
     
       
@@ -129,8 +188,6 @@
     <category term="linux" scheme="http://bruce11111.github.io/categories/linux/"/>
     
     
-    <category term="linux" scheme="http://bruce11111.github.io/tags/linux/"/>
-    
   </entry>
   
   <entry>
@@ -138,14 +195,14 @@
     <link href="http://bruce11111.github.io/2021/06/10/mysql-ji-chu/"/>
     <id>http://bruce11111.github.io/2021/06/10/mysql-ji-chu/</id>
     <published>2021-06-10T02:58:01.000Z</published>
-    <updated>2021-06-10T03:19:52.449Z</updated>
+    <updated>2021-10-14T05:52:31.031Z</updated>
     
     
       
       
         
         
-    <summary type="html">&lt;h2 id=&quot;1-安装&quot;&gt;&lt;a href=&quot;#1-安装&quot; class=&quot;headerlink&quot; title=&quot;1.安装&quot;&gt;&lt;/a&gt;1.安装&lt;/h2&gt;&lt;h3 id=&quot;1-1-centos-mysql-5-7&quot;&gt;&lt;a href=&quot;#1-1-centos-mysql-5-7&quot;</summary>
+    <summary type="html">&lt;h2 id=&quot;1-安装&quot;&gt;&lt;a href=&quot;#1-安装&quot; class=&quot;headerlink&quot; title=&quot;1.安装&quot;&gt;&lt;/a&gt;1.安装&lt;/h2&gt;&lt;h1 id=&quot;1-centos&quot;&gt;&lt;a href=&quot;#1-centos&quot; class=&quot;headerlink&quot;</summary>
         
       
     
@@ -153,8 +210,6 @@
     
     <category term="mysql" scheme="http://bruce11111.github.io/categories/mysql/"/>
     
-    
-    <category term="mysql" scheme="http://bruce11111.github.io/tags/mysql/"/>
     
   </entry>
   
@@ -180,8 +235,6 @@
     
     <category term="mybatis plus" scheme="http://bruce11111.github.io/categories/java/mybatis-plus/"/>
     
-    
-    <category term="java" scheme="http://bruce11111.github.io/tags/java/"/>
     
   </entry>
   
@@ -233,7 +286,7 @@
     <link href="http://bruce11111.github.io/2021/05/23/nginx/"/>
     <id>http://bruce11111.github.io/2021/05/23/nginx/</id>
     <published>2021-05-23T10:43:47.000Z</published>
-    <updated>2021-08-19T00:43:05.417Z</updated>
+    <updated>2021-09-25T06:33:10.780Z</updated>
     
     
       
@@ -250,8 +303,6 @@
     
     <category term="java" scheme="http://bruce11111.github.io/categories/nginx/java/"/>
     
-    
-    <category term="nginx" scheme="http://bruce11111.github.io/tags/nginx/"/>
     
   </entry>
   
@@ -278,8 +329,6 @@
     <category term="java" scheme="http://bruce11111.github.io/categories/springboot/java/"/>
     
     
-    <category term="springboot" scheme="http://bruce11111.github.io/tags/springboot/"/>
-    
   </entry>
   
   <entry>
@@ -304,8 +353,6 @@
     <category term="讨论" scheme="http://bruce11111.github.io/categories/%E8%AE%A8%E8%AE%BA/"/>
     
     
-    <category term="讨论" scheme="http://bruce11111.github.io/tags/%E8%AE%A8%E8%AE%BA/"/>
-    
   </entry>
   
   <entry>
@@ -328,8 +375,6 @@
     
     <category term="docker" scheme="http://bruce11111.github.io/categories/docker/"/>
     
-    
-    <category term="docker" scheme="http://bruce11111.github.io/tags/docker/"/>
     
   </entry>
   
@@ -367,8 +412,6 @@
     <category term="git" scheme="http://bruce11111.github.io/categories/git/"/>
     
     
-    <category term="git" scheme="http://bruce11111.github.io/tags/git/"/>
-    
   </entry>
   
   <entry>
@@ -394,8 +437,6 @@
     <category term="java" scheme="http://bruce11111.github.io/categories/springcloud/java/"/>
     
     
-    <category term="springcloud" scheme="http://bruce11111.github.io/tags/springcloud/"/>
-    
   </entry>
   
   <entry>
@@ -418,83 +459,6 @@
     
     <category term="java" scheme="http://bruce11111.github.io/categories/java/"/>
     
-    
-    <category term="java" scheme="http://bruce11111.github.io/tags/java/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>netty</title>
-    <link href="http://bruce11111.github.io/2021/05/01/netty/"/>
-    <id>http://bruce11111.github.io/2021/05/01/netty/</id>
-    <published>2021-05-01T01:25:12.000Z</published>
-    <updated>2021-08-20T14:38:39.335Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h1 id=&quot;Netty&quot;&gt;&lt;a href=&quot;#Netty&quot; class=&quot;headerlink&quot; title=&quot;Netty&quot;&gt;&lt;/a&gt;Netty&lt;/h1&gt;&lt;h2 id=&quot;1-IO模型&quot;&gt;&lt;a href=&quot;#1-IO模型&quot; class=&quot;headerlink&quot;</summary>
-        
-      
-    
-    
-    
-    <category term="netty" scheme="http://bruce11111.github.io/categories/netty/"/>
-    
-    
-    <category term="netty" scheme="http://bruce11111.github.io/tags/netty/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Properties类Java</title>
-    <link href="http://bruce11111.github.io/2021/04/27/properties-lei-java/"/>
-    <id>http://bruce11111.github.io/2021/04/27/properties-lei-java/</id>
-    <published>2021-04-27T02:31:58.000Z</published>
-    <updated>2021-04-27T03:20:07.215Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h1 id=&quot;Properties&quot;&gt;&lt;a href=&quot;#Properties&quot; class=&quot;headerlink&quot; title=&quot;Properties&quot;&gt;&lt;/a&gt;Properties&lt;/h1&gt;&lt;p&gt;&lt;img</summary>
-        
-      
-    
-    
-    
-    <category term="java" scheme="http://bruce11111.github.io/categories/java/"/>
-    
-    
-    <category term="java" scheme="http://bruce11111.github.io/tags/java/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>dubbo</title>
-    <link href="http://bruce11111.github.io/2021/04/23/dubbo/"/>
-    <id>http://bruce11111.github.io/2021/04/23/dubbo/</id>
-    <published>2021-04-23T13:42:09.000Z</published>
-    <updated>2021-05-16T07:43:18.221Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h1 id=&quot;Dubbo&quot;&gt;&lt;a href=&quot;#Dubbo&quot; class=&quot;headerlink&quot; title=&quot;Dubbo&quot;&gt;&lt;/a&gt;Dubbo&lt;/h1&gt;&lt;h2 id=&quot;1-分布式基础&quot;&gt;&lt;a href=&quot;#1-分布式基础&quot; class=&quot;headerlink&quot;</summary>
-        
-      
-    
-    
-    
-    <category term="dubbo" scheme="http://bruce11111.github.io/categories/dubbo/"/>
-    
-    
-    <category term="dubbo" scheme="http://bruce11111.github.io/tags/dubbo/"/>
     
   </entry>
   
