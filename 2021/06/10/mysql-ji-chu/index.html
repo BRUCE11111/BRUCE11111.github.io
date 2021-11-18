@@ -445,9 +445,13 @@
             <div class="row tag-cate">
                 <div class="col s7">
                     
-                          <div class="article-tag">
-                            <span class="chip bg-color">无标签</span>
-                          </div>
+                    <div class="article-tag">
+                        
+                            <a href="/tags/mysql/">
+                                <span class="chip bg-color">mysql</span>
+                            </a>
+                        
+                    </div>
                     
                 </div>
                 <div class="col s5 right-align">
@@ -640,8 +644,15 @@ mysql -uroot -p000 db_tencent_health_data &lt; t_doctor_20210607.sql #在这个�
 <p>其中localhost指本地才可连接</p>
 <p>可以将其换成%指任意ip都能连接</p>
 <p>也可以指定ip连接</p>
-<h2 id="修改密码"><a href="#修改密码" class="headerlink" title="修改密码"></a>修改密码</h2><pre class="line-numbers language-pgsql" data-language="pgsql"><code class="language-pgsql">Alter user 'test1'@'localhost' identified by '新密码';
+<ul>
+<li>查询用户信息:</li>
+</ul>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">select host, user, authentication_string, plugin from user;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
+
+
+<h2 id="修改密码"><a href="#修改密码" class="headerlink" title="修改密码"></a>修改密码</h2><pre class="line-numbers language-pgsql" data-language="pgsql"><code class="language-pgsql">Alter user 'test1'@'localhost' identified by '新密码';
+ALTER user 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY '123456';
 flush privileges;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 
 <h2 id="授权"><a href="#授权" class="headerlink" title="授权"></a>授权</h2><pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">grant all privileges on *.* to 'test1'@'localhost' with grant option;
@@ -664,6 +675,12 @@ GRANT select,update,insert,create on *.* TO 'xxh'@'%' WITH GRANT OPTION;
 
 <p>用户有什么权限就撤什么权限</p>
 <h2 id="删除用户"><a href="#删除用户" class="headerlink" title="删除用户"></a>删除用户</h2><pre class="line-numbers language-n1ql" data-language="n1ql"><code class="language-n1ql"><span class="token keyword">drop</span> <span class="token keyword">user</span> <span class="token string">'test1'</span>@<span class="token string">'localhost'</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h2 id="3-搭建集群"><a href="#3-搭建集群" class="headerlink" title="3. 搭建集群"></a>3. 搭建集群</h2><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/richie696/article/details/114261284?utm_medium=distribute.pc_relevant.none-task-blog-2~default~CTRLIST~default-1.no_search_link&amp;depth_1-utm_source=distribute.pc_relevant.none-task-blog-2~default~CTRLIST~default-1.no_search_link">(3条消息) MySQL8.0高级应用———集群模式配置（主从、双主、MHA高可用模式配置）_richie696的专栏-CSDN博客</a></p>
+<p>参考这个博客。</p>
+<p>注意 主从每个机子的server-id 必须不一样</p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">change master to master_host='172.16.6.94',master_port=3306,master_user='xxh',master_password='',master_log_file='mysql-bin.000003',master_log_pos=156;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
 
                 
             </div>
@@ -727,7 +744,11 @@ GRANT select,update,insert,create on *.* TO 'xxh'@'%' WITH GRANT OPTION;
                 <div class="post-meta__tag-list" style="display: inline-block;">
                     
                         <div class="article-tag">
-                            <span class="chip bg-color">无标签</span>
+                            
+                                <a href="/tags/mysql/">
+                                    <span class="chip bg-color">mysql</span>
+                                </a>
+                            
                         </div>
                     
                 </div>
@@ -956,6 +977,14 @@ GRANT select,update,insert,create on *.* TO 'xxh'@'%' WITH GRANT OPTION;
                             
                         </span>
                     </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/linux/">
+                        <span class="chip bg-color">linux</span>
+                    </a>
+                    
                 </div>
                 
             </div>

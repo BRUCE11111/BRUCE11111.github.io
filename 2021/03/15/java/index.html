@@ -520,6 +520,24 @@
 <p>然后在系统变量中找到名为“Path”的变量并双击，新建变量为 %JAVA_HOME%\bin</p>
 <p> <img src="https://images2018.cnblogs.com/blog/1313907/201805/1313907-20180505152115707-154528137.png" alt="img"></p>
 <p>确定以后，分别输入“java”、“java -version”（java -version代表你安装的java的版本）和javac，若都正常运行则代表java已经正确安装。</p>
+<h2 id="ubuntu18-04-安装"><a href="#ubuntu18-04-安装" class="headerlink" title="ubuntu18.04 安装"></a>ubuntu18.04 安装</h2><p>java下载</p>
+<p>1.进入官网下载页面<a target="_blank" rel="noopener" href="http://www.oracle.com/technetwork/java/javase/downloads/index.html">http://www.oracle.com/technetwork/java/javase/downloads/index.html</a></p>
+<p>2.选择需要的版本，进入下载页面</p>
+<p>选中红框才可以下载</p>
+<p>3.下载完成解压</p>
+<p>本人安装目录是/usr/java下，需要cd /usr进入usr目录</p>
+<p>创建java文件夹，命令sudo mkdir java</p>
+<p>为了后续方便，将java目录赋予最高权限，命令sudo chmod 777 java</p>
+<p>将下载的文件移动到java目录下，具体根据你的是桌面版还是服务器版本自行移动。</p>
+<p>解压java包 tar -zxvf jdk文件名</p>
+<p>本人的是tar -zxvf jdk-8u144-linux-x64.gz</p>
+<p>解压完成</p>
+<p>三、配置java</p>
+<p>输入sudo vim /etc/profile</p>
+<p>如果没有vim，使用vi也可以，或者其他编辑器，都可以</p>
+<p>在文件中添加如下，根据自己实际情况填写</p>
+<p>#安装目录<br>export   JAVA_HOME=/usr/java/jdk1.8.0_144<br>#下面都一样啦<br>export   CLASSPATH=.:$JAVA_HOME/lib:$JRE_HOME/lib:$CLASSPATH<br>export  PATH=$JAVA_HOME/bin:$JRE_HOME/bin:$PATH<br>export   JRE_HOME=$JAVA_HOME/jre</p>
+<h2 id="远程开发-IDEA"><a href="#远程开发-IDEA" class="headerlink" title="远程开发 IDEA"></a>远程开发 IDEA</h2><p>官网 <a target="_blank" rel="noopener" href="https://www.jetbrains.com/help/idea/run-targets.html">Run targets | IntelliJ IDEA (jetbrains.com)</a></p>
 <h3 id="求时间复杂度"><a href="#求时间复杂度" class="headerlink" title=" 求时间复杂度 "></a><font color="green"> 求时间复杂度 </font></h3><ol>
 <li>递归树法</li>
 </ol>

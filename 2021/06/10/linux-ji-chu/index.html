@@ -445,9 +445,13 @@
             <div class="row tag-cate">
                 <div class="col s7">
                     
-                          <div class="article-tag">
-                            <span class="chip bg-color">无标签</span>
-                          </div>
+                    <div class="article-tag">
+                        
+                            <a href="/tags/linux/">
+                                <span class="chip bg-color">linux</span>
+                            </a>
+                        
+                    </div>
                     
                 </div>
                 <div class="col s5 right-align">
@@ -492,20 +496,20 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="1-命令1"><a href="#1-命令1" class="headerlink" title="1.命令1"></a>1.命令1</h2><h3 id="1-重命名文件夹"><a href="#1-重命名文件夹" class="headerlink" title="1. 重命名文件夹"></a>1. 重命名文件夹</h3><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"><span class="token function">mv</span> souce target <span class="token comment"># 直接使用mv就好了，在本地相当于覆盖地改了</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+                <h2 id="1-命令1"><a href="#1-命令1" class="headerlink" title="1.命令1"></a>1.命令1</h2><h3 id="1-重命名文件夹"><a href="#1-重命名文件夹" class="headerlink" title="1. 重命名文件夹"></a>1. 重命名文件夹</h3><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">mv souce target # 直接使用mv就好了，在本地相当于覆盖地改了<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 
 
-<h3 id="2-查看当前路径"><a href="#2-查看当前路径" class="headerlink" title="2. 查看当前路径"></a>2. 查看当前路径</h3><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"><span class="token builtin class-name">pwd</span>
+<h3 id="2-查看当前路径"><a href="#2-查看当前路径" class="headerlink" title="2. 查看当前路径"></a>2. 查看当前路径</h3><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">pwd
 -L 
-如果 <span class="token environment constant">PWD</span> 环境变量包含了不包含文件名 .（点表示当前目录）或 <span class="token punctuation">..</span>（点点表示父目录）的当前目录的绝对路径名，则显示 <span class="token environment constant">PWD</span> 环境变量的值。否则，-L 标志与 -P 标志一样运行。 
+如果 PWD 环境变量包含了不包含文件名 .（点表示当前目录）或 ..（点点表示父目录）的当前目录的绝对路径名，则显示 PWD 环境变量的值。否则，-L 标志与 -P 标志一样运行。 
 -P 
 显示当前目录的绝对路径名。与 -P 标志一起显示的绝对路径不包含在路径名的绝对路径中涉及到符号链接类型的文件的名称。<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <h3 id="3-修改环境变量"><a href="#3-修改环境变量" class="headerlink" title="3. 修改环境变量"></a>3. 修改环境变量</h3><p>使用export命令直接修改PATH的值，配置MySQL进入环境变量的方法:</p>
-<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"><span class="token builtin class-name">export</span> <span class="token assign-left variable"><span class="token environment constant">PATH</span></span><span class="token operator">=</span>/home/uusama/mysql/bin:<span class="token environment constant">$PATH</span>
-<span class="token comment">#或者把PATH放在前面</span>
-<span class="token builtin class-name">export</span> <span class="token assign-left variable"><span class="token environment constant">PATH</span></span><span class="token operator">=</span><span class="token environment constant">$PATH</span>:/home/uusama/mysql/bin<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">export PATH=/home/uusama/mysql/bin:$PATH
+#或者把PATH放在前面
+export PATH=$PATH:/home/uusama/mysql/bin<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 
 <p>注意事项：</p>
 <ul>
@@ -515,9 +519,9 @@
 <li>配置的环境变量中不要忘了加上原来的配置，即$PATH部分，避免覆盖原来配置</li>
 </ul>
 <h4 id="Linux环境变量配置方法二：vim-bashrc"><a href="#Linux环境变量配置方法二：vim-bashrc" class="headerlink" title="Linux环境变量配置方法二：vim ~/.bashrc"></a>Linux环境变量配置方法二：vim ~/.bashrc</h4><p>通过修改用户目录下的~/.bashrc文件进行配置：</p>
-<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"><span class="token function">vim</span> ~/.bashrc
-<span class="token comment"># 在最后一行加上</span>
-<span class="token builtin class-name">export</span> <span class="token assign-left variable"><span class="token environment constant">PATH</span></span><span class="token operator">=</span><span class="token environment constant">$PATH</span>:/home/uusama/mysql/bin<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">vim ~/.bashrc
+# 在最后一行加上
+export PATH=$PATH:/home/uusama/mysql/bin<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 
 <p>注意事项：</p>
 <ul>
@@ -527,9 +531,9 @@
 <li>如果有后续的环境变量加载文件覆盖了PATH定义，则可能不生效</li>
 </ul>
 <h4 id="Linux环境变量配置方法三：vim-bash-profile"><a href="#Linux环境变量配置方法三：vim-bash-profile" class="headerlink" title="Linux环境变量配置方法三：vim ~/.bash_profile"></a>Linux环境变量配置方法三：vim ~/.bash_profile</h4><p>和修改~/.bashrc文件类似，也是要在文件最后加上新的路径即可：</p>
-<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"><span class="token function">vim</span> ~/.bash_profile
-<span class="token comment"># 在最后一行加上</span>
-<span class="token builtin class-name">export</span> <span class="token assign-left variable"><span class="token environment constant">PATH</span></span><span class="token operator">=</span><span class="token environment constant">$PATH</span>:/home/uusama/mysql/bin<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">vim ~/.bash_profile
+# 在最后一行加上
+export PATH=$PATH:/home/uusama/mysql/bin<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 
 <p>注意事项：</p>
 <ul>
@@ -539,11 +543,11 @@
 <li>如果没有<del>/.bash_profile文件，则可以编辑</del>/.profile文件或者新建一个</li>
 </ul>
 <h4 id="Linux环境变量配置方法四：vim-etc-bashrc"><a href="#Linux环境变量配置方法四：vim-etc-bashrc" class="headerlink" title="Linux环境变量配置方法四：vim /etc/bashrc"></a>Linux环境变量配置方法四：vim /etc/bashrc</h4><p>该方法是修改系统配置，需要管理员权限（如root）或者对该文件的写入权限：</p>
-<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"><span class="token comment"># 如果/etc/bashrc文件不可编辑，需要修改为可编辑</span>
-<span class="token function">chmod</span> -v u+w /etc/bashrc
-<span class="token function">vim</span> /etc/bashrc
-<span class="token comment"># 在最后一行加上</span>
-<span class="token builtin class-name">export</span> <span class="token assign-left variable"><span class="token environment constant">PATH</span></span><span class="token operator">=</span><span class="token environment constant">$PATH</span>:/home/uusama/mysql/bin<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"># 如果/etc/bashrc文件不可编辑，需要修改为可编辑
+chmod -v u+w /etc/bashrc
+vim /etc/bashrc
+# 在最后一行加上
+export PATH=$PATH:/home/uusama/mysql/bin<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>注意事项：</p>
 <ul>
@@ -552,11 +556,11 @@
 <li>生效范围：对所有用户有效</li>
 </ul>
 <h4 id="Linux环境变量配置方法五：vim-etc-profile"><a href="#Linux环境变量配置方法五：vim-etc-profile" class="headerlink" title="Linux环境变量配置方法五：vim /etc/profile"></a>Linux环境变量配置方法五：vim /etc/profile</h4><p>该方法修改系统配置，需要管理员权限或者对该文件的写入权限，和vim /etc/bashrc类似：</p>
-<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"><span class="token comment"># 如果/etc/profile文件不可编辑，需要修改为可编辑</span>
-<span class="token function">chmod</span> -v u+w /etc/profile
-<span class="token function">vim</span> /etc/profile
-<span class="token comment"># 在最后一行加上</span>
-<span class="token builtin class-name">export</span> <span class="token assign-left variable"><span class="token environment constant">PATH</span></span><span class="token operator">=</span><span class="token environment constant">$PATH</span>:/home/uusama/mysql/bin<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"># 如果/etc/profile文件不可编辑，需要修改为可编辑
+chmod -v u+w /etc/profile
+vim /etc/profile
+# 在最后一行加上
+export PATH=$PATH:/home/uusama/mysql/bin<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>注意事项：</p>
 <ul>
@@ -565,11 +569,11 @@
 <li>生效范围：对所有用户有效</li>
 </ul>
 <h4 id="Linux环境变量配置方法六：vim-etc-environment"><a href="#Linux环境变量配置方法六：vim-etc-environment" class="headerlink" title="Linux环境变量配置方法六：vim /etc/environment"></a>Linux环境变量配置方法六：vim /etc/environment</h4><p>该方法是修改系统环境配置文件，需要管理员权限或者对该文件的写入权限：</p>
-<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"><span class="token comment"># 如果/etc/bashrc文件不可编辑，需要修改为可编辑</span>
-<span class="token function">chmod</span> -v u+w /etc/environment
-<span class="token function">vim</span> /etc/profile
-<span class="token comment"># 在最后一行加上</span>
-<span class="token builtin class-name">export</span> <span class="token assign-left variable"><span class="token environment constant">PATH</span></span><span class="token operator">=</span><span class="token environment constant">$PATH</span>:/home/uusama/mysql/bin<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"># 如果/etc/bashrc文件不可编辑，需要修改为可编辑
+chmod -v u+w /etc/environment
+vim /etc/profile
+# 在最后一行加上
+export PATH=$PATH:/home/uusama/mysql/bin<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>注意事项：</p>
 <ul>
@@ -653,6 +657,27 @@ PATH="$HOME/bin:$HOME/.local/bin:$PATH"<span aria-hidden="true" class="line-numb
 <p>从~/.profile文件中代码不难发现，/.profile文件只在用户登录的时候读取一次，而/.bashrc会在每次运行Shell脚本的时候读取一次。</p>
 <h4 id="一些小技巧"><a href="#一些小技巧" class="headerlink" title="一些小技巧"></a>一些小技巧</h4><p>可以自定义一个环境变量文件，比如在某个项目下定义uusama.profile，在这个文件中使用export定义一系列变量，然后在~/.profile文件后面加上：sourc uusama.profile，这样你每次登陆都可以在Shell脚本中使用自己定义的一系列变量。</p>
 <p>也可以使用alias命令定义一些命令的别名，比如alias rm=”rm -i”（双引号必须），并把这个代码加入到~/.profile中，这样你每次使用rm命令的时候，都相当于使用rm -i命令，非常方便。</p>
+<h4 id="1-僵尸进程"><a href="#1-僵尸进程" class="headerlink" title="1.僵尸进程"></a>1.僵尸进程</h4><p>当子进程退出时，父进程没有调用wait函数或者waitpid()函数等待子进程结束，又没有显式忽略SIGCHLD信号，那么它将一直保持在僵尸状态，如果这时父进程结束了，init进程会自动接收这个子进程，为它收尸，但如果父进程是一个循环，不会结束，那么子进程就会一直保持僵死状态。</p>
+<p>进程状态：</p>
+<ul>
+<li>Z 僵尸</li>
+<li>S 休眠</li>
+<li>D 不可中断的休眠</li>
+<li>R 运行</li>
+<li>T 停止时跟踪</li>
+</ul>
+<p><span class="github-emoji"><span>🍦</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f366.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span> 例子1：</p>
+<ul>
+<li>查看僵尸进程：<code>ps -A -o stat,ppid,pid,cmd | grep -e '^[Zz]'</code></li>
+</ul>
+<p>命令注解：</p>
+<p>-A 参数列出所有进程</p>
+<p>-o 自定义输出字段 我们设定显示字段为 stat（状态）, ppid（进程父id）, pid(进程id)，cmd（命令）这四个参数</p>
+<ul>
+<li>杀死僵尸进程：</li>
+</ul>
+<p><code>ps -A -o stat,ppid,pid,cmd | grep -e '^[Zz]' | awk '{print $2}' | xargs kill -9</code></p>
+<p>查找僵死进程，然后将父进程杀死。</p>
 <h2 id="4-linux各个目录的作用"><a href="#4-linux各个目录的作用" class="headerlink" title="4. linux各个目录的作用"></a>4. linux各个目录的作用</h2><p><code>bin</code> 存放系统命令的目录，普通用户和超级用户都可以执行。/bin目录下的命令单用户模式下也可以执行。</p>
 <p><code>sbin</code>保存系统环境设置相关的命令，只有超级用户可以使用这些命令进行系统环境设置，但是有些命令允许普通用户查看。</p>
 <p><code>usr/bin</code>存放系统命令的目录，普通用户和超级用户都可以执行。这些命令和系统启动无关，在单用户模式下不能执行。</p>
@@ -678,6 +703,7 @@ PATH="$HOME/bin:$HOME/.local/bin:$PATH"<span aria-hidden="true" class="line-numb
 <p>其后分别是 u g o</p>
 <p>u所有者 g所属组 o其他人</p>
 <p>r读 w写 x执行（最高权限）</p>
+<p><img src="/2021/06/10/linux-ji-chu/image-20211107134330379.png" alt="image-20211107134330379"></p>
 <h4 id="4-1-2-mkdir"><a href="#4-1-2-mkdir" class="headerlink" title="4.1.2 mkdir"></a>4.1.2 mkdir</h4><p><code>mkdir -p</code> 递归创建目录。</p>
 <p><code>mkdir -p /tmp/japan/boduo</code></p>
 <p><code>mkdir /tmp/Japan/longze  /tmp/Japan/cangjing</code></p>
@@ -721,7 +747,7 @@ PATH="$HOME/bin:$HOME/.local/bin:$PATH"<span aria-hidden="true" class="line-numb
 <p><code>find /etc/ -name init???</code> 匹配三个字符 问好匹配单个字符</p>
 <p><code>find / -size +204800</code> 在根目录下查找大于100MB的文件。 +n 大于 -n 小于 n 等于。 一个数据块0.5k。 然后 100MB = 102400KB * 2 = 204800</p>
 <p><code>find /home -user shenchao</code> 在home文件夹下找到所有者为shenchao的文件。</p>
-<p><code>fidn /etc -cmin -5</code> 在/etc目录下查找5分钟内（注意-号，是小于5分钟）被修改过的属性的文件和目录。</p>
+<p><code>find /etc -cmin -5</code> 在/etc目录下查找5分钟内（注意-号，是小于5分钟）被修改过的属性的文件和目录。</p>
 <p>-amin 访问时间 access</p>
 <p>-cmin 文件属性 change</p>
 <p>-mmin 文件内容 modify</p>
@@ -740,7 +766,485 @@ PATH="$HOME/bin:$HOME/.local/bin:$PATH"<span aria-hidden="true" class="line-numb
 <h4 id="4-2-4-help"><a href="#4-2-4-help" class="headerlink" title="4.2.4 help"></a>4.2.4 help</h4><p>有一部分是shell内置命令。找不到它存放的路径。需要使用help获取内置命令的帮助信息。</p>
 <h3 id="4-3-用户管理"><a href="#4-3-用户管理" class="headerlink" title="4.3 用户管理"></a>4.3 用户管理</h3><h4 id="4-3-1-useradd"><a href="#4-3-1-useradd" class="headerlink" title="4.3.1 useradd"></a>4.3.1 useradd</h4><p>添加用户命令。</p>
 <h4 id="4-3-2-passwd"><a href="#4-3-2-passwd" class="headerlink" title="4.3.2 passwd"></a>4.3.2 passwd</h4><p>更改密码 <code>passwd xxh</code></p>
-<h4 id="4-3-3"><a href="#4-3-3" class="headerlink" title="4.3.3"></a>4.3.3</h4>
+<h4 id="4-3-3-who"><a href="#4-3-3-who" class="headerlink" title="4.3.3 who"></a>4.3.3 who</h4><p><img src="/2021/06/10/linux-ji-chu/1\blog\source_posts\linux基础\image-20211014141358511.png" alt="image-20211014141358511"></p>
+<h3 id="4-3-4-w"><a href="#4-3-4-w" class="headerlink" title="4.3.4 w"></a>4.3.4 w</h3><p><img src="/2021/06/10/linux-ji-chu/1\blog\source_posts\linux基础\image-20211014141459636.png" alt="image-20211014141459636"></p>
+<p>IDLE 空闲时间</p>
+<p>JCPU 累计占用cpu时间</p>
+<p>PCPU 当前用户占用cpu的时间。</p>
+<p>WHAT 当前执行的命令。</p>
+<h4 id="4-3-5-uptime"><a href="#4-3-5-uptime" class="headerlink" title="4.3.5 uptime"></a>4.3.5 uptime</h4><p>总共运行时间。</p>
+<h4 id="4-3-6-chmod"><a href="#4-3-6-chmod" class="headerlink" title="4.3.6 chmod"></a>4.3.6 chmod</h4><p><code>chmod [{ugoa}{+=}{rwx}] [文件或目录][mode=421][文件或目录] -R 递归修改</code></p>
+<h3 id="4-3-7-踢出用户"><a href="#4-3-7-踢出用户" class="headerlink" title="4.3.7 踢出用户"></a>4.3.7 踢出用户</h3><p>#who</p>
+<p>USER TTY FROM LOGIN@ IDLE JCPU PCPU WHAT<br>root pts/0 192.168.153.72 14:52 10.00s 0.00s 0.00s w<br>root pts/1 192.168.153.72 14:52 0.00s 0.00s 0.00s -bash</p>
+<p>方法一：</p>
+<p><code>pkill -kill -t pts/1</code></p>
+<p>方法二：</p>
+<p><code>fuser -k /dev/pts/1</code></p>
+<p>你也可以给他发送关闭信息然后关闭</p>
+<p><code>echo "你被管理员踢出了" &gt; /dev/pts/1 &amp;&amp; fuser -k /dev/pts/1</code></p>
+<h3 id="4-4-压缩"><a href="#4-4-压缩" class="headerlink" title="4.4 压缩"></a>4.4 压缩</h3><ul>
+<li>压缩格式 gzip</li>
+</ul>
+<p>.gz 对应命令 <code>gzip</code>  解压缩 <code>gunzip</code></p>
+<p><code>gzip 文件名</code> gzip 只能压缩文件，不能压缩目录。</p>
+<p>压缩完就只剩下压缩包了，源文件就不见了。</p>
+<ul>
+<li>tar</li>
+</ul>
+<p><code>tar -cvfz [-zcf][压缩后文件名][目录]</code></p>
+<p>-c 打包</p>
+<p>-v 显示详细信息</p>
+<p>-f 指定文件名</p>
+<p>-z 打包同时压缩 或者 解压缩</p>
+<p>-x 解包</p>
+<p>-j bzip2 的格式</p>
+<ul>
+<li>zip</li>
+</ul>
+<p><code>zip 选项[-r] [压缩后的文件名] [文件或目录]</code>  -r压缩目录 </p>
+<p>比gzip压缩效果差</p>
+<ul>
+<li>bzip2 zip的升级版本</li>
+</ul>
+<p><code>bzip2 选项[-k] [文件]</code> 压缩后保留原文件 </p>
+<p>压缩比很厉害</p>
+<h3 id="4-5-网络命令"><a href="#4-5-网络命令" class="headerlink" title="4.5 网络命令"></a>4.5 网络命令</h3><h4 id="4-5-1-write"><a href="#4-5-1-write" class="headerlink" title="4.5.1 write"></a>4.5.1 write</h4><p>命令所在路径：<code>/usr/bin/write</code></p>
+<p>语法： write &lt;用户名&gt;</p>
+<p>功能： 给在线用户发信息，以ctrl + D 保存结束</p>
+<h4 id="4-5-2-wall"><a href="#4-5-2-wall" class="headerlink" title="4.5.2 wall"></a>4.5.2 wall</h4><p>广播所有在线用户发送信息</p>
+<p><code>wall message</code></p>
+<h4 id="4-5-3-ping"><a href="#4-5-3-ping" class="headerlink" title="4.5.3 ping"></a>4.5.3 ping</h4><p>测试网络的连通性</p>
+<p><code>ping ip</code></p>
+<p><code>ping -c 3 ip</code> 打印3次信息</p>
+<h4 id="4-5-4-ifconfig"><a href="#4-5-4-ifconfig" class="headerlink" title="4.5.4 ifconfig"></a>4.5.4 ifconfig</h4><p><img src="/2021/06/10/linux-ji-chu/1\blog\source_posts\linux基础\image-20211023205703132.png" alt="image-20211023205703132"></p>
+<h4 id="4-5-5-mail"><a href="#4-5-5-mail" class="headerlink" title="4.5.5 mail"></a>4.5.5 mail</h4><p>查看发送电子邮件</p>
+<p><code>mail 用户名</code> </p>
+<p>接收 ： mail 啥都不用加，就可以看了</p>
+<h4 id="4-5-6-last"><a href="#4-5-6-last" class="headerlink" title="4.5.6 last"></a>4.5.6 last</h4><p>统计计算机所有用户的登录和重启时间</p>
+<h4 id="4-5-7-lastlog"><a href="#4-5-7-lastlog" class="headerlink" title="4.5.7 lastlog"></a>4.5.7 lastlog</h4><p><code>lastlog -u 用户名</code></p>
+<p>不加-u 可以打印全部用户</p>
+<p>查看所有用户 最近登录的信息</p>
+<h4 id="4-5-8-traceroute"><a href="#4-5-8-traceroute" class="headerlink" title="4.5.8 traceroute"></a>4.5.8 traceroute</h4><p><code>traceroute 网络地址</code></p>
+<h4 id="4-5-9-netstat"><a href="#4-5-9-netstat" class="headerlink" title="4.5.9 netstat"></a>4.5.9 netstat</h4><p>查询网络状态相关信息</p>
+<p>-t tcp协议 </p>
+<p>-u udp</p>
+<p>-l 监听</p>
+<p>-r 路由 计算机网关</p>
+<p>-n 显示IP地址和端口号</p>
+<p>一般就是写 -tuln 就满足了大部分场景</p>
+<h4 id="4-5-10-setup"><a href="#4-5-10-setup" class="headerlink" title="4.5.10 setup"></a>4.5.10 setup</h4><p>redhat系列系统才有的。</p>
+<p>网络配置。</p>
+<h3 id="4-6-关机重启命令"><a href="#4-6-关机重启命令" class="headerlink" title="4.6 关机重启命令"></a>4.6 关机重启命令</h3><ul>
+<li>shutdown</li>
+</ul>
+<p>-c： 取消前一个关机命令</p>
+<p>-h: 关机</p>
+<p>-r：重启</p>
+<p>尽量使用shutdown命令来进行关机重启。因为它会将服务正常关闭。</p>
+<p>其他的关机命令</p>
+<ul>
+<li><p>halt </p>
+</li>
+<li><p>poweroff // 直接断电</p>
+</li>
+<li><p>init 0</p>
+</li>
+<li><p>reboot 重新启动</p>
+</li>
+<li><p>init 6 重新启动</p>
+</li>
+</ul>
+<p>**系统运行级别 **7个运行级别</p>
+<ul>
+<li>0 关机</li>
+<li>1 单用户</li>
+<li>2 不完全多用户，不含NFS服务</li>
+<li>3 完全多用户</li>
+<li>4 未分配</li>
+<li>5 图形界面</li>
+<li>6 重启</li>
+</ul>
+<p>runlevel 查看运行级别</p>
+<ul>
+<li>logout 退出登录</li>
+</ul>
+<h3 id="4-7-文本编辑器-vim"><a href="#4-7-文本编辑器-vim" class="headerlink" title="4.7 文本编辑器 vim"></a>4.7 文本编辑器 vim</h3><p><img src="/2021/06/10/linux-ji-chu/image-20211027172327338.png" alt="image-20211027172327338"></p>
+<p><img src="/2021/06/10/linux-ji-chu/image-20211027190046265.png" alt="image-20211027190046265"></p>
+<p><img src="/2021/06/10/linux-ji-chu/image-20211027190422338.png" alt="image-20211027190422338"></p>
+<p><img src="/2021/06/10/linux-ji-chu/image-20211027191046576.png" alt="image-20211027191046576"></p>
+<h4 id="4-7-1-常用操作"><a href="#4-7-1-常用操作" class="headerlink" title="4.7.1 常用操作"></a>4.7.1 常用操作</h4><p><img src="/2021/06/10/linux-ji-chu/image-20211029170805479.png" alt="image-20211029170805479"></p>
+<h4 id="4-7-2-常用命令"><a href="#4-7-2-常用命令" class="headerlink" title="4.7.2 常用命令"></a>4.7.2 常用命令</h4><p>复制和剪切 yy-p 复制到下面 dd-p 剪切到上面</p>
+<p>替换和恢复 r/R u</p>
+<h4 id="4-7-3-技巧"><a href="#4-7-3-技巧" class="headerlink" title="4.7.3 技巧"></a>4.7.3 技巧</h4><p>编辑模式中：</p>
+<p><code>:r /etc/issue</code> 将/etc/issue 的文件内容导入到当前光标所在的位置。</p>
+<p><code>:! 系统命令</code> 不退出vim中执行命令</p>
+<p><code>map ^P I#&lt;ESC&gt;</code> 触发命令</p>
+<p>^ 表示行首。</p>
+<p><img src="/2021/06/10/linux-ji-chu/image-20211029194326440.png" alt="image-20211029194326440"></p>
+<ul>
+<li>配置默认的vim文件，每个用户对应的目录下进行配置：/home/xxh/.vimrc</li>
+</ul>
+<h2 id="5-RPM软件包"><a href="#5-RPM软件包" class="headerlink" title="5. RPM软件包"></a>5. RPM软件包</h2><ul>
+<li>源代码包</li>
+<li>二进制包<ul>
+<li>RPM包和系统默认包</li>
+</ul>
+</li>
+</ul>
+<h3 id="5-1-RPM包"><a href="#5-1-RPM包" class="headerlink" title="5.1 RPM包"></a>5.1 RPM包</h3><h4 id="5-1-1-RPM包命名规则"><a href="#5-1-1-RPM包命名规则" class="headerlink" title="5.1.1 RPM包命名规则"></a>5.1.1 RPM包命名规则</h4><p><img src="/2021/06/10/linux-ji-chu/image-20211030193430610.png" alt="image-20211030193430610"></p>
+<h4 id="5-1-2-RPM包的依赖性"><a href="#5-1-2-RPM包的依赖性" class="headerlink" title="5.1.2 RPM包的依赖性"></a>5.1.2 RPM包的依赖性</h4><p><img src="/2021/06/10/linux-ji-chu/image-20211030212353633.png" alt="image-20211030212353633"></p>
+<h4 id="5-1-4-rpm安装"><a href="#5-1-4-rpm安装" class="headerlink" title="5.1.4 rpm安装"></a>5.1.4 rpm安装</h4><p><code>rmp -ivh 包全名</code> -i(install) 安装 </p>
+<p>-v（verbose）显示详细信息</p>
+<p>-h (hash) 显示进度</p>
+<p>–nodeps 不检测依赖性</p>
+<h4 id="5-1-5-rpm卸载"><a href="#5-1-5-rpm卸载" class="headerlink" title="5.1.5 rpm卸载"></a>5.1.5 rpm卸载</h4><p><code>rpm -e 包名</code> </p>
+<p>-e 卸载</p>
+<p>–nodeps 不检查依赖性</p>
+<p><code>rpm -q 包名</code> 查询是否安装 -q query 的意思</p>
+<p><code>rpm -qa</code> 查询素偶又安装的RPM包</p>
+<p><code>rpm -qi 包名</code> 查询包信息</p>
+<p><code>rpm -qip 包名</code> -p 查询未安装包的信息</p>
+<p><code>rpm -qR 包名</code> 查询软件包的依赖性</p>
+<p><code>rpm -qf 系统文件名</code> 查询系统文件属于哪个软件包</p>
+<p><code>rpm -V 包名</code> 校验指定RPM包中的文件（verify)</p>
+<p><img src="/2021/06/10/linux-ji-chu/image-20211031215839628.png" alt="image-20211031215839628"></p>
+<p><img src="/2021/06/10/linux-ji-chu/image-20211101152754501.png" alt="image-20211101152754501"></p>
+<h4 id="5-1-6-RPM包中文件提取"><a href="#5-1-6-RPM包中文件提取" class="headerlink" title="5.1.6 RPM包中文件提取"></a>5.1.6 RPM包中文件提取</h4><p><code>rpm2cpio 包全名 | \</code> </p>
+<p>cpio -idv .文件绝对路径</p>
+<p>rpm2cpio # 将rpm包转换为cpio格式的命令</p>
+<p>cpio 是一个标准工具，它用于创建软件档案文件和从档案文件中提取文件。</p>
+<p><code>cpio 选项 &lt; [文件|设备] </code> -i: copy-in模式，还原 </p>
+<p><img src="/2021/06/10/linux-ji-chu/image-20211101154530780.png" alt="image-20211101154530780"></p>
+<h3 id="5-2-yum在线管理"><a href="#5-2-yum在线管理" class="headerlink" title="5.2 yum在线管理"></a>5.2 yum在线管理</h3><p>yum在线管理解决包的依赖性。</p>
+<p><code>yum list</code> 查询所有可用软件包列表</p>
+<p><code>yum search 关键字</code> 搜索服务器上所有和关键字相关的包</p>
+<p><code>yum -y update 包名</code> yum 自动升级包 如果不写包名，<strong>会升级所有的包，并且会升级linux内核</strong>。</p>
+<p><code>yum -y remove 包名</code> yum卸载，记得按顺序卸载，先卸载a，否则先卸载c的话，会把依赖于c的所有包全部卸载掉。很容易造成系统故障。</p>
+<p><img src="/2021/06/10/linux-ji-chu/image-20211102111108482.png" alt="image-20211102111108482"></p>
+<h3 id="5-3-源码包和RPM包的区别"><a href="#5-3-源码包和RPM包的区别" class="headerlink" title="5.3 源码包和RPM包的区别"></a>5.3 源码包和RPM包的区别</h3><p>安装之前：概念上的区别</p>
+<p>安装之后：安装位置不同</p>
+<p><img src="/2021/06/10/linux-ji-chu/image-20211102134500800.png" alt="image-20211102134500800"></p>
+<p><img src="/2021/06/10/linux-ji-chu/image-20211102134801312.png" alt="image-20211102134801312"></p>
+<p><img src="/2021/06/10/linux-ji-chu/image-20211102140053616.png" alt="image-20211102140053616"></p>
+<p><img src="/2021/06/10/linux-ji-chu/image-20211102142647407.png" alt="image-20211102142647407"></p>
+<ul>
+<li><code>./configure</code> 软件配置与检查</li>
+</ul>
+<p><img src="/2021/06/10/linux-ji-chu/image-20211102143533533.png" alt="image-20211102143533533"></p>
+<h2 id="6-用户管理"><a href="#6-用户管理" class="headerlink" title="6. 用户管理"></a>6. 用户管理</h2><h3 id="6-1-用户管理配置文件"><a href="#6-1-用户管理配置文件" class="headerlink" title="6.1 用户管理配置文件"></a>6.1 用户管理配置文件</h3><h4 id="6-1-1-etc-passwd"><a href="#6-1-1-etc-passwd" class="headerlink" title="6.1.1 /etc/passwd"></a>6.1.1 /etc/passwd</h4><p>字段1： 用户名称</p>
+<p>字段2：密码标志 密码其实放到了shadow文件中。因为用户存放了用户信息，所有用户都可以看到信息，所以放到了权限更低的shadow。shadow当中的密码还是密文，也是比较安全的。x表示这个用户是有密码的。</p>
+<p>字段3：UID（用户ID） 0：超级用户。 1-499：系统用户。500-65535：普通用户。</p>
+<p>字段4：GID （用户初始组ID）</p>
+<p>字段5：用户说明。</p>
+<p>字段6：家目录。普通用户/home/用户名。 超级用户:/root/</p>
+<p>字段7：登录之后的shell。</p>
+<h4 id="6-1-2-etc-shadow"><a href="#6-1-2-etc-shadow" class="headerlink" title="6.1.2 /etc/shadow"></a>6.1.2 /etc/shadow</h4><p>字段1：用户名</p>
+<p>字段2：加密密码，SHA512散列加密算法。 如果密码位是“!!”或”*”代表没有密码，不能登录。</p>
+<p>字段3：密码最后一次修改的日期。</p>
+<p>字段4：两次密码的修改间隔时间（和3字段相比）。</p>
+<p>字段5：密码有效期（和3字段相比）</p>
+<p>字段6：密码修改到期前的警告天数（和第5字段相比）。</p>
+<h4 id="6-1-3-etc-group"><a href="#6-1-3-etc-group" class="headerlink" title="6.1.3 /etc/group"></a>6.1.3 /etc/group</h4><p>字段1：组名。</p>
+<p>字段2：组密码标志。</p>
+<p>字段3：GID。</p>
+<p>字段4：组中附加用户。</p>
+<h4 id="6-1-4-etc-gshadow"><a href="#6-1-4-etc-gshadow" class="headerlink" title="6.1.4 /etc/gshadow"></a>6.1.4 /etc/gshadow</h4><p>字段1：组名。</p>
+<p>字段2：组密码。 不推荐使用组密码。</p>
+<p>字段3：组管理员用户名。</p>
+<p>字段4：组中附加用户。</p>
+<h3 id="6-2-useradd"><a href="#6-2-useradd" class="headerlink" title="6.2 useradd"></a>6.2 useradd</h3><p>普通用户：/home/用户名， 所有者和所属组都是此用户，权限是700。</p>
+<p>超级用户：/root/ ，所有者和所属组都是root用户，权限是550。</p>
+<p><code>useradd [选项] 用户名</code></p>
+<p>-u UID： 手工指定用户的UID号</p>
+<p>-d 家目录： 手工指定用户的家目录</p>
+<p>-c 用户说明：手工指定用户的说明</p>
+<p>-g 组名：手工指定用户的初始组</p>
+<p>-G 组名：指定用户的附加组</p>
+<p>-s shell：手工指定用户的登录shell。默认是/bin/bash</p>
+<ul>
+<li>/etc/default/useradd</li>
+</ul>
+<p>GROUP=100 #用户默认组</p>
+<p>HOME=/home #用户家目录</p>
+<p>INACATIVE=-1 #密码过期宽限天数（shadow文件7字段）</p>
+<p>EXPIRE= #密码失效时间</p>
+<p>SHELL=/bin/bash</p>
+<p>SKEL=/etc/skel</p>
+<p>CREATE_MAIL_SPOOL=yes #是否建立邮箱</p>
+<ul>
+<li>/etc/login.defs</li>
+</ul>
+<p>PASS_MAX_DAYS 99999 # 密码有效期（5）</p>
+<p>PASS_MIN_DAYS 0 # 密码修改间隔（4）</p>
+<p>PASS_MIN_LEN 5 #密码最小5位（PAM） 现在PAM管理，其实是最小8位</p>
+<p>PASS_WARN_AGE 7 # 密码到期警告（6）</p>
+<p>UID_MIN 500 # 最小和最大UID范围</p>
+<p>GID_MAX 60000</p>
+<p>ENCRYPT_METHOD SHA512 #加密模式</p>
+<h3 id="6-3-passwd"><a href="#6-3-passwd" class="headerlink" title="6.3 passwd"></a>6.3 passwd</h3><p>修改用户密码。</p>
+<p>pass [选项] 用户名</p>
+<p>-S 查询用户密码的密码状态。仅root用户可用。</p>
+<p>-l 暂时锁定用户。仅root用户可用。</p>
+<p>-u 解锁用户，仅root用户可用。</p>
+<p>–stdin 可以通过管道符输出的数据作为用户的密码。</p>
+<h3 id="6-4-usermod和chage"><a href="#6-4-usermod和chage" class="headerlink" title="6.4 usermod和chage"></a>6.4 usermod和chage</h3><p>修改用户信息和修改用户密码状态。</p>
+<ul>
+<li>usermod [选项] 用户名</li>
+</ul>
+<p>-u UID: 修改用户的UID号</p>
+<p>-c 用户说明： 修改用户的说明信息</p>
+<p>-G 组名： 修改用户的附加组。</p>
+<p>-L： 临时锁定用户（Lock）。</p>
+<p>-U： 解锁用户锁定（Unlock）。</p>
+<ul>
+<li>chage [选项] 用户名</li>
+</ul>
+<p>-l: 列出用户的详细密码状态</p>
+<p>-d 日期： 修改密码最后一次更改日期（shadow3字段）</p>
+<p>-m 天数： 两次密码修改间隔（4字段）</p>
+<p>-M 天数： 密码有效期（5字段）</p>
+<p>-W 天数：密码有效期（5字段）</p>
+<p>-I 天数：密码过后宽限天数（7字段）</p>
+<p>-E 日期：账号失效时间（8字段）</p>
+<ul>
+<li>userdel [-r] 用户名</li>
+</ul>
+<p>-r 删除用户的同时删除用户家目录</p>
+<p><img src="/2021/06/10/linux-ji-chu/image-20211106161116574.png" alt="image-20211106161116574"></p>
+<h3 id="6-5-用户组管理命令"><a href="#6-5-用户组管理命令" class="headerlink" title="6.5 用户组管理命令"></a>6.5 用户组管理命令</h3><ul>
+<li>添加组<code>groupadd [选项] 组名</code></li>
+</ul>
+<p>-g GID: 指定组ID</p>
+<ul>
+<li>修改组 groupmod [选项] 组名</li>
+</ul>
+<p>-g GID: 修改组ID</p>
+<p>-n 新组名： 修改组名</p>
+<ul>
+<li>groupmod -n testgrp group1</li>
+</ul>
+<p>把组名group1修改为testgrp</p>
+<ul>
+<li><p>删除组 groupdel 组名</p>
+</li>
+<li><p>gpasswd 选项 组名</p>
+</li>
+</ul>
+<p>-a 用户名： 把用户加入组</p>
+<p>-d 用户名： 把用户从组中删除</p>
+<p><code>gpasswd -a user1 root</code> 把user1加入root组。 </p>
+<p>或者直接在/etc/group文件中最后加入用户名。</p>
+<h2 id="7-权限管理"><a href="#7-权限管理" class="headerlink" title="7. 权限管理"></a>7. 权限管理</h2><h3 id="7-1-ACL权限"><a href="#7-1-ACL权限" class="headerlink" title="7.1 ACL权限"></a>7.1 ACL权限</h3><p>身份不足问题，因为身份只有所有者、所属组和其他人。</p>
+<p>ACL和windows比较接近，直接给这个用户分配权限，不再考虑所有者、所属组啥的。</p>
+<ul>
+<li>分区必须支持ACL权限</li>
+</ul>
+<p><code>dumpe2fs -h /dev/sda3</code> dumpe2fs命令是查询指定分区详细文件系统信息的命令选项：-h 仅显示超级块中信息，而不显示磁盘块组的详细信息。</p>
+<p><img src="/2021/06/10/linux-ji-chu/image-20211107135443259.png" alt="image-20211107135443259"></p>
+<p>上面这个图片的信息表示支持ACL。</p>
+<p>如果不支持ACL，需要开启，开启方式如下：</p>
+<p><code>mount -o remount, acl /</code> 重新挂载根分区，并挂载加入acl权限。这个是临时生效的，若想要永久生效，需要：</p>
+<p><code>vi /etc/fstab</code> 这个文件是系统开机自动挂载文件。</p>
+<p><img src="/2021/06/10/linux-ji-chu/image-20211107135936299.png" alt="image-20211107135936299"></p>
+<p>修改完毕后，重启或者重新挂载文件 <code>mount -o remount /</code>。</p>
+<h3 id="7-2-ACL查看与设定"><a href="#7-2-ACL查看与设定" class="headerlink" title="7.2 ACL查看与设定"></a>7.2 ACL查看与设定</h3><ul>
+<li><p><code>getfacle 文件名</code> 查看acl权限</p>
+</li>
+<li><p>setfacl 选项 文件名</p>
+<ul>
+<li>-m 设定ACL权限</li>
+<li>-x 删除指定的ACL权限</li>
+<li>-b 删除所有的ACL权限</li>
+<li>-d 设定默认ACL权限</li>
+<li>-k 删除默认ACL权限</li>
+<li>-R 递归设定ACL权限</li>
+</ul>
+</li>
+</ul>
+<p><span class="github-emoji"><span>🍦</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f366.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span> 例子： 给用户<code>st</code> 读和执行<code>/project</code>目录的权限：</p>
+<p><code>setfacl -m u:st:rx /project/</code> 加完权限之后，可以发现<code>ll</code>下的权限中多了一个<code>+</code>号。说名有其他权限。</p>
+<p><img src="/2021/06/10/linux-ji-chu/image-20211107141712388.png" alt="image-20211107141712388"></p>
+<p>查看这个<code>+</code>是什么权限，使用命令： <code>getfacl /project</code> </p>
+<p><img src="/2021/06/10/linux-ji-chu/image-20211107141922160.png" alt="image-20211107141922160"></p>
+<h3 id="7-3-最大有效权限和删除"><a href="#7-3-最大有效权限和删除" class="headerlink" title="7.3 最大有效权限和删除"></a>7.3 最大有效权限和删除</h3><p>mask是用来指定最大有效权限的。如果我给用户赋予了ACL权限，需要和mask的权限“相与”才能得到用户的真正权限。</p>
+<p><img src="/2021/06/10/linux-ji-chu/image-20211107143407319.png" alt="image-20211107143407319"></p>
+<ul>
+<li><p><code>setfacl -m m:rx /project/</code> 最大权限只有读和执行。</p>
+</li>
+<li><p><code>setfacl -b 文件名</code> 把文件或目录的所有ACL权限删除</p>
+</li>
+<li><p><code>setfacl -x g:tgroup2 /project/</code> 指定删除某一个用户或者组的权限</p>
+</li>
+</ul>
+<h3 id="7-4-默认ACL权限和递归ACL权限"><a href="#7-4-默认ACL权限和递归ACL权限" class="headerlink" title="7.4 默认ACL权限和递归ACL权限"></a>7.4 默认ACL权限和递归ACL权限</h3><h4 id="7-4-1-递归ACL权限"><a href="#7-4-1-递归ACL权限" class="headerlink" title="7.4.1 递归ACL权限"></a>7.4.1 递归ACL权限</h4><p>父目录设定的ACL权限，子目录和子文件也都会有一样的ACL权限。</p>
+<ul>
+<li><code>setfacl -m u:用户名:权限 -R 文件名</code> 其实就是-R参数。针对现有的文件赋值ACL权限。</li>
+</ul>
+<h4 id="7-4-2-默认ACL权限"><a href="#7-4-2-默认ACL权限" class="headerlink" title="7.4.2 默认ACL权限"></a>7.4.2 默认ACL权限</h4><p>如果父目录设定了默认ACL权限，那么父目录中所有新建的子文件都会继承父目录的ACL权限。</p>
+<ul>
+<li><code>setfacl -m d:u:用户名:权限 文件名</code> 针对未来的文件赋值ACL权限。</li>
+</ul>
+<h3 id="7-5-文件特殊权限"><a href="#7-5-文件特殊权限" class="headerlink" title="7.5 文件特殊权限"></a>7.5 文件特殊权限</h3><h4 id="7-5-1-文件特殊权限SetUID-4"><a href="#7-5-1-文件特殊权限SetUID-4" class="headerlink" title="7.5.1 文件特殊权限SetUID 4"></a>7.5.1 文件特殊权限SetUID 4</h4><ul>
+<li><p>只有执行的二进制程序才能设定SUID权限。</p>
+</li>
+<li><p>命令执行者要对该程序拥有x（执行）权限。</p>
+</li>
+<li><p>命令执行者在执行该程序时获得该程序文件属主的身份。</p>
+</li>
+<li><p>SetUID权限只在该程序执行过程中有效，也就是身份改变只在程序执行过程中有效。</p>
+</li>
+</ul>
+<p><span class="github-emoji"><span>🍧</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f367.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span> 例子：</p>
+<p><code>passwd</code> 命令拥有<code>SetUID</code>权限，所以可以修改自己的密码。</p>
+<p><img src="/2021/06/10/linux-ji-chu/image-20211112123708042.png" alt="image-20211112123708042"></p>
+<p><code>cat</code>命令没有SetUID权限，所以无法查看<code>/etc/shadow</code>文件内容。</p>
+<p><img src="/2021/06/10/linux-ji-chu/image-20211112124519400.png" alt="image-20211112124519400"></p>
+<p>设定SetUID的方法：</p>
+<ul>
+<li>chmod 4755 文件名</li>
+<li>chmod u+s 文件名</li>
+</ul>
+<p>取消SetUID的方法：</p>
+<ul>
+<li>chmod 755 文件名</li>
+<li>chmod u-s 文件名</li>
+</ul>
+<p>4 表示SUID。</p>
+<p>这个权限很危险，在使用时必须要谨慎。比如你把<code>vi</code>这个命令的可执行文件赋予了setuid权限，那么以后任何一个用户都可以相当于root用户来保存和修改任何一个文件！十分危险！</p>
+<p><code>find /bin -perm /u=s</code>  查看/bin目录下的带有s权限的文件。</p>
+<p><span class="github-emoji"><span>😫</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f62b.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span> 注意，如果<code>ll</code>后权限中有S，说明赋予属性错误。</p>
+<h4 id="7-5-2-SetGID-2"><a href="#7-5-2-SetGID-2" class="headerlink" title="7.5.2 SetGID 2"></a>7.5.2 SetGID 2</h4><ul>
+<li><p>只有二进制文件才能设置<code>SGID</code>权限</p>
+</li>
+<li><p>命令执行者要对该程序拥有x（执行）权限</p>
+</li>
+<li><p>命令执行在执行程序时，组身份升级为该程序文件的属组。</p>
+</li>
+<li><p>SetGID权限同样只在该程序执行过程中有效，也就是说组身份改变只在程序执行过程中有效。</p>
+</li>
+</ul>
+<p><strong>SetGID对目录的作用：</strong></p>
+<p>普通用户必须对此目录拥有r和x权限，才能进入此目录。</p>
+<p>普通用户在此目录中的有效组会变成此目录的属组。</p>
+<p>若普通用户对此目录拥有w权限时，新建的文件的默认属组是这个目录的属组。</p>
+<p><span class="github-emoji"><span>🍦</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f366.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span> 例子：<img src="/2021/06/10/linux-ji-chu/image-20211112213029883.png" alt="image-20211112213029883"></p>
+<h4 id="7-5-3-Sticky-BIT-文件特殊权限-1"><a href="#7-5-3-Sticky-BIT-文件特殊权限-1" class="headerlink" title="7.5.3 Sticky BIT 文件特殊权限 1"></a>7.5.3 Sticky BIT 文件特殊权限 1</h4><ul>
+<li>粘着位目前只对目录有效</li>
+<li>普通用户对该目录拥有w和x权限，即普通用户可以在此目录拥有写入权限。</li>
+<li>如果没有黏着位，因为普通用户拥有w权限，所以可以删除此目录下所有文件，包括其他用户建立的文件。一旦赋予了黏着位，除了root可以删除所有文件，普通用户就算拥有w权限，也只能删除自己建立的文件，但是不能删除其他用户建立的文件。</li>
+</ul>
+<p>设置黏着位 </p>
+<ul>
+<li>chmod 1755 目录名</li>
+<li>chmod o+t 目录名</li>
+</ul>
+<p>取消黏着位</p>
+<ul>
+<li>chmod 777 目录名</li>
+<li>chmod o-t 目录名</li>
+</ul>
+<p><span class="github-emoji"><span>🍦</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f366.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span> 例子：</p>
+<p><img src="/2021/06/10/linux-ji-chu/image-20211112213233069.png" alt="image-20211112213233069"></p>
+<h3 id="7-6-chattr权限"><a href="#7-6-chattr权限" class="headerlink" title="7.6 chattr权限"></a>7.6 chattr权限</h3><p><code>chattr [+-=] [选项] 文件或目录名</code></p>
+<p><code>+:增加权限</code></p>
+<p><code>-:删除权限</code></p>
+<p><code>=:等于某权限</code></p>
+<p>改变文件属性</p>
+<p><code>i</code>: 如果对文件设置i属性，那么不允许对文件进行删除、改名，也不能添加和修改数据。如果对目录设<code>i</code>属性，那么只能修改目录下文件的数据，但不允许建立和删除文件。</p>
+<p><code>a</code>：如果对文件设置a属性，那么只能在文件中增加数据，但是不能删除和修改数据。如果对目录设置a属性，那么只允许在目录中建立和修改文件，但是不允许删除。</p>
+<p><strong>lsattr</strong> 选项 文件名 （查看权限）</p>
+<ul>
+<li>-a 显示所有文件和目录。</li>
+<li>-d 若目标是目录，仅列出目录本身的属性，而不是子文件的。</li>
+</ul>
+<p><span class="github-emoji"><span>🍦</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f366.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span> <code>chattr +i abc</code> 添加<code>i</code>属性。</p>
+<h3 id="7-7-sudo权限"><a href="#7-7-sudo权限" class="headerlink" title="7.7 sudo权限"></a>7.7 sudo权限</h3><ul>
+<li>root把本来只能超级用户执行的命令赋予普通用户执行。</li>
+<li>sudo的操作对象是系统命令。</li>
+</ul>
+<p><img src="/2021/06/10/linux-ji-chu/image-20211113144628539.png" alt="image-20211113144628539"></p>
+<p><span class="github-emoji"><span>🍦</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f366.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span>例子：</p>
+<p><code>sc ALL=/sbin/shudown -r now</code> 写的很细的命令，这一条sc用户就只能使用带着-r参数的命令。</p>
+<h2 id="8-分区"><a href="#8-分区" class="headerlink" title="8. 分区"></a>8. 分区</h2><h3 id="8-1-分区类型"><a href="#8-1-分区类型" class="headerlink" title="8.1 分区类型"></a>8.1 分区类型</h3><p><img src="/2021/06/10/linux-ji-chu/image-20211113151814602.png" alt="image-20211113151814602"></p>
+<p><span class="github-emoji"><span>🍦</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f366.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span>例子：</p>
+<p><img src="/2021/06/10/linux-ji-chu/image-20211113151824492.png" alt="image-20211113151824492"></p>
+<p><img src="/2021/06/10/linux-ji-chu/image-20211113151937225.png" alt="image-20211113151937225"></p>
+<p><img src="/2021/06/10/linux-ji-chu/image-20211113152050859.png" alt="image-20211113152050859"></p>
+<p>1 2 3 4 只能分配给主分区或者扩展分区号，逻辑分区只能从5开始。</p>
+<h3 id="8-2-df命令"><a href="#8-2-df命令" class="headerlink" title="8.2 df命令"></a>8.2 df命令</h3><p><code>df [选项][挂载点]</code> 显示文件系统大小和使用情况</p>
+<p>选项：</p>
+<p> -a 显示所有的文件系统信息，包括特殊文件系统，如：/proc、/sysfs。</p>
+<p>-h 使用习惯单位显示容量，如KB，MB或GB等。</p>
+<p>-T 显示文件系统类型。</p>
+<p>-m 已MB为单位显示容量。</p>
+<p>-k 以KB单位显示容量。默认就是KB为单位。</p>
+<h3 id="8-3-统计目录或文件大小"><a href="#8-3-统计目录或文件大小" class="headerlink" title="8.3 统计目录或文件大小"></a>8.3 统计目录或文件大小</h3><p><code>du [选项] [目录或文件名]</code></p>
+<p>-a 显示每个子文件的磁盘占用量。默认只统计子目录的磁盘占用量</p>
+<p>-h 使用习惯单位显示磁盘占用量，如KB，MB或GB等</p>
+<p>-s 统计总占用量，而不列出子目录和子文件的占用量。</p>
+<p><span class="github-emoji"><span>😆</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f606.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span> du和df的区别是，df显示的空间大小一般大于du，因为长时间不重启机子，某些进程所留下的临时文件或删除的文件空间并没有释放。</p>
+<h3 id="8-4-文件系统修复命令-fsck"><a href="#8-4-文件系统修复命令-fsck" class="headerlink" title="8.4 文件系统修复命令 fsck"></a>8.4 文件系统修复命令 fsck</h3><p><code>fsck [选项] 分区设备文件名</code> </p>
+<p>-a：不用显示用户提示，自动修复文件系统。</p>
+<p>-y：自动修复。和-a作用一致，不过有些文件系统只支持-y。</p>
+<h3 id="8-5-磁盘状态命令dumpe2fs"><a href="#8-5-磁盘状态命令dumpe2fs" class="headerlink" title="8.5 磁盘状态命令dumpe2fs"></a>8.5 磁盘状态命令dumpe2fs</h3><p><code>dumpe2fs 分区设备文件名</code> 这个命令还可以查询到设备的UUID号。</p>
+<h3 id="8-6-mount查询和自动挂载"><a href="#8-6-mount查询和自动挂载" class="headerlink" title="8.6 mount查询和自动挂载"></a>8.6 mount查询和自动挂载</h3><p>mount命令本身可以查询已经挂载的设备。</p>
+<p><code>mount [-l]</code> 查询系统中已经挂载的设备，-l会显示卷标名称。</p>
+<p><code>mount -a</code> 依据配置文件<code>/etc/fstab</code>的内容，自动挂载。</p>
+<p><code>mount [-t 文件系统] [-L 卷标名] [-o 特殊选项] 设备文件名 挂载点</code></p>
+<p>选项： -t 文件系统：加入文件系统类型来指定挂载的类型，可以ext3、ext4、iso9660等文件系统</p>
+<p>-L 卷标名： 挂载指定卷标的分区，而不是安装设备文件名挂载</p>
+<p>-o 选项特殊：可以指定挂载的额外选项</p>
+<p><img src="/2021/06/10/linux-ji-chu/image-20211113172923073.png" alt="image-20211113172923073"></p>
+<h4 id="8-6-1-挂载光盘和U盘"><a href="#8-6-1-挂载光盘和U盘" class="headerlink" title="8.6.1 挂载光盘和U盘"></a>8.6.1 挂载光盘和U盘</h4><blockquote>
+<p>建立挂载点</p>
+<p><code>mkdir /mnt/cdrom/</code></p>
+<p>挂载光盘</p>
+<p><code>mount -t iso9660 /dev/cdrom /mnt/cdrom/</code> 把设备文件挂载到/mnt的这个目录下</p>
+<p><code>mount /dev/sr0 /mnt/cdrom</code> 把设备文件挂载到/mnt的这个目录下</p>
+</blockquote>
+<blockquote>
+<p>卸载命令</p>
+<p><code>umount 设备文件名或挂载点</code></p>
+<p><code>umount /mnt/cdrom</code> </p>
+</blockquote>
+<h4 id="8-6-2-挂载u盘"><a href="#8-6-2-挂载u盘" class="headerlink" title="8.6.2 挂载u盘"></a>8.6.2 挂载u盘</h4><p><code>fdisk -l</code> 查看分区</p>
+<p><code>mount -t vfat /dev/sdb1 /mnt/usb/</code></p>
+<p><span class="github-emoji"><span>😠</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f620.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span> linux默认是不支持NTFS文件系统的。</p>
+<h4 id="8-6-3-支持NTFS文件系统"><a href="#8-6-3-支持NTFS文件系统" class="headerlink" title="8.6.3 支持NTFS文件系统"></a>8.6.3 支持NTFS文件系统</h4><ul>
+<li>重新编译内核的方式，不推荐 :happy: 。</li>
+<li>利用第三方软件: ntfs-3g</li>
+</ul>
+<blockquote>
+<p>ntfs-3g</p>
+<blockquote>
+<p><code>tar -zxvf ntfs-3g_ntfsprogs-2013.1.13.tgz</code></p>
+<p><code>cd ntfs-3gxxx</code></p>
+<p><code>./configure</code></p>
+<p><code>make</code></p>
+<p><code>make install</code></p>
+<p><code>mount -t ntfs-3g 分区设备文件名 挂载点</code></p>
+</blockquote>
+</blockquote>
+<h3 id="8-7-fdisk分区"><a href="#8-7-fdisk分区" class="headerlink" title="8.7 fdisk分区"></a>8.7 fdisk分区</h3><p>查看硬盘：</p>
+<p><code>fdisk -l</code></p>
+<p><code>fdisk /dev/sdb</code></p>
+<p><img src="/2021/06/10/linux-ji-chu/image-20211114195657353.png" alt="image-20211114195657353"></p>
+<p>重新读取分区表信息： <code>partprobe</code></p>
+<h4 id="8-7-1-格式化分区"><a href="#8-7-1-格式化分区" class="headerlink" title="8.7.1 格式化分区"></a>8.7.1 格式化分区</h4><p><code>mkfs -t ext4 /dev/dsb1</code></p>
+<h3 id="8-8-分区自动挂载和fstab文件修复"><a href="#8-8-分区自动挂载和fstab文件修复" class="headerlink" title="8.8 分区自动挂载和fstab文件修复"></a>8.8 分区自动挂载和fstab文件修复</h3><blockquote>
+<p>自动挂载</p>
+<blockquote>
+<p>写入<code>/etc/fstab</code> 文件。 一定要写对，如果写不对可能导致系统崩溃。</p>
+<p>:happy: <code>fstab</code> 文件内容：</p>
+<p><img src="/2021/06/10/linux-ji-chu/image-20211117213822198.png" alt="image-20211117213822198"></p>
+</blockquote>
+<p><span class="github-emoji"><span>😢</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f622.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span> <code>fstab</code> <font color="red">内容如果改错了咋办？</font></p>
+<p><img src="/2021/06/10/linux-ji-chu/image-20211117220201017.png" alt="image-20211117220201017"></p>
+<p>使用mount 重新挂载才能修改<code>fstab</code> 文件。</p>
+</blockquote>
+<h2 id="9-SHELL"><a href="#9-SHELL" class="headerlink" title="9.SHELL"></a>9.SHELL</h2><p><img src="/2021/06/10/linux-ji-chu/image-20211117220524694.png" alt="image-20211117220524694"></p>
+<p>SHELL 是一种编程语言，是解释执行的脚本语言，在SHELL中可以直接调用LINUX系统命令。</p>
+
                 
             </div>
             <hr/>
@@ -803,7 +1307,11 @@ PATH="$HOME/bin:$HOME/.local/bin:$PATH"<span aria-hidden="true" class="line-numb
                 <div class="post-meta__tag-list" style="display: inline-block;">
                     
                         <div class="article-tag">
-                            <span class="chip bg-color">无标签</span>
+                            
+                                <a href="/tags/linux/">
+                                    <span class="chip bg-color">linux</span>
+                                </a>
+                            
                         </div>
                     
                 </div>
@@ -1073,6 +1581,14 @@ PATH="$HOME/bin:$HOME/.local/bin:$PATH"<span aria-hidden="true" class="line-numb
                             
                         </span>
                     </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/mysql/">
+                        <span class="chip bg-color">mysql</span>
+                    </a>
+                    
                 </div>
                 
             </div>

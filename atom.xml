@@ -6,7 +6,7 @@
   <link href="http://bruce11111.github.io/atom.xml" rel="self"/>
   
   <link href="http://bruce11111.github.io/"/>
-  <updated>2021-09-27T13:39:40.584Z</updated>
+  <updated>2021-11-07T09:24:51.181Z</updated>
   <id>http://bruce11111.github.io/</id>
   
   <author>
@@ -15,6 +15,71 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>linux安装软件</title>
+    <link href="http://bruce11111.github.io/2021/11/07/linux-an-zhuang-ruan-jian/"/>
+    <id>http://bruce11111.github.io/2021/11/07/linux-an-zhuang-ruan-jian/</id>
+    <published>2021-11-07T09:23:32.000Z</published>
+    <updated>2021-11-07T09:24:51.181Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;Ubuntu&quot;&gt;&lt;a href=&quot;#Ubuntu&quot; class=&quot;headerlink&quot; title=&quot;Ubuntu&quot;&gt;&lt;/a&gt;Ubuntu&lt;/h1&gt;&lt;h2 id=&quot;1-Anaconda&quot;&gt;&lt;a href=&quot;#1-Anaconda&quot;</summary>
+        
+      
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>资产管理平台</title>
+    <link href="http://bruce11111.github.io/2021/10/26/zi-chan-guan-li-ping-tai/"/>
+    <id>http://bruce11111.github.io/2021/10/26/zi-chan-guan-li-ping-tai/</id>
+    <published>2021-10-26T01:34:28.000Z</published>
+    <updated>2021-11-14T09:11:11.847Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;1-ElastricSearch&quot;&gt;&lt;a href=&quot;#1-ElastricSearch&quot; class=&quot;headerlink&quot; title=&quot;1. ElastricSearch&quot;&gt;&lt;/a&gt;1. ElastricSearch&lt;/h2&gt;&lt;h2</summary>
+        
+      
+    
+    
+    
+    <category term="项目" scheme="http://bruce11111.github.io/categories/%E9%A1%B9%E7%9B%AE/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>python</title>
+    <link href="http://bruce11111.github.io/2021/10/23/python/"/>
+    <id>http://bruce11111.github.io/2021/10/23/python/</id>
+    <published>2021-10-23T02:32:54.000Z</published>
+    <updated>2021-10-23T02:59:32.965Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;安装&quot;&gt;&lt;a href=&quot;#安装&quot; class=&quot;headerlink&quot; title=&quot;安装&quot;&gt;&lt;/a&gt;安装&lt;/h1&gt;&lt;h3 id=&quot;windows&quot;&gt;&lt;a href=&quot;#windows&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    
+  </entry>
   
   <entry>
     <title>go</title>
@@ -172,7 +237,7 @@
     <link href="http://bruce11111.github.io/2021/06/10/linux-ji-chu/"/>
     <id>http://bruce11111.github.io/2021/06/10/linux-ji-chu/</id>
     <published>2021-06-10T03:28:08.000Z</published>
-    <updated>2021-10-13T08:44:33.680Z</updated>
+    <updated>2021-11-18T02:42:14.925Z</updated>
     
     
       
@@ -188,6 +253,8 @@
     <category term="linux" scheme="http://bruce11111.github.io/categories/linux/"/>
     
     
+    <category term="linux" scheme="http://bruce11111.github.io/tags/linux/"/>
+    
   </entry>
   
   <entry>
@@ -195,7 +262,7 @@
     <link href="http://bruce11111.github.io/2021/06/10/mysql-ji-chu/"/>
     <id>http://bruce11111.github.io/2021/06/10/mysql-ji-chu/</id>
     <published>2021-06-10T02:58:01.000Z</published>
-    <updated>2021-10-14T05:52:31.031Z</updated>
+    <updated>2021-11-13T06:20:00.801Z</updated>
     
     
       
@@ -210,6 +277,8 @@
     
     <category term="mysql" scheme="http://bruce11111.github.io/categories/mysql/"/>
     
+    
+    <category term="mysql" scheme="http://bruce11111.github.io/tags/mysql/"/>
     
   </entry>
   
@@ -379,19 +448,6 @@
   </entry>
   
   <entry>
-    <title>post</title>
-    <link href="http://bruce11111.github.io/2021/05/16/post/"/>
-    <id>http://bruce11111.github.io/2021/05/16/post/</id>
-    <published>2021-05-16T13:49:16.000Z</published>
-    <updated>2021-05-16T13:49:16.484Z</updated>
-    
-    
-    
-    
-    
-  </entry>
-  
-  <entry>
     <title>git</title>
     <link href="http://bruce11111.github.io/2021/05/16/git/"/>
     <id>http://bruce11111.github.io/2021/05/16/git/</id>
@@ -410,54 +466,6 @@
     
     
     <category term="git" scheme="http://bruce11111.github.io/categories/git/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>springcloud</title>
-    <link href="http://bruce11111.github.io/2021/05/16/springcloud/"/>
-    <id>http://bruce11111.github.io/2021/05/16/springcloud/</id>
-    <published>2021-05-16T09:01:57.000Z</published>
-    <updated>2021-08-29T13:31:19.879Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h1 id=&quot;Springcloud&quot;&gt;&lt;a href=&quot;#Springcloud&quot; class=&quot;headerlink&quot; title=&quot;Springcloud&quot;&gt;&lt;/a&gt;Springcloud&lt;/h1&gt;&lt;h2 id=&quot;1-微服务架构&quot;&gt;&lt;a href=&quot;#1-微服务架构&quot;</summary>
-        
-      
-    
-    
-    
-    <category term="springcloud" scheme="http://bruce11111.github.io/categories/springcloud/"/>
-    
-    <category term="java" scheme="http://bruce11111.github.io/categories/springcloud/java/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>Java堆栈内存与堆外内存</title>
-    <link href="http://bruce11111.github.io/2021/05/08/java-dui-zhan-nei-cun-yu-dui-wai-nei-cun/"/>
-    <id>http://bruce11111.github.io/2021/05/08/java-dui-zhan-nei-cun-yu-dui-wai-nei-cun/</id>
-    <published>2021-05-08T12:48:12.000Z</published>
-    <updated>2021-05-08T12:51:19.333Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h2 id=&quot;Java堆栈内存与堆外内存&quot;&gt;&lt;a href=&quot;#Java堆栈内存与堆外内存&quot; class=&quot;headerlink&quot; title=&quot;Java堆栈内存与堆外内存&quot;&gt;&lt;/a&gt;Java堆栈内存与堆外内存&lt;/h2&gt;&lt;p&gt;参考至：&lt;a</summary>
-        
-      
-    
-    
-    
-    <category term="java" scheme="http://bruce11111.github.io/categories/java/"/>
     
     
   </entry>
