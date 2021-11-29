@@ -445,9 +445,13 @@
             <div class="row tag-cate">
                 <div class="col s7">
                     
-                          <div class="article-tag">
-                            <span class="chip bg-color">无标签</span>
-                          </div>
+                    <div class="article-tag">
+                        
+                            <a href="/tags/springcloud/">
+                                <span class="chip bg-color">springcloud</span>
+                            </a>
+                        
+                    </div>
                     
                 </div>
                 <div class="col s5 right-align">
@@ -496,7 +500,20 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="Springcloud"><a href="#Springcloud" class="headerlink" title="Springcloud"></a>Springcloud</h1><h2 id="1-微服务架构"><a href="#1-微服务架构" class="headerlink" title="1. 微服务架构"></a>1. 微服务架构</h2><h3 id="1-1-为什么"><a href="#1-1-为什么" class="headerlink" title="1.1 为什么"></a>1.1 为什么</h3><h3 id="2-2-是什么"><a href="#2-2-是什么" class="headerlink" title="2.2 是什么"></a>2.2 是什么</h3><p>将单一应用划分成一组小的服务，服务之间相互协调、互相配合，为用户提供最终价值。</p>
+                <h1 id="Springcloud"><a href="#Springcloud" class="headerlink" title="Springcloud"></a>Springcloud</h1><h2 id="摘要介绍"><a href="#摘要介绍" class="headerlink" title="摘要介绍"></a>摘要介绍</h2><ul>
+<li>springcloud 版本以英文字母 H、D等开头。springboot以数字开头2.2.x。</li>
+<li>spingboot必须使用2.0.x以上版本。bugfix。</li>
+</ul>
+<h2 id="boot和cloud依赖关系"><a href="#boot和cloud依赖关系" class="headerlink" title="boot和cloud依赖关系"></a>boot和cloud依赖关系</h2><p><a target="_blank" rel="noopener" href="https://spring.io/projects/spring-cloud">Spring Cloud</a></p>
+<p><img src="/2021/05/16/springcloud/image-20211125153132181.png" alt="image-20211125153132181"></p>
+<p>查看具体的版本对应网址： start.spring.io/actuator/info</p>
+<p><span class="github-emoji"><span>👼</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f47c.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span> cloud升级：<img src="/2021/05/16/springcloud/image-20211125155143985.png" alt="image-20211125155143985"></p>
+<h1 id="建工程步骤"><a href="#建工程步骤" class="headerlink" title="建工程步骤"></a>建工程步骤</h1><p><img src="/2021/05/16/springcloud/image-20211125155621284.png" alt="image-20211125155621284"></p>
+<p>编码： seting-&gt;Editor-&gt; File Encodings</p>
+<p>注解： Build,Execution,Deployment-&gt; Compiler-&gt; Annotation Processors 对Enable annotation processing打勾</p>
+<p>编译版本：Build,Execution,Deployment-&gt; Compiler-&gt; Java Compiler</p>
+<p>文件过滤：Editor -&gt; File Types</p>
+<h2 id="1-微服务架构"><a href="#1-微服务架构" class="headerlink" title="1. 微服务架构"></a>1. 微服务架构</h2><h3 id="1-1-为什么"><a href="#1-1-为什么" class="headerlink" title="1.1 为什么"></a>1.1 为什么</h3><h3 id="2-2-是什么"><a href="#2-2-是什么" class="headerlink" title="2.2 是什么"></a>2.2 是什么</h3><p>将单一应用划分成一组小的服务，服务之间相互协调、互相配合，为用户提供最终价值。</p>
 <p>springcloud=多种微服务架构落地技术的集合体，微服务全家桶</p>
 <p><img src="/2021/05/16/springcloud/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%A8%A1%E5%9D%97.PNG"></p>
 <h3 id="1-3-pom文件"><a href="#1-3-pom文件" class="headerlink" title="1.3 pom文件"></a>1.3 pom文件</h3><p><code>dependencyManagement</code> 是maven提供的一种管理依赖版本号的方式。</p>
@@ -530,6 +547,31 @@
 <li>服务熔断：牺牲局部服务，保全整体系统稳定性的措施。</li>
 <li>服务降级：服务熔断以后，客户端用自己本地方法返回缺省值。</li>
 </ol>
+<h2 id="4-OpenFeign"><a href="#4-OpenFeign" class="headerlink" title="4. OpenFeign"></a>4. OpenFeign</h2><h2 id="工程依赖"><a href="#工程依赖" class="headerlink" title="工程依赖"></a>工程依赖</h2><pre class="line-numbers language-xml" data-language="xml"><code class="language-xml"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">&gt;</span></span>org.springframework.cloud<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">&gt;</span></span>spring-cloud-starter-openfeign<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">&gt;</span></span>com.alibaba.cloud<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">&gt;</span></span>spring-cloud-starter-alibaba-nacos-discovery<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">&gt;</span></span>
+<span class="token comment">&lt;!--spring cloud Hoxton.SR1--&gt;</span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">&gt;</span></span>org.springframework.cloud<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">&gt;</span></span>spring-cloud-dependencies<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>type</span><span class="token punctuation">&gt;</span></span>pom<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>type</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>scope</span><span class="token punctuation">&gt;</span></span>import<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>scope</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">&gt;</span></span>
+<span class="token comment">&lt;!--spring cloud alibaba 2.1.0.RELEASE--&gt;</span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">&gt;</span></span>com.alibaba.cloud<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">&gt;</span></span>spring-cloud-alibaba-dependencies<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>type</span><span class="token punctuation">&gt;</span></span>pom<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>type</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>scope</span><span class="token punctuation">&gt;</span></span>import<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>scope</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">&gt;</span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+
 
                 
             </div>
@@ -593,7 +635,11 @@
                 <div class="post-meta__tag-list" style="display: inline-block;">
                     
                         <div class="article-tag">
-                            <span class="chip bg-color">无标签</span>
+                            
+                                <a href="/tags/springcloud/">
+                                    <span class="chip bg-color">springcloud</span>
+                                </a>
+                            
                         </div>
                     
                 </div>

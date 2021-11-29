@@ -445,9 +445,13 @@
             <div class="row tag-cate">
                 <div class="col s7">
                     
-                          <div class="article-tag">
-                            <span class="chip bg-color">无标签</span>
-                          </div>
+                    <div class="article-tag">
+                        
+                            <a href="/tags/maven/">
+                                <span class="chip bg-color">maven</span>
+                            </a>
+                        
+                    </div>
                     
                 </div>
                 <div class="col s5 right-align">
@@ -541,6 +545,104 @@
 
 <p>idea配置maven并更改maven的中央仓库为阿里云</p>
 <p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/majestyking/p/12329535.html">https://www.cnblogs.com/majestyking/p/12329535.html</a></p>
+<h1 id="学习笔记"><a href="#学习笔记" class="headerlink" title="学习笔记"></a>学习笔记</h1><p>超级pom ，可以在这里查询标签：</p>
+<p><a target="_blank" rel="noopener" href="https://www.runoob.com/maven/maven-pom.html">Maven POM | 菜鸟教程 (runoob.com)</a> 网页中往下拉</p>
+<h2 id="1-主要内容"><a href="#1-主要内容" class="headerlink" title="1. 主要内容"></a>1. 主要内容</h2><p><img src="/2021/06/10/maven/image-20211126153131195.png" alt="image-20211126153131195"></p>
+<p>Maven 这个词可以翻译为专家，内行。作为Apache组织中得一个项目，Maven主要服务于java平台的项目构建，依赖管理和信息项目管理。</p>
+<h3 id="1-1-项目构建"><a href="#1-1-项目构建" class="headerlink" title="1.1 项目构建"></a>1.1 项目构建</h3><p>编译、测试、打包、部署，这些东西就是构建。构建可以像全自动流水线一样，只需要一条简单的命令，所有繁琐的步骤都能够自动完成，很快得到最终结果。</p>
+<p>市面比较大的项目管理工具：</p>
+<p>ant、Maven、Gradle。大部分使用Maven。</p>
+<h3 id="1-2-四大特性"><a href="#1-2-四大特性" class="headerlink" title="1.2 四大特性"></a>1.2 四大特性</h3><h4 id="1-依赖管理系统"><a href="#1-依赖管理系统" class="headerlink" title="1. 依赖管理系统"></a>1. 依赖管理系统</h4><p>Maven为java引入依赖管理系统jar包管理。jar升级时修改配置文件即可。</p>
+<p>java世界中，可以用groupId（jar包所在的公司）、artifactId（公司的项目）、version组成的Coordination（坐标）唯一坐标标识一个依赖。</p>
+<p><strong>groupId</strong></p>
+<p>定义当前Maven项目隶属的实际项目-公司名称。（jar包所在的仓库路径）。</p>
+<p><strong>artifactId</strong></p>
+<p>该元素定义实际项目中的一个Maven模块-项目名，推荐的做法是使用实际项目名称作为artifactId的前缀。</p>
+<p><strong>version</strong></p>
+<p>该元素定义Maven项目当前所处的版本。</p>
+<h4 id="2-多模块构建"><a href="#2-多模块构建" class="headerlink" title="2. 多模块构建"></a>2. 多模块构建</h4><h4 id="3-一致的项目结构"><a href="#3-一致的项目结构" class="headerlink" title="3. 一致的项目结构"></a>3. 一致的项目结构</h4><h4 id="4-一致的构建模型和插件机制"><a href="#4-一致的构建模型和插件机制" class="headerlink" title="4. 一致的构建模型和插件机制"></a>4. 一致的构建模型和插件机制</h4><p>plugin</p>
+<h2 id="2-命令"><a href="#2-命令" class="headerlink" title="2. 命令"></a>2. 命令</h2><p>命令的格式：</p>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">mvn <span class="token punctuation">[</span>plugin-name<span class="token punctuation">]</span>:<span class="token punctuation">[</span>goal-name<span class="token punctuation">]</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>命令代表的含义：执行<code>plugin-name</code>插件的<code>goal-name</code>目标。</p>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>mvn -version</td>
+<td>显示版本信息</td>
+</tr>
+<tr>
+<td>mvn clean</td>
+<td>清理项目生产的临时文件，一般是模块下的target目录</td>
+</tr>
+<tr>
+<td>mvn compile</td>
+<td>编译源代码，一般编译模块下的src/main/java目录</td>
+</tr>
+<tr>
+<td>mvn package</td>
+<td>项目打包工具，会在模块下的target目录生成jar或war等文件</td>
+</tr>
+<tr>
+<td>mvn test</td>
+<td>测试命令，或执行src/test/java/下的junit的测试用例</td>
+</tr>
+<tr>
+<td>mvn install</td>
+<td>将打包的jar/war文件复制到你的本地仓库中，共其他模块使用</td>
+</tr>
+<tr>
+<td>mvn deploy</td>
+<td>将打包的文件发布到远程参考，提供其他人员进行依赖下载</td>
+</tr>
+<tr>
+<td>mvn site</td>
+<td>生成项目相关信息的网站</td>
+</tr>
+<tr>
+<td>mvn eclipse:eclipse</td>
+<td>将项目转换为eclipse项目</td>
+</tr>
+<tr>
+<td>mvn dependecy:tree</td>
+<td>打印出项目的整个依赖树</td>
+</tr>
+<tr>
+<td>mvn archetype:generate</td>
+<td>创建maven的普通java项目</td>
+</tr>
+<tr>
+<td>mvn tomcat7:run</td>
+<td>在tomcat容器中运行web应用</td>
+</tr>
+<tr>
+<td>mvn jetty:run</td>
+<td>调用jetty插件的Run目标在Jetty Servlet容器启动web应用</td>
+</tr>
+</tbody></table>
+<pre class="line-numbers language-none"><code class="language-none">注意：运行maven命令的时候，首先需要定位到maven项目的目录，也就是项目的pom.xml文件所在的目录。否则必须通过参数来指定项目的目录。<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h3 id="2-1-D-传入参数属性"><a href="#2-1-D-传入参数属性" class="headerlink" title="2.1 -D 传入参数属性"></a>2.1 -D 传入参数属性</h3><p><span class="github-emoji"><span>🍨</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f368.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span> 例子 ：</p>
+<p>​        <code>mvn package -Dmaven.test.skip=true</code></p>
+<p>​        以<code>-D</code>开头，将<code>maven.test.skip</code>的值设为<code>true</code>，就是告诉maven打包的时候跳过单元测试。</p>
+<h3 id="2-2-P-使用指定的Profile配置"><a href="#2-2-P-使用指定的Profile配置" class="headerlink" title="2.2 -P 使用指定的Profile配置"></a>2.2 -P 使用指定的Profile配置</h3><p><span class="github-emoji"><span>🍨</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f368.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span> 例子：</p>
+<p>​        <code>mvn package -Pdev -Dmaven.test.skip=true</code></p>
+<p>​        表示使用dev环境，打包本地环境，并跳过单元测试。</p>
+<p><img src="/2021/06/10/maven/image-20211126212946328.png" alt="image-20211126212946328"></p>
+<p><code>pom</code>中的<code>profiles</code>定义了各个环境的变量<code>id</code>，<code>filters</code>中定义了变量配置文件的地址，其中地址中的环境变量就是上面的<code>profile</code>中定义的值，<code>resources</code>中定义哪些目录下的文件会被配置文件中的定义的变量替换。</p>
+<h2 id="3-仓库"><a href="#3-仓库" class="headerlink" title="3.仓库"></a>3.仓库</h2><p>下载依赖原理：</p>
+<p>当依赖本地仓库找不到，找私服仓库，私服没有，找远程仓库。</p>
+<h3 id="3-1-远程仓库"><a href="#3-1-远程仓库" class="headerlink" title="3.1 远程仓库"></a>3.1 远程仓库</h3><p>一般就是中央仓库，在国外。</p>
+<h3 id="3-2-私服仓库"><a href="#3-2-私服仓库" class="headerlink" title="3.2 私服仓库"></a>3.2 私服仓库</h3><p>公司搭建的，可以节省外网流量、保持依赖的稳定性等好处。</p>
+<h3 id="3-3-公共仓库"><a href="#3-3-公共仓库" class="headerlink" title="3.3  公共仓库"></a>3.3  公共仓库</h3><p>比如阿里云。</p>
+<h3 id="3-4-本地仓库"><a href="#3-4-本地仓库" class="headerlink" title="3.4 本地仓库"></a>3.4 本地仓库</h3><p>本地保存的。</p>
+<h2 id="4-maven依赖概念"><a href="#4-maven依赖概念" class="headerlink" title="4. maven依赖概念"></a>4. maven依赖概念</h2><p><img src="/2021/06/10/maven/image-20211126213600859.png" alt="image-20211126213600859"></p>
+<h3 id="10-1-依赖范围"><a href="#10-1-依赖范围" class="headerlink" title="10.1 依赖范围"></a>10.1 依赖范围</h3><p><img src="/2021/06/10/maven/image-20211126213730716.png" alt="image-20211126213730716"></p>
 
                 
             </div>
@@ -604,7 +706,11 @@
                 <div class="post-meta__tag-list" style="display: inline-block;">
                     
                         <div class="article-tag">
-                            <span class="chip bg-color">无标签</span>
+                            
+                                <a href="/tags/maven/">
+                                    <span class="chip bg-color">maven</span>
+                                </a>
+                            
                         </div>
                     
                 </div>

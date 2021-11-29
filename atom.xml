@@ -6,7 +6,7 @@
   <link href="http://bruce11111.github.io/atom.xml" rel="self"/>
   
   <link href="http://bruce11111.github.io/"/>
-  <updated>2021-11-07T09:24:51.181Z</updated>
+  <updated>2021-11-29T12:55:39.015Z</updated>
   <id>http://bruce11111.github.io/</id>
   
   <author>
@@ -15,6 +15,42 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>前端</title>
+    <link href="http://bruce11111.github.io/2021/11/27/qian-duan/"/>
+    <id>http://bruce11111.github.io/2021/11/27/qian-duan/</id>
+    <published>2021-11-27T08:55:41.000Z</published>
+    <updated>2021-11-29T12:55:39.015Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;HTML&quot;&gt;&lt;a href=&quot;#HTML&quot; class=&quot;headerlink&quot; title=&quot;HTML&quot;&gt;&lt;/a&gt;HTML&lt;/h1&gt;&lt;h2 id=&quot;1-标签&quot;&gt;&lt;a href=&quot;#1-标签&quot; class=&quot;headerlink&quot; title=&quot;1.</summary>
+        
+      
+    
+    
+    
+    <category term="前端" scheme="http://bruce11111.github.io/categories/%E5%89%8D%E7%AB%AF/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>maven</title>
+    <link href="http://bruce11111.github.io/2021/11/26/maven-1/"/>
+    <id>http://bruce11111.github.io/2021/11/26/maven-1/</id>
+    <published>2021-11-26T07:27:12.000Z</published>
+    <updated>2021-11-26T07:27:12.878Z</updated>
+    
+    
+    
+    
+    
+  </entry>
   
   <entry>
     <title>linux安装软件</title>
@@ -42,7 +78,7 @@
     <link href="http://bruce11111.github.io/2021/10/26/zi-chan-guan-li-ping-tai/"/>
     <id>http://bruce11111.github.io/2021/10/26/zi-chan-guan-li-ping-tai/</id>
     <published>2021-10-26T01:34:28.000Z</published>
-    <updated>2021-11-14T09:11:11.847Z</updated>
+    <updated>2021-11-25T07:19:45.796Z</updated>
     
     
       
@@ -86,7 +122,7 @@
     <link href="http://bruce11111.github.io/2021/09/27/go/"/>
     <id>http://bruce11111.github.io/2021/09/27/go/</id>
     <published>2021-09-27T13:38:09.000Z</published>
-    <updated>2021-09-27T13:39:40.584Z</updated>
+    <updated>2021-11-28T07:31:16.086Z</updated>
     
     
       
@@ -212,7 +248,7 @@
     <link href="http://bruce11111.github.io/2021/06/10/maven/"/>
     <id>http://bruce11111.github.io/2021/06/10/maven/</id>
     <published>2021-06-10T06:36:59.000Z</published>
-    <updated>2021-09-05T01:56:22.532Z</updated>
+    <updated>2021-11-26T13:38:58.235Z</updated>
     
     
       
@@ -230,6 +266,8 @@
     <category term="maven" scheme="http://bruce11111.github.io/categories/maven/"/>
     
     
+    <category term="maven" scheme="http://bruce11111.github.io/tags/maven/"/>
+    
   </entry>
   
   <entry>
@@ -237,14 +275,14 @@
     <link href="http://bruce11111.github.io/2021/06/10/linux-ji-chu/"/>
     <id>http://bruce11111.github.io/2021/06/10/linux-ji-chu/</id>
     <published>2021-06-10T03:28:08.000Z</published>
-    <updated>2021-11-18T02:42:14.925Z</updated>
+    <updated>2021-11-27T07:35:03.403Z</updated>
     
     
       
       
         
         
-    <summary type="html">&lt;h2 id=&quot;1-命令1&quot;&gt;&lt;a href=&quot;#1-命令1&quot; class=&quot;headerlink&quot; title=&quot;1.命令1&quot;&gt;&lt;/a&gt;1.命令1&lt;/h2&gt;&lt;h3 id=&quot;1-重命名文件夹&quot;&gt;&lt;a href=&quot;#1-重命名文件夹&quot; class=&quot;headerlink&quot;</summary>
+    <summary type="html">&lt;h2 id=&quot;1-命令1&quot;&gt;&lt;a href=&quot;#1-命令1&quot; class=&quot;headerlink&quot; title=&quot;1.命令1&quot;&gt;&lt;/a&gt;1.命令1&lt;/h2&gt;&lt;h3 id=&quot;2-查看当前路径&quot;&gt;&lt;a href=&quot;#2-查看当前路径&quot; class=&quot;headerlink&quot;</summary>
         
       
     
@@ -262,7 +300,7 @@
     <link href="http://bruce11111.github.io/2021/06/10/mysql-ji-chu/"/>
     <id>http://bruce11111.github.io/2021/06/10/mysql-ji-chu/</id>
     <published>2021-06-10T02:58:01.000Z</published>
-    <updated>2021-11-13T06:20:00.801Z</updated>
+    <updated>2021-11-21T11:44:15.190Z</updated>
     
     
       
@@ -287,7 +325,7 @@
     <link href="http://bruce11111.github.io/2021/06/07/mybatis-plus/"/>
     <id>http://bruce11111.github.io/2021/06/07/mybatis-plus/</id>
     <published>2021-06-07T07:59:52.000Z</published>
-    <updated>2021-06-09T13:05:30.812Z</updated>
+    <updated>2021-11-27T02:52:53.554Z</updated>
     
     
       
@@ -304,6 +342,8 @@
     
     <category term="mybatis plus" scheme="http://bruce11111.github.io/categories/java/mybatis-plus/"/>
     
+    
+    <category term="java" scheme="http://bruce11111.github.io/tags/java/"/>
     
   </entry>
   
@@ -420,52 +460,6 @@
     
     
     <category term="讨论" scheme="http://bruce11111.github.io/categories/%E8%AE%A8%E8%AE%BA/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>docker</title>
-    <link href="http://bruce11111.github.io/2021/05/16/docker/"/>
-    <id>http://bruce11111.github.io/2021/05/16/docker/</id>
-    <published>2021-05-16T13:49:59.000Z</published>
-    <updated>2021-07-20T14:12:42.855Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h1 id=&quot;Docker&quot;&gt;&lt;a href=&quot;#Docker&quot; class=&quot;headerlink&quot; title=&quot;Docker&quot;&gt;&lt;/a&gt;Docker&lt;/h1&gt;&lt;h2 id=&quot;1-概述&quot;&gt;&lt;a href=&quot;#1-概述&quot; class=&quot;headerlink&quot;</summary>
-        
-      
-    
-    
-    
-    <category term="docker" scheme="http://bruce11111.github.io/categories/docker/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>git</title>
-    <link href="http://bruce11111.github.io/2021/05/16/git/"/>
-    <id>http://bruce11111.github.io/2021/05/16/git/</id>
-    <published>2021-05-16T10:59:22.000Z</published>
-    <updated>2021-05-16T13:48:33.840Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h1 id=&quot;Git&quot;&gt;&lt;a href=&quot;#Git&quot; class=&quot;headerlink&quot; title=&quot;Git&quot;&gt;&lt;/a&gt;Git&lt;/h1&gt;&lt;h2 id=&quot;1-简介&quot;&gt;&lt;a href=&quot;#1-简介&quot; class=&quot;headerlink&quot; title=&quot;1.</summary>
-        
-      
-    
-    
-    
-    <category term="git" scheme="http://bruce11111.github.io/categories/git/"/>
     
     
   </entry>

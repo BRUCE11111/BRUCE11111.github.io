@@ -679,7 +679,7 @@ GRANT select,update,insert,create on *.* TO 'xxh'@'%' WITH GRANT OPTION;
 <h2 id="3-搭建集群"><a href="#3-搭建集群" class="headerlink" title="3. 搭建集群"></a>3. 搭建集群</h2><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/richie696/article/details/114261284?utm_medium=distribute.pc_relevant.none-task-blog-2~default~CTRLIST~default-1.no_search_link&amp;depth_1-utm_source=distribute.pc_relevant.none-task-blog-2~default~CTRLIST~default-1.no_search_link">(3条消息) MySQL8.0高级应用———集群模式配置（主从、双主、MHA高可用模式配置）_richie696的专栏-CSDN博客</a></p>
 <p>参考这个博客。</p>
 <p>注意 主从每个机子的server-id 必须不一样</p>
-<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">change master to master_host='172.16.6.94',master_port=3306,master_user='xxh',master_password='',master_log_file='mysql-bin.000003',master_log_pos=156;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">change master to master_host='172.16.6.221',master_port=3306,master_user='xxh',master_password='',master_log_file='mysql-bin.000001',master_log_pos=156;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 
                 
@@ -1030,6 +1030,14 @@ GRANT select,update,insert,create on *.* TO 'xxh'@'%' WITH GRANT OPTION;
                             
                         </span>
                     </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/java/">
+                        <span class="chip bg-color">java</span>
+                    </a>
+                    
                 </div>
                 
             </div>

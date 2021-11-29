@@ -505,8 +505,7 @@
 
 <pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">docker run --name kibana -e <span class="token assign-left variable">ELASTICSEARCH_URL</span><span class="token operator">=</span>http://0.0.0.0:9200 -p <span class="token number">5601</span>:5601 -d kibana:7.4.2<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
-
-
+<p><code>sudo docker update d51f 9ece --restart=always</code> //永久重启</p>
 <h1 id="2-使用"><a href="#2-使用" class="headerlink" title="2. 使用"></a>2. 使用</h1><h2 id="2-1-put"><a href="#2-1-put" class="headerlink" title="2.1 put"></a>2.1 put</h2><h3 id="2-1-1-带id"><a href="#2-1-1-带id" class="headerlink" title="2.1.1 带id"></a>2.1.1 带id</h3><p><code>http://172.16.6.94:9200/customer/external/1</code></p>
 <p><span class="github-emoji"><span>😠</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f620.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span> 切记put方式不允许不带id的。</p>
 <h2 id="2-2-post"><a href="#2-2-post" class="headerlink" title="2.2 post"></a>2.2 post</h2><p><code>http://172.16.6.94:9200/customer/external/</code></p>
@@ -523,7 +522,132 @@
 </ol>
 <p><span class="github-emoji"><span>🍧</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f367.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span> 例子：</p>
 <p><img src="/2021/10/26/zi-chan-guan-li-ping-tai/image-20211114163024759.png" alt="image-20211114163024759"></p>
-<h2 id="3-2-QueryDS"><a href="#3-2-QueryDS" class="headerlink" title="3.2 QueryDS"></a>3.2 QueryDS</h2>
+<h2 id="3-2-QueryDS"><a href="#3-2-QueryDS" class="headerlink" title="3.2 QueryDS"></a>3.2 QueryDS</h2><p>ES提供可以执行查询的<code>json</code>风格的DSL（<strong>domain-specific language 领域特定语言</strong>)。这个被称为Query DSL。</p>
+<p><span class="github-emoji"><span>🍨</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f368.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span>例子：查询语句的典型结构。</p>
+<pre class="line-numbers language-json" data-language="json"><code class="language-json"><span class="token punctuation">{</span>
+    QUERY_NAME<span class="token operator">:</span><span class="token punctuation">{</span>
+        ARGUMENT<span class="token operator">:</span>VALUE<span class="token punctuation">,</span>
+        ARGUMENT<span class="token operator">:</span>VALUE<span class="token punctuation">,</span>...
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token punctuation">{</span>
+	<span class="token property">"query"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+    	<span class="token property">"match_all"</span><span class="token operator">:</span><span class="token punctuation">{</span><span class="token punctuation">}</span>
+	<span class="token punctuation">}</span><span class="token punctuation">,</span>
+	<span class="token property">"sort"</span><span class="token operator">:</span><span class="token punctuation">[</span>
+        <span class="token punctuation">{</span>
+            <span class="token property">"balance"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+                <span class="token property">"order"</span><span class="token operator">:</span> <span class="token string">"desc"</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">]</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="3-2-1-match-phrase-短语匹配"><a href="#3-2-1-match-phrase-短语匹配" class="headerlink" title="3.2.1 match_phrase 短语匹配"></a>3.2.1 match_phrase 短语匹配</h4><p>将需要匹配的值当成一个整体单词（不分词）进行检索。 </p>
+<pre class="line-numbers language-json" data-language="json"><code class="language-json"><span class="token punctuation">{</span>
+    <span class="token property">"query"</span><span class="token operator">:</span><span class="token punctuation">{</span>
+        <span class="token property">"match_phrase"</span><span class="token operator">:</span><span class="token punctuation">{</span>
+            <span class="token property">"address"</span><span class="token operator">:</span><span class="token string">"mill road"</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>最终查出address中包含mill或者road或者mill road的所有记录，并给出相关性得分。</p>
+<h4 id="3-2-2-multi-match-多字段匹配"><a href="#3-2-2-multi-match-多字段匹配" class="headerlink" title="3.2.2 multi_match 多字段匹配"></a>3.2.2 multi_match 多字段匹配</h4><pre class="line-numbers language-json" data-language="json"><code class="language-json"><span class="token punctuation">{</span>
+    <span class="token property">"query"</span><span class="token operator">:</span><span class="token punctuation">{</span>
+        <span class="token property">"multi_match"</span><span class="token operator">:</span><span class="token punctuation">{</span>
+            <span class="token property">"query"</span><span class="token operator">:</span><span class="token string">"mill"</span><span class="token punctuation">,</span>
+            <span class="token property">"fileds"</span><span class="token operator">:</span><span class="token punctuation">[</span><span class="token string">"state"</span><span class="token punctuation">,</span><span class="token string">"address"</span><span class="token punctuation">]</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>state或者address包含mill。</p>
+<h4 id="3-2-3-复合查询"><a href="#3-2-3-复合查询" class="headerlink" title="3.2.3 复合查询"></a>3.2.3 复合查询</h4><pre class="line-numbers language-json" data-language="json"><code class="language-json"><span class="token property">"query"</span><span class="token operator">:</span><span class="token punctuation">{</span>
+    <span class="token property">"bool"</span><span class="token operator">:</span><span class="token punctuation">{</span>
+        <span class="token property">"must"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+            <span class="token punctuation">{</span>
+                <span class="token property">"match"</span><span class="token operator">:</span><span class="token punctuation">{</span>
+                <span class="token property">"gender"</span><span class="token operator">:</span> <span class="token string">"F"</span>
+            	<span class="token punctuation">}</span>
+            <span class="token punctuation">}</span><span class="token punctuation">,</span>
+            <span class="token punctuation">{</span>
+                <span class="token property">"match"</span><span class="token operator">:</span><span class="token punctuation">{</span>
+                    <span class="token property">"address"</span><span class="token operator">:</span> <span class="token string">"mill"</span>
+                <span class="token punctuation">}</span>
+            <span class="token punctuation">}</span>
+            
+        <span class="token punctuation">]</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="3-2-4-结果过滤filter"><a href="#3-2-4-结果过滤filter" class="headerlink" title="3.2.4 结果过滤filter"></a>3.2.4 结果过滤filter</h4><p>filter不会进行相关性得分计算。</p>
+<h4 id="3-2-5-term"><a href="#3-2-5-term" class="headerlink" title="3.2.5 term"></a>3.2.5 term</h4><h1 id="2-NACOS"><a href="#2-NACOS" class="headerlink" title="2. NACOS"></a>2. NACOS</h1><h2 id="2-1-下载"><a href="#2-1-下载" class="headerlink" title="2.1 下载"></a>2.1 下载</h2><p><a target="_blank" rel="noopener" href="https://github.com/alibaba/nacos/releases">Releases · alibaba/nacos (github.com)</a></p>
+<blockquote>
+<p>启动</p>
+<ul>
+<li>Linux/Unix/Mac , execute <code>sh startup.sh -m standalone</code> （ubuntu 使用bash）</li>
+<li>Windows , execute <code>cmd startup.cmd</code></li>
+<li>nacos/nacos 默认登录</li>
+</ul>
+<pre class="line-numbers language-xml" data-language="xml"><code class="language-xml"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">&gt;</span></span>com.alibaba.cloud<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">&gt;</span></span>spring-cloud-starter-alibaba-nacos-discovery<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">&gt;</span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>application.properties</p>
+<pre class="line-numbers language-properties" data-language="properties"><code class="language-properties"><span class="token attr-name">spring.cloud.nacos.discovery.server-addr</span><span class="token punctuation">=</span><span class="token attr-value">127.0.0.1:8848</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<ol>
+<li><p>Use the @EnableDiscoveryClient annotation to turn on service registration and discovery.</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token annotation punctuation">@SpringBootApplication</span>
+<span class="token annotation punctuation">@EnableDiscoveryClient</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">ProviderApplication</span> <span class="token punctuation">{</span>
+   
+	<span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token class-name">String</span><span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+		<span class="token class-name">SpringApplication</span><span class="token punctuation">.</span><span class="token function">run</span><span class="token punctuation">(</span><span class="token class-name">ProviderApplication</span><span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">,</span> args<span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token punctuation">}</span>
+   
+	<span class="token annotation punctuation">@RestController</span>
+	<span class="token keyword">class</span> <span class="token class-name">EchoController</span> <span class="token punctuation">{</span>
+		<span class="token annotation punctuation">@GetMapping</span><span class="token punctuation">(</span>value <span class="token operator">=</span> <span class="token string">"/echo/{string}"</span><span class="token punctuation">)</span>
+		<span class="token keyword">public</span> <span class="token class-name">String</span> <span class="token function">echo</span><span class="token punctuation">(</span><span class="token annotation punctuation">@PathVariable</span> <span class="token class-name">String</span> string<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+				<span class="token keyword">return</span> string<span class="token punctuation">;</span>
+		<span class="token punctuation">}</span>
+	<span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
+</ol>
+</blockquote>
+<h3 id="2-1-1-远程调用"><a href="#2-1-1-远程调用" class="headerlink" title="2.1.1 远程调用"></a>2.1.1 远程调用</h3><ol>
+<li>使用Feign</li>
+</ol>
+<pre class="line-numbers language-xml" data-language="xml"><code class="language-xml"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">&gt;</span></span>org.springframework.cloud<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">&gt;</span></span>spring-cloud-starter-openfeign<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>version</span><span class="token punctuation">&gt;</span></span>${spring-openfeign.version}<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>version</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">&gt;</span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ol start="2">
+<li>编写接口，告诉springcloud接口需要调用远程服务。声明接口的每一个方法都是调用哪个远程服务的哪个请求。</li>
+<li>开启远程调用功能。</li>
+</ol>
+<h1 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h1><h2 id="1-Kibana"><a href="#1-Kibana" class="headerlink" title="1. Kibana"></a>1. Kibana</h2><h3 id="1-1-无法连接ES"><a href="#1-1-无法连接ES" class="headerlink" title="1.1 无法连接ES"></a>1.1 无法连接ES</h3><p>“Unable to revive connection: <a target="_blank" rel="noopener" href="http://172.16.6.94:9200/%E2%80%9C">http://172.16.6.94:9200/“</a></p>
+<p>解决方案：</p>
+<ol>
+<li><p>进入kibana容器：<code>docker exec -it d51f /bin/bash</code></p>
+</li>
+<li><p>进入config目录 <code>cd config</code></p>
+</li>
+<li><p>修改kibana.yml文件 <code>vi kibana.yml</code>。修改elasticsearch.hosts的地址, 改成es的ip server.name: kibana server.host: “0” <strong>elasticsearch.hosts: [ “<a href="http://192.168.56.10:9200&quot;">http://192.168.56.10:9200"</a> ]</strong></p>
+</li>
+</ol>
+<p>将其中的host地址改为ES地址。</p>
+<ol start="4">
+<li>修改完成配置文件后, 重启docker的kibana服务。</li>
+</ol>
+<h1 id="2-springcloud"><a href="#2-springcloud" class="headerlink" title="2. springcloud"></a>2. springcloud</h1>
                 
             </div>
             <hr/>

@@ -496,11 +496,7 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="1-命令1"><a href="#1-命令1" class="headerlink" title="1.命令1"></a>1.命令1</h2><h3 id="1-重命名文件夹"><a href="#1-重命名文件夹" class="headerlink" title="1. 重命名文件夹"></a>1. 重命名文件夹</h3><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">mv souce target # 直接使用mv就好了，在本地相当于覆盖地改了<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-
-
-<h3 id="2-查看当前路径"><a href="#2-查看当前路径" class="headerlink" title="2. 查看当前路径"></a>2. 查看当前路径</h3><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">pwd
+                <h2 id="1-命令1"><a href="#1-命令1" class="headerlink" title="1.命令1"></a>1.命令1</h2><h3 id="2-查看当前路径"><a href="#2-查看当前路径" class="headerlink" title="2. 查看当前路径"></a>2. 查看当前路径</h3><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">pwd
 -L 
 如果 PWD 环境变量包含了不包含文件名 .（点表示当前目录）或 ..（点点表示父目录）的当前目录的绝对路径名，则显示 PWD 环境变量的值。否则，-L 标志与 -P 标志一样运行。 
 -P 
@@ -581,80 +577,6 @@ export PATH=$PATH:/home/uusama/mysql/bin<span aria-hidden="true" class="line-num
 <li>生效期限：永久有效</li>
 <li>生效范围：对所有用户有效</li>
 </ul>
-<h4 id="Linux环境变量加载原理解析"><a href="#Linux环境变量加载原理解析" class="headerlink" title="Linux环境变量加载原理解析"></a>Linux环境变量加载原理解析</h4><p>上面列出了环境变量的各种配置方法，那么Linux是如何加载这些配置的呢？是以什么样的顺序加载的呢？</p>
-<p>特定的加载顺序会导致相同名称的环境变量定义被覆盖或者不生效。</p>
-<p>环境变量的分类</p>
-<p>环境变量可以简单的分成用户自定义的环境变量以及系统级别的环境变量。</p>
-<ul>
-<li>用户级别环境变量定义文件：~/.bashrc、~/.profile（部分系统为：~/.bash_profile）</li>
-<li>系统级别环境变量定义文件：/etc/bashrc、/etc/profile(部分系统为：/etc/bash_profile）、/etc/environment</li>
-</ul>
-<p>另外在用户环境变量中，系统会首先读取<del>/.bash_profile（或者</del>/.profile）文件，如果没有该文件则读取<del>/.bash_login，根据这些文件中内容再去读取</del>/.bashrc。</p>
-<h4 id="测试Linux环境变量加载顺序的方法"><a href="#测试Linux环境变量加载顺序的方法" class="headerlink" title="测试Linux环境变量加载顺序的方法"></a>测试Linux环境变量加载顺序的方法</h4><p>为了测试各个不同文件的环境变量加载顺序，我们在每个环境变量定义文件中的第一行都定义相同的环境变量UU_ORDER，该变量的值为本身的值连接上当前文件名称。</p>
-<p>需要修改的文件如下：</p>
-<pre class="line-numbers language-none"><code class="language-none">/etc/environment
-/etc/profile
-/etc/profile.d/test.sh，新建文件，没有文件夹可略过
-/etc/bashrc，或者/etc/bash.bashrc
-~/.bash_profile，或者~/.profile
-~/.bashrc<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>在每个文件中的第一行都加上下面这句代码，并相应的把冒号后的内容修改为当前文件的绝对文件名。</p>
-<pre class="line-numbers language-none"><code class="language-none">export UU_ORDER="$UU_ORDER:~/.bash_profile"<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<p>修改完之后保存，新开一个窗口，然后echo $UU_ORDER观察变量的值：</p>
-<pre class="line-numbers language-none"><code class="language-none">uusama@ubuntu:~$ echo $UU_ORDER
-$UU_ORDER:/etc/environment:/etc/profile:/etc/bash.bashrc:/etc/profile.d/test.sh:~/.profile:~/.bashrc<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-
-<p>可以推测出Linux加载环境变量的顺序如下：</p>
-<pre class="line-numbers language-none"><code class="language-none">/etc/environment
-/etc/profile
-/etc/bash.bashrc
-/etc/profile.d/test.sh
-~/.profile
-~/.bashrc<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h4 id="Linux环境变量文件加载详解"><a href="#Linux环境变量文件加载详解" class="headerlink" title="Linux环境变量文件加载详解"></a>Linux环境变量文件加载详解</h4><p>由上面的测试可容易得出Linux加载环境变量的顺序如下，：</p>
-<p>系统环境变量 -&gt; 用户自定义环境变量 /etc/environment -&gt; /etc/profile -&gt; ~/.profile</p>
-<p>打开/etc/profile文件你会发现，该文件的代码中会加载/etc/bash.bashrc文件，然后检查/etc/profile.d/目录下的.sh文件并加载。</p>
-<pre class="line-numbers language-none"><code class="language-none"># /etc/profile: system-wide .profile file for the Bourne shell (sh(1))
-# and Bourne compatible shells (bash(1), ksh(1), ash(1), ...).
-if [ "$PS1" ]; then
-  if [ "$BASH" ] &amp;&amp; [ "$BASH" != "/bin/sh" ]; then
-    # The file bash.bashrc already sets the default PS1.
-    # PS1='h:w$ '
-    if [ -f /etc/bash.bashrc ]; then
-      . /etc/bash.bashrc
-    fi
-  else
-    if [ "`id -u`" -eq 0 ]; then
-      PS1='# '
-    else
-      PS1='$ '
-    fi
-  fi
-fi
-if [ -d /etc/profile.d ]; then
-  for i in /etc/profile.d/*.sh; do
-    if [ -r $i ]; then
-      . $i
-    fi
-  done
-  unset i
-fi<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>其次再打开<del>/.profile文件，会发现该文件中加载了</del>/.bashrc文件。</p>
-<pre class="line-numbers language-none"><code class="language-none"># if running bash
-if [ -n "$BASH_VERSION" ]; then
-    # include .bashrc if it exists
-    if [ -f "$HOME/.bashrc" ]; then
- . "$HOME/.bashrc"
-    fi
-fi
-# set PATH so it includes user's private bin directories
-PATH="$HOME/bin:$HOME/.local/bin:$PATH"<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>从~/.profile文件中代码不难发现，/.profile文件只在用户登录的时候读取一次，而/.bashrc会在每次运行Shell脚本的时候读取一次。</p>
 <h4 id="一些小技巧"><a href="#一些小技巧" class="headerlink" title="一些小技巧"></a>一些小技巧</h4><p>可以自定义一个环境变量文件，比如在某个项目下定义uusama.profile，在这个文件中使用export定义一系列变量，然后在~/.profile文件后面加上：sourc uusama.profile，这样你每次登陆都可以在Shell脚本中使用自己定义的一系列变量。</p>
 <p>也可以使用alias命令定义一些命令的别名，比如alias rm=”rm -i”（双引号必须），并把这个代码加入到~/.profile中，这样你每次使用rm命令的时候，都相当于使用rm -i命令，非常方便。</p>
 <h4 id="1-僵尸进程"><a href="#1-僵尸进程" class="headerlink" title="1.僵尸进程"></a>1.僵尸进程</h4><p>当子进程退出时，父进程没有调用wait函数或者waitpid()函数等待子进程结束，又没有显式忽略SIGCHLD信号，那么它将一直保持在僵尸状态，如果这时父进程结束了，init进程会自动接收这个子进程，为它收尸，但如果父进程是一个循环，不会结束，那么子进程就会一直保持僵死状态。</p>
@@ -678,6 +600,33 @@ PATH="$HOME/bin:$HOME/.local/bin:$PATH"<span aria-hidden="true" class="line-numb
 </ul>
 <p><code>ps -A -o stat,ppid,pid,cmd | grep -e '^[Zz]' | awk '{print $2}' | xargs kill -9</code></p>
 <p>查找僵死进程，然后将父进程杀死。</p>
+<h3 id="ubuntu-查询dns"><a href="#ubuntu-查询dns" class="headerlink" title="ubuntu 查询dns"></a>ubuntu 查询dns</h3><p><code>nmcli dev show</code></p>
+<h3 id="固定ip"><a href="#固定ip" class="headerlink" title="固定ip"></a>固定ip</h3><h4 id="ubuntu20-04-（18-也行）"><a href="#ubuntu20-04-（18-也行）" class="headerlink" title="ubuntu20.04 （18 也行）"></a>ubuntu20.04 （18 也行）</h4><p>禁用dhcp使用静态ip注意事项</p>
+<p>假设要把ip地址设为 192.168.1.38 子网掩码24位即255.255.255.0<br>首先确认网卡名称 使用ifconfig命令:</p>
+<pre class="line-numbers language-dns" data-language="dns"><code class="language-dns">`eno1: flags=4163&lt;UP,BROADCAST,RUNNING,MULTICAST&gt;  mtu 1500
+    inet 192.168.1.39  netmask 255.255.255.0  broadcast 192.168.1.255`<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>网卡名称 eno1 目前的ip地址是192.168.1.39,子网掩码24位</p>
+<p>确认网关地址:使用 route -n 命令</p>
+<pre class="line-numbers language-accesslog" data-language="accesslog"><code class="language-accesslog">`Destination     Gateway         Genmask        Flags Metric Ref    Use Iface
+0.0.0.0         192.168.1.1     0.0.0.0         UG    100    0        0 eno1`<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>默认网关 192.168.1.1</p>
+<p>最后编辑 sudo vim /etc/netplan/01-network-manager-all.yaml 填入:</p>
+<pre class="line-numbers language-yaml" data-language="yaml"><code class="language-yaml">`network<span class="token punctuation">:</span>
+  <span class="token key atrule">version</span><span class="token punctuation">:</span> <span class="token number">2</span>
+  <span class="token key atrule">renderer</span><span class="token punctuation">:</span> NetworkManager
+  <span class="token key atrule">ethernets</span><span class="token punctuation">:</span>
+    <span class="token key atrule">eno1</span><span class="token punctuation">:</span>   <span class="token comment"># 网卡名称</span>
+      <span class="token key atrule">dhcp4</span><span class="token punctuation">:</span> no     <span class="token comment"># 关闭dhcp</span>
+      <span class="token key atrule">dhcp6</span><span class="token punctuation">:</span> no
+      <span class="token key atrule">addresses</span><span class="token punctuation">:</span> <span class="token punctuation">[</span>192.168.1.38/24<span class="token punctuation">]</span>  <span class="token comment"># 静态ip</span>
+      <span class="token key atrule">gateway4</span><span class="token punctuation">:</span> 192.168.1.1     <span class="token comment"># 网关</span>
+      <span class="token key atrule">nameservers</span><span class="token punctuation">:</span>
+        <span class="token key atrule">addresses</span><span class="token punctuation">:</span> <span class="token punctuation">[</span>8.8.8.8<span class="token punctuation">,</span> 114.114.114.114<span class="token punctuation">]</span>`<span class="token comment"># dns</span>
+        <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>运行 <code>sudo netplan apply</code></p>
 <h2 id="4-linux各个目录的作用"><a href="#4-linux各个目录的作用" class="headerlink" title="4. linux各个目录的作用"></a>4. linux各个目录的作用</h2><p><code>bin</code> 存放系统命令的目录，普通用户和超级用户都可以执行。/bin目录下的命令单用户模式下也可以执行。</p>
 <p><code>sbin</code>保存系统环境设置相关的命令，只有超级用户可以使用这些命令进行系统环境设置，但是有些命令允许普通用户查看。</p>
 <p><code>usr/bin</code>存放系统命令的目录，普通用户和超级用户都可以执行。这些命令和系统启动无关，在单用户模式下不能执行。</p>
@@ -758,6 +707,18 @@ PATH="$HOME/bin:$HOME/.local/bin:$PATH"<span aria-hidden="true" class="line-numb
 <p>-exec/-ok 命令{}\ ，对搜索结果执行操作。</p>
 <p>-inum i节点， 根据i节点查找。</p>
 <p><code>find -inum 31531 -exec rm {} \</code> 删除i节点是31531的文件。</p>
+<h4 id="4-1-18-history"><a href="#4-1-18-history" class="headerlink" title="4.1.18 history"></a>4.1.18 history</h4><p><code>history [选项] [历史命令保存文件]</code></p>
+<p>-c 清空历史命令</p>
+<p>-w 把缓存中的历史命令写入历史命令保存文件 ~/.bash_history</p>
+<p>历史命令默认保存1000条，在<code>/etc/profile</code>文件中修改。</p>
+<blockquote>
+<p>执行历史命令</p>
+<ol>
+<li><code>!n</code> 执行第n条历史命令。</li>
+<li><code>!!</code> 重复执行上一条命令。</li>
+<li><code>!字串</code> 重复执行最后一条以字串开头的命令。</li>
+</ol>
+</blockquote>
 <h3 id="4-2-帮助命令"><a href="#4-2-帮助命令" class="headerlink" title="4.2 帮助命令"></a>4.2 帮助命令</h3><h4 id="4-2-1-man"><a href="#4-2-1-man" class="headerlink" title="4.2.1 man"></a>4.2.1 man</h4><p>命令和配置文件的帮助信息。</p>
 <p><code>man ls</code> 查看ls命令的帮助信息</p>
 <p>1 是命令的帮助 5 是配置文件的帮助。</p>
@@ -1244,6 +1205,306 @@ PATH="$HOME/bin:$HOME/.local/bin:$PATH"<span aria-hidden="true" class="line-numb
 </blockquote>
 <h2 id="9-SHELL"><a href="#9-SHELL" class="headerlink" title="9.SHELL"></a>9.SHELL</h2><p><img src="/2021/06/10/linux-ji-chu/image-20211117220524694.png" alt="image-20211117220524694"></p>
 <p>SHELL 是一种编程语言，是解释执行的脚本语言，在SHELL中可以直接调用LINUX系统命令。</p>
+<p>SHELL有两种语法类型：Bourne和C。两种互不兼容。Bourne主要支持sh、ksh、<font color="red">Bash</font>、psh、zsh等。C家族主要包括csh和tcsh。</p>
+<p>现在linux基本都是用Bash SEHLL。</p>
+<blockquote>
+<p>linux中支持的SEHLL： 写在文件 <code>/etc/shells/</code></p>
+</blockquote>
+<h3 id="9-1-脚本执行方式"><a href="#9-1-脚本执行方式" class="headerlink" title="9.1 脚本执行方式"></a>9.1 脚本执行方式</h3><h4 id="9-1-1-echo"><a href="#9-1-1-echo" class="headerlink" title="9.1.1 echo"></a>9.1.1 echo</h4><blockquote>
+<p>echo [选项] [输出内容] <font color="red">输出的内容有空格，必须加双引号或者单引号</font></p>
+<blockquote>
+<p>-e 支持反斜线控制的字符转换</p>
+<p><img src="/2021/06/10/linux-ji-chu/image-20211118111309140.png" alt="image-20211118111309140"></p>
+<p><code>echo -e "\e[1;31m abcd \e[0m"</code> 输出红色字体的<code>abcd</code></p>
+</blockquote>
+<blockquote>
+<p><code>#!/bin/shell</code> 开头标记，标注以下程序是SHELL程序。简单的shell程序如果没有标记，不影响。但是SHELL中如果嵌套了其他语句就会报错。</p>
+<p>编写完毕一个shell脚本后，有两种执行方式：</p>
+<blockquote>
+<ol>
+<li><p>赋予执行权限</p>
+<p><code>chmod 755 xxx.sh</code></p>
+<p><code>./xxx.sh</code> or <code>sh xxx.sh</code></p>
+</li>
+<li><p>bash运行</p>
+<p><code>bash xxx.sh</code></p>
+</li>
+</ol>
+</blockquote>
+</blockquote>
+<blockquote>
+</blockquote>
+</blockquote>
+<h4 id="9-1-2-命令别名"><a href="#9-1-2-命令别名" class="headerlink" title="9.1.2 命令别名"></a>9.1.2 命令别名</h4><p><code>alia 别名='原命令'</code> 只能临时生效</p>
+<p><code>alia</code> 查询别名 </p>
+<p><img src="/2021/06/10/linux-ji-chu/image-20211119110453078.png" alt="image-20211119110453078"></p>
+<p><code>vim /root/.bashrc</code> 别名永久生效。</p>
+<p><code>unalias 别名</code> 删除别名。</p>
+<h4 id="9-1-3-bash常用快捷键"><a href="#9-1-3-bash常用快捷键" class="headerlink" title="9.1.3 bash常用快捷键"></a>9.1.3 bash常用快捷键</h4><p><img src="/2021/06/10/linux-ji-chu/image-20211119111227442.png" alt="image-20211119111227442"></p>
+<h4 id="9-1-4-输入输出重定向"><a href="#9-1-4-输入输出重定向" class="headerlink" title="9.1.4 输入输出重定向"></a>9.1.4 输入输出重定向</h4><blockquote>
+<p>输出</p>
+</blockquote>
+<p><img src="/2021/06/10/linux-ji-chu/image-20211119111818726.png" alt="image-20211119111818726"></p>
+<p><img src="/2021/06/10/linux-ji-chu/image-20211119112237251.png" alt="image-20211119112237251"></p>
+<p>输出重定向，不再输出到原始设定的屏幕上，而是文件中。（只有有输出的命令才可以重定向）</p>
+<p><img src="/2021/06/10/linux-ji-chu/image-20211119113829091.png" alt="image-20211119113829091"></p>
+<blockquote>
+<p>输入</p>
+<p><code>wc [选项] [文件名]</code> </p>
+<p>-c 统计字节数</p>
+<p>-w 统计单词数</p>
+<p>-l 统计行数</p>
+<p><span class="github-emoji"><span>🍨</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f368.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span> 例子<img src="/2021/06/10/linux-ji-chu/image-20211119114853618.png" alt="image-20211119114853618"> 双<code>&lt;&lt;</code> 碰到相同的，之间的内容进行统计。</p>
+<p><span class="github-emoji"><span>🍨</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f368.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span>例子：<img src="/2021/06/10/linux-ji-chu/image-20211119114941398.png" alt="image-20211119114941398"></p>
+</blockquote>
+<h4 id="9-1-5-多命令顺序执行和管道符"><a href="#9-1-5-多命令顺序执行和管道符" class="headerlink" title="9.1.5 多命令顺序执行和管道符"></a>9.1.5 多命令顺序执行和管道符</h4><p><img src="/2021/06/10/linux-ji-chu/image-20211119115138032.png" alt="image-20211119115138032"></p>
+<p><code>dd</code> 命令主要用来进行磁盘复制。</p>
+<p><img src="/2021/06/10/linux-ji-chu/image-20211119115910670.png" alt="image-20211119115910670"></p>
+<blockquote>
+<p>管道符</p>
+<p><code>命令1 | 命令2</code> 命令1的正确输出作为命令2的操作对象。 命令1必须有正确的输出，否则命令2是不能执行的。</p>
+<p><span class="github-emoji"><span>🍨</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f368.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span> 例子：<img src="/2021/06/10/linux-ji-chu/image-20211119121539105.png" alt="image-20211119121539105"></p>
+</blockquote>
+<h4 id="9-1-6-通配符与其他特殊符号"><a href="#9-1-6-通配符与其他特殊符号" class="headerlink" title="9.1.6 通配符与其他特殊符号"></a>9.1.6 通配符与其他特殊符号</h4><blockquote>
+<p>通配符</p>
+<p><img src="/2021/06/10/linux-ji-chu/image-20211119122607603.png" alt="image-20211119122607603"></p>
+<p><span class="github-emoji"><span>🍨</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f368.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span> 例子： </p>
+<p><code>ls *abc</code> <code>ls [^a-z]*</code>  </p>
+</blockquote>
+<blockquote>
+<p>其他特殊符号</p>
+<p><img src="/2021/06/10/linux-ji-chu/image-20211120130200666.png" alt="image-20211120130200666"></p>
+</blockquote>
+<h3 id="9-2-bash的变量"><a href="#9-2-bash的变量" class="headerlink" title="9.2 bash的变量"></a>9.2 bash的变量</h3><h4 id="9-2-1-用户自定义变量"><a href="#9-2-1-用户自定义变量" class="headerlink" title="9.2.1 用户自定义变量"></a>9.2.1 用户自定义变量</h4><ul>
+<li>不能用数字开头</li>
+<li>默认字符串类型，如果要进行数值运算，必须指定变量类型为数值型</li>
+<li>等号两侧不要加空格</li>
+</ul>
+<p>:happy: 环境变量名建议大写，便于区分。</p>
+<h4 id="9-2-2-环境变量"><a href="#9-2-2-环境变量" class="headerlink" title="9.2.2 环境变量"></a>9.2.2 环境变量</h4><ul>
+<li>和操作系统环境相关的数据。</li>
+</ul>
+<blockquote>
+<p>本地变量</p>
+<p><span class="github-emoji"><span>🍨</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f368.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span> 例子：<code>sc=$(name)</code> </p>
+</blockquote>
+<blockquote>
+<p>查看变量</p>
+<p><span class="github-emoji"><span>🍨</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f368.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span> <code>set</code> <code>unset 变量名称</code>  </p>
+</blockquote>
+<blockquote>
+<p>变量叠加</p>
+<p><span class="github-emoji"><span>🍨</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f368.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span> <code>aa=123</code> <code>aa="$aa"456</code> <code>aa=${aa}789</code></p>
+</blockquote>
+<blockquote>
+<p>环境变量设置</p>
+<p><code>export 变量名=变量值</code></p>
+<p>查询变量<code>env</code></p>
+<p>删除变量 <code>unset 变量名</code></p>
+</blockquote>
+<blockquote>
+<p>PATH</p>
+<p>系统查找命令的变量</p>
+<p>一般更习惯于变量叠加的方式： <code>PATH="$PATH":/XX/XX</code></p>
+</blockquote>
+<p><img src="/2021/06/10/linux-ji-chu/image-20211120160046419.png" alt="image-20211120160046419"></p>
+<h4 id="9-2-3-位置参数变量"><a href="#9-2-3-位置参数变量" class="headerlink" title="9.2.3 位置参数变量"></a>9.2.3 位置参数变量</h4><blockquote>
+<p>几种位置参数变量</p>
+<p><img src="/2021/06/10/linux-ji-chu/image-20211120160757024.png" alt="image-20211120160757024"></p>
+</blockquote>
+<h4 id="9-2-4-预定义变量"><a href="#9-2-4-预定义变量" class="headerlink" title="9.2.4 预定义变量"></a>9.2.4 预定义变量</h4><p><img src="/2021/06/10/linux-ji-chu/image-20211120170303489.png" alt="image-20211120170303489"></p>
+<h4 id="9-2-5-bash的运算符"><a href="#9-2-5-bash的运算符" class="headerlink" title="9.2.5 bash的运算符"></a>9.2.5 bash的运算符</h4><h4 id="9-2-5-1-数值运算与运算符"><a href="#9-2-5-1-数值运算与运算符" class="headerlink" title="9.2.5.1 数值运算与运算符"></a>9.2.5.1 数值运算与运算符</h4><p><img src="/2021/06/10/linux-ji-chu/image-20211120172546934.png" alt="image-20211120172546934"></p>
+<p>3种将变量声明为数值型的方式：</p>
+<p><span class="github-emoji"><span>🍨</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f368.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span>例子： <code>declare -i cc=$aa+$bb</code></p>
+<p><span class="github-emoji"><span>🍨</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f368.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span>例子：<code>dd=$(expr $aa + $bb)</code> 注意加号的左右两侧空格必须要加</p>
+<p><span class="github-emoji"><span>🍨</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f368.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span>例子： <code>ff=$(($aa+$bb))</code> 更推荐使用这种两个括号叠加的方式 <code>$((运算式))</code> 这里面的空格都不严格，看自己咋写吧</p>
+<blockquote>
+<p>运算符优先级 数值越高优先级越高</p>
+<p><img src="/2021/06/10/linux-ji-chu/image-20211121134043295.png" alt="image-20211121134043295"></p>
+</blockquote>
+<h4 id="9-2-5-2-变量测试与内容替换"><a href="#9-2-5-2-变量测试与内容替换" class="headerlink" title="9.2.5.2 变量测试与内容替换"></a>9.2.5.2 变量测试与内容替换</h4><p><img src="/2021/06/10/linux-ji-chu/image-20211121134333775.png" alt="image-20211121134333775"></p>
+<h3 id="9-3-环境变量配置文件"><a href="#9-3-环境变量配置文件" class="headerlink" title="9.3 环境变量配置文件"></a>9.3 环境变量配置文件</h3><h4 id="9-3-1-环境变量配置文件简介"><a href="#9-3-1-环境变量配置文件简介" class="headerlink" title="9.3.1 环境变量配置文件简介"></a>9.3.1 环境变量配置文件简介</h4><p><code>source 配置文件</code> 或 <code>. 配置文件</code></p>
+<p>环境变量配置文件中主要是定义对系统的操作环境生效的系统默认环境变量，比如PATH、HISTSIZE、PS1、HOSTNAME等默认环境变量中。</p>
+<h4 id="9-3-2-环境变量配置文件作用"><a href="#9-3-2-环境变量配置文件作用" class="headerlink" title="9.3.2 环境变量配置文件作用"></a>9.3.2 环境变量配置文件作用</h4><p><code>/etc/profile</code></p>
+<p><code>/etc/profile.d/*.sh</code></p>
+<p><code>~/.bash_profile</code></p>
+<p><code>~/.bashrc</code></p>
+<p><code>/etc/bashrc</code></p>
+<p>下图中，上面一行是有登录过程的变量定义文件。</p>
+<p>下一行是没有登录过程的变量定义文件，且定义在后面的文件会覆盖前面的文件中的变量。</p>
+<p><img src="/2021/06/10/linux-ji-chu/image-20211121140539041.png" alt="image-20211121140539041"></p>
+<blockquote>
+<p><code>/etc/profile</code> 作用</p>
+<p><img src="/2021/06/10/linux-ji-chu/image-20211121140951883.png" alt="image-20211121140951883"></p>
+</blockquote>
+<h4 id="9-3-3-其他配置文件和登录信息"><a href="#9-3-3-其他配置文件和登录信息" class="headerlink" title="9.3.3 其他配置文件和登录信息"></a>9.3.3 其他配置文件和登录信息</h4><blockquote>
+<p>shell登录信息</p>
+<blockquote>
+<p>本地终端欢迎信息 <code>/etc/issue</code></p>
+<p><img src="/2021/06/10/linux-ji-chu/image-20211121144836187.png" alt="image-20211121144836187"></p>
+</blockquote>
+<blockquote>
+<p>远程终端 <code>/etc/issue.net</code></p>
+<p>远程终端中不能使用上文中的转义符。</p>
+<p>是否显示此欢迎信息，由ssh的配置文件<code>/etc/ssh/sshd_config</code>决定，加入”Banner /etc/issue.net”行才能显示（重启ssh）。</p>
+</blockquote>
+<blockquote>
+<p>登陆后的欢迎信息</p>
+<p><code>/etc/motd</code> </p>
+</blockquote>
+</blockquote>
+<h3 id="9-4-正则表达式"><a href="#9-4-正则表达式" class="headerlink" title="9.4 正则表达式"></a>9.4 正则表达式</h3><p>正则表达式用来在文件中匹配符合条件的字符串，正则是包含匹配。grep、awk、sed等命令可以支持正则表达式。</p>
+<h4 id="9-4-1-基础正则表达式"><a href="#9-4-1-基础正则表达式" class="headerlink" title="9.4.1 基础正则表达式"></a>9.4.1 基础正则表达式</h4><p><img src="/2021/06/10/linux-ji-chu/image-20211121152030768.png" alt="image-20211121152030768"></p>
+<h4 id="9-4-2-字符截取命令"><a href="#9-4-2-字符截取命令" class="headerlink" title="9.4.2 字符截取命令"></a>9.4.2 字符截取命令</h4><p>grep提取行，下面这几个提取列。</p>
+<blockquote>
+<p>cut 字段提取命令 截断制表符，不是空格</p>
+<p><code>cut [选项] 文件名</code></p>
+<p>-f 列号： 提取第几列</p>
+<p>-d 分隔符： 按照指定分隔符分割列</p>
+<p><span class="github-emoji"><span>🍨</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f368.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span> 例子： <code>cut -f 2,4 student.txt</code> 提取第二列和第四列</p>
+<p><span class="github-emoji"><span>🍨</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f368.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span>例子： <code>cut -d ":" -f 2,4 /etc/passwd</code> 指定分隔符后提取列</p>
+</blockquote>
+<blockquote>
+<p>printf</p>
+<p><code>printf '输出类型输出格式' 输出内容</code></p>
+<p><code>%ns</code>： 输出字符串。n是数字指代输出几个字符。</p>
+<p><code>%ni</code>: 输出整数。n是数字指代输出几个数字。</p>
+<p><code>%m.nf</code>： 输出浮点数。m和n是数字，指代输出的整数位数和小数位数。如<code>%8.2f</code>代表共输出8位数，其中2位是小数，6位是整数。</p>
+<p><img src="/2021/06/10/linux-ji-chu/image-20211121154304412.png" alt="image-20211121154304412"></p>
+<p><span class="github-emoji"><span>🍨</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f368.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span>例子： <code>pirntf '%s' $(cat student.txt)</code></p>
+</blockquote>
+<blockquote>
+<p>awk</p>
+<p>awk支持print和printf命令。</p>
+<p>print会在每个输出后自动加入一个换行符，printf需要手动加入换行符。</p>
+<p><code>awk ‘条件1{动作1}条件2{动作2}...’ 文件名</code></p>
+<p><img src="/2021/06/10/linux-ji-chu/image-20211121155457112.png" alt="image-20211121155457112"></p>
+<p><span class="github-emoji"><span>🍨</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f368.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span>例子： <code>awk {printf $2 "\t" $6"\n"} student.txt</code></p>
+<p>BEGIN 动作首先发生。</p>
+<p><span class="github-emoji"><span>🍨</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f368.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span> <code>awk 'BEGIN{} {print dd}'</code></p>
+<p><span class="github-emoji"><span>🍨</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f368.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span>例子： <code>awk '{BEGIN{FS=":"}{print $1}' xxx.txt</code> FS指定分隔符</p>
+<p>END 动作最后发生。</p>
+<p><span class="github-emoji"><span>🍨</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f368.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span>例子：<code>awk '{BEGIN{FS=":"}end{print aaaaa}{print $1}' xxx.txt</code></p>
+<p>关系运算符 <code>$6&gt;=88</code></p>
+</blockquote>
+<blockquote>
+<p>sed</p>
+</blockquote>
+<p>sed是一种几乎包括在所有UNIX平台（包括Linux）的轻量级流编辑器。sed主要是用来将数据进行选取、替换、删除、新增的命令。</p>
+<p><code>sed [选项] [动作] 文件名</code> </p>
+<p>选项： -n 一般sed命令会把所有数据输出到屏幕，如果加入此选择，则会把经过sed命令处理的行输出到屏幕。</p>
+<p>-e 允许对输入数据应用多条sed命令编辑</p>
+<p>-i 用sed的修改结果直接修改读取数据的文件，而不是由屏幕输出</p>
+<p><img src="/2021/06/10/linux-ji-chu/image-20211123212819182.png" alt="image-20211123212819182"></p>
+<h4 id="9-4-3-字符处理命令"><a href="#9-4-3-字符处理命令" class="headerlink" title="9.4.3 字符处理命令"></a>9.4.3 字符处理命令</h4><blockquote>
+<p>sort 排序命令</p>
+<p><code>sort 【选项】 文件名</code> </p>
+<p>选项： </p>
+<p>-f 忽略大小写</p>
+<p>-n 以数值型进行排序，默认使用字符串型排序</p>
+<p>-r 反向排序</p>
+<p>-t 指定分隔符，默认分隔符是制表符</p>
+<p>-k n[,m]：按照指定的字段范围排序。从第n字段开始，m字段结束（默认到行尾）</p>
+</blockquote>
+<h4 id="9-4-4-条件判断"><a href="#9-4-4-条件判断" class="headerlink" title="9.4.4 条件判断"></a>9.4.4 条件判断</h4><p><img src="/2021/06/10/linux-ji-chu/image-20211124102610006.png" alt="image-20211124102610006"></p>
+<p><span class="github-emoji"><span>🍨</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f368.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span> <code>[ -e /root/install.log ]</code> 判断文件 </p>
+<p><span class="github-emoji"><span>🍨</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f368.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span> <code>test -e /root/install.log</code> 判断文件</p>
+<p><img src="/2021/06/10/linux-ji-chu/image-20211124104857073.png" alt="image-20211124104857073"></p>
+<p>判断文件权限：</p>
+<p><span class="github-emoji"><span>🍨</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f368.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span> <code>[ -w /root/student.txt ]</code></p>
+<blockquote>
+<p>两个文件之间进行比较</p>
+<p><img src="/2021/06/10/linux-ji-chu/image-20211124111816645.png" alt="image-20211124111816645"></p>
+</blockquote>
+<blockquote>
+<p>整数比较</p>
+<p><img src="/2021/06/10/linux-ji-chu/image-20211124112314879.png" alt="image-20211124112314879"></p>
+</blockquote>
+<blockquote>
+<p>字符串判断</p>
+<p><img src="/2021/06/10/linux-ji-chu/image-20211124112353364.png" alt="image-20211124112353364"></p>
+</blockquote>
+<blockquote>
+<p>多重条件判断</p>
+<p><img src="/2021/06/10/linux-ji-chu/image-20211124113103024.png" alt="image-20211124113103024"></p>
+</blockquote>
+<h4 id="9-4-5-流程控制"><a href="#9-4-5-流程控制" class="headerlink" title="9.4.5 流程控制"></a>9.4.5 流程控制</h4><blockquote>
+<p>if 语句</p>
+<p><img src="/2021/06/10/linux-ji-chu/image-20211124200045771.png" alt="image-20211124200045771"></p>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">if [条件判断式];then
+程序
+fi
+或者
+if [条件判断式]
+  then
+  程序
+fi
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">if [条件判断式]
+  then
+    条件成立时，执行的程序
+  else 
+    条件不成立时，执行的另外一个程序
+fi<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<pre class="line-numbers language-none"><code class="language-none">if [条件判断式1]
+  then
+    当条件判断式1成立时，执行程序1
+elif [条件判断式2]
+  then
+    当条件判断式2成立时，执行程序2
+else
+	当所有条件都不成立时，最后执行此程序
+fi<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+</blockquote>
+<h4 id="9-4-6-case语句"><a href="#9-4-6-case语句" class="headerlink" title="9.4.6 case语句"></a>9.4.6 case语句</h4><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">case $变量名 in
+"值1")
+	如果变量的值等于值1，则执行程序1
+	;;
+"值2")
+	如果变量的值等于值1，则执行程序1
+	;;
+*)
+    如果变量的值都不是以上的值，则执行此程序。
+    ;;
+esac<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="9-4-7-for循环"><a href="#9-4-7-for循环" class="headerlink" title="9.4.7 for循环"></a>9.4.7 for循环</h4><p>第一种语法：</p>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">for 变量in 值1 值2 值3...
+  do
+    程序
+  done<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>第二种语法：</p>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">for((初始值;循环控制条件;变量变化))
+  do
+    程序
+  done<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="9-4-8-while-循环"><a href="#9-4-8-while-循环" class="headerlink" title="9.4.8 while 循环"></a>9.4.8 while 循环</h4><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">while [条件判断式]
+  do
+    程序
+  done<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">until [条件判断式] // 和while判断结果相反
+  do
+    程序
+  done<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="10-服务分类"><a href="#10-服务分类" class="headerlink" title="10.服务分类"></a>10.服务分类</h2><p><img src="/2021/06/10/linux-ji-chu/image-20211127150325968.png" alt="image-20211127150325968"></p>
+<blockquote>
+<p>查看已安装的服务</p>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"># RPM包安装的服务
+chkconfig --list
+
+#源码包安装的服务
+一般是在/usr/local/ 下<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+</blockquote>
 
                 
             </div>
@@ -1540,6 +1801,14 @@ PATH="$HOME/bin:$HOME/.local/bin:$PATH"<span aria-hidden="true" class="line-numb
                             
                         </span>
                     </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/maven/">
+                        <span class="chip bg-color">maven</span>
+                    </a>
+                    
                 </div>
                 
             </div>
