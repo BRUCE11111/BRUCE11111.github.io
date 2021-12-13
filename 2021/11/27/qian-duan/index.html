@@ -723,7 +723,80 @@ B）为了简化代码，可以把伪类选择符中相同的声明提出来放�
 
 <h4 id="2-2-5-选择器权重"><a href="#2-2-5-选择器权重" class="headerlink" title="2.2.5 选择器权重"></a>2.2.5 选择器权重</h4><p>当多个选择器，选中的是同一个元素，且都为他们定义了样式，如果属性发生了冲突，会选择权重高的来执行。</p>
 <p><img src="/2021/11/27/qian-duan/image-20211129204856795.png" alt="image-20211129204856795"></p>
-<h2 id="2-3-属性"><a href="#2-3-属性" class="headerlink" title="2.3 属性"></a>2.3 属性</h2>
+<h2 id="2-3-属性"><a href="#2-3-属性" class="headerlink" title="2.3 属性"></a>2.3 属性</h2><h3 id="2-3-1-css属性和属性值的定义"><a href="#2-3-1-css属性和属性值的定义" class="headerlink" title="2.3.1 css属性和属性值的定义"></a>2.3.1 css属性和属性值的定义</h3><p><img src="/2021/11/27/qian-duan/image-20211130104416581.png" alt="image-20211130104416581"></p>
+<p><img src="/2021/11/27/qian-duan/image-20211130130557097.png" alt="image-20211130130557097"></p>
+<p>谷歌浏览器默认的字体是微软雅黑字体。</p>
+<p><img src="/2021/11/27/qian-duan/image-20211130110358559.png" alt="image-20211130110358559"></p>
+<p>color:#ffffff 没两位一个颜色.</p>
+<p>字体加粗：<code>font-weight:100</code> 100细体，400正常，700加粗，900更粗体。</p>
+<p>首行缩进：<code>text-indent:2em</code> 如果设置成了负数，左侧缩进，很少用负数。</p>
+<p>文本修饰：<img src="/2021/11/27/qian-duan/image-20211201105710047.png" alt="image-20211201105710047"> 设置多个修饰只能空格并列设置。</p>
+<p><code>font</code> <img src="/2021/11/27/qian-duan/image-20211201115727715.png" alt="image-20211201115727715"> 可以写到一块，但是前后顺序 比如粗和斜体顺序不能换。</p>
+<h3 id="2-3-2-css列表属性"><a href="#2-3-2-css列表属性" class="headerlink" title="2.3.2 css列表属性"></a>2.3.2 css列表属性</h3><p><img src="/2021/11/27/qian-duan/image-20211201121609263.png" alt="image-20211201121609263"></p>
+<p><code>list-style</code> 把上面的三个属性一次并列写出来，顺序不能换。<img src="/2021/11/27/qian-duan/image-20211201122204687.png" alt="image-20211201122204687"></p>
+<h3 id="2-3-3-css背景属性"><a href="#2-3-3-css背景属性" class="headerlink" title="2.3.3 css背景属性"></a>2.3.3 css背景属性</h3><p><code>background-color:red</code></p>
+<p><code>background-color:rgb()</code></p>
+<p><code>background-color:rgba()</code> a指的是透明度，值是0-1，1不透明</p>
+<p><img src="/2021/11/27/qian-duan/image-20211204085056333.png" alt="image-20211204085056333"></p>
+<ul>
+<li><p>图片 <span class="github-emoji"><span>🍨</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f368.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span>例子：<code>background-image:url(img/01.png)</code> </p>
+<p>默认平铺效果——repeat。</p>
+<p>平铺x轴——repeat-x。</p>
+<p>平铺y轴——repeat-y。</p>
+<p>不平铺：no-repeat。</p>
+</li>
+<li><p>位置 position</p>
+<p>10px 10px <span class="github-emoji"><span>🍨</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f368.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span>例子：<code>background-position: 10px 10px</code> 距离左上角10px</p>
+<p>10% 10% <span class="github-emoji"><span>🍨</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f368.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span>例子：<code>background-position: 10% 10%</code> 距离左上角是整个区域的10%的距离</p>
+<p>水平<code>left centor right</code> 垂直 <code>top center bottom</code>  <span class="github-emoji"><span>🍨</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f368.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span>例子：<code>background-position: left center</code></p>
+</li>
+<li><p>background-size </p>
+<p>10px 10px 或 10% 10% </p>
+<p>cover 能放大到多大算多大，多余的部分裁掉，然后覆盖目标区域。</p>
+<p>contain 将图片完美地放到区域内部。但是区域内可能会留白，因为图片本身有宽高比例。</p>
+</li>
+<li><p>background-attachment  视差效果</p>
+<p>fixed 无视窗口滑动，始终固定在浏览器的某个位置。相对于浏览器窗口，跟盒子没有关系。</p>
+</li>
+<li><p>复合写法</p>
+<p>空格隔开，顺序可以换，可以只取一个值，放在后面能覆盖前面的值。 <code>background-size</code>无法使用复合写法，只能单独写出来。</p>
+</li>
+</ul>
+<h3 id="2-3-4-css边框属性"><a href="#2-3-4-css边框属性" class="headerlink" title="2.3.4 css边框属性"></a>2.3.4 css边框属性</h3><h3 id="2-3-5-css浮动属性"><a href="#2-3-5-css浮动属性" class="headerlink" title="2.3.5 css浮动属性"></a>2.3.5 css浮动属性</h3><p>让div盒子横着并列的效果。竖着的东西横着来。</p>
+<p><img src="/2021/11/27/qian-duan/image-20211206121225682.png" alt="image-20211206121225682"></p>
+<p><img src="/2021/11/27/qian-duan/image-20211206195002316.png" alt="image-20211206195002316"></p>
+<p><span class="github-emoji"><span>🍨</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f368.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span> 例子：<img src="/2021/11/27/qian-duan/image-20211206210217285.png" alt="image-20211206210217285"></p>
+<p>边距：</p>
+<p><img src="/2021/11/27/qian-duan/image-20211207165528790.png" alt="image-20211207165528790"></p>
+<p><code>padding-left</code> <code>padding-top</code> <code>padding-right</code> <code>padding-bottom</code> </p>
+<p>背景色可以蔓延到padding中（内边距）。</p>
+<h3 id="2-4-6-盒子模型"><a href="#2-4-6-盒子模型" class="headerlink" title="2.4.6 盒子模型"></a>2.4.6 盒子模型</h3><h4 id="边框-border"><a href="#边框-border" class="headerlink" title="边框 border"></a>边框 border</h4><p>border 属性： <code>border : 10px double red</code>  其中，边框的形状可以有： <code>solid</code> <code>double</code> <code>dashed</code> <code>dotted</code> </p>
+<p><code>border-top</code> <code>border-Left</code> <code>border-Right</code> <code>border-bottom</code> </p>
+<p>border还有很多属性，vscode中有提示。</p>
+<p><span class="github-emoji"><span>🍨</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f368.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span> 例子： <img src="/2021/11/27/qian-duan/image-20211209144009436.png" alt="image-20211209144009436"></p>
+<p>应用：给盒子外面加上点框子啥的。</p>
+<h4 id="外边距-margin"><a href="#外边距-margin" class="headerlink" title="外边距 margin"></a>外边距 margin</h4><p>快递和快递之间距离。</p>
+<p><img src="/2021/11/27/qian-duan/image-20211209144455536.png" alt="image-20211209144455536"></p>
+<p><span class="github-emoji"><span>🍨</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f368.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span> 例子： <code>margin: 10px 20px 30px 40px</code> 顺时针方向走就行了。</p>
+<p>同样支持四个方向 : <code>margin-Left</code> <code>margin-top</code> <code>margin-bottom</code> <code>margin-Right</code></p>
+<p>margin如果是<strong>负数</strong>： <img src="/2021/11/27/qian-duan/image-20211209145329771.png" alt="image-20211209145329771"></p>
+<p>负值往反方向走。</p>
+<p>屏幕居中： <code>margin: 0 auto</code> </p>
+<h4 id="外边距特性"><a href="#外边距特性" class="headerlink" title="外边距特性"></a>外边距特性</h4><ul>
+<li>兄弟盒子（邻居盒子）<ul>
+<li>垂直方向 取外边距最大值</li>
+<li>水平方向 取两者边距的合并（相加）值</li>
+</ul>
+</li>
+<li>父子盒子（内外）<ul>
+<li>要想达到父和子之间的关系，父盒子可以加padding，子盒子不能加margin，子盒子加margin会让效果加到父盒子。 但这种方案要注意边界。</li>
+<li>要想实现和兄弟盒子的那种方式，需要给父盒子加上边界border属性，不能让儿子没大没小不知道边界。这样儿子盒子就可以直接使用margin属性了。但是加了border父盒子高度会增加border的高度，注意计算的换算。</li>
+<li>加上浮动，让父子分开，某一个加上浮动属性，就可以达到父子margin的属性正常赋值。</li>
+<li><code>overflow :hidden</code> 父盒子加上BFC属性。本身不会和外界产生互动和干扰。这样子盒子虽然闹腾，但是父盒子不会和外边产生什么干扰，可以达到效果。</li>
+</ul>
+</li>
+</ul>
+
                 
             </div>
             <hr/>

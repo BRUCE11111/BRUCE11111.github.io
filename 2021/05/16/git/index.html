@@ -445,9 +445,13 @@
             <div class="row tag-cate">
                 <div class="col s7">
                     
-                          <div class="article-tag">
-                            <span class="chip bg-color">无标签</span>
-                          </div>
+                    <div class="article-tag">
+                        
+                            <a href="/tags/git/">
+                                <span class="chip bg-color">git</span>
+                            </a>
+                        
+                    </div>
                     
                 </div>
                 <div class="col s5 right-align">
@@ -504,7 +508,7 @@
 <h3 id="1-1-git和svn的区别"><a href="#1-1-git和svn的区别" class="headerlink" title="1.1 git和svn的区别"></a>1.1 git和svn的区别</h3><ul>
 <li>svn </li>
 </ul>
-<p>集种式版本控制系统，版本库是集种放在中央服务器的。而工作的时候，用的都是自己的电脑，所以首先要从中央服务器得到最新的版本，然后工作，完成工作后，需要把自己做完的活推送到中央服务器。集中式版本控制系统是必须联网才能工作，对网络带宽要求较高。</p>
+<p>集中式版本控制系统，版本库是集种放在中央服务器的。而工作的时候，用的都是自己的电脑，所以首先要从中央服务器得到最新的版本，然后工作，完成工作后，需要把自己做完的活推送到中央服务器。集中式版本控制系统是必须联网才能工作，对网络带宽要求较高。</p>
 <ul>
 <li>git</li>
 </ul>
@@ -571,20 +575,23 @@ doc/*.txt <span class="token comment">#会忽略 doc/noted.txt 但不包括 doc/
 
 
 
+<h2 id="5-HEAD"><a href="#5-HEAD" class="headerlink" title="5. HEAD"></a>5. HEAD</h2><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"><span class="token comment"># 查看HEAD指向</span>
+<span class="token function">cat</span> .git/HEAD
+<span class="token comment"># 如果Head指向一个引用</span>
+<span class="token function">git</span> symbolic-ref HEAD<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+<p>使用<code>^</code> 向上移动1个提交记录。 使用<code>~num</code> 向上移动多个提交记录。<span class="github-emoji"><span>🍨</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f368.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span> 例子： <code>~3</code></p>
+<p><code>git branch -f HEAD^3</code> 将main分支强制指向HEAD的3级父提交。</p>
+<p>移动分支指向： <span class="github-emoji"><span>🍨</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f368.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span> <code>git checkout HEAD^</code> 将HEAD指向向上一级父节点。</p>
+<p><code>git checkout HEAD~3</code></p>
+<p><code>git branch -f HEAD main~3</code> </p>
+<h2 id="6-撤销变更"><a href="#6-撤销变更" class="headerlink" title="6. 撤销变更"></a>6. 撤销变更</h2><p><code>git revert</code> <img src="/2021/05/16/git/image-20211208165901595.png" alt="image-20211208165901595"></p>
+<p>这样你就可以远程分享给别人了。<span class="github-emoji"><span>🍨</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f368.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span> <code>git revert c2</code></p>
+<p><code>git reset</code> 彻底撤销回退至从<code>c1</code> ，<font color="red">但是这个回退只对本地有效。</font> <span class="github-emoji"><span>🍨</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f368.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span> <code>git reset c1</code> </p>
+<p>也可以通过，<code>rebase</code> 调整提交记录的顺序：</p>
+<p><code>git rebase -i HEAD^4</code>  <code>-i 指的是interactive</code></p>
+<h2 id="7-复制"><a href="#7-复制" class="headerlink" title="7. 复制"></a>7. 复制</h2><p>想将一些提交复制到当前位置<code>HEAD</code>下面的话，<code>cherry-pick</code> 是最直接的方式。</p>
+<p><img src="/2021/05/16/git/image-20211208171511869.png" alt="image-20211208171511869"></p>
 
                 
             </div>
@@ -648,7 +655,11 @@ doc/*.txt <span class="token comment">#会忽略 doc/noted.txt 但不包括 doc/
                 <div class="post-meta__tag-list" style="display: inline-block;">
                     
                         <div class="article-tag">
-                            <span class="chip bg-color">无标签</span>
+                            
+                                <a href="/tags/git/">
+                                    <span class="chip bg-color">git</span>
+                                </a>
+                            
                         </div>
                     
                 </div>

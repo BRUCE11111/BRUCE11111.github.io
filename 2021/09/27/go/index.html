@@ -626,7 +626,149 @@ ss <span class="token operator">:=</span> <span class="token string">"heihei"</s
 
 <h2 id="4-基本数据类型"><a href="#4-基本数据类型" class="headerlink" title="4.基本数据类型"></a>4.基本数据类型</h2><h3 id="4-1-整型"><a href="#4-1-整型" class="headerlink" title="4.1 整型"></a>4.1 整型</h3><p><img src="/2021/09/27/go/image-20211128151038860.png" alt="image-20211128151038860"></p>
 <p><img src="/2021/09/27/go/image-20211128151524779.png" alt="image-20211128151524779"></p>
+<ul>
+<li>查看变量的类型 <code>%T</code> <span class="github-emoji"><span>🍨</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f368.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span> <code>fmt.printf("%T", in1)</code></li>
+</ul>
+<h3 id="4-2-浮点数"><a href="#4-2-浮点数" class="headerlink" title="4.2 浮点数"></a>4.2 浮点数</h3><p>go支持两种浮点数：<code>float32</code> 和 <code>float64</code>。 最大值分别为<code>math.MaxFloat32</code>和 <code>math.MaxFloat64</code>。 go语言中默认是<code>float64</code>。</p>
+<h3 id="4-3-布尔值"><a href="#4-3-布尔值" class="headerlink" title="4.3 布尔值"></a>4.3 布尔值</h3><p>默认<code>false</code>。</p>
+<h3 id="4-4-字符串"><a href="#4-4-字符串" class="headerlink" title="4.4 字符串"></a>4.4 字符串</h3><p>双引号括起来。单引号括起来的是字符。</p>
+<p>多行字符串可以使用 ` 表示。</p>
+<p><img src="/2021/09/27/go/image-20211201215947785.png" alt="image-20211201215947785">aa</p>
+<ul>
+<li><p><span class="github-emoji"><span>🍨</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f368.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span> springf</p>
+<p><code>s1 = Sprintf("%s%s", a,b)</code> a和b拼接，返回值赋给s1变量</p>
+</li>
+<li><p><span class="github-emoji"><span>🍨</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f368.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span> Split(“”)</p>
+<p><code>s = strings.Split(" ")</code> 返回值赋给s变量</p>
+</li>
+<li><p><span class="github-emoji"><span>🍨</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f368.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span> Contians(“理想”) HasPrefix() HasSuffix</p>
+<p>判断是否包含字符串 <code>s = strings.Contains(ss, "理想")</code></p>
+</li>
+</ul>
+<p><img src="/2021/09/27/go/image-20211201222313586.png" alt="image-20211201222313586"></p>
+<h3 id="4-5-字符"><a href="#4-5-字符" class="headerlink" title="4.5 字符"></a>4.5 字符</h3><p>go内置两种字符。<code>byte</code>和<code>rune</code>。rune4个byte，支持<code>unicode</code>编码。</p>
+<h2 id="5-复合数据类型"><a href="#5-复合数据类型" class="headerlink" title="5. 复合数据类型"></a>5. 复合数据类型</h2><h3 id="5-1-指针"><a href="#5-1-指针" class="headerlink" title="5.1 指针"></a>5.1 指针</h3><p><code>*p</code> 和 <code>**p</code> go语言的指针同样支持多级指针。<code>&amp;</code> 取对象的地址。</p>
+<p><span class="github-emoji"><span>🍨</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f368.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span> 例子：</p>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">var</span> v1 <span class="token operator">=</span> <span class="token number">6</span>
+p <span class="token operator">:=</span> <span class="token operator">&amp;</span>v1<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
+<p><span class="github-emoji"><span>🍨</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f368.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span> 例子：</p>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">type</span> User <span class="token keyword">struct</span> <span class="token punctuation">{</span>
+    name <span class="token builtin">string</span>
+    age <span class="token builtin">int16</span>
+<span class="token punctuation">}</span>
+adam <span class="token operator">:=</span> User <span class="token punctuation">{</span>
+    <span class="token string">"adam"</span><span class="token punctuation">,</span>
+    <span class="token number">23</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span>
+p <span class="token operator">:=</span> <span class="token operator">&amp;</span>adam
+fmt<span class="token punctuation">.</span><span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%d"</span><span class="token punctuation">,</span> p<span class="token punctuation">.</span>age<span class="token punctuation">)</span> <span class="token comment">// 对属性的访问也是使用 . </span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ul>
+<li>go禁止指针运算，因为go支持垃圾回收，指针运算会带来垃圾回收不便。</li>
+</ul>
+<p><span class="github-emoji"><span>🍨</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f368.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span>例子： go允许返回地址</p>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">func</span> sum <span class="token punctuation">(</span>a<span class="token punctuation">,</span> b <span class="token builtin">int</span><span class="token punctuation">)</span> <span class="token operator">*</span><span class="token builtin">int</span> <span class="token punctuation">{</span>
+    sum <span class="token operator">:=</span> a <span class="token operator">+</span> b
+    <span class="token keyword">return</span> <span class="token operator">&amp;</span>sum
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>go使用”栈逃逸“机制将局部变量分配到堆上。</p>
+<h3 id="5-2-数组"><a href="#5-2-数组" class="headerlink" title="5.2 数组"></a>5.2 数组</h3><p><code>[n]elemenType</code> n是数组元素，elementType是数组元素类型。</p>
+<p><span class="github-emoji"><span>🍨</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f368.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span> 例子：初始化</p>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go">array1 <span class="token operator">:=</span> <span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">]</span><span class="token builtin">int</span><span class="token punctuation">{</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">}</span>
+array2 <span class="token operator">:=</span> <span class="token punctuation">[</span><span class="token operator">...</span><span class="token punctuation">]</span><span class="token builtin">int</span><span class="token punctuation">{</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">}</span>
+array3 <span class="token operator">:=</span> <span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">]</span><span class="token builtin">int</span><span class="token punctuation">{</span><span class="token number">1</span><span class="token punctuation">:</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">:</span><span class="token number">3</span><span class="token punctuation">}</span> <span class="token comment">// 指定长度，并且由索引值初始化元素。没有初始化元素时使用类型默认值。</span>
+array4 <span class="token operator">:=</span> <span class="token punctuation">[</span><span class="token operator">...</span><span class="token punctuation">]</span><span class="token builtin">int</span><span class="token punctuation">{</span><span class="token number">1</span><span class="token punctuation">:</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">:</span><span class="token number">3</span><span class="token punctuation">}</span> <span class="token comment">// 不指定长度，数组长度由最后一个索引值确定。没有指定索引的元素被初始化为类型的零值</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>数组是值类型的 ，数组复制或作为函数参数都是值拷贝。</p>
+<p><span class="github-emoji"><span>🍨</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f368.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span> 访问数组：</p>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go">array <span class="token operator">:=</span> <span class="token punctuation">[</span><span class="token operator">...</span><span class="token punctuation">]</span><span class="token builtin">int</span><span class="token punctuation">{</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">}</span>
+b <span class="token operator">:=</span> array<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span>
+<span class="token comment">// 方式1</span>
+<span class="token keyword">for</span> i<span class="token punctuation">,</span>val <span class="token operator">:=</span> <span class="token keyword">range</span> array <span class="token punctuation">{</span>
+    
+<span class="token punctuation">}</span>
+<span class="token comment">// 方式2</span>
+alength <span class="token operator">:=</span> <span class="token function">len</span><span class="token punctuation">(</span>array<span class="token punctuation">)</span>
+<span class="token keyword">for</span> i <span class="token operator">:=</span> <span class="token number">0</span><span class="token punctuation">,</span> i <span class="token operator">&lt;</span> alength<span class="token punctuation">;</span> i<span class="token operator">++</span> <span class="token punctuation">{</span>
+    
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="5-3-切片"><a href="#5-3-切片" class="headerlink" title="5.3 切片"></a>5.3 切片</h3><p>数组的定长和值拷贝限制了使用场景。使用切片<code>slice</code>。其数据结构中有只想数组的指针，是一种引用类型。</p>
+<p>切片的数据结构：</p>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">type</span> slice <span class="token keyword">struct</span> <span class="token punctuation">{</span>
+    array Unsafe<span class="token punctuation">.</span>Pointer
+    <span class="token builtin">len</span> <span class="token builtin">int</span>
+    <span class="token builtin">cap</span> <span class="token builtin">int</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p><code>go</code>为切片维护三个元素——指向底层数组的指针、切片的元素数量和底层数组的容量。</p>
+<p><img src="/2021/09/27/go/image-20211202150438651.png" alt="image-20211202150438651"></p>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go">声明：
+<span class="token number">1.</span> 通过数组
+array <span class="token operator">:=</span> <span class="token punctuation">[</span><span class="token operator">...</span><span class="token punctuation">]</span><span class="token builtin">int</span><span class="token punctuation">{</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">}</span>
+s1 <span class="token operator">:=</span> array<span class="token punctuation">[</span>b<span class="token punctuation">:</span>e<span class="token punctuation">]</span> <span class="token comment">// 生成从b到e - 1 的共 e - b个元素的切片。</span>
+
+<span class="token number">2.</span> 通过<span class="token builtin">make</span>
+<span class="token comment">// len = 10， cap = 10</span>
+a <span class="token operator">:=</span> <span class="token function">make</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token builtin">int</span><span class="token punctuation">,</span> <span class="token number">10</span><span class="token punctuation">)</span>
+<span class="token comment">// len = 10, cap = 15</span>
+a <span class="token operator">:=</span> <span class="token function">make</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token builtin">int</span><span class="token punctuation">,</span> <span class="token number">10</span><span class="token punctuation">,</span> <span class="token number">15</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ul>
+<li>支持的操作</li>
+</ul>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token function">len</span><span class="token punctuation">(</span><span class="token punctuation">)</span> 返回切片的长度。
+<span class="token function">cap</span><span class="token punctuation">(</span><span class="token punctuation">)</span> 返回底层数组的容量。
+<span class="token function">append</span><span class="token punctuation">(</span><span class="token punctuation">)</span> 追加元素
+<span class="token function">copy</span><span class="token punctuation">(</span><span class="token punctuation">)</span> 复制一个切片<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="5-4-字典"><a href="#5-4-字典" class="headerlink" title="5.4 字典"></a>5.4 字典</h3><p><code>map [K]v</code> K是任何可以比较的类型，v是值类型。</p>
+<p><span class="github-emoji"><span>🍨</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f368.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span> 创建例子：</p>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token number">1.</span> map1 <span class="token operator">:=</span> <span class="token punctuation">[</span><span class="token builtin">string</span><span class="token punctuation">]</span><span class="token builtin">int</span><span class="token punctuation">{</span><span class="token string">"a"</span><span class="token punctuation">:</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token string">"b"</span><span class="token punctuation">:</span><span class="token number">2</span><span class="token punctuation">}</span>
+fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span>map1<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span>map1<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+<span class="token number">2.</span> 使用内置<span class="token builtin">make</span>创建
+
+mp1 <span class="token operator">:=</span> <span class="token function">make</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token builtin">int</span><span class="token punctuation">]</span><span class="token builtin">string</span><span class="token punctuation">)</span>
+mp2 <span class="token operator">:=</span> <span class="token function">make</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token builtin">int</span><span class="token punctuation">]</span><span class="token builtin">string</span><span class="token punctuation">,</span> <span class="token number">10</span><span class="token punctuation">)</span>
+mp1<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token string">"tom"</span>
+mp2<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token string">"jerry"</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p><span class="github-emoji"><span>🍨</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f368.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span> 支持的操作：</p>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">for</span> k<span class="token punctuation">,</span>v <span class="token operator">:=</span> <span class="token keyword">range</span> mp1 <span class="token punctuation">{</span>
+    
+<span class="token punctuation">}</span>
+<span class="token function">delete</span><span class="token punctuation">(</span>mp1<span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>map并不是并发安全的，并发安全的map可以使用sync中的map。</p>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go">注意，不能直接修改<span class="token keyword">map</span>中某个元素的值。如果要修改<span class="token keyword">map</span>中某个元素的值，必须整体对其进行修改。<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">type</span> User <span class="token keyword">struct</span> <span class="token punctuation">{</span>
+    name <span class="token builtin">string</span>
+    age <span class="token builtin">int32</span>
+<span class="token punctuation">}</span>
+mp1<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">.</span>age <span class="token operator">=</span> <span class="token number">12</span> <span class="token comment">// 错误</span>
+adam<span class="token punctuation">.</span>age <span class="token operator">=</span> <span class="token number">12</span>
+mp1<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">=</span> adam <span class="token comment">// 才行</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">struct</span> <span class="token punctuation">{</span>
+    FieldName  FieldType
+    FieldName  FieldType
+    FieldName  FieldType
+<span class="token punctuation">}</span>
+
+<span class="token keyword">type</span> TypeName <span class="token keyword">struct</span> <span class="token punctuation">{</span>
+    FieldName  FieldType
+    FieldName  FieldType
+    FieldName  FieldType
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p><img src="/2021/09/27/go/image-20211202161539643.png" alt="image-20211202161539643"></p>
+<h3 id="5-5-通道"><a href="#5-5-通道" class="headerlink" title="5.5 通道"></a>5.5 通道</h3><h3 id="5-6-结构"><a href="#5-6-结构" class="headerlink" title="5.6 结构"></a>5.6 结构</h3><h3 id="5-7-接口"><a href="#5-7-接口" class="headerlink" title="5.7 接口"></a>5.7 接口</h3>
                 
             </div>
             <hr/>
