@@ -587,6 +587,16 @@ character-set-server <span class="token operator">=</span> utf8<span aria-hidden
 <p>恢复使用root密码</p>
 <p>1、退出 mysql，编辑 <code>/etc/my.cnf </code>文件，删除 skip-grant-tables=1 的内容</p>
 <p>2、重启 mysqld 服务，再用新密码登录即可</p>
+<h3 id="2-1安装MySQL8-0"><a href="#2-1安装MySQL8-0" class="headerlink" title="2.1安装MySQL8.0"></a>2.1安装MySQL8.0</h3><p>参考：</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_39150374/article/details/112471108">(21条消息) centos8安装mysql8.0.22教程(超详细)_上善若水滴世界的博客-CSDN博客_centos8安装mysql8.0</a></p>
+<p>在yum install 版本后面加上 –nogpgcheck，即可绕过GPG验证成功安装。比如</p>
+<p>yum install mysql-community-server –nogpgcheck 作者：又双叒叕变帅了 <a target="_blank" rel="noopener" href="https://www.bilibili.com/read/cv15259704">https://www.bilibili.com/read/cv15259704</a> 出处：bilibili</p>
+<h4 id="2-1-1-修改密码"><a href="#2-1-1-修改密码" class="headerlink" title="2.1.1 修改密码"></a>2.1.1 修改密码</h4><pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">alter user 'root'@'localhost' identified by '';<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+
+
+
+
 <h2 id="2-备份和恢复"><a href="#2-备份和恢复" class="headerlink" title="2. 备份和恢复"></a>2. 备份和恢复</h2><p><strong>备份方法</strong></p>
 <pre class="line-numbers language-none"><code class="language-none">mysqldump -uroot -p000 db table &gt; db.sql<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
@@ -1236,7 +1246,7 @@ GRANT select,update,insert,create on *.* TO 'xxh'@'%' WITH GRANT OPTION;
         <div class="col s12 m8 l8 copy-right">
             Copyright&nbsp;&copy;
             
-                <span id="year">2019-2021</span>
+                <span id="year">2019-2022</span>
             
             <span id="year">2019</span>
             <a href="/about" target="_blank">小灰灰</a>

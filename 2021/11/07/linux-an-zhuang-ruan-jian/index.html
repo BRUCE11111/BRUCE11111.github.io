@@ -484,10 +484,100 @@
         <div class="card-content article-card-content">
             <div id="articleContent">
                 <h1 id="Ubuntu"><a href="#Ubuntu" class="headerlink" title="Ubuntu"></a>Ubuntu</h1><h2 id="1-Anaconda"><a href="#1-Anaconda" class="headerlink" title="1.Anaconda"></a>1.Anaconda</h2><ol>
-<li>下载软件包</li>
+<li>下载软件包 （<font color="red">这个包有问题</font>）</li>
 </ol>
 <p><code>curl -O https://repo.anaconda.com/archive/Anaconda3-2021.05-Linux-s390x.sh</code></p>
 <p>注意这个是2021版本的。</p>
+<h3 id="1-1-加速conda下载"><a href="#1-1-加速conda下载" class="headerlink" title="1.1 加速conda下载"></a>1.1 加速conda下载</h3><ul>
+<li>参考 <a target="_blank" rel="noopener" href="https://blog.csdn.net/Xiao_Spring/article/details/109130663">(21条消息) 【陆续排坑】解决conda下载速度慢的问题：更换国内源_黄元帅的博客-CSDN博客_conda更改下载源</a></li>
+</ul>
+<p>这里有三组国内源可供选择：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">清华镜像：
+
+https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/msys2/
+https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/conda-forge/
+https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/
+
+中科大镜像：
+
+https://mirrors.ustc.edu.cn/anaconda/pkgs/main/
+https://mirrors.ustc.edu.cn/anaconda/pkgs/free/
+https://mirrors.ustc.edu.cn/anaconda/cloud/conda-forge/
+
+上海交大镜像：
+
+https://mirrors.sjtug.sjtu.edu.cn/anaconda/pkgs/main/
+https://mirrors.sjtug.sjtu.edu.cn/anaconda/pkgs/free/
+https://mirrors.sjtug.sjtu.edu.cn/anaconda/cloud/conda-forge/<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>以清华镜像为例：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/
+conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/conda-forge 
+conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/msys2/
+<span class="token comment"># 设置搜索时显示通道地址 从channel中安装包时显示channel的url，这样就可以知道包的安装来源</span>
+conda config --set show_channel_urls <span class="token function">yes</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+
+<ul>
+<li>还原下载源，删除上面的配置</li>
+</ul>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">conda config --remove-key channels
+也可以使用conda config --remove-key channels XXX移除指定的链接<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+
+
+
+
+
+
+<h1 id="Centos"><a href="#Centos" class="headerlink" title="Centos"></a>Centos</h1><h2 id="1-Cmake"><a href="#1-Cmake" class="headerlink" title="1. Cmake"></a>1. Cmake</h2><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_44901564/article/details/108225845">(20条消息) CentOS7安装cmake-3.18.0_绮梦寒宵的博客-CSDN博客</a></p>
+<h3 id="2-Redis"><a href="#2-Redis" class="headerlink" title="2. Redis"></a>2. Redis</h3><p><a target="_blank" rel="noopener" href="https://www.4spaces.org/centos-8-install-redis/">CentOS 8安装Redis的两种方式-四个空格 (4spaces.org)</a></p>
+<h2 id="3-rabbitmq"><a href="#3-rabbitmq" class="headerlink" title="3. rabbitmq"></a>3. rabbitmq</h2><p>安装： <a target="_blank" rel="noopener" href="https://www.cnblogs.com/pengpengboshi/p/13614486.html">centos8安装 rabbitmq - Sureing - 博客园 (cnblogs.com)</a></p>
+<h3 id="4-fastdfs"><a href="#4-fastdfs" class="headerlink" title="4. fastdfs"></a>4. fastdfs</h3><p><a target="_blank" rel="noopener" href="https://developer.aliyun.com/article/745317">CentOS 8 安装 FastDFS 6.06 -阿里云开发者社区 (aliyun.com)</a></p>
+<h3 id="5-jupyter-notebook"><a href="#5-jupyter-notebook" class="headerlink" title="5. jupyter notebook"></a>5. jupyter notebook</h3><p><a target="_blank" rel="noopener" href="https://www.scielib.com/remote-jupyter-notebook.html">配置Jupyter notebook远程访问，及jupyter notebook 插件 - 魔比之城 (scielib.com)</a></p>
+<p>nohup jupyter notebook –allow-root &amp;</p>
+<p>代码提示：</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/maoyuanming0806/article/details/109744284">(21条消息) JupyterNotebook代码提示与自动补齐_小明同学YYDS的博客-CSDN博客</a></p>
+<h3 id="6-docker-compose"><a href="#6-docker-compose" class="headerlink" title="6. docker- compose"></a>6. docker- compose</h3><p><code>curl -L "https://github.com/docker/compose/releases/download/v2.2.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose</code></p>
+<p><code>chmod +x /usr/local/bin/docker-compose</code></p>
+<p><code>ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose</code></p>
+<p><code>docker-compose --version</code></p>
+<h2 id="2-tvm"><a href="#2-tvm" class="headerlink" title="2. tvm"></a>2. tvm</h2><p>安装tvm好多坑，直接参考这个博主的，版本都按照他的来。不然很多地方编译的时候版本问题很抓狂。</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/mmphhh/article/details/116484914">(21条消息) TVM：深度学习框架编译器的安装踩坑集_Lytain2022的博客-CSDN博客_tvm编译器</a></p>
+<h3 id="2-1错误信息"><a href="#2-1错误信息" class="headerlink" title="2.1错误信息"></a>2.1错误信息</h3><ol>
+<li>libtinfo.so.5</li>
+</ol>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># 先查看tinfo自己OS上的版本</span>
+<span class="token function">find</span> / -name libtinfo.so* 
+<span class="token comment"># 如果不匹配，直接将现在的版本转换成tvm要求的版本呢</span>
+<span class="token function">ln</span> -s /usr/lib64/libtinfo.so.6 /usr/lib64/libtinfo.so.5<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ol start="2">
+<li><p>编译时报错 ld: can’t find libtinfo.so libedit.so等问题</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">find</span> / -name libtinfo.so
+<span class="token comment"># 建立软连接'</span>
+<span class="token function">ln</span> -s /root/anaconda3/lib/libtinfo.so /usr/lib/libtinfo.so<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre></li>
+<li><p>libbacktrace/configure: Permission denied</p>
+<p>chmod +x /path/to/tvm/3rdparty/libbacktrace/configure</p>
+</li>
+</ol>
+<h3 id="4-gcc-amp-cmake"><a href="#4-gcc-amp-cmake" class="headerlink" title="4. gcc &amp; cmake"></a>4. gcc &amp; cmake</h3><p>对于 cmake 直接yum安装： <code>yum install cmake</code></p>
+<p>cmake .. 时 出现了can’t find 问题</p>
+<ul>
+<li><p>问题：</p>
+<ul>
+<li><p><a target="_blank" rel="noopener" href="https://github.com/lanlin/notes/issues/101">CentOS 8: No matching repo to modify: PowerTools · Issue #101 · lanlin/notes (github.com)</a></p>
+<p>dnf search glibc</p>
+<p>dnf provides */libc.a</p>
+<p>dnf config-manager –set-enabled powertools</p>
+<p>dnf install glibc-static</p>
+<p>dnf install libstdc++-static</p>
+</li>
+</ul>
+</li>
+</ul>
 
                 
             </div>
@@ -1015,7 +1105,7 @@
         <div class="col s12 m8 l8 copy-right">
             Copyright&nbsp;&copy;
             
-                <span id="year">2019-2021</span>
+                <span id="year">2019-2022</span>
             
             <span id="year">2019</span>
             <a href="/about" target="_blank">小灰灰</a>

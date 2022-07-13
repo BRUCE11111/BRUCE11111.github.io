@@ -6,7 +6,7 @@
   <link href="http://bruce11111.github.io/atom.xml" rel="self"/>
   
   <link href="http://bruce11111.github.io/"/>
-  <updated>2021-12-09T08:03:12.257Z</updated>
+  <updated>2022-06-28T09:04:50.946Z</updated>
   <id>http://bruce11111.github.io/</id>
   
   <author>
@@ -15,6 +15,125 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>机器学习</title>
+    <link href="http://bruce11111.github.io/2022/06/28/ji-qi-xue-xi/"/>
+    <id>http://bruce11111.github.io/2022/06/28/ji-qi-xue-xi/</id>
+    <published>2022-06-28T09:02:01.000Z</published>
+    <updated>2022-06-28T09:04:50.946Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;机器学习&quot;&gt;&lt;a href=&quot;#机器学习&quot; class=&quot;headerlink&quot; title=&quot;机器学习&quot;&gt;&lt;/a&gt;机器学习&lt;/h1&gt;&lt;h2 id=&quot;1-深度学习&quot;&gt;&lt;a href=&quot;#1-深度学习&quot; class=&quot;headerlink&quot; title=&quot;1.</summary>
+        
+      
+    
+    
+    
+    <category term="机器学习" scheme="http://bruce11111.github.io/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>c++基础</title>
+    <link href="http://bruce11111.github.io/2022/06/27/c-ji-chu/"/>
+    <id>http://bruce11111.github.io/2022/06/27/c-ji-chu/</id>
+    <published>2022-06-27T01:29:48.000Z</published>
+    <updated>2022-06-29T06:20:08.320Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;C&quot;&gt;&lt;a href=&quot;#C&quot; class=&quot;headerlink&quot; title=&quot;C++&quot;&gt;&lt;/a&gt;C++&lt;/h1&gt;&lt;h1 id=&quot;1-const-的新花样&quot;&gt;&lt;a href=&quot;#1-const-的新花样&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="c++" scheme="http://bruce11111.github.io/categories/c/"/>
+    
+    
+    <category term="c++" scheme="http://bruce11111.github.io/tags/c/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>vue</title>
+    <link href="http://bruce11111.github.io/2022/05/10/vue/"/>
+    <id>http://bruce11111.github.io/2022/05/10/vue/</id>
+    <published>2022-05-10T14:23:11.000Z</published>
+    <updated>2022-05-15T10:47:20.921Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;Vue&quot;&gt;&lt;a href=&quot;#Vue&quot; class=&quot;headerlink&quot; title=&quot;Vue&quot;&gt;&lt;/a&gt;Vue&lt;/h1&gt;&lt;h2 id=&quot;1-Vue-简介&quot;&gt;&lt;a href=&quot;#1-Vue-简介&quot; class=&quot;headerlink&quot; title=&quot;1.</summary>
+        
+      
+    
+    
+    
+    <category term="前端" scheme="http://bruce11111.github.io/categories/%E5%89%8D%E7%AB%AF/"/>
+    
+    
+    <category term="vue" scheme="http://bruce11111.github.io/tags/vue/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>算法笔记</title>
+    <link href="http://bruce11111.github.io/2022/04/06/suan-fa-bi-ji/"/>
+    <id>http://bruce11111.github.io/2022/04/06/suan-fa-bi-ji/</id>
+    <published>2022-04-06T01:52:34.000Z</published>
+    <updated>2022-06-11T05:25:12.026Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;算法必知&quot;&gt;&lt;a href=&quot;#算法必知&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="算法" scheme="http://bruce11111.github.io/categories/%E7%AE%97%E6%B3%95/"/>
+    
+    
+    <category term="算法" scheme="http://bruce11111.github.io/tags/%E7%AE%97%E6%B3%95/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>kubernets</title>
+    <link href="http://bruce11111.github.io/2022/01/24/kubernets/"/>
+    <id>http://bruce11111.github.io/2022/01/24/kubernets/</id>
+    <published>2022-01-24T09:25:21.000Z</published>
+    <updated>2022-01-24T12:31:12.277Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;kubernets&quot;&gt;&lt;a href=&quot;#kubernets&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    
+  </entry>
   
   <entry>
     <title>前端</title>
@@ -57,7 +176,7 @@
     <link href="http://bruce11111.github.io/2021/11/07/linux-an-zhuang-ruan-jian/"/>
     <id>http://bruce11111.github.io/2021/11/07/linux-an-zhuang-ruan-jian/</id>
     <published>2021-11-07T09:23:32.000Z</published>
-    <updated>2021-11-07T09:24:51.181Z</updated>
+    <updated>2022-06-04T08:20:09.299Z</updated>
     
     
       
@@ -275,7 +394,7 @@
     <link href="http://bruce11111.github.io/2021/06/10/linux-ji-chu/"/>
     <id>http://bruce11111.github.io/2021/06/10/linux-ji-chu/</id>
     <published>2021-06-10T03:28:08.000Z</published>
-    <updated>2021-11-27T07:35:03.403Z</updated>
+    <updated>2022-04-25T15:20:35.183Z</updated>
     
     
       
@@ -300,7 +419,7 @@
     <link href="http://bruce11111.github.io/2021/06/10/mysql-ji-chu/"/>
     <id>http://bruce11111.github.io/2021/06/10/mysql-ji-chu/</id>
     <published>2021-06-10T02:58:01.000Z</published>
-    <updated>2021-11-21T11:44:15.190Z</updated>
+    <updated>2022-04-10T10:05:56.208Z</updated>
     
     
       
@@ -344,123 +463,6 @@
     
     
     <category term="java" scheme="http://bruce11111.github.io/tags/java/"/>
-    
-  </entry>
-  
-  <entry>
-    <title></title>
-    <link href="http://bruce11111.github.io/2021/05/24/mybatis/"/>
-    <id>http://bruce11111.github.io/2021/05/24/mybatis/</id>
-    <published>2021-05-24T08:49:54.943Z</published>
-    <updated>2021-07-04T12:16:36.915Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h1 id=&quot;Mybatis&quot;&gt;&lt;a href=&quot;#Mybatis&quot; class=&quot;headerlink&quot; title=&quot;Mybatis&quot;&gt;&lt;/a&gt;Mybatis&lt;/h1&gt;&lt;h2 id=&quot;1-配置maven&quot;&gt;&lt;a href=&quot;#1-配置maven&quot;</summary>
-        
-      
-    
-    
-    
-    
-  </entry>
-  
-  <entry>
-    <title></title>
-    <link href="http://bruce11111.github.io/2021/05/24/springmvc/"/>
-    <id>http://bruce11111.github.io/2021/05/24/springmvc/</id>
-    <published>2021-05-24T08:49:54.916Z</published>
-    <updated>2021-03-20T09:13:48.848Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h1 id=&quot;SpringMVC&quot;&gt;&lt;a href=&quot;#SpringMVC&quot; class=&quot;headerlink&quot; title=&quot;SpringMVC&quot;&gt;&lt;/a&gt;SpringMVC&lt;/h1&gt;&lt;ol&gt;
-&lt;li&gt;&lt;p&gt;模型 dao service</summary>
-        
-      
-    
-    
-    
-    
-  </entry>
-  
-  <entry>
-    <title>nginx</title>
-    <link href="http://bruce11111.github.io/2021/05/23/nginx/"/>
-    <id>http://bruce11111.github.io/2021/05/23/nginx/</id>
-    <published>2021-05-23T10:43:47.000Z</published>
-    <updated>2021-09-25T06:33:10.780Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h1 id=&quot;NIGNX&quot;&gt;&lt;a href=&quot;#NIGNX&quot; class=&quot;headerlink&quot; title=&quot;NIGNX&quot;&gt;&lt;/a&gt;NIGNX&lt;/h1&gt;&lt;h2 id=&quot;1-基本概念&quot;&gt;&lt;a href=&quot;#1-基本概念&quot; class=&quot;headerlink&quot;</summary>
-        
-      
-    
-    
-    
-    <category term="nginx" scheme="http://bruce11111.github.io/categories/nginx/"/>
-    
-    <category term="java" scheme="http://bruce11111.github.io/categories/nginx/java/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>springboot</title>
-    <link href="http://bruce11111.github.io/2021/05/19/springboot/"/>
-    <id>http://bruce11111.github.io/2021/05/19/springboot/</id>
-    <published>2021-05-19T09:53:35.000Z</published>
-    <updated>2021-07-16T12:50:05.145Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h1 id=&quot;SpringBoot&quot;&gt;&lt;a href=&quot;#SpringBoot&quot; class=&quot;headerlink&quot; title=&quot;SpringBoot&quot;&gt;&lt;/a&gt;SpringBoot&lt;/h1&gt;&lt;h2 id=&quot;1-1-自动装配原理&quot;&gt;&lt;a</summary>
-        
-      
-    
-    
-    
-    <category term="springboot" scheme="http://bruce11111.github.io/categories/springboot/"/>
-    
-    <category term="java" scheme="http://bruce11111.github.io/categories/springboot/java/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>什么是高可用</title>
-    <link href="http://bruce11111.github.io/2021/05/18/shi-me-shi-gao-ke-yong/"/>
-    <id>http://bruce11111.github.io/2021/05/18/shi-me-shi-gao-ke-yong/</id>
-    <published>2021-05-18T09:07:21.000Z</published>
-    <updated>2021-07-20T12:36:46.489Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h1 id=&quot;什么是高可用&quot;&gt;&lt;a href=&quot;#什么是高可用&quot; class=&quot;headerlink&quot; title=&quot;什么是高可用&quot;&gt;&lt;/a&gt;什么是高可用&lt;/h1&gt;&lt;p&gt;为什么就不说了吧，系统都要保证这一点的，否则经常奔溃那这系统还能用吗？&lt;/p&gt;
-&lt;h2</summary>
-        
-      
-    
-    
-    
-    <category term="讨论" scheme="http://bruce11111.github.io/categories/%E8%AE%A8%E8%AE%BA/"/>
-    
     
   </entry>
   

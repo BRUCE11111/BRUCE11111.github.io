@@ -496,16 +496,16 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="1-命令1"><a href="#1-命令1" class="headerlink" title="1.命令1"></a>1.命令1</h2><h3 id="2-查看当前路径"><a href="#2-查看当前路径" class="headerlink" title="2. 查看当前路径"></a>2. 查看当前路径</h3><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">pwd
+                <h2 id="1-命令1"><a href="#1-命令1" class="headerlink" title="1.命令1"></a>1.命令1</h2><h3 id="2-查看当前路径"><a href="#2-查看当前路径" class="headerlink" title="2. 查看当前路径"></a>2. 查看当前路径</h3><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"><span class="token builtin class-name">pwd</span>
 -L 
-如果 PWD 环境变量包含了不包含文件名 .（点表示当前目录）或 ..（点点表示父目录）的当前目录的绝对路径名，则显示 PWD 环境变量的值。否则，-L 标志与 -P 标志一样运行。 
+如果 <span class="token environment constant">PWD</span> 环境变量包含了不包含文件名 .（点表示当前目录）或 <span class="token punctuation">..</span>（点点表示父目录）的当前目录的绝对路径名，则显示 <span class="token environment constant">PWD</span> 环境变量的值。否则，-L 标志与 -P 标志一样运行。 
 -P 
 显示当前目录的绝对路径名。与 -P 标志一起显示的绝对路径不包含在路径名的绝对路径中涉及到符号链接类型的文件的名称。<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <h3 id="3-修改环境变量"><a href="#3-修改环境变量" class="headerlink" title="3. 修改环境变量"></a>3. 修改环境变量</h3><p>使用export命令直接修改PATH的值，配置MySQL进入环境变量的方法:</p>
-<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">export PATH=/home/uusama/mysql/bin:$PATH
-#或者把PATH放在前面
-export PATH=$PATH:/home/uusama/mysql/bin<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"><span class="token builtin class-name">export</span> <span class="token assign-left variable"><span class="token environment constant">PATH</span></span><span class="token operator">=</span>/home/uusama/mysql/bin:<span class="token environment constant">$PATH</span>
+<span class="token comment">#或者把PATH放在前面</span>
+<span class="token builtin class-name">export</span> <span class="token assign-left variable"><span class="token environment constant">PATH</span></span><span class="token operator">=</span><span class="token environment constant">$PATH</span>:/home/uusama/mysql/bin<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 
 <p>注意事项：</p>
 <ul>
@@ -515,9 +515,9 @@ export PATH=$PATH:/home/uusama/mysql/bin<span aria-hidden="true" class="line-num
 <li>配置的环境变量中不要忘了加上原来的配置，即$PATH部分，避免覆盖原来配置</li>
 </ul>
 <h4 id="Linux环境变量配置方法二：vim-bashrc"><a href="#Linux环境变量配置方法二：vim-bashrc" class="headerlink" title="Linux环境变量配置方法二：vim ~/.bashrc"></a>Linux环境变量配置方法二：vim ~/.bashrc</h4><p>通过修改用户目录下的~/.bashrc文件进行配置：</p>
-<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">vim ~/.bashrc
-# 在最后一行加上
-export PATH=$PATH:/home/uusama/mysql/bin<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"><span class="token function">vim</span> ~/.bashrc
+<span class="token comment"># 在最后一行加上</span>
+<span class="token builtin class-name">export</span> <span class="token assign-left variable"><span class="token environment constant">PATH</span></span><span class="token operator">=</span><span class="token environment constant">$PATH</span>:/home/uusama/mysql/bin<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 
 <p>注意事项：</p>
 <ul>
@@ -527,9 +527,9 @@ export PATH=$PATH:/home/uusama/mysql/bin<span aria-hidden="true" class="line-num
 <li>如果有后续的环境变量加载文件覆盖了PATH定义，则可能不生效</li>
 </ul>
 <h4 id="Linux环境变量配置方法三：vim-bash-profile"><a href="#Linux环境变量配置方法三：vim-bash-profile" class="headerlink" title="Linux环境变量配置方法三：vim ~/.bash_profile"></a>Linux环境变量配置方法三：vim ~/.bash_profile</h4><p>和修改~/.bashrc文件类似，也是要在文件最后加上新的路径即可：</p>
-<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">vim ~/.bash_profile
-# 在最后一行加上
-export PATH=$PATH:/home/uusama/mysql/bin<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"><span class="token function">vim</span> ~/.bash_profile
+<span class="token comment"># 在最后一行加上</span>
+<span class="token builtin class-name">export</span> <span class="token assign-left variable"><span class="token environment constant">PATH</span></span><span class="token operator">=</span><span class="token environment constant">$PATH</span>:/home/uusama/mysql/bin<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 
 <p>注意事项：</p>
 <ul>
@@ -539,11 +539,11 @@ export PATH=$PATH:/home/uusama/mysql/bin<span aria-hidden="true" class="line-num
 <li>如果没有<del>/.bash_profile文件，则可以编辑</del>/.profile文件或者新建一个</li>
 </ul>
 <h4 id="Linux环境变量配置方法四：vim-etc-bashrc"><a href="#Linux环境变量配置方法四：vim-etc-bashrc" class="headerlink" title="Linux环境变量配置方法四：vim /etc/bashrc"></a>Linux环境变量配置方法四：vim /etc/bashrc</h4><p>该方法是修改系统配置，需要管理员权限（如root）或者对该文件的写入权限：</p>
-<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"># 如果/etc/bashrc文件不可编辑，需要修改为可编辑
-chmod -v u+w /etc/bashrc
-vim /etc/bashrc
-# 在最后一行加上
-export PATH=$PATH:/home/uusama/mysql/bin<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"><span class="token comment"># 如果/etc/bashrc文件不可编辑，需要修改为可编辑</span>
+<span class="token function">chmod</span> -v u+w /etc/bashrc
+<span class="token function">vim</span> /etc/bashrc
+<span class="token comment"># 在最后一行加上</span>
+<span class="token builtin class-name">export</span> <span class="token assign-left variable"><span class="token environment constant">PATH</span></span><span class="token operator">=</span><span class="token environment constant">$PATH</span>:/home/uusama/mysql/bin<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>注意事项：</p>
 <ul>
@@ -552,11 +552,11 @@ export PATH=$PATH:/home/uusama/mysql/bin<span aria-hidden="true" class="line-num
 <li>生效范围：对所有用户有效</li>
 </ul>
 <h4 id="Linux环境变量配置方法五：vim-etc-profile"><a href="#Linux环境变量配置方法五：vim-etc-profile" class="headerlink" title="Linux环境变量配置方法五：vim /etc/profile"></a>Linux环境变量配置方法五：vim /etc/profile</h4><p>该方法修改系统配置，需要管理员权限或者对该文件的写入权限，和vim /etc/bashrc类似：</p>
-<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"># 如果/etc/profile文件不可编辑，需要修改为可编辑
-chmod -v u+w /etc/profile
-vim /etc/profile
-# 在最后一行加上
-export PATH=$PATH:/home/uusama/mysql/bin<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"><span class="token comment"># 如果/etc/profile文件不可编辑，需要修改为可编辑</span>
+<span class="token function">chmod</span> -v u+w /etc/profile
+<span class="token function">vim</span> /etc/profile
+<span class="token comment"># 在最后一行加上</span>
+<span class="token builtin class-name">export</span> <span class="token assign-left variable"><span class="token environment constant">PATH</span></span><span class="token operator">=</span><span class="token environment constant">$PATH</span>:/home/uusama/mysql/bin<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>注意事项：</p>
 <ul>
@@ -565,11 +565,11 @@ export PATH=$PATH:/home/uusama/mysql/bin<span aria-hidden="true" class="line-num
 <li>生效范围：对所有用户有效</li>
 </ul>
 <h4 id="Linux环境变量配置方法六：vim-etc-environment"><a href="#Linux环境变量配置方法六：vim-etc-environment" class="headerlink" title="Linux环境变量配置方法六：vim /etc/environment"></a>Linux环境变量配置方法六：vim /etc/environment</h4><p>该方法是修改系统环境配置文件，需要管理员权限或者对该文件的写入权限：</p>
-<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"># 如果/etc/bashrc文件不可编辑，需要修改为可编辑
-chmod -v u+w /etc/environment
-vim /etc/profile
-# 在最后一行加上
-export PATH=$PATH:/home/uusama/mysql/bin<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"><span class="token comment"># 如果/etc/bashrc文件不可编辑，需要修改为可编辑</span>
+<span class="token function">chmod</span> -v u+w /etc/environment
+<span class="token function">vim</span> /etc/profile
+<span class="token comment"># 在最后一行加上</span>
+<span class="token builtin class-name">export</span> <span class="token assign-left variable"><span class="token environment constant">PATH</span></span><span class="token operator">=</span><span class="token environment constant">$PATH</span>:/home/uusama/mysql/bin<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>注意事项：</p>
 <ul>
@@ -1389,13 +1389,19 @@ export PATH=$PATH:/home/uusama/mysql/bin<span aria-hidden="true" class="line-num
 </blockquote>
 <blockquote>
 <p>sed</p>
-</blockquote>
 <p>sed是一种几乎包括在所有UNIX平台（包括Linux）的轻量级流编辑器。sed主要是用来将数据进行选取、替换、删除、新增的命令。</p>
+<p>sed只能通过命令行输入编辑命令、指定文件名，然后在屏幕上查看输出。sed编辑器没有破坏性，它不会修改文件，除非使用shell重定向来保存输出结果。默认情况下，所有的输出行都被打印到屏幕上。</p>
+<blockquote>
+<p><span class="github-emoji"><span>🍨</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f368.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span>工作过程：</p>
+<p>sed编辑器逐行处理文件（或输入），并将输出结果发送到屏幕。sed把当前正在处理的行保存在一个临时缓存区中，这个缓存区称为模式空间或临时缓冲。sed处理完模式空间中的行后，就把改行发送到屏幕上。sed把每一行都保存在临时缓存区中，对这个副本进行编辑，所以不会修改或破坏源文件。</p>
+<p><img src="/2021/06/10/linux-ji-chu/image-20220425231816143.png" alt="image-20220425231816143"></p>
+</blockquote>
 <p><code>sed [选项] [动作] 文件名</code> </p>
 <p>选项： -n 一般sed命令会把所有数据输出到屏幕，如果加入此选择，则会把经过sed命令处理的行输出到屏幕。</p>
 <p>-e 允许对输入数据应用多条sed命令编辑</p>
 <p>-i 用sed的修改结果直接修改读取数据的文件，而不是由屏幕输出</p>
 <p><img src="/2021/06/10/linux-ji-chu/image-20211123212819182.png" alt="image-20211123212819182"></p>
+</blockquote>
 <h4 id="9-4-3-字符处理命令"><a href="#9-4-3-字符处理命令" class="headerlink" title="9.4.3 字符处理命令"></a>9.4.3 字符处理命令</h4><blockquote>
 <p>sort 排序命令</p>
 <p><code>sort 【选项】 文件名</code> </p>
@@ -1431,22 +1437,22 @@ export PATH=$PATH:/home/uusama/mysql/bin<span aria-hidden="true" class="line-num
 <h4 id="9-4-5-流程控制"><a href="#9-4-5-流程控制" class="headerlink" title="9.4.5 流程控制"></a>9.4.5 流程控制</h4><blockquote>
 <p>if 语句</p>
 <p><img src="/2021/06/10/linux-ji-chu/image-20211124200045771.png" alt="image-20211124200045771"></p>
-<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">if [条件判断式];then
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"><span class="token keyword">if</span> <span class="token punctuation">[</span>条件判断式<span class="token punctuation">]</span><span class="token punctuation">;</span><span class="token keyword">then</span>
 程序
-fi
+<span class="token keyword">fi</span>
 或者
-if [条件判断式]
-  then
+<span class="token keyword">if</span> <span class="token punctuation">[</span>条件判断式<span class="token punctuation">]</span>
+  <span class="token keyword">then</span>
   程序
-fi
+<span class="token keyword">fi</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">if [条件判断式]
-  then
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"><span class="token keyword">if</span> <span class="token punctuation">[</span>条件判断式<span class="token punctuation">]</span>
+  <span class="token keyword">then</span>
     条件成立时，执行的程序
-  else 
+  <span class="token keyword">else</span> 
     条件不成立时，执行的另外一个程序
-fi<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token keyword">fi</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <pre class="line-numbers language-none"><code class="language-none">if [条件判断式1]
   then
@@ -1460,47 +1466,47 @@ fi<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><
 
 
 </blockquote>
-<h4 id="9-4-6-case语句"><a href="#9-4-6-case语句" class="headerlink" title="9.4.6 case语句"></a>9.4.6 case语句</h4><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">case $变量名 in
-"值1")
+<h4 id="9-4-6-case语句"><a href="#9-4-6-case语句" class="headerlink" title="9.4.6 case语句"></a>9.4.6 case语句</h4><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"><span class="token keyword">case</span> $变量名 <span class="token keyword">in</span>
+<span class="token string">"值1"</span><span class="token punctuation">)</span>
 	如果变量的值等于值1，则执行程序1
-	;;
-"值2")
+	<span class="token punctuation">;</span><span class="token punctuation">;</span>
+<span class="token string">"值2"</span><span class="token punctuation">)</span>
 	如果变量的值等于值1，则执行程序1
-	;;
-*)
+	<span class="token punctuation">;</span><span class="token punctuation">;</span>
+*<span class="token punctuation">)</span>
     如果变量的值都不是以上的值，则执行此程序。
-    ;;
-esac<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+    <span class="token punctuation">;</span><span class="token punctuation">;</span>
+<span class="token keyword">esac</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <h4 id="9-4-7-for循环"><a href="#9-4-7-for循环" class="headerlink" title="9.4.7 for循环"></a>9.4.7 for循环</h4><p>第一种语法：</p>
-<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">for 变量in 值1 值2 值3...
-  do
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"><span class="token keyword">for</span> 变量in 值1 值2 值3<span class="token punctuation">..</span>.
+  <span class="token keyword">do</span>
     程序
-  done<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+  <span class="token keyword">done</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>第二种语法：</p>
-<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">for((初始值;循环控制条件;变量变化))
-  do
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"><span class="token keyword">for</span><span class="token variable"><span class="token punctuation">((</span>初始值<span class="token punctuation">;</span>循环控制条件<span class="token punctuation">;</span>变量变化<span class="token punctuation">))</span></span>
+  <span class="token keyword">do</span>
     程序
-  done<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+  <span class="token keyword">done</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 
-<h4 id="9-4-8-while-循环"><a href="#9-4-8-while-循环" class="headerlink" title="9.4.8 while 循环"></a>9.4.8 while 循环</h4><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">while [条件判断式]
-  do
+<h4 id="9-4-8-while-循环"><a href="#9-4-8-while-循环" class="headerlink" title="9.4.8 while 循环"></a>9.4.8 while 循环</h4><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"><span class="token keyword">while</span> <span class="token punctuation">[</span>条件判断式<span class="token punctuation">]</span>
+  <span class="token keyword">do</span>
     程序
-  done<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+  <span class="token keyword">done</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 
-<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">until [条件判断式] // 和while判断结果相反
-  do
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"><span class="token keyword">until</span> <span class="token punctuation">[</span>条件判断式<span class="token punctuation">]</span> // 和while判断结果相反
+  <span class="token keyword">do</span>
     程序
-  done<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+  <span class="token keyword">done</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 
 <h2 id="10-服务分类"><a href="#10-服务分类" class="headerlink" title="10.服务分类"></a>10.服务分类</h2><p><img src="/2021/06/10/linux-ji-chu/image-20211127150325968.png" alt="image-20211127150325968"></p>
 <blockquote>
 <p>查看已安装的服务</p>
-<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"># RPM包安装的服务
-chkconfig --list
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"><span class="token comment"># RPM包安装的服务</span>
+<span class="token function">chkconfig</span> --list
 
-#源码包安装的服务
+<span class="token comment">#源码包安装的服务</span>
 一般是在/usr/local/ 下<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 
@@ -2056,7 +2062,7 @@ chkconfig --list
         <div class="col s12 m8 l8 copy-right">
             Copyright&nbsp;&copy;
             
-                <span id="year">2019-2021</span>
+                <span id="year">2019-2022</span>
             
             <span id="year">2019</span>
             <a href="/about" target="_blank">小灰灰</a>

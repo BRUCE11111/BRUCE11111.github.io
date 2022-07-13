@@ -575,14 +575,46 @@ docker attach 容器id # 进入容器正在执行的终端，不会启动新的�
 <h4 id="2-9-4-容器内的文件拷贝到机子上"><a href="#2-9-4-容器内的文件拷贝到机子上" class="headerlink" title="2.9.4 容器内的文件拷贝到机子上"></a>2.9.4 容器内的文件拷贝到机子上</h4><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"># 进入容器后！！！
 docker cp 容器id:/dir/XXX.java /home<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
+<h3 id="2-10-容器卷"><a href="#2-10-容器卷" class="headerlink" title="2.10 容器卷"></a>2.10 容器卷</h3><p>将docker容器内的数据保存到宿主机中，防止数据丢失，做数据备份。</p>
+<ul>
+<li>容器卷中的更改可以实时更改生效。</li>
+<li>容器卷可在容器之间共享或重用</li>
+<li>数据卷中的更改不会包含在镜像的更新中</li>
+<li>数据卷的声明周期一直持续到没有容器使用它为止</li>
+</ul>
+<h4 id="2-10-1-宿主机和容器映射添加容器卷"><a href="#2-10-1-宿主机和容器映射添加容器卷" class="headerlink" title="2.10.1 宿主机和容器映射添加容器卷"></a>2.10.1 宿主机和容器映射添加容器卷</h4><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">docker run -it --privileged<span class="token operator">=</span>true -v /宿主机绝对路径目录:/容器内目录 镜像名<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>查看是否挂载成功</p>
+<h4 id="2-10-2-容器卷的读写规则"><a href="#2-10-2-容器卷的读写规则" class="headerlink" title="2.10.2 容器卷的读写规则"></a>2.10.2 容器卷的读写规则</h4><p>默认支持同时读和写。</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">docker run -it --privileged<span class="token operator">=</span>true -v /宿主机绝对路径目录:/容器内目录:rw 镜像名<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>只读：限制容器内只能读不能写</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">docker run -it --privileged<span class="token operator">=</span>true -v /宿主机绝对路径目录:/容器内目录:ro   镜像名<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h4 id="2-10-3-容器的继承和共享"><a href="#2-10-3-容器的继承和共享" class="headerlink" title="2.10.3 容器的继承和共享"></a>2.10.3 容器的继承和共享</h4><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">docker run -it --privileged<span class="token operator">=</span>true --volumes-from u1 --name u2 ubuntu<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+
+
+
+
+
+
+<h3 id="2-11-拷贝文件"><a href="#2-11-拷贝文件" class="headerlink" title="2.11 拷贝文件"></a>2.11 拷贝文件</h3><p>容器到主机：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">docker <span class="token function">cp</span> 容器ID:容器内路径 目的主机路径<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+
+
+
+
 
 
 <h1 id="3-可视化管理Portainer"><a href="#3-可视化管理Portainer" class="headerlink" title="3.可视化管理Portainer"></a>3.可视化管理Portainer</h1><p>官方安装说明 <code>portainer.io/installation/</code></p>
 <pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">docker pull portainer/portainer 
 docker volume create portainer_data
-docker run -d -p 8000:8000 -p 9000:9000 --name=portainer --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/dataportainer/portainer portainer/portainer<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+docker run -d -p <span class="token number">8000</span>:8000 -p <span class="token number">9000</span>:9000 --name<span class="token operator">=</span>portainer --restart<span class="token operator">=</span>always -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/dataportainer/portainer portainer/portainer<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 
 <p>使用ip+9000端口进行访问。</p>
+<h1 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h1><p><img src="/2021/05/16/docker/image-20220710131509683.png" alt="image-20220710131509683"></p>
 
                 
             </div>
@@ -1126,7 +1158,7 @@ docker run -d -p 8000:8000 -p 9000:9000 --name=portainer --restart=always -v /va
         <div class="col s12 m8 l8 copy-right">
             Copyright&nbsp;&copy;
             
-                <span id="year">2019-2021</span>
+                <span id="year">2019-2022</span>
             
             <span id="year">2019</span>
             <a href="/about" target="_blank">小灰灰</a>

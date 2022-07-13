@@ -592,6 +592,17 @@ doc/*.txt <span class="token comment">#会忽略 doc/noted.txt 但不包括 doc/
 <p><code>git rebase -i HEAD^4</code>  <code>-i 指的是interactive</code></p>
 <h2 id="7-复制"><a href="#7-复制" class="headerlink" title="7. 复制"></a>7. 复制</h2><p>想将一些提交复制到当前位置<code>HEAD</code>下面的话，<code>cherry-pick</code> 是最直接的方式。</p>
 <p><img src="/2021/05/16/git/image-20211208171511869.png" alt="image-20211208171511869"></p>
+<h2 id="8-加速"><a href="#8-加速" class="headerlink" title="8. 加速"></a>8. 加速</h2> <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment">#原地址</span>
+<span class="token function">git</span> clone https://github.com/kubernetes/kubernetes.git
+<span class="token comment">#改为</span>
+<span class="token function">git</span> clone https://github.com.cnpmjs.org/kubernetes/kubernetes.git
+<span class="token comment">#或者</span>
+<span class="token function">git</span> clone https://hub.fastgit.org/kubernetes/kubernetes.git
+<span class="token comment">#或者</span>
+<span class="token function">git</span> clone https://gitclone.com/github.com/kubernetes/kubernetes.git
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>如果git clone 等命令很慢的话，可以替换为上述地址，后面是具体的仓库。</p>
 
                 
             </div>
@@ -1147,7 +1158,7 @@ doc/*.txt <span class="token comment">#会忽略 doc/noted.txt 但不包括 doc/
         <div class="col s12 m8 l8 copy-right">
             Copyright&nbsp;&copy;
             
-                <span id="year">2019-2021</span>
+                <span id="year">2019-2022</span>
             
             <span id="year">2019</span>
             <a href="/about" target="_blank">小灰灰</a>
