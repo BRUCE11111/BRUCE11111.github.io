@@ -1,0 +1,5 @@
+git config --global credential.helper wincred
+hexo new post "article title"
+hexo g 本地静态页面
+hexo s 本地预览
+hexo d 上传
