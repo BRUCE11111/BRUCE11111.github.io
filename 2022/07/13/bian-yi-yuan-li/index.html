@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="c++基础, 小灰的博客">
+    <meta name="keywords" content="编译原理, 小灰的博客">
     <meta name="description" content="技术记录">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>c++基础 | 小灰的博客</title>
+    <title>编译原理 | 小灰的博客</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -326,12 +326,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/1.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/18.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">c++基础</h1>
+                    <h1 class="description center-align post-title">编译原理</h1>
                 </div>
             </div>
         </div>
@@ -447,23 +447,14 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/c/">
-                                <span class="chip bg-color">c++</span>
+                            <a href="/tags/%E7%BC%96%E8%AF%91/">
+                                <span class="chip bg-color">编译</span>
                             </a>
                         
                     </div>
                     
                 </div>
                 <div class="col s5 right-align">
-                    
-                    <div class="post-cate">
-                        <i class="fas fa-bookmark fa-fw icon-category"></i>
-                        
-                            <a href="/categories/c/" class="post-category">
-                                c++
-                            </a>
-                        
-                    </div>
                     
                 </div>
             </div>
@@ -472,7 +463,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2022-06-27
+                    2022-07-13
                 </div>
                 
 
@@ -496,176 +487,27 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="C"><a href="#C" class="headerlink" title="C++"></a>C++</h1><h1 id="1-const-的新花样"><a href="#1-const-的新花样" class="headerlink" title="1. const 的新花样"></a>1. const 的新花样</h1><p>参考至：<a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_45483780/article/details/107018603">(22条消息) const全局变量和局部变量的区别_weixin_45483780的博客-CSDN博客_const局部变量和全局变量</a></p>
-<h3 id="1-1-c语言"><a href="#1-1-c语言" class="headerlink" title="1.1 c语言"></a>1.1 c语言</h3><h4 id="1-1-1-修改"><a href="#1-1-1-修改" class="headerlink" title="1.1.1 修改"></a>1.1.1 修改</h4><p>c语言中的const，需要重新读取内存对其进行赋值。所以，本质上是可以强制修改内容，只是语法上不能修改内容。</p>
-<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">#include &lt;stdio.h&gt;
-
-int main() {
-	const int x = 10;
-	int* p = (int*) &amp;x;
-	*p = 99;
-	printf("%d", x);
-	return 0;
-}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>const<a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=%E5%85%A8%E5%B1%80%E5%8F%98%E9%87%8F&amp;spm=1001.2101.3001.7020">全局变量</a>在静态区，直接或间接都不可以修改<br>const局部变量在栈上，可以间接修改<br><strong>但是定义为const的变量不建议修改</strong></p>
-<h4 id="1-1-2-作用域"><a href="#1-1-2-作用域" class="headerlink" title="1.1.2 作用域"></a>1.1.2 作用域</h4><p>c语言中的const和普通变量的唯一区别就是不能修改（语法上），其他无区别，使用extern在其他文件中也可以使用。</p>
-<h3 id="1-2-c"><a href="#1-2-c" class="headerlink" title="1.2 c++"></a>1.2 c++</h3><h4 id="1-2-1-修改"><a href="#1-2-1-修改" class="headerlink" title="1.2.1 修改"></a>1.2.1 修改</h4><p>c++ 在编译过程中就直接将值替换给变量，没有访问内存这一步，所以修改变量对于c++还是无效的，打印出来还是初始定义的值。</p>
-<h4 id="1-2-2-作用域"><a href="#1-2-2-作用域" class="headerlink" title="1.2.2 作用域"></a>1.2.2 作用域</h4><p>c++语言中const只能作用于本文件中，如果其他文件中使用，需要定义在头文件，其他文件引用头文件。</p>
-<h2 id="2-类和对象"><a href="#2-类和对象" class="headerlink" title="2. 类和对象"></a>2. 类和对象</h2><p>类只是一个模板，不占用内存空间。对象是类的运行实例，其位于栈上或者堆上。</p>
-<blockquote>
-<p>栈</p>
-<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">class demo {
-    private:
-    	string name;
-    public:
-    	string nickName;
-}
-
-int main(){
-    // 栈上
-    demo d1;
-    d1.nickName = "hello";
-    // 堆上
-    demo *d2 = new demo;
-    d2 -&gt; nickName = "hello";
-    
-    return 0;
-}
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-</blockquote>
-<h2 id="2-1-string"><a href="#2-1-string" class="headerlink" title="2.1 string"></a>2.1 string</h2><p>使用string类需要包含头文件<string>:</string></p>
-<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">void erase_demo() {
-	string s1, s2, s3;
-	s1 = s2 = s3 = "1234567890";
-	s2.erase(5);
-	s3.erase(5, 3);
-	cout &lt;&lt; s1 &lt;&lt; endl;
-	cout &lt;&lt; s2 &lt;&lt; endl;
-	cout &lt;&lt; s3 &lt;&lt; endl;
-}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h2 id="2-2-string-内部是什么样的"><a href="#2-2-string-内部是什么样的" class="headerlink" title="2.2 string 内部是什么样的"></a>2.2 string 内部是什么样的</h2><p>c语言中，两种字符串的写法：</p>
+                <h1 id="编译原理"><a href="#编译原理" class="headerlink" title="编译原理"></a>编译原理</h1><h2 id="1-介绍"><a href="#1-介绍" class="headerlink" title="1. 介绍"></a>1. 介绍</h2><h3 id="1-1-编译器"><a href="#1-1-编译器" class="headerlink" title="1.1 编译器"></a>1.1 编译器</h3><ul>
+<li>编译器</li>
+</ul>
+<p>程序 -&gt; 编译器 -&gt; 可执行文件。 编译器不是实时的，只是对程序进行预处理。</p>
+<ul>
+<li>解释器</li>
+</ul>
+<p>程序和数据 -&gt; 解释器 -&gt; 输出。 这个是online的，实时的。</p>
+<h3 id="1-1-1-历史"><a href="#1-1-1-历史" class="headerlink" title="1.1.1 历史"></a>1.1.1 历史</h3><p>IBM的704的机子，软件开销比硬件开销还大。这让很多人考虑如何让代码编程更有效——speedcoding， 快速编码（1953），但是这个东西又慢又花费很多内存，没有流行。</p>
+<p>后来同样的动机诞生了fortran，第一个编译器，是理论和实践的结合。</p>
+<p>现在对编译器的总结，大概有五个部分：</p>
 <ol>
-<li><code>char str[10] = "abc"</code> 这个字符串可读写.</li>
-<li><code>char *str = "abc"</code>，这个字符串只能读，不能写.</li>
+<li>词法分析 lexical analysis<br> Recognize words。<br> 编译器分析文本将程序文本变为 word 或者 token。关键词、变量名等。</li>
+<li>语法分析 parsing<br>通过分析关键词等构建语法树。</li>
+<li>语义分析 semantic analysis</li>
+<li>优化 optimization (运行的更快，占用更少内存)<br>优化，相当于对句子进行编辑，对于程序而言是跑的更快并且使用更少的内存。</li>
+<li>Code Generation 代码生成<br>代码生成</li>
 </ol>
-<p>两种形式总是以”\0”作为结束标志。<br>c++ string隐藏了包含字符序列的物理表示，不需要关心数组的维数或者<br><code>\0</code>方面的问题。</p>
-<p>c++ 标准没有严格定义string类的内存布局，各个编译厂商可以提供不同的实现，但是必须保证string的行为是一致的。string内存分配规则，允许但不要求以引用计数(reference counting)的方式实现。</p>
-<p>c++中，独立的几个string对象可以占据也可以不占据各自特定的物理存储区，但是，如果采用引用计数避免了保存同一数据的拷贝副本，那么各个独立对象<br>必须看起来并表现得就像独占存储区一样。</p>
-<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">// #include&lt;bits/stdc++.h&gt;
-#include &lt;iostream&gt;
-#include &lt;string&gt;
-using namespace std;
-
-int main() {
-    string s1("12345");
-    string s2 = s1;
-    cout &lt;&lt; (s1 == s2) &lt;&lt; endl;
-    s1[0] = '6';
-    cout &lt;&lt; "s1 = " &lt;&lt; s1 &lt;&lt; endl;  // 62345
-    cout &lt;&lt; "s2 = " &lt;&lt; s2 &lt;&lt; endl;  // 12345
-    cout &lt;&lt; (s1 == s2) &lt;&lt; endl;
-
-    return 0;
-}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>在 GCC 下的运行结果：</p>
-<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">s1 = 62345
-s2 = 12345
-0<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-<p>只有当字符串被修改的时候才创建各自的拷贝，这种实现方式称为写时复制（copy-on-write）策略。当字符串只是作为值参数（value parameter）或在其他只读情形下使用，这种方法能够节省时间和空间。多线程中不可能使用引用计数的形式来进行实现，否则会引起冲突。</p>
-<p>同时， COW(copy-on-write)并没有想象中的那么美好。</p>
-<h1 id="3-C-引用"><a href="#3-C-引用" class="headerlink" title="3. C++引用"></a>3. C++引用</h1><p>c/c++ 禁止在函数调用时直接传递数组的内容，而是强制传递数组的指针。</p>
-<p>对于结构体和对象，既可以传递指针也可以传递内容。为了提高效率，一般建议传递指针。</p>
-<h2 id="3-1-与指针的区别"><a href="#3-1-与指针的区别" class="headerlink" title="3.1 与指针的区别"></a>3.1 与指针的区别</h2><ol>
-<li>引用必须被初始化，但是不分配存储空间。指针不声明时初始化，在初始化的时候需要分配存储空间。</li>
-<li>引用初始化后不能被改变，指针可以改变所指的对象。</li>
-<li>不存在指向空值的引用，但是存在指向空值的指针。</li>
-</ol>
-<p>从概念上讲。指针从本质上讲就是存放变量地址的一个变量，在逻辑上是独立的，它可以被改变，包括其所指向的地址的改变和其指向的地址中所存放的数据的改变。</p>
-<p>而引用是一个别名，它在逻辑上不是独立的，它的存在具有依附性，所以引用必须在一开始就被初始化，而且其引用的对象在其整个生命周期中是不能被改变的（自始至终只能依附于同一个变量）。引用的主要功能是传递函数的参数和返回值。</p>
-<p>指针变量在符号表上对应的地址值为指针变量的地址值，而引用在符号表上对应的地址值为 引用对象的地址值。符号表生成后就不会再改，因此指针可以改变其指向的对象（指针变量中的值可以改），而引用对象则不能修改。</p>
-<p>“sizeof 引用”得到的是所指向的变量(对象)的大小，而“sizeof 指针”得到的是指针本身的大小；</p>
-<h2 id="3-2-注意点"><a href="#3-2-注意点" class="headerlink" title="3.2 注意点"></a>3.2 注意点</h2><p>同时，需要注意的是，引用不能指向临时数据。</p>
-<p>其实 C++ 代码中的大部分内容都是放在内存中的，例如定义的变量、创建的对象、字符串常量、函数形参、函数体本身、new或malloc()分配的内存等，这些内容都可以用&amp;来获取地址，进而用指针指向它们。除此之外，还有一些我们平时不太留意的临时数据，例如表达式的结果、函数的返回值等，它们可能会放在内存中，也可能会放在寄存器中。一旦它们被放到了寄存器中，就没法用&amp;获取它们的地址了，也就没法用指针指向它们了。</p>
-<p>下面的代码演示了表达式所产生的临时结果：<br>这些表达式的结果都会被放到寄存器中，尝试用&amp;获取它们的地址都是错误的。</p>
-<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">int n = 100, m = 200;
-int *p1 = &amp;(m + n);    //m + n 的结果为 300
-int *p2 = &amp;(n + 100);  //n + 100 的结果为 200
-bool *p4 = &amp;(m &lt; n);   //m &lt; n 的结果为 false
-#include &lt;iostream&gt;
-using namespace std;
-
-int main() {
-    int n = 100, m = 200;
-    int *p1 = &amp;(m);
-    return 0;
-}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h2 id="3-3-绑定临时变量"><a href="#3-3-绑定临时变量" class="headerlink" title="3.3 绑定临时变量"></a>3.3 绑定临时变量</h2><p>c++ 引用不能绑定临时变量，但是将常引用绑定到临时数据时，编译器采取了一种妥协机制：编译器会为临时数据创建一个新的、无名的临时变量，并将临时数据放入该临时变量中，然后再将引用绑定到该临时变量。注意，临时变量也是变量，所有的变量都会被分配内存。</p>
-<p>为什么编译器为常引用创建临时变量是合理的，而为普通引用创建临时变量就不合理呢？</p>
-<ol>
-<li><p>将引用绑定到一份数据后，就可以通过引用对这份数据进行操作了，包括读取和写入（修改）；尤其是写入操作，会改变数据的值。而临时数据往往无法寻址，是不能写入的，即使为临时数据创建了一个临时变量，那么修改的也仅仅是临时变量里面的数据，不会影响原来的数据，这样就使得引用所绑定到的数据和原来的数据不能同步更新，最终产生了两份不同的数据，失去了引用的意义。</p>
-</li>
-<li><p>const 引用和普通引用不一样，我们只能通过 const 引用读取数据的值，而不能修改它的值，所以不用考虑同步更新的问题，也不会产生两份不同的数据，为 const 引用创建临时变量反而会使得引用更加灵活和通用。</p>
-</li>
-</ol>
-<h2 id="3-4-const引用和类型转换"><a href="#3-4-const引用和类型转换" class="headerlink" title="3.4 const引用和类型转换"></a>3.4 const引用和类型转换</h2><p>参考至： <a target="_blank" rel="noopener" href="http://www.cdsy.xyz/computer/programme/vc/20210105/cd16098262047569.html">http://www.cdsy.xyz/computer/programme/vc/20210105/cd16098262047569.html</a></p>
-<p>编译器禁止指针指向不同类型的数据。</p>
-<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">int n = 100;
-int *p1 = &amp;n;  //正确
-float *p2 = &amp;n;  //错误
-char c = '@';
-char *p3 = &amp;c;  //正确
-int *p4 = &amp;c;  //错误<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>虽然 int 和 float 类型都占用 4 个字节的内存，但是程序对它们的处理方式却大相径庭：</p>
-<p>对于 int，程序把最高 1 位作为符号位，把剩下的 31 位作为数值位；<br>对于 float，程序把最高 1 位作为符号位，把最低的 23 位作为尾数位，把中间的 8 位作为指数位。</p>
-<p>「类型严格一致」是为了防止发生让人匪夷所思的操作，但是这条规则仅仅适用于普通引用，当对引用添加 const 限定后，情况就又发生了变化，编译器允许引用绑定到类型不一致的数据。</p>
-<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">int n = 100;
-int &amp;r1 = n;  //正确
-const float &amp;r2 = n;  //正确
-char c = '@';
-char &amp;r3 = c;  //正确
-const int &amp;r4 = c;  //正确 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>临时变量的类型和引用的类型是一样的，在将数据赋值给临时变量时会发生自动类型转换。</p>
-<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">float f = 12.45;
-const int &amp;r = f;
-printf("%d", r);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-<p>但是，当引用的类型和数据的类型不遵守「数据类型的自动转换」规则，那么编译器将报错，绑定失败。</p>
-<h3 id="3-3-1-形参使用const修饰"><a href="#3-3-1-形参使用const修饰" class="headerlink" title="3.3.1 形参使用const修饰"></a>3.3.1 形参使用const修饰</h3><p>同时，引用类型的形参，如果在函数中不发生改变，尽量使用const修饰。</p>
-<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">#include &lt;cstdio&gt;
-using namespace std;
-double volume(const double &amp;len, const double &amp;width, const double &amp;hei){
-    return len*width*2 + len*hei*2 + width*hei*2;
-}
-int main(){
-    int a = 12, b = 3, c = 20;
-    double v1 = volume(a, b, c);
-    double v2 = volume(10, 20, 30);
-    double v3 = volume(89.4, 32.7, 19);
-    double v4 = volume(a+12.5, b+23.4, 16.78);
-    double v5 = volume(a+b, a+c, b+c);
-    printf("%lf, %lf, %lf, %lf, %lf\n", v1, v2, v3, v4, v5);
-    return 0;
-}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>概括起来说，将引用类型的形参添加 const 限制的理由有三个：</p>
-<ol>
-<li>使用 const 可以避免无意中修改数据的编程错误。</li>
-<li>使用 const 能让函数接收 const 和非 const 类型的实参，否则将只能接收非 const 类型的实参；</li>
-<li>使用 const 引用能够让函数正确生成并使用临时变量。</li>
-</ol>
-<h1 id="4-C-继承和派生"><a href="#4-C-继承和派生" class="headerlink" title="4. C++继承和派生"></a>4. C++继承和派生</h1><p>public、protected、private 修饰类的成员，protected 成员和 private 成员类似，也不能通过对象访问。但是当存在继承关系时，protected 和 private 就不一样了：基类中的 protected 成员可以在派生类中使用，而基类中的 private 成员不能在派生类中使用。</p>
-<ol>
-<li>基类成员在派生类中的访问权限不得高于继承方式中指定的权限。例如，当继承方式为 protected 时，那么基类成员在派生类中的访问权限最高也为 protected，高于 protected 的会降级为 protected，但低于 protected 不会升级。再如，当继承方式为 public 时，那么基类成员在派生类中的访问权限将保持不变。</li>
-</ol>
-<p>也就是说，继承方式中的 public、protected、private 是用来指明基类成员在派生类中的最高访问权限的。</p>
-<p>2.）不管继承方式如何，基类中的 private 成员在派生类中始终不能使用（不能在派生类的成员函数中访问或调用）。</p>
-<p>3.）如果希望基类的成员能够被派生类继承并且毫无障碍地使用，那么这些成员只能声明为 public 或 protected；只有那些不希望在派生类中使用的成员才声明为 private。</p>
-<p>4.) 如果希望基类的成员既不向外暴露（不能通过对象访问），还能在派生类中使用，那么只能声明为 protected。</p>
-<p><font color="red">我们这里说的是基类的 private 成员不能在派生类中使用，并没有说基类的 private 成员不能被继承。实际上，基类的 private 成员是能够被继承的，并且（成员变量）会占用派生类对象的内存，它只是在派生类中不可见，导致无法使用罢了。private 成员的这种特性，能够很好的对派生类隐藏基类的实现，以体现面向对象的封装性。</font></p>
+<h3 id="1-2-识别单词"><a href="#1-2-识别单词" class="headerlink" title="1.2 识别单词"></a>1.2 识别单词</h3><h3 id="1-3-定义"><a href="#1-3-定义" class="headerlink" title="1.3 定义"></a>1.3 定义</h3><p>Alphabet = English characters<br>Language = English sentences<br>Meaning funciton L maps syntax to semantics.</p>
+<p>生成汇编代码。</p>
+<p>把程序代码根据角色分割成不同的substring。(Recognize substrings corresponding to tokens.)<br>把这些token为给parser。(Identify the token class of each lexeme.)</p>
 
                 
             </div>
@@ -692,7 +534,7 @@ int main(){
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://bruce11111.github.io/2022/06/27/c-ji-chu/">http://bruce11111.github.io/2022/06/27/c-ji-chu/</a>
+                    <a href="http://bruce11111.github.io/2022/07/13/bian-yi-yuan-li/">http://bruce11111.github.io/2022/07/13/bian-yi-yuan-li/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -730,8 +572,8 @@ int main(){
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/c/">
-                                    <span class="chip bg-color">c++</span>
+                                <a href="/tags/%E7%BC%96%E8%AF%91/">
+                                    <span class="chip bg-color">编译</span>
                                 </a>
                             
                         </div>
@@ -902,7 +744,7 @@ int main(){
         repo: '',
         owner: '',
         admin: null,
-        id: '2022-06-27T09-29-48',
+        id: '2022-07-13T19-35-42',
         distractionFreeMode: false  // Facebook-like distraction free mode
     });
 
@@ -928,9 +770,56 @@ int main(){
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
+            <div class="card">
+                <a href="/2022/07/13/bian-yi-yuan-li/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/18.jpg" class="responsive-img" alt="编译原理">
+                        
+                        <span class="card-title">编译原理</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-07-13
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-user fa-fw"></i>
+                            小灰灰
+                            
+                        </span>
+                    </div>
+                </div>
+
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E7%BC%96%E8%AF%91/">
+                        <span class="chip bg-color">编译</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
             <div class="card">
                 <a href="/2022/06/28/ji-qi-xue-xi/">
                     <div class="card-image">
@@ -948,9 +837,9 @@ int main(){
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2022-06-28
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-06-28
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -962,55 +851,6 @@ int main(){
                             
                         </span>
                     </div>
-                </div>
-                
-            </div>
-        </div>
-        
-        
-        <div class="article col s12 m6" data-aos="fade-up">
-            <div class="article-badge right-badge text-color">
-                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
-            </div>
-            <div class="card">
-                <a href="/2022/05/10/vue/">
-                    <div class="card-image">
-                        
-                        
-                        <img src="/medias/featureimages/6.jpg" class="responsive-img" alt="vue">
-                        
-                        <span class="card-title">vue</span>
-                    </div>
-                </a>
-                <div class="card-content article-content">
-                    <div class="summary block-with-text">
-                        
-                            
-                        
-                    </div>
-                    <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2022-05-10
-                            </span>
-                        <span class="publish-author">
-                            
-                            <i class="fas fa-bookmark fa-fw icon-category"></i>
-                            
-                            <a href="/categories/%E5%89%8D%E7%AB%AF/" class="post-category">
-                                    前端
-                                </a>
-                            
-                            
-                        </span>
-                    </div>
-                </div>
-                
-                <div class="card-action article-tags">
-                    
-                    <a href="/tags/vue/">
-                        <span class="chip bg-color">vue</span>
-                    </a>
-                    
                 </div>
                 
             </div>
