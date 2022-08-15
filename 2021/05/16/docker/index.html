@@ -517,63 +517,63 @@
 <p>镜像的本质就是压缩包。Docker中的每一个镜像都是由一系列只读的层构成，Dockerfile中每一个命令都会在已有的层上创建一个新的层：</p>
 <p>一个容器其实等于镜像加上一个可读写的层，也就是同一个镜像可以对应多个容器。</p>
 <h2 id="2-常用命令"><a href="#2-常用命令" class="headerlink" title="2. 常用命令"></a>2. 常用命令</h2><p>官方命令地址：<a target="_blank" rel="noopener" href="https://docs.docker.com/engine/reference/commandline/login/">docker login | Docker Documentation</a></p>
-<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">docker verison <span class="token comment"># 显示docker的版本信息</span>
-docker info <span class="token comment"># 显示docker的系统信息，包括镜像和容器的数量</span>
-docker 命令 --help <span class="token comment">#万能命令</span>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">docker verison # 显示docker的版本信息
+docker info # 显示docker的系统信息，包括镜像和容器的数量
+docker 命令 --help #万能命令
 
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 
 <h3 id="2-1-搜索"><a href="#2-1-搜索" class="headerlink" title="2.1 搜索"></a>2.1 搜索</h3><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">docker search
 
-docker search mysql --filter<span class="token operator">=</span>STARS<span class="token operator">=</span><span class="token number">3000</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+docker search mysql --filter=STARS=3000<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 
 <h3 id="2-2-拉取"><a href="#2-2-拉取" class="headerlink" title="2.2 拉取"></a>2.2 拉取</h3><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">docker pull 
-<span class="token comment"># docker pull 镜像名字:tag</span>
-<span class="token comment"># 如果不写tag就下载最新的 latest</span>
-<span class="token comment"># </span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+# docker pull 镜像名字:tag
+# 如果不写tag就下载最新的 latest
+# <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 
 
 
-<h3 id="2-3-运行"><a href="#2-3-运行" class="headerlink" title="2.3 运行"></a>2.3 运行</h3><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">docker run <span class="token punctuation">[</span>可选参数<span class="token punctuation">]</span> image
+<h3 id="2-3-运行"><a href="#2-3-运行" class="headerlink" title="2.3 运行"></a>2.3 运行</h3><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">docker run [可选参数] image
 
---name<span class="token operator">=</span><span class="token string">"name"</span> <span class="token comment">#名字</span>
--d <span class="token comment">#后台运行</span>
--it <span class="token comment">#交互方式进行</span>
--p 指定容器的端口， -p <span class="token number">8080</span>:8080
+--name="name" #名字
+-d #后台运行
+-it #交互方式进行
+-p 指定容器的端口， -p 8080:8080
 -P 随机指定端口<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<h3 id="2-4-列出容器"><a href="#2-4-列出容器" class="headerlink" title="2.4 列出容器"></a>2.4 列出容器</h3><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">docker <span class="token function">ps</span> 正在运行
+<h3 id="2-4-列出容器"><a href="#2-4-列出容器" class="headerlink" title="2.4 列出容器"></a>2.4 列出容器</h3><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">docker ps 正在运行
 -a 正在运行+历史运行<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
-<h3 id="2-5-退出容器"><a href="#2-5-退出容器" class="headerlink" title="2.5 退出容器"></a>2.5 退出容器</h3><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"><span class="token builtin class-name">exit</span> <span class="token comment">#直接退出容器并停止</span>
-Ctrl + P + Q <span class="token comment">#容器不停止退出</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<h3 id="2-5-退出容器"><a href="#2-5-退出容器" class="headerlink" title="2.5 退出容器"></a>2.5 退出容器</h3><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">exit #直接退出容器并停止
+Ctrl + P + Q #容器不停止退出<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
-<h3 id="2-6-删除容器"><a href="#2-6-删除容器" class="headerlink" title="2.6 删除容器"></a>2.6 删除容器</h3><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">docker <span class="token function">rm</span> <span class="token function">id</span> <span class="token comment">#镜像是rmi</span>
-docker <span class="token function">rm</span> -f <span class="token variable"><span class="token variable">$(</span>docker <span class="token function">ps</span> -aq<span class="token variable">)</span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<h3 id="2-6-删除容器"><a href="#2-6-删除容器" class="headerlink" title="2.6 删除容器"></a>2.6 删除容器</h3><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">docker rm id #镜像是rmi
+docker rm -f $(docker ps -aq)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
-<h3 id="2-7-停止容器"><a href="#2-7-停止容器" class="headerlink" title="2.7 停止容器"></a>2.7 停止容器</h3><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">docker stop <span class="token function">id</span>
-docker <span class="token function">kill</span> <span class="token function">id</span>
-docker start <span class="token function">id</span>
-docker restart <span class="token function">id</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="2-7-停止容器"><a href="#2-7-停止容器" class="headerlink" title="2.7 停止容器"></a>2.7 停止容器</h3><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">docker stop id
+docker kill id
+docker start id
+docker restart id<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 
 
 
-<h3 id="2-8-查看内部信息"><a href="#2-8-查看内部信息" class="headerlink" title="2.8 查看内部信息"></a>2.8 查看内部信息</h3><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">docker <span class="token function">top</span> <span class="token function">id</span> <span class="token comment"># 查看内部信息</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h3 id="2-8-查看内部信息"><a href="#2-8-查看内部信息" class="headerlink" title="2.8 查看内部信息"></a>2.8 查看内部信息</h3><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">docker top id # 查看内部信息<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 
 
 <h3 id="2-9-常用其他命令"><a href="#2-9-常用其他命令" class="headerlink" title="2.9 常用其他命令"></a>2.9 常用其他命令</h3><h4 id="2-9-1-后台启动命令"><a href="#2-9-1-后台启动命令" class="headerlink" title="2.9.1 后台启动命令"></a>2.9.1 后台启动命令</h4><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">docker run -d centos
 
-<span class="token comment"># 问题docker ps 如果退出会停止，容器使用后台进程，容器中必须要有一个进程在跑着，不然就自动停了。</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+# 问题docker ps 如果退出会停止，容器使用后台进程，容器中必须要有一个进程在跑着，不然就自动停了。<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 
-<h4 id="2-9-2-查看日志"><a href="#2-9-2-查看日志" class="headerlink" title="2.9.2 查看日志"></a>2.9.2 查看日志</h4><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">docker logs -ft --tail <span class="token number">10</span> 容器id <span class="token comment">#查看id容器的日志，且一开始打印最新的10条log（如果还有新日志，会一直增加显示新日志）</span>
-docker inspect 容器id <span class="token comment"># 查看容器信息</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<h4 id="2-9-2-查看日志"><a href="#2-9-2-查看日志" class="headerlink" title="2.9.2 查看日志"></a>2.9.2 查看日志</h4><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">docker logs -ft --tail 10 容器id #查看id容器的日志，且一开始打印最新的10条log（如果还有新日志，会一直增加显示新日志）
+docker inspect 容器id # 查看容器信息<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
 <h4 id="2-9-3-进入当前容器"><a href="#2-9-3-进入当前容器" class="headerlink" title="2.9.3 进入当前容器"></a>2.9.3 进入当前容器</h4><pre class="line-numbers language-xml" data-language="xml"><code class="language-xml">docker exec -it 容器id /bin/bash # 进入容器后开启新的终端，可以在里面操作（常用）
 docker attach 容器id # 进入容器正在执行的终端，不会启动新的进程<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
-<h4 id="2-9-4-容器内的文件拷贝到机子上"><a href="#2-9-4-容器内的文件拷贝到机子上" class="headerlink" title="2.9.4 容器内的文件拷贝到机子上"></a>2.9.4 容器内的文件拷贝到机子上</h4><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"><span class="token comment"># 进入容器后！！！</span>
-docker <span class="token function">cp</span> 容器id:/dir/XXX.java /home<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<h4 id="2-9-4-容器内的文件拷贝到机子上"><a href="#2-9-4-容器内的文件拷贝到机子上" class="headerlink" title="2.9.4 容器内的文件拷贝到机子上"></a>2.9.4 容器内的文件拷贝到机子上</h4><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"># 进入容器后！！！
+docker cp 容器id:/dir/XXX.java /home<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
 <h3 id="2-10-容器卷"><a href="#2-10-容器卷" class="headerlink" title="2.10 容器卷"></a>2.10 容器卷</h3><p>将docker容器内的数据保存到宿主机中，防止数据丢失，做数据备份。</p>
 <ul>
