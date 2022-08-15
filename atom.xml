@@ -6,7 +6,7 @@
   <link href="http://bruce11111.github.io/atom.xml" rel="self"/>
   
   <link href="http://bruce11111.github.io/"/>
-  <updated>2022-07-23T06:22:06.470Z</updated>
+  <updated>2022-08-15T14:08:09.374Z</updated>
   <id>http://bruce11111.github.io/</id>
   
   <author>
@@ -17,11 +17,36 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>读书笔记</title>
+    <link href="http://bruce11111.github.io/2022/08/05/du-shu-bi-ji/"/>
+    <id>http://bruce11111.github.io/2022/08/05/du-shu-bi-ji/</id>
+    <published>2022-08-05T12:40:18.000Z</published>
+    <updated>2022-08-15T14:08:09.374Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;1-毛泽东&quot;&gt;&lt;a href=&quot;#1-毛泽东&quot; class=&quot;headerlink&quot; title=&quot;1. 毛泽东&quot;&gt;&lt;/a&gt;1. 毛泽东&lt;/h1&gt;&lt;h2 id=&quot;1-1-心之力&quot;&gt;&lt;a href=&quot;#1-1-心之力&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="读书笔记" scheme="http://bruce11111.github.io/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
+    
+    
+    <category term="读书笔记" scheme="http://bruce11111.github.io/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
+    
+  </entry>
+  
+  <entry>
     <title>编译原理</title>
     <link href="http://bruce11111.github.io/2022/07/13/bian-yi-yuan-li/"/>
     <id>http://bruce11111.github.io/2022/07/13/bian-yi-yuan-li/</id>
     <published>2022-07-13T11:35:42.000Z</published>
-    <updated>2022-07-23T06:22:06.470Z</updated>
+    <updated>2022-08-15T14:08:11.140Z</updated>
     
     
       
@@ -34,6 +59,8 @@
     
     
     
+    <category term="基础" scheme="http://bruce11111.github.io/categories/%E5%9F%BA%E7%A1%80/"/>
+    
     
     <category term="编译" scheme="http://bruce11111.github.io/tags/%E7%BC%96%E8%AF%91/"/>
     
@@ -44,7 +71,7 @@
     <link href="http://bruce11111.github.io/2022/06/28/ji-qi-xue-xi/"/>
     <id>http://bruce11111.github.io/2022/06/28/ji-qi-xue-xi/</id>
     <published>2022-06-28T09:02:01.000Z</published>
-    <updated>2022-06-28T09:04:50.946Z</updated>
+    <updated>2022-08-15T14:08:05.836Z</updated>
     
     
       
@@ -60,6 +87,8 @@
     <category term="机器学习" scheme="http://bruce11111.github.io/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
     
     
+    <category term="AI" scheme="http://bruce11111.github.io/tags/AI/"/>
+    
   </entry>
   
   <entry>
@@ -67,7 +96,7 @@
     <link href="http://bruce11111.github.io/2022/06/27/c-ji-chu/"/>
     <id>http://bruce11111.github.io/2022/06/27/c-ji-chu/</id>
     <published>2022-06-27T01:29:48.000Z</published>
-    <updated>2022-07-23T06:22:06.470Z</updated>
+    <updated>2022-08-15T14:12:12.176Z</updated>
     
     
       
@@ -80,10 +109,10 @@
     
     
     
-    <category term="c++" scheme="http://bruce11111.github.io/categories/c/"/>
+    <category term="C++" scheme="http://bruce11111.github.io/categories/C/"/>
     
     
-    <category term="c++" scheme="http://bruce11111.github.io/tags/c/"/>
+    <category term="C++基础" scheme="http://bruce11111.github.io/tags/C-%E5%9F%BA%E7%A1%80/"/>
     
   </entry>
   
@@ -92,7 +121,7 @@
     <link href="http://bruce11111.github.io/2022/05/10/vue/"/>
     <id>http://bruce11111.github.io/2022/05/10/vue/</id>
     <published>2022-05-10T14:23:11.000Z</published>
-    <updated>2022-05-15T10:47:20.921Z</updated>
+    <updated>2022-08-15T14:22:16.188Z</updated>
     
     
       
@@ -105,7 +134,7 @@
     
     
     
-    <category term="前端" scheme="http://bruce11111.github.io/categories/%E5%89%8D%E7%AB%AF/"/>
+    <category term="基础" scheme="http://bruce11111.github.io/categories/%E5%9F%BA%E7%A1%80/"/>
     
     
     <category term="vue" scheme="http://bruce11111.github.io/tags/vue/"/>
@@ -117,7 +146,7 @@
     <link href="http://bruce11111.github.io/2022/04/06/suan-fa-bi-ji/"/>
     <id>http://bruce11111.github.io/2022/04/06/suan-fa-bi-ji/</id>
     <published>2022-04-06T01:52:34.000Z</published>
-    <updated>2022-06-11T05:25:12.026Z</updated>
+    <updated>2022-08-15T14:08:24.560Z</updated>
     
     
       
@@ -130,7 +159,7 @@
     
     
     
-    <category term="算法" scheme="http://bruce11111.github.io/categories/%E7%AE%97%E6%B3%95/"/>
+    <category term="基础" scheme="http://bruce11111.github.io/categories/%E5%9F%BA%E7%A1%80/"/>
     
     
     <category term="算法" scheme="http://bruce11111.github.io/tags/%E7%AE%97%E6%B3%95/"/>
@@ -142,7 +171,7 @@
     <link href="http://bruce11111.github.io/2022/01/24/kubernets/"/>
     <id>http://bruce11111.github.io/2022/01/24/kubernets/</id>
     <published>2022-01-24T09:25:21.000Z</published>
-    <updated>2022-01-24T12:31:12.277Z</updated>
+    <updated>2022-08-15T14:16:10.004Z</updated>
     
     
       
@@ -155,6 +184,10 @@
     
     
     
+    <category term="Java" scheme="http://bruce11111.github.io/categories/Java/"/>
+    
+    
+    <category term="Java基础" scheme="http://bruce11111.github.io/tags/Java%E5%9F%BA%E7%A1%80/"/>
     
   </entry>
   
@@ -163,7 +196,7 @@
     <link href="http://bruce11111.github.io/2021/11/27/qian-duan/"/>
     <id>http://bruce11111.github.io/2021/11/27/qian-duan/</id>
     <published>2021-11-27T08:55:41.000Z</published>
-    <updated>2021-12-09T08:03:12.257Z</updated>
+    <updated>2022-08-15T14:08:01.002Z</updated>
     
     
       
@@ -176,21 +209,10 @@
     
     
     
-    <category term="前端" scheme="http://bruce11111.github.io/categories/%E5%89%8D%E7%AB%AF/"/>
+    <category term="基础" scheme="http://bruce11111.github.io/categories/%E5%9F%BA%E7%A1%80/"/>
     
     
-  </entry>
-  
-  <entry>
-    <title>maven</title>
-    <link href="http://bruce11111.github.io/2021/11/26/maven-1/"/>
-    <id>http://bruce11111.github.io/2021/11/26/maven-1/</id>
-    <published>2021-11-26T07:27:12.000Z</published>
-    <updated>2021-11-26T07:27:12.878Z</updated>
-    
-    
-    
-    
+    <category term="前端" scheme="http://bruce11111.github.io/tags/%E5%89%8D%E7%AB%AF/"/>
     
   </entry>
   
@@ -199,7 +221,7 @@
     <link href="http://bruce11111.github.io/2021/11/07/linux-an-zhuang-ruan-jian/"/>
     <id>http://bruce11111.github.io/2021/11/07/linux-an-zhuang-ruan-jian/</id>
     <published>2021-11-07T09:23:32.000Z</published>
-    <updated>2022-06-04T08:20:09.299Z</updated>
+    <updated>2022-08-15T14:16:16.983Z</updated>
     
     
       
@@ -212,6 +234,10 @@
     
     
     
+    <category term="基础" scheme="http://bruce11111.github.io/categories/%E5%9F%BA%E7%A1%80/"/>
+    
+    
+    <category term="linux" scheme="http://bruce11111.github.io/tags/linux/"/>
     
   </entry>
   
@@ -220,7 +246,7 @@
     <link href="http://bruce11111.github.io/2021/10/26/zi-chan-guan-li-ping-tai/"/>
     <id>http://bruce11111.github.io/2021/10/26/zi-chan-guan-li-ping-tai/</id>
     <published>2021-10-26T01:34:28.000Z</published>
-    <updated>2021-11-25T07:19:45.796Z</updated>
+    <updated>2022-08-15T14:14:50.084Z</updated>
     
     
       
@@ -236,6 +262,8 @@
     <category term="项目" scheme="http://bruce11111.github.io/categories/%E9%A1%B9%E7%9B%AE/"/>
     
     
+    <category term="资产管理项目" scheme="http://bruce11111.github.io/tags/%E8%B5%84%E4%BA%A7%E7%AE%A1%E7%90%86%E9%A1%B9%E7%9B%AE/"/>
+    
   </entry>
   
   <entry>
@@ -243,7 +271,7 @@
     <link href="http://bruce11111.github.io/2021/10/23/python/"/>
     <id>http://bruce11111.github.io/2021/10/23/python/</id>
     <published>2021-10-23T02:32:54.000Z</published>
-    <updated>2021-10-23T02:59:32.965Z</updated>
+    <updated>2022-08-15T14:19:41.734Z</updated>
     
     
       
@@ -256,6 +284,10 @@
     
     
     
+    <category term="Python" scheme="http://bruce11111.github.io/categories/Python/"/>
+    
+    
+    <category term="Python基础" scheme="http://bruce11111.github.io/tags/Python%E5%9F%BA%E7%A1%80/"/>
     
   </entry>
   
@@ -264,7 +296,7 @@
     <link href="http://bruce11111.github.io/2021/09/27/go/"/>
     <id>http://bruce11111.github.io/2021/09/27/go/</id>
     <published>2021-09-27T13:38:09.000Z</published>
-    <updated>2021-12-02T09:01:09.901Z</updated>
+    <updated>2022-08-15T14:13:29.486Z</updated>
     
     
       
@@ -277,6 +309,10 @@
     
     
     
+    <category term="Go语言" scheme="http://bruce11111.github.io/categories/Go%E8%AF%AD%E8%A8%80/"/>
+    
+    
+    <category term="Go基础" scheme="http://bruce11111.github.io/tags/Go%E5%9F%BA%E7%A1%80/"/>
     
   </entry>
   
@@ -285,7 +321,7 @@
     <link href="http://bruce11111.github.io/2021/09/26/kafka/"/>
     <id>http://bruce11111.github.io/2021/09/26/kafka/</id>
     <published>2021-09-26T14:01:37.000Z</published>
-    <updated>2021-10-11T13:50:33.603Z</updated>
+    <updated>2022-08-15T14:16:00.690Z</updated>
     
     
       
@@ -298,6 +334,10 @@
     
     
     
+    <category term="Java" scheme="http://bruce11111.github.io/categories/Java/"/>
+    
+    
+    <category term="Java基础" scheme="http://bruce11111.github.io/tags/Java%E5%9F%BA%E7%A1%80/"/>
     
   </entry>
   
@@ -306,7 +346,7 @@
     <link href="http://bruce11111.github.io/2021/09/22/raft-suan-fa/"/>
     <id>http://bruce11111.github.io/2021/09/22/raft-suan-fa/</id>
     <published>2021-09-22T02:46:31.000Z</published>
-    <updated>2021-09-22T14:06:52.681Z</updated>
+    <updated>2022-08-15T14:20:02.588Z</updated>
     
     
       
@@ -319,21 +359,10 @@
     
     
     
-    <category term="分布式" scheme="http://bruce11111.github.io/categories/%E5%88%86%E5%B8%83%E5%BC%8F/"/>
+    <category term="碎片知识" scheme="http://bruce11111.github.io/categories/%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%86/"/>
     
     
-  </entry>
-  
-  <entry>
-    <title>MybatisPlus</title>
-    <link href="http://bruce11111.github.io/2021/07/20/mybatisplus/"/>
-    <id>http://bruce11111.github.io/2021/07/20/mybatisplus/</id>
-    <published>2021-07-20T12:33:57.000Z</published>
-    <updated>2021-07-20T12:33:57.102Z</updated>
-    
-    
-    
-    
+    <category term="分布式" scheme="http://bruce11111.github.io/tags/%E5%88%86%E5%B8%83%E5%BC%8F/"/>
     
   </entry>
   
@@ -342,7 +371,7 @@
     <link href="http://bruce11111.github.io/2021/07/19/hapi-yuan-li/"/>
     <id>http://bruce11111.github.io/2021/07/19/hapi-yuan-li/</id>
     <published>2021-07-19T12:17:52.000Z</published>
-    <updated>2021-08-03T04:07:06.143Z</updated>
+    <updated>2022-08-15T14:13:39.822Z</updated>
     
     
       
@@ -357,8 +386,10 @@
     
     
     
-    <category term="HAPI" scheme="http://bruce11111.github.io/categories/HAPI/"/>
+    <category term="项目" scheme="http://bruce11111.github.io/categories/%E9%A1%B9%E7%9B%AE/"/>
     
+    
+    <category term="HAPI项目" scheme="http://bruce11111.github.io/tags/HAPI%E9%A1%B9%E7%9B%AE/"/>
     
   </entry>
   
@@ -367,7 +398,7 @@
     <link href="http://bruce11111.github.io/2021/07/15/zai-xian-jiao-yu-ping-tai/"/>
     <id>http://bruce11111.github.io/2021/07/15/zai-xian-jiao-yu-ping-tai/</id>
     <published>2021-07-15T09:14:06.000Z</published>
-    <updated>2021-07-23T12:01:14.974Z</updated>
+    <updated>2022-08-15T14:14:45.568Z</updated>
     
     
       
@@ -383,6 +414,8 @@
     <category term="项目" scheme="http://bruce11111.github.io/categories/%E9%A1%B9%E7%9B%AE/"/>
     
     
+    <category term="教育平台" scheme="http://bruce11111.github.io/tags/%E6%95%99%E8%82%B2%E5%B9%B3%E5%8F%B0/"/>
+    
   </entry>
   
   <entry>
@@ -390,7 +423,7 @@
     <link href="http://bruce11111.github.io/2021/06/10/maven/"/>
     <id>http://bruce11111.github.io/2021/06/10/maven/</id>
     <published>2021-06-10T06:36:59.000Z</published>
-    <updated>2021-11-26T13:38:58.235Z</updated>
+    <updated>2022-08-15T14:16:47.401Z</updated>
     
     
       
@@ -405,7 +438,7 @@
     
     
     
-    <category term="maven" scheme="http://bruce11111.github.io/categories/maven/"/>
+    <category term="Java" scheme="http://bruce11111.github.io/categories/Java/"/>
     
     
     <category term="maven" scheme="http://bruce11111.github.io/tags/maven/"/>
@@ -417,7 +450,7 @@
     <link href="http://bruce11111.github.io/2021/06/10/linux-ji-chu/"/>
     <id>http://bruce11111.github.io/2021/06/10/linux-ji-chu/</id>
     <published>2021-06-10T03:28:08.000Z</published>
-    <updated>2022-04-25T15:20:35.183Z</updated>
+    <updated>2022-08-15T14:16:21.790Z</updated>
     
     
       
@@ -430,7 +463,7 @@
     
     
     
-    <category term="linux" scheme="http://bruce11111.github.io/categories/linux/"/>
+    <category term="基础" scheme="http://bruce11111.github.io/categories/%E5%9F%BA%E7%A1%80/"/>
     
     
     <category term="linux" scheme="http://bruce11111.github.io/tags/linux/"/>
@@ -442,7 +475,7 @@
     <link href="http://bruce11111.github.io/2021/06/10/mysql-ji-chu/"/>
     <id>http://bruce11111.github.io/2021/06/10/mysql-ji-chu/</id>
     <published>2021-06-10T02:58:01.000Z</published>
-    <updated>2022-04-10T10:05:56.208Z</updated>
+    <updated>2022-08-15T14:18:19.305Z</updated>
     
     
       
@@ -455,10 +488,37 @@
     
     
     
-    <category term="mysql" scheme="http://bruce11111.github.io/categories/mysql/"/>
+    <category term="基础" scheme="http://bruce11111.github.io/categories/%E5%9F%BA%E7%A1%80/"/>
     
     
-    <category term="mysql" scheme="http://bruce11111.github.io/tags/mysql/"/>
+    <category term="数据库" scheme="http://bruce11111.github.io/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>mybatis-plus</title>
+    <link href="http://bruce11111.github.io/2021/06/07/mybatis/"/>
+    <id>http://bruce11111.github.io/2021/06/07/mybatis/</id>
+    <published>2021-06-07T07:59:52.000Z</published>
+    <updated>2022-08-15T14:18:00.206Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;Mybatis&quot;&gt;&lt;a href=&quot;#Mybatis&quot; class=&quot;headerlink&quot; title=&quot;Mybatis&quot;&gt;&lt;/a&gt;Mybatis&lt;/h1&gt;&lt;h2 id=&quot;1-配置maven&quot;&gt;&lt;a href=&quot;#1-配置maven&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="Java" scheme="http://bruce11111.github.io/categories/Java/"/>
+    
+    
+    <category term="Java基础" scheme="http://bruce11111.github.io/tags/Java%E5%9F%BA%E7%A1%80/"/>
+    
+    <category term="mybatis" scheme="http://bruce11111.github.io/tags/mybatis/"/>
     
   </entry>
   
