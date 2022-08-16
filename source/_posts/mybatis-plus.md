@@ -7,10 +7,9 @@ mathjax: true
 date: 2021-06-07 15:59:52
 password:
 summary:
-tags: java
+tags: Java基础
 categories: 
-  - java
-  - mybatis plus
+  - Java
 ---
 
 ## 1. 介绍

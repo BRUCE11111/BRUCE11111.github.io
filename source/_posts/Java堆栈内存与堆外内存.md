@@ -7,8 +7,8 @@ mathjax: true
 date: 2021-05-08 20:48:12
 password:
 summary:
-tags: java
-categories: java
+tags: Java基础
+categories: Java
 ---
 
 ## Java堆栈内存与堆外内存

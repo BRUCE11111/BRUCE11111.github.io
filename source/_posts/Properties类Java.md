@@ -7,8 +7,8 @@ mathjax: true
 date: 2021-04-27 10:31:58
 password:
 summary:
-tags: java
-categories: java
+tags: Java基础
+categories: Java
 ---
 
 # Properties

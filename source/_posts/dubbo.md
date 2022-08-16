@@ -8,7 +8,7 @@ date: 2021-04-23 21:42:09
 password:
 summary:
 tags: dubbo
-categories: dubbo
+categories: Java
 ---
 
 # Dubbo

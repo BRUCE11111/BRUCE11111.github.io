@@ -7,8 +7,8 @@ mathjax: true
 date: 2021-03-30 20:45:30
 password: 1
 summary:
-tags: life
-categories: life
+tags: 爱情
+categories: 生活
 ---
 
 # 小陈和我的生活记录

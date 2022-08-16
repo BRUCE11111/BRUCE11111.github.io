@@ -7,8 +7,8 @@ mathjax: true
 date: 2021-11-07 17:23:32
 password:
 summary:
-tags:
-categories:
+tags: linux
+categories: 基础
 ---
 
 # Ubuntu

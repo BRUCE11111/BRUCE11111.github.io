@@ -7,8 +7,8 @@ mathjax: true
 date: 2021-03-31 15:36:33
 password:
 summary:
-tags:
-categories: Spring
+tags: Spring
+categories: Java
 ---
 
 # Spring 注解驱动开发

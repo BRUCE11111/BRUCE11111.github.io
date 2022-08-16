@@ -7,8 +7,8 @@ mathjax: true
 date: 2021-03-15 15:51:32
 password:
 summary:
-tags: 
-categories: database
+tags: 数据库
+categories: 基础
 ---
 
 

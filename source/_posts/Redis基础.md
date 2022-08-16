@@ -7,8 +7,8 @@ mathjax: true
 date: 2021-04-06 16:26:29
 password:
 summary:
-tags: database
-categories: database
+tags: Redis
+categories: 数据库
 ---
 
 # 安装

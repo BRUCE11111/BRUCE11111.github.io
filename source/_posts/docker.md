@@ -1,14 +1,14 @@
 ---
 title: docker
 top: false
-cover: true
+cover: false
 toc: true
 mathjax: true
 date: 2021-05-16 21:49:59
 password:
 summary:
 tags: docker
-categories: docker
+categories: 基础
 ---
 
 # Docker

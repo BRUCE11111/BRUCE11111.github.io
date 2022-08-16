@@ -8,7 +8,7 @@ date: 2021-06-10 11:28:08
 password:
 summary:
 tags: linux
-categories: linux
+categories: 基础
 ---
 
 ## 1.命令1

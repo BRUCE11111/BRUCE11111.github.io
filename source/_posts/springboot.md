@@ -7,10 +7,11 @@ mathjax: true
 date: 2021-05-19 17:53:35
 password:
 summary:
-tags: springboot
+tags: 
+  - Springboot
+  - Spring
 categories: 
-  - springboot
-  - java
+  - Java
 ---
 
 # SpringBoot

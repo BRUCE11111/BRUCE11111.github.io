@@ -1,14 +1,14 @@
 ---
 title: java
 top: false
-cover: false
+cover: true
 toc: true
 mathjax: true
 date: 2021-03-15 15:47:03
 password:
 summary:
-tags:
-categories: java
+tags: Java基础
+categories: Java
 ---
 
 # JAVA 常问知识点
@@ -21,7 +21,7 @@ http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.h
 
 本篇文章下载1.8的
 
-![img](https://images2018.cnblogs.com/blog/1313907/201805/1313907-20180505150858787-1466797424.png)
+![](java/2022-08-15-22-38-52.png)
 
 选择相应的系统。
 
@@ -42,8 +42,7 @@ http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.h
 
 对我的电脑点右键，然后选择属性
 
-![img](https://images2018.cnblogs.com/blog/1313907/201805/1313907-20180505151708817-878049841.png)
-
+![](java/2022-08-15-22-39-22.png)
  
 
  进入之后选择高级系统设置，然后选择环境变量
@@ -52,19 +51,18 @@ http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.h
 
  然后输入JAVA_HOME,对应的变量值为你jdk安装的目录。
 
-![img](https://images2018.cnblogs.com/blog/1313907/201805/1313907-20180505151930953-913534876.png)
+![](java/2022-08-15-22-39-39.png)
 
 点击确定。
 
 然后新建变量名：classpath     变量值：.;%JAVA_HOME%\lib;%JAVA_HOME%\lib\tools.jar点确定
 
-![img](https://images2018.cnblogs.com/blog/1313907/201805/1313907-20180505160714794-1912853159.png)
 
- 
+ ![](java/2022-08-15-22-39-58.png)
 
 然后在系统变量中找到名为“Path”的变量并双击，新建变量为 %JAVA_HOME%\bin
 
- ![img](https://images2018.cnblogs.com/blog/1313907/201805/1313907-20180505152115707-154528137.png)
+ ![](java/2022-08-15-22-40-13.png)
 
 确定以后，分别输入“java”、“java -version”（java -version代表你安装的java的版本）和javac，若都正常运行则代表java已经正确安装。
 

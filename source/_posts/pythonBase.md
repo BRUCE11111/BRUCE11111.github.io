@@ -7,9 +7,21 @@ mathjax: true
 date: 2021-04-09 21:46:56
 password:
 summary:
-tags: python
-categories: python
+tags: Python基础
+categories: Python
 ---
+
+# 安装
+
+### windows
+
+```python
+https://blog.csdn.net/weixin_40844416/article/details/80889165
+```
+
+python2 和 python3 共存的方法：
+
+[Windows10系统下安装python2和python3双版本 - 暮光微凉 - 博客园 (cnblogs.com)](https://www.cnblogs.com/schut/p/10344597.html)
 
 ## 1. Python线程模块
 

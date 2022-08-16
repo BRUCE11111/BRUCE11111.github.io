@@ -7,10 +7,10 @@ mathjax: true
 date: 2021-05-16 17:01:57
 password:
 summary:
-tags: springcloud
+tags: 
+  - Springcloud
 categories: 
-  - springcloud
-  - java
+  - Java
 ---
 
 # Springcloud

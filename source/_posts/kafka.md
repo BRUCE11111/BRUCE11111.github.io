@@ -8,8 +8,8 @@ mathjax: true
 date: 2021-09-26 22:01:37
 password:
 summary:
-tags:
-categories:
+tags: Java基础
+categories: Java
 ---
 
 # Kafka

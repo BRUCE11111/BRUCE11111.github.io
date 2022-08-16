@@ -7,8 +7,8 @@ mathjax: true
 date: 2021-04-01 20:37:02
 password:
 summary:
-tags: java
-categories: java
+tags: Java基础
+categories: Java
 ---
 
 ### 哈希

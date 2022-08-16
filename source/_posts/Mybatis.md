@@ -1,3 +1,19 @@
+---
+title: mybatis-plus
+top: false
+cover: false
+toc: true
+mathjax: true
+date: 2021-06-07 15:59:52
+password:
+summary:
+tags: 
+  - Java基础
+  - mybatis
+categories: 
+  - Java
+---
+
 # Mybatis
 
 ## 1. 配置maven

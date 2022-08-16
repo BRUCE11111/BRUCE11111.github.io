@@ -7,8 +7,8 @@ mathjax: true
 date: 2021-04-01 20:17:42
 password:
 summary:
-tags: java
-categories: java
+tags: Java基础
+categories: Java
 ---
 
 [ArrayList扩容机制](https://www.cnblogs.com/baichunyu/p/12965241.html)

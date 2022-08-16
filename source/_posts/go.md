@@ -7,8 +7,8 @@ mathjax: true
 date: 2021-09-27 21:38:09
 password:
 summary:
-tags:
-categories:
+tags: Go基础
+categories: Go语言
 ---
 
 ## 1. 安装问题

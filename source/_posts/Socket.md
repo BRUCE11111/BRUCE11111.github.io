@@ -7,8 +7,8 @@ mathjax: true
 date: 2021-04-09 21:25:28
 password:
 summary:
-tags: java
-categories: java
+tags: 网络
+categories: 基础
 ---
 
 # Socket

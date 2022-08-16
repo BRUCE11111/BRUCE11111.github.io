@@ -7,8 +7,8 @@ mathjax: true
 date: 2021-06-10 10:58:01
 password:
 summary:
-tags: mysql
-categories: mysql
+tags: 数据库
+categories: 基础
 ---
 
 ## 1.安装

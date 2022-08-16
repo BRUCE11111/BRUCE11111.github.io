@@ -8,7 +8,7 @@ date: 2021-09-22 10:46:31
 password:
 summary:
 tags: 分布式
-categories: 分布式
+categories: 碎片知识
 ---
 
 # Raft算法

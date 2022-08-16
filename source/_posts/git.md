@@ -8,7 +8,7 @@ date: 2021-05-16 18:59:22
 password:
 summary:
 tags: git
-categories: git
+categories: 基础
 ---
 
 # Git

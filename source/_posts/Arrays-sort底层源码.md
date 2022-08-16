@@ -7,8 +7,8 @@ mathjax: true
 date: 2021-04-01 20:28:06
 password:
 summary:
-tags: java
-categories: java
+tags: Java基础
+categories: Java
 ---
 
 # Java的Arrays.sort()方法到底用的什么排序算法

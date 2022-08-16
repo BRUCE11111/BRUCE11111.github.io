@@ -7,8 +7,8 @@ mathjax: true
 date: 2021-03-23 10:54:31
 password:
 summary:
-tags:
-categories: project
+tags: 项目笔记
+categories: Java
 ---
 
 # 在线教育平台

@@ -8,7 +8,7 @@ date: 2021-05-01 09:25:12
 password:
 summary:
 tags: netty
-categories: netty
+categories: Java
 ---
 
 # Netty

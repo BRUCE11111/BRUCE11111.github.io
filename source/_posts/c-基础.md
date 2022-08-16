@@ -7,8 +7,8 @@ mathjax: true
 date: 2022-06-27 09:29:48
 password:
 summary:
-tags: c++
-categories: c++
+tags: C++基础
+categories: C++
 ---
 
 # C++

@@ -8,7 +8,7 @@ date: 2022-05-10 22:23:11
 password:
 summary:
 tags: vue
-categories: 前端
+categories: 基础
 ---
 
 # Vue

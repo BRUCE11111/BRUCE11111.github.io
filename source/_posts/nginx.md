@@ -9,8 +9,7 @@ password:
 summary:
 tags: nginx
 categories: 
-  - nginx
-  - java
+  - Java
 ---
 
 # NIGNX

@@ -8,7 +8,7 @@ date: 2021-06-10 14:36:59
 password:
 summary:
 tags: maven
-categories: maven
+categories: Java
 ---
 
 ## 1.打包问题

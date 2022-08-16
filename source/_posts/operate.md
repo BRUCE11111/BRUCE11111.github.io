@@ -7,8 +7,8 @@ mathjax: true
 date: 2021-03-15 15:46:44
 password:
 summary:
-tags:
-categories: operate
+tags: 操作系统
+categories: 操作系统
 ---
 
 

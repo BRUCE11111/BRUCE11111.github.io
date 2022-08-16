@@ -7,8 +7,8 @@ mathjax: true
 date: 2021-03-15 15:26:53
 password:
 summary:
-tags:
-categories: network
+tags: 网络
+categories: 基础
 ---
 
 # 计算机网络

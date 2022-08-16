@@ -7,8 +7,8 @@ mathjax: true
 date: 2021-03-31 11:38:47
 password:
 summary:
-tags: java
-categories: java
+tags: Java基础
+categories: Java
 ---
 
 ## The Security Manager
