@@ -156,7 +156,9 @@ git symbolic-ref HEAD
 
 ## 6. 撤销变更
 
-`git revert` ![image-20211208165901595](git/image-20211208165901595.png)
+`git revert` 和 `git reset`
+
+![image-20211208165901595](git/image-20211208165901595.png)
 
 这样你就可以远程分享给别人了。:ice_cream: `git revert c2`
 
