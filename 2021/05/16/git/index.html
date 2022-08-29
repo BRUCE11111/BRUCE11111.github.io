@@ -585,7 +585,8 @@ doc/*.txt <span class="token comment">#会忽略 doc/noted.txt 但不包括 doc/
 <p>移动分支指向： <span class="github-emoji"><span>🍨</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f368.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span> <code>git checkout HEAD^</code> 将HEAD指向向上一级父节点。</p>
 <p><code>git checkout HEAD~3</code></p>
 <p><code>git branch -f HEAD main~3</code> </p>
-<h2 id="6-撤销变更"><a href="#6-撤销变更" class="headerlink" title="6. 撤销变更"></a>6. 撤销变更</h2><p><code>git revert</code> <img src="/2021/05/16/git/image-20211208165901595.png" alt="image-20211208165901595"></p>
+<h2 id="6-撤销变更"><a href="#6-撤销变更" class="headerlink" title="6. 撤销变更"></a>6. 撤销变更</h2><p><code>git revert</code> 和 <code>git reset</code></p>
+<p><img src="/2021/05/16/git/image-20211208165901595.png" alt="image-20211208165901595"></p>
 <p>这样你就可以远程分享给别人了。<span class="github-emoji"><span>🍨</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f368.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span> <code>git revert c2</code></p>
 <p><code>git reset</code> 彻底撤销回退至从<code>c1</code> ，<font color="red">但是这个回退只对本地有效。</font> <span class="github-emoji"><span>🍨</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f368.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span> <code>git reset c1</code> </p>
 <p>也可以通过，<code>rebase</code> 调整提交记录的顺序：</p>

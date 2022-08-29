@@ -515,8 +515,61 @@
 <li>Code Generation 代码生成<br>代码生成</li>
 </ol>
 <h3 id="1-2-识别单词"><a href="#1-2-识别单词" class="headerlink" title="1.2 识别单词"></a>1.2 识别单词</h3><h3 id="1-3-定义"><a href="#1-3-定义" class="headerlink" title="1.3 定义"></a>1.3 定义</h3><p>Alphabet = English characters<br>Language = English sentences<br>Meaning funciton L maps syntax to semantics.</p>
-<p>生成汇编代码。</p>
-<p>把程序代码根据角色分割成不同的substring。(Recognize substrings corresponding to tokens.)<br>把这些token为给parser。(Identify the token class of each lexeme.)</p>
+<h2 id="1-语法树"><a href="#1-语法树" class="headerlink" title="1. 语法树"></a>1. 语法树</h2><blockquote>
+<p>是什么</p>
+</blockquote>
+<p>你如果分析出来了token。为了利用token分析语法语义，你得构造一个东西来进行解析啊，不然怎么解析呢？</p>
+<blockquote>
+<p>为什么</p>
+</blockquote>
+<p>树状的形式能更好的对字符进行提取和表征。</p>
+<blockquote>
+<p>怎么做</p>
+</blockquote>
+<p>构造语法树 -》 求解语法树的短语、素短语、直接短语和句柄。</p>
+<p><img src="/2022/07/13/bian-yi-yuan-li/2022-08-24-13-01-58.png"></p>
+<p><font color="red">对于图中的红色二义性表达有误，其实二义性指的是你能画出来两种不同结构的树，那就是二义性，</font></p>
+<blockquote>
+<p>短语</p>
+</blockquote>
+<p><img src="/2022/07/13/bian-yi-yuan-li/2022-08-24-13-04-44.png"></p>
+<h2 id="2-消除左递归和回溯"><a href="#2-消除左递归和回溯" class="headerlink" title="2. 消除左递归和回溯"></a>2. 消除左递归和回溯</h2><blockquote>
+<p>是什么</p>
+</blockquote>
+<p>在构造语法树的过程中发现了很多无限循环的恶心案例，为了解决这些东西，有了消除递归和回溯。</p>
+<blockquote>
+<p>为什么</p>
+</blockquote>
+<p>同是什么。</p>
+<blockquote>
+<p>怎么做</p>
+</blockquote>
+<p><img src="/2022/07/13/bian-yi-yuan-li/2022-08-24-13-06-27.png"></p>
+<p>左递归，你看式子里面箭头后面紧跟着的和箭头前的字符是一样的，那就是递归了啊。<br>所以你得消除他，不然语法解析会一直无限循环。怎么消除呢？</p>
+<p>要想让它别循环了，停下来肯定得有终结符啊，所以你直接把后面的终结符提上来先写上去。构造一<code>字符的撇</code>。</p>
+<p>下面对这个<code>字符的撇</code>的处理，为了还原式子原意，所以你得把这个字符原来式子中前面的东西得继续写上，后面的因为已经提取了，成了空的了，所以有了这个推导。</p>
+<p>消除回溯</p>
+<p>回溯的式子中每个都有相同的起始字符。所以为了消除回溯，只留下一个这个字符，后面的改造成新的<code>字符撇</code>。对新的字符撇，前面字符已经提取，所以直接写后面的字符即可。</p>
+<h3 id="2-1-LL语法"><a href="#2-1-LL语法" class="headerlink" title="2.1 LL语法"></a>2.1 LL语法</h3><blockquote>
+<p>是什么</p>
+</blockquote>
+<p>LL语法是分析token，组织有效的语义的一种自顶向下的分析算法。它规定不能有左递归和不能有二义性和不能有回溯。</p>
+<blockquote>
+<p>为什么</p>
+</blockquote>
+<p>为了分析语义啊。自顶向下的一个算法罢了。</p>
+<blockquote>
+<p>怎么做</p>
+</blockquote>
+<p>一般是构造First和Fllow集，来分析下一步能不能走到最终的target语义。</p>
+<p>看名字就知道，看当前碰到的和下一个碰到的字符就行了。</p>
+<p><img src="/2022/07/13/bian-yi-yuan-li/!%5B%5D(%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/2022-08-24-13-53-29.png).png"></p>
+<p>求First集，如果看箭头紧挨着的那个字符，如果是终结符，将这个终结符加入first集合。如果不是终结符，那么继续找这个非终结符的是否有终结符，直到找到终结符。（只看箭头紧挨着的那个终结字符）</p>
+<p>求follow集，如果看途中可以看到有3中情况，对照规则来就行。</p>
+<p>我对其中的这么做的原因做一下解释，对于其中的第二条，如果B后面是空，那么怎么告诉当前字符的下一个follow是谁呢（主要是告诉他该停止了）？已经是空了所以需要当前A的终结符来对本次语法匹配进行终止（follow集合）。需要加入A的follow集合。</p>
+<p>对于第三条，如果是终结符，那么直接写下来就好，如果不是，你就需要对当前的β的终止符加入到follow啦，因为你需要看到当前β的终止符才能停下来，你直接查β的first集合就好啦。</p>
+<p><strong>完整分析过程</strong></p>
+<p>根据消除左递归和回溯的语法，构造first和follow集，然后再构造LL（1）分析表。</p>
 
                 
             </div>

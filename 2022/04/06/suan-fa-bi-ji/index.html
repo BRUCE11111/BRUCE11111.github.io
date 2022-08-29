@@ -898,6 +898,47 @@
 
 <h3 id="2-AStar算法"><a href="#2-AStar算法" class="headerlink" title="2. AStar算法"></a>2. AStar算法</h3><p>AStar算法一般在BFS模板中，对搜索方向有了新的优先级。详细可以参考<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/cut-off-trees-for-golf-event/solution/by-ac_oier-ksth/">【宫水三叶】一题三解 :「BFS」&amp;「AStar 算法」&amp;「并查集预处理」 - 为高尔夫比赛砍树 - 力扣（LeetCode）</a></p>
 <p>其中，AStar算法的汇总：<a target="_blank" rel="noopener" href="https://sharingsource.github.io/tags/AStar-%E7%AE%97%E6%B3%95/">标签 - AStar 算法 - 宫水三叶的刷题日记 (sharingsource.github.io)</a></p>
+<h2 id="3-找规律题目"><a href="#3-找规律题目" class="headerlink" title="3. 找规律题目"></a>3. 找规律题目</h2><h3 id="3-1-在数组中找到最大的相等频率"><a href="#3-1-在数组中找到最大的相等频率" class="headerlink" title="3.1 在数组中找到最大的相等频率"></a>3.1 <font color="red">在数组中找到最大的相等频率</font></h3><p>力扣第1224题目。</p>
+<p><img src="/2022/04/06/suan-fa-bi-ji/2022-08-18-09-48-29.png"></p>
+<p>本题目仔细阅读后，会发现没有固定的套路来解决它。所以，是个找规律解答的题目类型。</p>
+<p>分析问题，关键的问题是，如何能够知道，当删除一个元素后，当前的前缀剩下的每个数字出现的次数都相同。如果知道了这个，那么就能够知道前缀的长度。</p>
+<p>思路：如果题目中每个元素出现的次数都是偶数的话，那么可以使用异或直接解决（偶数出现后和为0）。所以得重新找思路，只能先看一下各种case。对于一个前缀，当前新出现的数字<code>x</code>，有以下几种情况：</p>
+<ol>
+<li><p>1 2 3 4<br>每个都是出现了一次，这种删除谁都行吧。 此时能够看到数字出现<code>最大的频率是1</code>。</p>
+</li>
+<li><p>111 222 333 4 or 111 222 3 444<br>应该删除4 或者 3。 此时数字出现的频率为 <code>最大频率 * 最大频率对应的数字种类 == 当前前缀长度 - 1</code></p>
+</li>
+<li><p>111 222 3333<br>应该删除3。此时数字出现的频率： <code>最大频率 = （当前前缀长度 - 1）/ 数字种类 + 1</code></p>
+<p>综上，需要记录 最大频率 最大频率对应的数字种类数量 出现的数字种类数量即可。</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">    <span class="token keyword">public</span> <span class="token keyword">int</span> <span class="token function">maxEqualFreq</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">[</span><span class="token punctuation">]</span> nums<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">int</span> n <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">)</span> <span class="token punctuation">(</span><span class="token number">1e5</span> <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">int</span><span class="token punctuation">[</span><span class="token punctuation">]</span> hashed <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token keyword">int</span><span class="token punctuation">[</span>n<span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token keyword">int</span> res <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token keyword">int</span> maxFrequency <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token keyword">int</span> maxType <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token keyword">int</span> curType <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> nums<span class="token punctuation">.</span>length<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>hashed<span class="token punctuation">[</span>nums<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token operator">++</span> <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            curType<span class="token operator">++</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>hashed<span class="token punctuation">[</span>nums<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">]</span> <span class="token operator">&gt;</span> maxFrequency<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            maxFrequency <span class="token operator">=</span> hashed<span class="token punctuation">[</span>nums<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+            maxType <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>hashed<span class="token punctuation">[</span>nums<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">]</span> <span class="token operator">==</span> maxFrequency<span class="token punctuation">)</span><span class="token punctuation">{</span>
+            maxType<span class="token operator">++</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token comment">// 1 2 3 anyone can delete</span>
+        <span class="token comment">// 111 222 333 4 should delete 4 or 111 222 3 444 should delete 3 </span>
+        <span class="token comment">// 111 222 3333 should delete 3</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>maxFrequency <span class="token operator">==</span> <span class="token number">1</span> <span class="token operator">||</span> <span class="token punctuation">(</span>maxType <span class="token operator">*</span> maxFrequency <span class="token operator">==</span> i<span class="token punctuation">)</span> <span class="token operator">||</span> <span class="token punctuation">(</span>maxType <span class="token operator">==</span> <span class="token number">1</span> <span class="token operator">&amp;&amp;</span> <span class="token punctuation">(</span>maxFrequency <span class="token operator">==</span> i <span class="token operator">/</span> curType <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            res <span class="token operator">=</span> i <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">return</span> res<span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
+</ol>
 
                 
             </div>
