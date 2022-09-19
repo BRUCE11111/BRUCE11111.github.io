@@ -1,4 +1,5 @@
 ---
+
 title: java
 top: false
 cover: true
@@ -43,7 +44,7 @@ http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.h
 对我的电脑点右键，然后选择属性
 
 ![](java/2022-08-15-22-39-22.png)
- 
+
 
  进入之后选择高级系统设置，然后选择环境变量
 
@@ -100,14 +101,19 @@ java下载
 
 在文件中添加如下，根据自己实际情况填写
 
-#安装目录
+安装目录
+
+```bash
 export   JAVA_HOME=/home/tclab/env/jdk1.8.0_301
+```
+
 #下面都一样啦
+
+```bash
 export   CLASSPATH=.:$JAVA_HOME/lib:$JRE_HOME/lib:$CLASSPATH
 export  PATH=$JAVA_HOME/bin:$JRE_HOME/bin:$PATH
 export   JRE_HOME=$JAVA_HOME/jre
-
-
+```
 
 ## 远程开发 IDEA
 
@@ -144,10 +150,6 @@ $T(n) = a * T(\frac{n}{b}) + f(n)$
 ![image-20210814220124329](java/image-20210814220124329.png)
 
 ![image-20210815153306305](java/image-20210815153306305.png)
-
-
-
-
 
 ### > 类加载子系统
 
@@ -199,10 +201,6 @@ cinit()方法会把显示初始化和静态代码块中的初始化放到一起�
 
 2. 执行。
 3. 退出。正常执行结束、运行时异常。
-
-
-
-
 
 
 
@@ -2366,19 +2364,11 @@ Owner：获得锁的线程称为Owner
 
 ### <font color = "green">CountDownLatch和Semaphore的区别和底层原理</font>
 
-CountDownLatch是计数器，给它设置一个数字，一个线程调用CountDownLatch的await()将会阻塞，其他线程可以调用CountDownLatch的countDown()方法来对数字减一，当数字减为0后，所以偶await线程都将会被唤醒。
+`CountDownLatch`是计数器，给它设置一个数字，一个线程调用`CountDownLatch`的`await()`将会阻塞，其他线程可以调用`CountDownLatch`的`countDown()`方法来对数字减一，当数字减为0后，所以偶await线程都将会被唤醒。
 
-对应的底层原理是：调用await（）方法的线程会利用AQS排队，一旦数字被减为0，则会被AQS中排队的线程依次唤醒。
+对应的底层原理是：调用`await（）`方法的线程会利用AQS排队，一旦数字被减为0，则会被AQS中排队的线程依次唤醒。
 
-
-
-Semophore表示信号量，可以设置许可的个数，表示同时允许最多多少个线程使用该信号量，通过acquire()来获取许可，如果没有许可则用线程阻塞，并通过AQS来排队，可以通过release()方法来释放许可，当某个线程释放许可后，会从AQS中正在排队的第一个线程依次唤醒，直到没有空闲许可。
-
-
-
-
-
-
+Semophore表示信号量，可以设置许可的个数，表示同时允许最多多少个线程使用该信号量，通过acquire()来获取许可，如果没有许可则用线程阻塞，并通过AQS来排队，可以通过`release()`方法来释放许可，当某个线程释放许可后，会从AQS中正在排队的第一个线程依次唤醒，直到没有空闲许可。
 
 泛型
 
@@ -2404,15 +2394,13 @@ interface Formula{
 
 通过使用`default`方法可以在接口中实现具体方法（非抽象方法）<font color=  "red"> `default`方法不能被子类重写，只能继承</font>。
 
-#### 1. Stream
+### 4.1 Stream
 
 `1. 中间操作`（返回`Stream<T>`和`终端操作`（返回定义类型的结果）。
 
 ```java
 long count = list.stream().distinct().count();
 ```
-
-
 
 2. 可以替代循环的`anymatch`
 
@@ -2463,7 +2451,7 @@ boolean isvalidTwo = list.stream().noneMatch(element - > element.contains("h"));
 
 6. `Reduction` 
 
-Imagine that you have a *List<Integer>* and you want to have a sum of all these elements and some initial *Integer* (in this example 23). So, you can run the following code and result will be 26 (23 + 1 + 1 + 1).
+Imagine that you have a `List<Integer>` and you want to have a sum of all these elements and some initial *Integer* (in this example 23). So, you can run the following code and result will be 26 (23 + 1 + 1 + 1).
 
 ```java
 List<Integer> integers = Arrays.asList(1,1,1);
@@ -2477,6 +2465,226 @@ Integer reduced = integers.stream().reduce(23, (a,b) -> a + b);
 ```java
 List<String> resultList = list.stream().map(element -> element.toUpperCase()).collect(Collectors.toList());
 ```
+
+### 4.2 lambda expressions
+
+如果一个接口只有一个抽象方法，那么这个接口可以标注为`FuncitonalInterface`。通过lambda表达式可以用更简短的代码更清楚地写明一个表达式。其形式如下：
+
+```java
+(argument-list)->{body}
+```
+
+* Argument-list: 可以是空或者非空的。
+* arrow：链接参数和body（{}）。
+* Body：包含各种表达式和语句。
+
+```java
+() -> {
+    //Body of no parameter lambda
+}
+
+(p1) -> {
+    // Body of single parameter lambda
+}
+
+(p1, p2) -> {
+    // Body of multiple parameter lambda
+}
+```
+
+:ice_cream:例子：
+
+```java
+interface Drawable{  
+    public void draw();  
+}  
+public class LambdaExpressionExample {  
+    public static void main(String[] args) {  
+        int width=10;  
+  
+        //without lambda, Drawable implementation using anonymous class  
+        Drawable d=new Drawable(){  
+            public void draw(){System.out.println("Drawing "+width);}  
+        };  
+        d.draw();  
+    }  
+}
+_______________________________________________________
+@FunctionalInterface  //It is optional  
+interface Drawable{  
+    public void draw();  
+}  
+  
+public class LambdaExpressionExample2 {  
+    public static void main(String[] args) {  
+        int width=10;  
+          
+        //with lambda  
+        Drawable d2=()->{  
+            System.out.println("Drawing "+width);  
+        };  
+        d2.draw();  
+    }  
+}  
+```
+
+### 4.3 方法引用
+
+方法引用是用来引用函数接口。也是很方便书写的lambda表达式的一种。有三种形式：
+
+1. 引用static 方法。
+2. 引用实例方法。
+3. 引用构造函数。
+
+举个:ice_cream:例子：
+
+```java
+ContainingClass::staticMethodName 
+```
+
+```java
+interface Sayable{  
+    void say();  
+}  
+public class MethodReference {  
+    public static void saySomething(){  
+        System.out.println("Hello, this is static method.");  
+    }  
+    public static void main(String[] args) {  
+        // Referring static method  
+        Sayable sayable = MethodReference::saySomething;  
+        // Calling interface method  
+        sayable.say();  
+    }  
+}  
+```
+
+引用实例方法：
+
+```java
+interface Sayable{  
+    void say();  
+}  
+public class InstanceMethodReference {  
+    public void saySomething(){  
+        System.out.println("Hello, this is non-static method.");  
+    }  
+    public static void main(String[] args) {  
+        InstanceMethodReference methodReference = new InstanceMethodReference(); // Creating object  
+        // Referring non-static method using reference  
+            Sayable sayable = methodReference::saySomething;  
+        // Calling interface method  
+            sayable.say();  
+            // Referring non-static method using anonymous object  
+            Sayable sayable2 = new InstanceMethodReference()::saySomething; // You can use anonymous object also  
+            // Calling interface method  
+            sayable2.say();  
+    }  
+}
+```
+
+引用构造器
+
+```java
+interface Messageable{  
+    Message getMessage(String msg);  
+}  
+class Message{  
+    Message(String msg){  
+        System.out.print(msg);  
+    }  
+}  
+public class ConstructorReference {  
+    public static void main(String[] args) {  
+        Messageable hello = Message::new;  
+        hello.getMessage("Hello");  
+    }  
+}  
+```
+
+### 4.4 函数接口
+
+上面提到的，一个接口中只有一个抽象方法就是函数接口。它可以有任意的默认和静态方法。举个例子:ice_cream:：
+
+```java
+@FunctionalInterface  
+interface sayable{  
+    void say(String msg);   // abstract method  
+    // It can contain any number of Object class methods.  
+    int hashCode();  
+    String toString();  
+    boolean equals(Object obj);  
+}  
+public class FunctionalInterfaceExample2 implements sayable{  
+    public void say(String msg){  
+        System.out.println(msg);  
+    }  
+    public static void main(String[] args) {  
+        FunctionalInterfaceExample2 fie = new FunctionalInterfaceExample2();  
+        fie.say("Hello there");  
+    }  
+}
+```
+
+函数式接口可以继承自非函数式接口：
+
+```java
+interface Doable{  
+    default void doIt(){  
+        System.out.println("Do it now");  
+    }  
+}  
+@FunctionalInterface  
+interface Sayable extends Doable{  
+    void say(String msg);   // abstract method  
+}  
+public class FunctionalInterfaceExample3 implements Sayable{  
+    public void say(String msg){  
+        System.out.println(msg);  
+    }  
+    public static void main(String[] args) {  
+        FunctionalInterfaceExample3 fie = new FunctionalInterfaceExample3();  
+        fie.say("Hello there");  
+        fie.doIt();  
+    }  
+}  
+```
+
+java提供了一些函数式接口：[Java 8 函数式接口 | 菜鸟教程 (runoob.com)](https://www.runoob.com/java/java8-functional-interfaces.html)
+
+### 4.5 Optional
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
