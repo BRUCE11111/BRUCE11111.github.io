@@ -496,7 +496,8 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="算法必知"><a href="#算法必知" class="headerlink" title="算法必知"></a>算法必知</h1><p>做题上来必须首先<strong>估算题目要求的时间复杂度</strong>，首先看题目中的数据量大小。</p>
+                <p>[toc]</p>
+<h1 id="算法必知"><a href="#算法必知" class="headerlink" title="算法必知"></a>算法必知</h1><p>做题上来必须首先<strong>估算题目要求的时间复杂度</strong>，首先看题目中的数据量大小。</p>
 <table>
 <thead>
 <tr>
@@ -864,14 +865,76 @@
 
 
 
+<h2 id="5-回溯"><a href="#5-回溯" class="headerlink" title="5. 回溯"></a>5. 回溯</h2><p>解决的题型有：排列组合子集类型，岛屿题目。</p>
+<h3 id="5-1-排列组合子集问题"><a href="#5-1-排列组合子集问题" class="headerlink" title="5.1 排列组合子集问题"></a>5.1 排列组合子集问题</h3><h4 id="5-1-1-划分k个子集"><a href="#5-1-1-划分k个子集" class="headerlink" title="5.1.1 划分k个子集"></a>5.1.1 划分k个子集</h4><p>[leetcode698](<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/partition-to-k-equal-sum-subsets/">698. 划分为k个相等的子集 - 力扣（LeetCode）</a>)</p>
+<h4 id="5-1-2-公平分发饼干"><a href="#5-1-2-公平分发饼干" class="headerlink" title="5.1.2 公平分发饼干"></a>5.1.2 公平分发饼干</h4><p>题目要求我们求得最公平的糖果数量，所以回溯方法可以穷尽所有的组合数。思路如下：</p>
+<ol>
+<li>每个糖果随机发给一个小孩子，这种情况肯定能够包括每个小孩子有一个糖果的情况（肯定比有的小孩子没有糖果的情况公平数小）。</li>
+<li>统计所有情况下的公平数，取最小值。</li>
+</ol>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">int</span> ans <span class="token operator">=</span> <span class="token class-name">Integer</span><span class="token punctuation">.</span>MAX_VALUE<span class="token punctuation">;</span>
+   <span class="token keyword">public</span> <span class="token keyword">int</span> <span class="token function">distributeCookies</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">[</span><span class="token punctuation">]</span> cookies<span class="token punctuation">,</span> <span class="token keyword">int</span> k<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+       <span class="token comment">// 穷尽所有的分发情况，统计最小不公平程度</span>
+       <span class="token comment">// k 个小孩子</span>
+       <span class="token keyword">int</span><span class="token punctuation">[</span><span class="token punctuation">]</span> child <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token keyword">int</span><span class="token punctuation">[</span>k<span class="token punctuation">]</span><span class="token punctuation">;</span>
+       <span class="token keyword">return</span> <span class="token function">dfs</span><span class="token punctuation">(</span>child<span class="token punctuation">,</span> cookies<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+   <span class="token punctuation">}</span>
 
+   <span class="token keyword">public</span> <span class="token keyword">int</span> <span class="token function">dfs</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">[</span><span class="token punctuation">]</span> child<span class="token punctuation">,</span> <span class="token keyword">int</span><span class="token punctuation">[</span><span class="token punctuation">]</span> cookies<span class="token punctuation">,</span> <span class="token keyword">int</span> index<span class="token punctuation">,</span> <span class="token keyword">int</span> max<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+       <span class="token keyword">if</span> <span class="token punctuation">(</span>index <span class="token operator">==</span> cookies<span class="token punctuation">.</span>length<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+           <span class="token keyword">return</span> max<span class="token punctuation">;</span>
+       <span class="token punctuation">}</span>
+       <span class="token keyword">int</span> ans <span class="token operator">=</span> <span class="token class-name">Integer</span><span class="token punctuation">.</span>MAX_VALUE<span class="token punctuation">;</span>
+       <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> child<span class="token punctuation">.</span>length<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+           <span class="token comment">// 第一个饼干发给哪个小孩子，他们之后的回溯情况本质上是一样的。</span>
+           <span class="token keyword">if</span> <span class="token punctuation">(</span>index <span class="token operator">==</span> <span class="token number">0</span> <span class="token operator">&amp;&amp;</span> i <span class="token operator">&gt;</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token keyword">return</span> ans<span class="token punctuation">;</span>
+           child<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">+=</span> cookies<span class="token punctuation">[</span>index<span class="token punctuation">]</span><span class="token punctuation">;</span>
+           ans <span class="token operator">=</span> <span class="token class-name">Math</span><span class="token punctuation">.</span><span class="token function">min</span><span class="token punctuation">(</span>ans<span class="token punctuation">,</span> <span class="token function">dfs</span><span class="token punctuation">(</span>child<span class="token punctuation">,</span> cookies<span class="token punctuation">,</span> index <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token class-name">Math</span><span class="token punctuation">.</span><span class="token function">max</span><span class="token punctuation">(</span>max<span class="token punctuation">,</span> child<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+           child<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">-=</span> cookies<span class="token punctuation">[</span>index<span class="token punctuation">]</span><span class="token punctuation">;</span>
+       <span class="token punctuation">}</span>
+       <span class="token keyword">return</span> ans<span class="token punctuation">;</span>
+   <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
+<p>优化思路：</p>
+<p>情况一：第一个饼干发给任意一个小孩子，回溯树的形状都是长得一样的，所以第一个饼干的情况只需要遍历一次。</p>
+<p><code>if (index == 0 &amp;&amp; i &gt; 0) return ans;</code></p>
+<p>情况二：对饼干排序，先发饼干数量多的包。<font color="blue">如果某位小朋友的饼干数量比当前的答案还多，显然继续回溯下去也无法成为最优答案，直接返回。</font>这样可以让回溯尽快结束。</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">int</span> cur <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">:</span> child<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    cur <span class="token operator">=</span> <span class="token class-name">Math</span><span class="token punctuation">.</span><span class="token function">max</span><span class="token punctuation">(</span>cur<span class="token punctuation">,</span> i<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">if</span> <span class="token punctuation">(</span>cur <span class="token operator">&gt;</span> ans<span class="token punctuation">)</span> <span class="token keyword">return</span> ans<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
+<p>综上：</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">int</span> ans <span class="token operator">=</span> <span class="token class-name">Integer</span><span class="token punctuation">.</span>MAX_VALUE<span class="token punctuation">;</span>
+    <span class="token keyword">public</span> <span class="token keyword">int</span> <span class="token function">distributeCookies</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">[</span><span class="token punctuation">]</span> cookies<span class="token punctuation">,</span> <span class="token keyword">int</span> k<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token comment">// 穷尽所有的分发情况，统计最小不公平程度</span>
+        <span class="token comment">// k 个小孩子</span>
+        <span class="token class-name">Arrays</span><span class="token punctuation">.</span><span class="token function">sort</span><span class="token punctuation">(</span>cookies<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">int</span><span class="token punctuation">[</span><span class="token punctuation">]</span> child <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token keyword">int</span><span class="token punctuation">[</span>k<span class="token punctuation">]</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> <span class="token function">dfs</span><span class="token punctuation">(</span>child<span class="token punctuation">,</span> cookies<span class="token punctuation">,</span> cookies<span class="token punctuation">.</span>length <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
 
+    <span class="token keyword">public</span> <span class="token keyword">int</span> <span class="token function">dfs</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">[</span><span class="token punctuation">]</span> child<span class="token punctuation">,</span> <span class="token keyword">int</span><span class="token punctuation">[</span><span class="token punctuation">]</span> cookies<span class="token punctuation">,</span> <span class="token keyword">int</span> index<span class="token punctuation">,</span> <span class="token keyword">int</span> max<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>index <span class="token operator">==</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">return</span> max<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">int</span> cur <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">:</span> child<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            cur <span class="token operator">=</span> <span class="token class-name">Math</span><span class="token punctuation">.</span><span class="token function">max</span><span class="token punctuation">(</span>cur<span class="token punctuation">,</span> i<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>cur <span class="token operator">&gt;</span> ans<span class="token punctuation">)</span> <span class="token keyword">return</span> ans<span class="token punctuation">;</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> child<span class="token punctuation">.</span>length<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>index <span class="token operator">==</span> cookies<span class="token punctuation">.</span>length <span class="token operator">-</span> <span class="token number">1</span> <span class="token operator">&amp;&amp;</span> i <span class="token operator">&gt;</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token keyword">return</span> ans<span class="token punctuation">;</span>
+            child<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">+=</span> cookies<span class="token punctuation">[</span>index<span class="token punctuation">]</span><span class="token punctuation">;</span>
+            ans <span class="token operator">=</span> <span class="token class-name">Math</span><span class="token punctuation">.</span><span class="token function">min</span><span class="token punctuation">(</span>ans<span class="token punctuation">,</span> <span class="token function">dfs</span><span class="token punctuation">(</span>child<span class="token punctuation">,</span> cookies<span class="token punctuation">,</span> index <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token class-name">Math</span><span class="token punctuation">.</span><span class="token function">max</span><span class="token punctuation">(</span>max<span class="token punctuation">,</span> child<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            child<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">-=</span> cookies<span class="token punctuation">[</span>index<span class="token punctuation">]</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">return</span> ans<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-
-
-
+<p>优化结果：</p>
+<p><img src="/2022/04/06/suan-fa-bi-ji/Users\xuxiaohu\AppData\Roaming\Typora\typora-user-images\image-20220920212523825.png" alt="image-20220920212523825"></p>
 <h1 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h1><h2 id="1-蓄水池抽样"><a href="#1-蓄水池抽样" class="headerlink" title="1. 蓄水池抽样"></a>1. 蓄水池抽样</h2><p>总的样本数量未知，从所有样本中抽取若干个，要求每个样本被抽到的概率相等。</p>
 <p>具体做法：从前往后处理每个样本，每个样本成为答案的概率为<code>1/i</code>，其中<code>i</code>为样本编号（编号从1开始），最终可以确保每个样本成为答案的概率均为<code>1/n</code>（其中<code>n</code>为样本总数）。</p>
 <p>证明：容易证明该做法的正确性，假设最终成为答案的样本编号为 <code>k</code>，那么 成为答案的充要条件为「在遍历到 时被选中」并且「遍历大于<code>k</code> 的所有元素时，均没有被选择（没有覆盖 <code>k</code>）」</p>
@@ -898,6 +961,44 @@
 
 <h3 id="2-AStar算法"><a href="#2-AStar算法" class="headerlink" title="2. AStar算法"></a>2. AStar算法</h3><p>AStar算法一般在BFS模板中，对搜索方向有了新的优先级。详细可以参考<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/cut-off-trees-for-golf-event/solution/by-ac_oier-ksth/">【宫水三叶】一题三解 :「BFS」&amp;「AStar 算法」&amp;「并查集预处理」 - 为高尔夫比赛砍树 - 力扣（LeetCode）</a></p>
 <p>其中，AStar算法的汇总：<a target="_blank" rel="noopener" href="https://sharingsource.github.io/tags/AStar-%E7%AE%97%E6%B3%95/">标签 - AStar 算法 - 宫水三叶的刷题日记 (sharingsource.github.io)</a></p>
+<h3 id="3-寻找缺失的数"><a href="#3-寻找缺失的数" class="headerlink" title="3. 寻找缺失的数"></a>3. 寻找缺失的数</h3><blockquote>
+<p>求和</p>
+</blockquote>
+<p>根据题意，给定 <code>nums</code> 的长度为 m 且缺失了两个数，所有的 <code>nums[i]</code> 加上缺失数字组成连续排列长度为 <code>n = m + 2n=m+2</code>。</p>
+<p>根据等差数量求和公式可知，补齐后的排列总和为 $\frac{n \times (1 + n)}{2} $，补全后的理论总和与实际总和之间的差值 </p>
+<p>$cur = \frac{n \times (1 + n)}{2} - \sum_{i = 0}^{m - 1}nums[i] $为缺失数值之和。</p>
+<p>根据补全后数值各不相同可知，两者必不可能同时位于 $t = \left \lfloor \frac{cur}{2} \right \rfloor$ 的同一侧或共点（偏大、偏小或数值重复），因此我们可以计算 [1, t] 范围内的理论总和与实际总和之间的差值来确定其一（将问题转换为求解缺失一值），再结合缺失两值之和 sum 算得答案。</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">int</span><span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token function">missingTwo</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">[</span><span class="token punctuation">]</span> nums<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">int</span> n <span class="token operator">=</span> nums<span class="token punctuation">.</span>length <span class="token operator">+</span> <span class="token number">2</span><span class="token punctuation">,</span> cur <span class="token operator">=</span> n <span class="token operator">*</span> <span class="token punctuation">(</span><span class="token number">1</span> <span class="token operator">+</span> n<span class="token punctuation">)</span> <span class="token operator">/</span> <span class="token number">2</span><span class="token punctuation">;</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> x <span class="token operator">:</span> nums<span class="token punctuation">)</span> cur <span class="token operator">-=</span> x<span class="token punctuation">;</span>
+        <span class="token keyword">int</span> sum <span class="token operator">=</span> cur<span class="token punctuation">,</span> t <span class="token operator">=</span> cur <span class="token operator">/</span> <span class="token number">2</span><span class="token punctuation">;</span>
+        cur <span class="token operator">=</span> t <span class="token operator">*</span> <span class="token punctuation">(</span><span class="token number">1</span> <span class="token operator">+</span> t<span class="token punctuation">)</span> <span class="token operator">/</span> <span class="token number">2</span><span class="token punctuation">;</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> x <span class="token operator">:</span> nums<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>x <span class="token operator">&lt;=</span> t<span class="token punctuation">)</span> cur <span class="token operator">-=</span> x<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token keyword">int</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">{</span>cur<span class="token punctuation">,</span> sum <span class="token operator">-</span> cur<span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<blockquote>
+<p>原地哈希</p>
+</blockquote>
+<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">class Solution {
+public:
+    vector&lt;int&gt; missingTwo(vector&lt;int&gt;&amp; nums) {
+        for (int i = 0; i &lt; 3; i ++) nums.push_back(-1);
+
+        for (int i = 0; i &lt; nums.size(); i ++)
+            while (i != nums[i] &amp;&amp; nums[i] != -1)
+                swap(nums[i], nums[nums[i]]);
+        
+        vector&lt;int&gt; ans;
+        for (int i = 1; i &lt; nums.size(); i ++) 
+            if (nums[i] == -1) ans.push_back(i);
+        return ans; 
+    }
+};<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
 <h2 id="3-找规律题目"><a href="#3-找规律题目" class="headerlink" title="3. 找规律题目"></a>3. 找规律题目</h2><h3 id="3-1-在数组中找到最大的相等频率"><a href="#3-1-在数组中找到最大的相等频率" class="headerlink" title="3.1 在数组中找到最大的相等频率"></a>3.1 <font color="red">在数组中找到最大的相等频率</font></h3><p>力扣第1224题目。</p>
 <p><img src="/2022/04/06/suan-fa-bi-ji/2022-08-18-09-48-29.png"></p>
 <p>本题目仔细阅读后，会发现没有固定的套路来解决它。所以，是个找规律解答的题目类型。</p>
@@ -917,7 +1018,7 @@
     <span class="token keyword">int</span> maxFrequency <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
     <span class="token keyword">int</span> maxType <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
     <span class="token keyword">int</span> curType <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
-
+   
     <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> nums<span class="token punctuation">.</span>length<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
         <span class="token keyword">if</span> <span class="token punctuation">(</span>hashed<span class="token punctuation">[</span>nums<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token operator">++</span> <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
             curType<span class="token operator">++</span><span class="token punctuation">;</span>
@@ -935,10 +1036,36 @@
             res <span class="token operator">=</span> i <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">;</span>
         <span class="token punctuation">}</span>
     <span class="token punctuation">}</span>
-
+   
     <span class="token keyword">return</span> res<span class="token punctuation">;</span>
 <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
 </ol>
+<h2 id="4-括号类型题目"><a href="#4-括号类型题目" class="headerlink" title="4. 括号类型题目"></a>4. 括号类型题目</h2><h3 id="4-1-括号分数"><a href="#4-1-括号分数" class="headerlink" title="4.1 括号分数"></a>4.1 括号分数</h3><p><img src="/2022/04/06/suan-fa-bi-ji/Users\xuxiaohu\AppData\Roaming\Typora\typora-user-images\image-20221009092436769.png" alt="image-20221009092436769"></p>
+<blockquote>
+<p>分析</p>
+</blockquote>
+<p>这个题目统计分数，遇到右括号要找到对应的左括号，明显是个栈的形式，所以肯定需要栈这个数据结构。</p>
+<p>因为有统计的形式，当我们遇到字符：</p>
+<ol>
+<li><p><code>')'</code>时，需要将左括号找到，并且这对括号包含的所有（<code>((..))</code>）括号计算出来。如果当前栈顶元素不是0， 那么2*栈顶元素。</p>
+<p>如果是0，则push（1）即可。遇到当前的右括号，将当前的分数全部统计出来，所以需要判断其他栈顶元素，使用prev2，每次将前一个分数算进来与当前元素相加合并为一个元素。为了方便计算，初始化栈时压入0。</p>
+</li>
+<li><p><code>'('</code>时，压栈，将分数0压栈。0代表当前是<code>(</code>。</p>
+</li>
+</ol>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token class-name">Deque</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">Integer</span><span class="token punctuation">&gt;</span></span> stack <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ArrayDeque</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token punctuation">&gt;</span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+stack<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">char</span> c <span class="token operator">:</span> s<span class="token punctuation">.</span><span class="token function">toCharArray</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span>c <span class="token operator">==</span> <span class="token string">'('</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        stack<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+        <span class="token keyword">int</span> prev1 <span class="token operator">=</span> stack<span class="token punctuation">.</span><span class="token function">pop</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">int</span> prev2 <span class="token operator">=</span> stack<span class="token punctuation">.</span><span class="token function">pop</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        stack<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span>prev2 <span class="token operator">+</span> <span class="token class-name">Math</span><span class="token punctuation">.</span><span class="token function">max</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> prev1 <span class="token operator">*</span> <span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">return</span> stack<span class="token punctuation">.</span><span class="token function">pop</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
 
                 
             </div>

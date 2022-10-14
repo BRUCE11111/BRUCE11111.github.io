@@ -496,8 +496,9 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="C"><a href="#C" class="headerlink" title="C++"></a>C++</h1><h1 id="1-const-的新花样"><a href="#1-const-的新花样" class="headerlink" title="1. const 的新花样"></a>1. const 的新花样</h1><p>参考至：<a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_45483780/article/details/107018603">(22条消息) const全局变量和局部变量的区别_weixin_45483780的博客-CSDN博客_const局部变量和全局变量</a></p>
-<h3 id="1-1-c语言"><a href="#1-1-c语言" class="headerlink" title="1.1 c语言"></a>1.1 c语言</h3><h4 id="1-1-1-修改"><a href="#1-1-1-修改" class="headerlink" title="1.1.1 修改"></a>1.1.1 修改</h4><p>c语言中的const，需要重新读取内存对其进行赋值。所以，本质上是可以强制修改内容，只是语法上不能修改内容。</p>
+                <h1 id="C"><a href="#C" class="headerlink" title="C++"></a>C++</h1><p>[toc]</p>
+<h1 id="1-关键字"><a href="#1-关键字" class="headerlink" title="1. 关键字"></a>1. 关键字</h1><h2 id="1-1-const"><a href="#1-1-const" class="headerlink" title="1.1 const"></a>1.1 const</h2><h3 id="1-1-1-const-的新花样"><a href="#1-1-1-const-的新花样" class="headerlink" title="1.1.1 const 的新花样"></a>1.1.1 const 的新花样</h3><p>参考至：<a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_45483780/article/details/107018603">(22条消息) const全局变量和局部变量的区别_weixin_45483780的博客-CSDN博客_const局部变量和全局变量</a></p>
+<p>c语言中的const，需要重新读取内存对其进行赋值。所以，本质上是可以强制修改内容，只是语法上不能修改内容。</p>
 <pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">#include &lt;stdio.h&gt;
 
 int main() {
@@ -509,10 +510,37 @@ int main() {
 }<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>const<a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=%E5%85%A8%E5%B1%80%E5%8F%98%E9%87%8F&amp;spm=1001.2101.3001.7020">全局变量</a>在静态区，直接或间接都不可以修改<br>const局部变量在栈上，可以间接修改<br><strong>但是定义为const的变量不建议修改</strong></p>
-<h4 id="1-1-2-作用域"><a href="#1-1-2-作用域" class="headerlink" title="1.1.2 作用域"></a>1.1.2 作用域</h4><p>c语言中的const和普通变量的唯一区别就是不能修改（语法上），其他无区别，使用extern在其他文件中也可以使用。</p>
-<h3 id="1-2-c"><a href="#1-2-c" class="headerlink" title="1.2 c++"></a>1.2 c++</h3><h4 id="1-2-1-修改"><a href="#1-2-1-修改" class="headerlink" title="1.2.1 修改"></a>1.2.1 修改</h4><p>c++ 在编译过程中就直接将值替换给变量，没有访问内存这一步，所以修改变量对于c++还是无效的，打印出来还是初始定义的值。</p>
-<h4 id="1-2-2-作用域"><a href="#1-2-2-作用域" class="headerlink" title="1.2.2 作用域"></a>1.2.2 作用域</h4><p>c++语言中const只能作用于本文件中，如果其他文件中使用，需要定义在头文件，其他文件引用头文件。</p>
-<h2 id="2-类和对象"><a href="#2-类和对象" class="headerlink" title="2. 类和对象"></a>2. 类和对象</h2><p>类只是一个模板，不占用内存空间。对象是类的运行实例，其位于栈上或者堆上。</p>
+<blockquote>
+<p>作用域</p>
+</blockquote>
+<p>c语言中的const和普通变量的唯一区别就是不能修改（语法上），其他无区别，使用extern在其他文件中也可以使用。</p>
+<blockquote>
+<p>修改</p>
+</blockquote>
+<p>c++ 在编译过程中就直接将值替换给变量，没有访问内存这一步，所以修改变量对于c++还是无效的，打印出来还是初始定义的值。</p>
+<blockquote>
+<p>作用域</p>
+</blockquote>
+<p>c++语言中const只能作用于本文件中，如果其他文件中使用，需要定义在头文件，其他文件引用头文件。</p>
+<h2 id="1-3-union"><a href="#1-3-union" class="headerlink" title="1.3 union"></a>1.3 union</h2><p>union是一种将各种不同的类型或数据结构放在一起共用一个地址的关键字。<br>有如下例子：</p>
+<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">union S {
+    int a;
+    float b;
+    uint64_t c;
+}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>这个例子中，变量a, b, c共用一个地址空间。这个Union命名的结构S，它的实际占用大小与成员中占用最大bit的成员一致。所以，在这里S实际上是个64bit的union。</p>
+<p>再举个例子说明什么叫共用一个地址空间：</p>
+<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">union S {
+    int a[2];
+    vector&lt;int&gt; vec;
+}
+void test() {
+    S s.a[1] = 12; // 此时a是激活状态，可以使用变量a。
+    
+}
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h1 id="2-类和对象"><a href="#2-类和对象" class="headerlink" title="2. 类和对象"></a>2. 类和对象</h1><p>类只是一个模板，不占用内存空间。对象是类的运行实例，其位于栈上或者堆上。</p>
 <blockquote>
 <p>栈</p>
 <pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">class demo {
@@ -534,7 +562,10 @@ int main(){
 }
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 </blockquote>
-<h2 id="2-1-string"><a href="#2-1-string" class="headerlink" title="2.1 string"></a>2.1 string</h2><p>使用string类需要包含头文件<string>:</string></p>
+<h2 id="1-2-string"><a href="#1-2-string" class="headerlink" title="1.2 string"></a>1.2 string</h2><blockquote>
+<p>头文件</p>
+</blockquote>
+<p>使用string类需要包含头文件<string>:</string></p>
 <pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">void erase_demo() {
 	string s1, s2, s3;
 	s1 = s2 = s3 = "1234567890";
@@ -545,7 +576,7 @@ int main(){
 	cout &lt;&lt; s3 &lt;&lt; endl;
 }<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<h2 id="2-2-string-内部是什么样的"><a href="#2-2-string-内部是什么样的" class="headerlink" title="2.2 string 内部是什么样的"></a>2.2 string 内部是什么样的</h2><p>c语言中，两种字符串的写法：</p>
+<h3 id="1-2-1-string-内部是什么样的"><a href="#1-2-1-string-内部是什么样的" class="headerlink" title="1.2.1 string 内部是什么样的"></a>1.2.1 string 内部是什么样的</h3><p>c语言中，两种字符串的写法：</p>
 <ol>
 <li><code>char str[10] = "abc"</code> 这个字符串可读写.</li>
 <li><code>char *str = "abc"</code>，这个字符串只能读，不能写.</li>
@@ -677,6 +708,273 @@ int main(){
 <pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">void func(int *parr){ ...... }
 void func(int arr[]){ ...... }
 void func(int arr[5]){ ...... }<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<h1 id="6-STL"><a href="#6-STL" class="headerlink" title="6.STL"></a>6.STL</h1><p>STL由容器、算法、迭代器、函数对象、适配器、内存分配器这6部分组成，其中后面4部分是为前面两部分服务的，他们各自的含义如表1所示。</p>
+<table>
+<thead>
+<tr>
+<th align="center">STL的组成</th>
+<th align="center">含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">容器</td>
+<td align="center">一些封装数据结构的模板类，例如vector向量容器、list列表容器等。</td>
+</tr>
+<tr>
+<td align="center">算法</td>
+<td align="center">STL将常用的数据结构算法设计成一个个模板函数，这些算法在std命名空间中定义，其中大部分算法都包含在<code>&lt;algorithm&gt;</code>中，少部分位于头文件<code>&lt;numeric&gt;</code>中。</td>
+</tr>
+<tr>
+<td align="center">迭代器</td>
+<td align="center">对容器的读和写通过迭代器完成，容器和算法之间的胶合剂。</td>
+</tr>
+<tr>
+<td align="center">函数对象</td>
+<td align="center">如果一个类将<code>()</code>运算符重载为成员函数，这个类就称为函数对象类，这个类的对象就是函数对象（仿函数）。</td>
+</tr>
+<tr>
+<td align="center">适配器</td>
+<td align="center">可以使一个类的接口（模板参数）适配成用户指定的形式，从而让原本不能在一起工作的两个类工作在一起。容器、迭代器和函数都有适配器。</td>
+</tr>
+<tr>
+<td align="center">内存分配器</td>
+<td align="center">为容器类模板提供自定义的内存申请和释放功能，一般只有高级用户拥有改变内存分配策略的需求。</td>
+</tr>
+</tbody></table>
+<p>C++标准中有13个头文件：</p>
+<p>|<iterator>|<functional>|<vector>|<deque>|<list>|<queue>|<stack>|<set>|<map>|<algorithm>|<numeric>|<memory>|<utility>|</utility></memory></numeric></algorithm></map></set></stack></queue></list></deque></vector></functional></iterator></p>
+<p>==标准头文件不再有扩展名。（vector.h -&gt; vector)==</p>
+<h2 id="6-1-序列式容器"><a href="#6-1-序列式容器" class="headerlink" title="6.1 序列式容器"></a>6.1 序列式容器</h2><blockquote>
+<p>是什么</p>
+</blockquote>
+<p>模板类的集合，容器中封装的是组织数据的方法（数据结构）。有序列容器、排序容器和哈希容器。其中后两类称为关联容器。</p>
+<table>
+<thead>
+<tr>
+<th>容器种类</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>序列容器</td>
+<td>包括vector向量容器、list列表容器和deque双端队列容器。之所以是序列容器，是因为元素在容器内的位置和元素的值无关，容器不是排序的。将元素插入容器时，指定什么位置元素就会在什么位置。</td>
+</tr>
+<tr>
+<td>排序容器</td>
+<td>包括set集合容器、multiset多重集合容器、map映射容器以及multimap多重映射容器。排序容器中的元素默认是由小到大排序好的，即便是插入元素，元素也会插入到适当位置。所以关联容器在查找时具有非常好的性能。</td>
+</tr>
+<tr>
+<td>哈希容器</td>
+<td>unordered_set哈希集合、unordered_multiset哈希多重集合、unordered_map哈希映射以及unordered_multimap哈希多重映射。未排序，元素位置由哈希函数确定。</td>
+</tr>
+</tbody></table>
+<h3 id="6-1-1-迭代器"><a href="#6-1-1-迭代器" class="headerlink" title="6.1.1 迭代器"></a>6.1.1 迭代器</h3><blockquote>
+<p>是什么</p>
+</blockquote>
+<p>容器内部结构虽然不同，但是对于数据的查找、排序和求和等操作都是类似的。</p>
+<p>完全利用泛型技术，将它们设计成适用所有容器的通用蒜贩，从而将容器和算法分开。</p>
+<p>有输入迭代器、输出迭代器、前向迭代器、双向迭代器和随机访问迭代器5种。经常使用的是后三种。</p>
+<ul>
+<li>前向迭代器</li>
+</ul>
+<p>如果<code>p</code>是一个前向迭代器，则p支持<code>++p</code> <code>p++</code> <code>*p</code> 操作，还可以被复制或赋值，可以用 <code>==</code> 和 <code>!=</code> 运算符进行比较。此外，两个正向迭代器可以互相赋值。</p>
+<ul>
+<li>双向迭代器</li>
+</ul>
+<p>双向迭代器具有正向迭代器的全部功能，除此之外，假设p是一个双向迭代器，则还可以进行<code>--p</code>或者<code>p--</code>操作（即一次向后移动一个位置）。</p>
+<ul>
+<li>随机访问迭代器</li>
+</ul>
+<p>随机访问迭代器具有双向迭代器的全部功能。初次之前，还支持<code>p+=i</code> <code>p-=i</code> <code>p+i</code> <code>p-i</code> <code>p[i]</code></p>
+<p>容器迭代器的类型：</p>
+<table>
+<thead>
+<tr>
+<th align="center">容器</th>
+<th align="center">对应的迭代器的类型</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">array</td>
+<td align="center">随机访问迭代器</td>
+</tr>
+<tr>
+<td align="center">vector</td>
+<td align="center">随机访问迭代器</td>
+</tr>
+<tr>
+<td align="center">deque</td>
+<td align="center">随机访问迭代器</td>
+</tr>
+<tr>
+<td align="center">list</td>
+<td align="center">双向迭代器</td>
+</tr>
+<tr>
+<td align="center">set/multiset</td>
+<td align="center">双向迭代器</td>
+</tr>
+<tr>
+<td align="center">map/multimap</td>
+<td align="center">双向迭代器</td>
+</tr>
+<tr>
+<td align="center">forward_list</td>
+<td align="center">前向迭代器</td>
+</tr>
+<tr>
+<td align="center">unordered_map/unordered_multimap</td>
+<td align="center">前向迭代器</td>
+</tr>
+<tr>
+<td align="center">unordered-set/unorderd_multiset</td>
+<td align="center">前向迭代器</td>
+</tr>
+<tr>
+<td align="center">stack</td>
+<td align="center">不支持</td>
+</tr>
+<tr>
+<td align="center">queue</td>
+<td align="center">不支持</td>
+</tr>
+</tbody></table>
+<h3 id="6-2-1-Array"><a href="#6-2-1-Array" class="headerlink" title="6.2.1 Array"></a>6.2.1 Array</h3><blockquote>
+<p>是什么</p>
+</blockquote>
+<p>在c++普通数组的基础上，添加了一些成员函数和全局函数。==比普通数组安全，且效率没有变差==</p>
+<p>array大小固定，无法动态扩展或者收缩。只允许访问或者替换元素。</p>
+<p><code>const int *p</code></p>
+<p><code>int const *p</code></p>
+<p><code>const int const *p</code></p>
+<h3 id="6-3-1-vector"><a href="#6-3-1-vector" class="headerlink" title="6.3.1 vector"></a>6.3.1 vector</h3><h3 id="6-3-1-deque"><a href="#6-3-1-deque" class="headerlink" title="6.3.1 deque"></a>6.3.1 deque</h3><blockquote>
+<p>怎么做</p>
+</blockquote>
+<p>实现原理：<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/562914205">C++ STL deque 容器底层实现原理（深度剖析） - 知乎 (zhihu.com)</a></p>
+<h3 id="6-4-1-map"><a href="#6-4-1-map" class="headerlink" title="6.4.1 map"></a>6.4.1 map</h3><p>![C++ STL map部分成员方法示意图](C:\Users\xuxiaohu\OneDrive - Intel Corporation\blog\BRUCE11111.github.io\source_posts\c-基础\2-19112Q14QE40.gif)</p>
+<p>部分成员方法示意图。</p>
+<p><code>map</code>是双向迭代器，可以支持<code>++p p++ --p p-- *p</code>，迭代器之间只能使用<code>== !=</code>运算符比较。</p>
+<h4 id="1-成员方法"><a href="#1-成员方法" class="headerlink" title="1. 成员方法"></a>1. 成员方法</h4><ul>
+<li><p>find</p>
+<p>提供<code>find()</code>成员方法，帮我们查找指定key值的键值对，如果成功找到，则返回一个指向该键值对的双向迭代器。反之和<code>end()</code>方法相同。</p>
+<p>默认使用键的值，对键值进行升序排序。</p>
+</li>
+<li><p>lower_bound(key) and upper_bound(key) and equal_range(key)</p>
+<p>lower是返回指向第一个不小于key的键值对迭代器。upper指向第一个键大于key的键值对的迭代器。</p>
+<p><code>equal_range(key)</code>返回一个pair对象，其中的2个元素都是迭代器类型，其中<code>pair.first</code>是<code>lower_bound(key)</code>返回值，<code>pair.second</code>是<code>upper_bound(key)</code>返回值。</p>
+</li>
+</ul>
+<h1 id="7-std-tricky"><a href="#7-std-tricky" class="headerlink" title="7. std tricky"></a>7. std tricky</h1><h2 id="7-1-类型转换"><a href="#7-1-类型转换" class="headerlink" title="7.1 类型转换"></a>7.1 类型转换</h2><p>c++基本数据类型，可以分为：整形、浮点型、字符型和布尔型。其中数值型包括整形和浮点型。字符型就是char。</p>
+<ol>
+<li>将浮点型数据赋值给整形变量，舍弃小数部分。</li>
+<li>将整形数据赋值给浮点型变量时，数值不变，但是以指数形式存储。</li>
+<li>将double型数据赋值给float型变量时，注意数值范围溢出。</li>
+<li>字符型数据可以赋值给整形变量，此时存入的时字符的ASCII码。</li>
+<li>将一个int，short或long数据赋值给一个char型变量，只将低8位原封不动送到char型变量中。</li>
+<li>将有符号数据赋值给长度相同的无符号型变量，连同原来的符号位一起传送。</li>
+</ol>
+<h3 id="7-1-1-const-pointer-cast"><a href="#7-1-1-const-pointer-cast" class="headerlink" title="7.1.1 const_pointer_cast"></a>7.1.1 <code>const_pointer_cast</code></h3><p>参考至：<a target="_blank" rel="noopener" href="https://cplusplus.com/reference/memory/const_pointer_cast/">here</a></p>
+<p>将<code>shared_ptr</code>指针转为<code>const</code>类型的指针。</p>
+<p>它的参数必须为shared_ptr类型的指针。<span class="github-emoji"><span>🍨</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f368.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span>例子：</p>
+<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">#include &lt;iostream&gt;
+#include &lt;memory&gt;
+
+int main () {
+  std::shared_ptr&lt;int&gt; foo;
+  std::shared_ptr&lt;const int&gt; bar;
+
+  foo = std::make_shared&lt;int&gt;(10);
+
+  bar = std::const_pointer_cast&lt;const int&gt;(foo);
+
+  std::cout &lt;&lt; "*bar: " &lt;&lt; *bar &lt;&lt; '\n';
+  *foo = 20;
+  std::cout &lt;&lt; "*bar: " &lt;&lt; *bar &lt;&lt; '\n';
+
+  return 0;
+}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="7-1-2-static-cast"><a href="#7-1-2-static-cast" class="headerlink" title="7.1.2 static_cast"></a>7.1.2 <code>static_cast</code></h3><p>强制将一种数据类型转换为另一种数据类型。例如将整形数据转换为浮点型数据。</p>
+<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">int a = 10;
+int b = 3;
+double result = static_cast&lt;double&gt;(a) / static_cast&lt;double&gt;(b);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p>主要用法：</p>
+<ol>
+<li><p>用于类层次结构中基类和派生类之间指针或引用的转换。</p>
+<p>向上转型时安全的。向下转型，由于没有动态类型检查，是不安全的。</p>
+</li>
+<li><p>用于基本数据类型之间的转换，如把int转为char。这种转换的安全也需要开发人员来保证。</p>
+</li>
+<li><p>把空指针转换为目标类型的空指针。</p>
+</li>
+<li><p>把任何类型的表达式转为void类型。</p>
+</li>
+</ol>
+<p>==static_cast不能转换掉表达式的const、volitale或__unaligned==</p>
+<p><strong>static_cast:可以实现C++中内置基本数据类型之间的相互转换。</strong></p>
+<p>如果涉及到类的话，static_cast只能在**有相互联系的类型中进行相互转换,**不一定包含虚函数。</p>
+<h3 id="7-1-3-const-cast"><a href="#7-1-3-const-cast" class="headerlink" title="7.1.3 const_cast"></a>7.1.3 const_cast</h3><p>强制去除不能修改的const属性，但是不是用于去除变量的常量性，而是去除指向常数对象的指针或引用常量性，去除的常量性对象必须为指针或引用。</p>
+<p>也就是说：<br>  常量指针被转化成非常量指针，并且仍然指向原来的对象；<br>  常量引用被转换成非常量引用，并且仍然指向原来的对象；常量对象被转换成非常量对象。</p>
+<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">const int a = 10;
+int b = const_cast&lt;int&gt;(a);  //compile error<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
                 

@@ -605,6 +605,9 @@ const Test Test::operator++(int)
 <p>浮点计数主要采用科学计数法，即一个基数（Base）、一个指数（Exponent）以及一个表示正负的符号来表达实数。比如，666.66 可以表达为 <code>6.6666*10^2</code>。其中6.6666是有效数字，10为基数，2是指数。浮点数利用浮动小数，从而灵活表达更大范围的实数。</p>
 <p>为了规范统一表示浮点数所以规定的浮点数必须为以下形式：</p>
 <p><img src="/2021/04/12/sui-pian-zhi-shi/2022-08-24-10-36-51.png"></p>
+<h1 id="2-性能优化"><a href="#2-性能优化" class="headerlink" title="2. 性能优化"></a>2. 性能优化</h1><h2 id="2-1-代码相关"><a href="#2-1-代码相关" class="headerlink" title="2.1 代码相关"></a>2.1 代码相关</h2><h3 id="2-1-1-除法-和-乘法-操作"><a href="#2-1-1-除法-和-乘法-操作" class="headerlink" title="2.1.1 除法 和 乘法 操作"></a>2.1.1 除法 和 乘法 操作</h3><p>CPU的<code>ALU</code>虽然是硬件实现，但是主要是它来执行我们的算法逻辑。传统的乘法算法有很多种，比如<a target="_blank" rel="noopener" href="http://en.wikipedia.org/wiki/Wallace_tree">Wallace tree</a></p>
+<p>和 <a target="_blank" rel="noopener" href="http://en.wikipedia.org/wiki/Dadda_tree">Dadda tree</a>。更多的乘法算法知识点击<a target="_blank" rel="noopener" href="http://en.wikipedia.org/wiki/Multiplication_ALU">here</a>。在新的处理器中会有更多的复杂算法，通常处理器会努力将一对bit并行化处理，以最大程度的最小化始终延迟。乘法算法可以很快地并行化。</p>
+<p>但是除法不能够有效地进行并行化。除法算法十分复杂，<a target="_blank" rel="noopener" href="http://en.wikipedia.org/wiki/Pentium_FDIV_bug">Pentium PDIV</a>描述了复杂度。除法一般需要更多地时钟周期来进行执行。更多的技术细节在<a target="_blank" rel="noopener" href="https://web.archive.org/web/20080320040614/http://www.intel.com/support/processors/pentium/sb/CS-013008.htm">这里</a>。</p>
 
                 
             </div>

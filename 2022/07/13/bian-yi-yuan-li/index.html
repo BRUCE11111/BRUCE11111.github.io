@@ -594,6 +594,16 @@
 <p>为什么</p>
 </blockquote>
 <p>LL语法虽然很容易自顶向下构造，但是并不能表示全部的语法规则。LR（1）是一种更加泛化的规则，它是通过自底向上构造的。</p>
+<blockquote>
+<p>怎么做</p>
+</blockquote>
+<p>构造LR(0)分析表，步骤：拓广文法-&gt;列项目-&gt;项目集规范簇-&gt;分析表。</p>
+<p>对于拓广文法，首先使用一个字符，来指向开始符。</p>
+<p>![image-20220921104914354](C:\Users\xuxiaohu\OneDrive - Intel Corporation\blog\BRUCE11111.github.io\source_posts\编译原理\image-20220921104914354.png)</p>
+<p>（途中圆圈框出来的就是一个指向E开始符。）</p>
+<p>画点，如果遇到的是终结符，可以停下来。如果当前遇到的不是终结符，需要把非终结符（除去拓广文法）的也写出来：</p>
+<p>![image-20220921105724647](C:\Users\xuxiaohu\OneDrive - Intel Corporation\blog\BRUCE11111.github.io\source_posts\编译原理\image-20220921105724647.png)</p>
+<p>在这个图中，对于左括号’(‘， 点号遇到了E， 那么需要把$I~0$中的E表达式全部写出来，在这期间点号又遇到了T，所以T的也写出来。</p>
 
                 
             </div>
