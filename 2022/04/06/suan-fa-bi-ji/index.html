@@ -588,6 +588,10 @@
         <span class="token punctuation">}</span>
     <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
+
+
+
+
 <h2 id="2-博弈"><a href="#2-博弈" class="headerlink" title="2.博弈"></a>2.博弈</h2><ul>
 <li><p>博弈知识</p>
 <p>博弈问题中的三个概念：必胜状态、必败状态和必和状态。</p>
@@ -935,6 +939,68 @@
 
 <p>优化结果：</p>
 <p><img src="/2022/04/06/suan-fa-bi-ji/Users\xuxiaohu\AppData\Roaming\Typora\typora-user-images\image-20220920212523825.png" alt="image-20220920212523825"></p>
+<h2 id="6-滑动窗口"><a href="#6-滑动窗口" class="headerlink" title="6.滑动窗口"></a>6.滑动窗口</h2><p>滑动窗口问题适用于解决连续子数组问题。让你在子数组范围内完成最大、最小等求值问题。</p>
+<p>大致的模板如下：</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">int</span> left <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">,</span> right <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token keyword">while</span> <span class="token punctuation">(</span>right <span class="token operator">&lt;</span> s<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment">// increate window</span>
+    window<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span>s<span class="token punctuation">[</span>right<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    right<span class="token operator">++</span><span class="token punctuation">;</span>
+    
+    <span class="token keyword">while</span> <span class="token punctuation">(</span>window need shrink<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token comment">// shrink window</span>
+        window<span class="token punctuation">.</span><span class="token function">remove</span><span class="token punctuation">(</span>s<span class="token punctuation">[</span>left<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        left<span class="token operator">++</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>==主要的问题在于，什么时候以及如何向窗口添加新元素以及缩小窗口==。新的框架为：</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">void</span> <span class="token function">slidingWindow</span><span class="token punctuation">(</span>string s<span class="token punctuation">,</span> string t<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token class-name">Map</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">Charater</span><span class="token punctuation">,</span> <span class="token class-name">Integer</span><span class="token punctuation">&gt;</span></span> need<span class="token punctuation">,</span> window<span class="token punctuation">;</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">char</span> c <span class="token operator">:</span> t<span class="token punctuation">)</span> need<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span>c<span class="token punctuation">,</span> need<span class="token punctuation">.</span><span class="token function">getOrDefault</span><span class="token punctuation">(</span>c<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">int</span> left <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">,</span> right <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token keyword">int</span> valid <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token keyword">while</span> <span class="token punctuation">(</span>right <span class="token operator">&lt;</span> s<span class="token punctuation">.</span><span class="token function">length</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token comment">// c is a character to move into the window</span>
+        <span class="token keyword">char</span> c <span class="token operator">=</span> s<span class="token punctuation">.</span><span class="token function">charAt</span><span class="token punctuation">(</span>right<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        right<span class="token operator">++</span><span class="token punctuation">;</span>
+        <span class="token comment">// update window</span>
+        
+        <span class="token comment">// judge whether the window needs to shrink</span>
+        <span class="token keyword">while</span> <span class="token punctuation">(</span>window need shrink<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token comment">// d is the removed charater</span>
+            <span class="token keyword">char</span> d <span class="token operator">=</span> s<span class="token punctuation">.</span><span class="token function">charAt</span><span class="token punctuation">(</span>left<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            left<span class="token operator">++</span><span class="token punctuation">;</span>
+            <span class="token comment">// update window</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+    
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="6-1-水果成篮"><a href="#6-1-水果成篮" class="headerlink" title="6.1 水果成篮"></a>6.1 水果成篮</h3><p>![image-20221017093901804](C:\Users\xuxiaohu\OneDrive - Intel Corporation\blog\BRUCE11111.github.io\source_posts\算法笔记\image-20221017093901804.png)</p>
+<ul>
+<li><p>题目分析</p>
+<p>这个题目，让你在数组里面找到一块连续的子数组中拥有最多两个不同数字的最大长度。所以是典型的滑动窗口问题。</p>
+<p>当加入的数字让不同的数字大于2，就需要收缩窗口。</p>
+</li>
+<li><p>代码</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">// 典型的滑动窗口题目，数字的不同最多为2个，求最大的窗口</span>
+<span class="token class-name">HashMap</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">Integer</span><span class="token punctuation">,</span> <span class="token class-name">Integer</span><span class="token punctuation">&gt;</span></span> map <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">HashMap</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token punctuation">&gt;</span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">int</span> left <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token keyword">int</span> right <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token keyword">int</span> ans <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token keyword">while</span> <span class="token punctuation">(</span>right <span class="token operator">&lt;</span> fruits<span class="token punctuation">.</span>length<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">int</span> cur <span class="token operator">=</span> fruits<span class="token punctuation">[</span>right<span class="token operator">++</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    map<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span>cur<span class="token punctuation">,</span> map<span class="token punctuation">.</span><span class="token function">getOrDefault</span><span class="token punctuation">(</span>cur<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">while</span> <span class="token punctuation">(</span>map<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">&gt;</span> <span class="token number">2</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">int</span> remove <span class="token operator">=</span> fruits<span class="token punctuation">[</span>left<span class="token operator">++</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+        map<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span>remove<span class="token punctuation">,</span> map<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span>remove<span class="token punctuation">)</span> <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>map<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span>remove<span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span> map<span class="token punctuation">.</span><span class="token function">remove</span><span class="token punctuation">(</span>remove<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    ans <span class="token operator">=</span> <span class="token class-name">Math</span><span class="token punctuation">.</span><span class="token function">max</span><span class="token punctuation">(</span>ans<span class="token punctuation">,</span> right <span class="token operator">-</span> left<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">return</span> ans<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
+</ul>
 <h1 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h1><h2 id="1-蓄水池抽样"><a href="#1-蓄水池抽样" class="headerlink" title="1. 蓄水池抽样"></a>1. 蓄水池抽样</h2><p>总的样本数量未知，从所有样本中抽取若干个，要求每个样本被抽到的概率相等。</p>
 <p>具体做法：从前往后处理每个样本，每个样本成为答案的概率为<code>1/i</code>，其中<code>i</code>为样本编号（编号从1开始），最终可以确保每个样本成为答案的概率均为<code>1/n</code>（其中<code>n</code>为样本总数）。</p>
 <p>证明：容易证明该做法的正确性，假设最终成为答案的样本编号为 <code>k</code>，那么 成为答案的充要条件为「在遍历到 时被选中」并且「遍历大于<code>k</code> 的所有元素时，均没有被选择（没有覆盖 <code>k</code>）」</p>
@@ -1040,6 +1106,25 @@ public:
     <span class="token keyword">return</span> res<span class="token punctuation">;</span>
 <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
 </ol>
+<h3 id="3-2-第k个语法符号"><a href="#3-2-第k个语法符号" class="headerlink" title="3.2 第k个语法符号"></a>3.2 第k个语法符号</h3><p> <img src="/2022/04/06/suan-fa-bi-ji/image-20221020095505924.png" alt="image-20221020095505924"></p>
+<p>典型的需要寻找规律，按规律解题。安题目要求写出来几个n的结果：</p>
+<p><img src="/2022/04/06/suan-fa-bi-ji/image-20221020095710406.png" alt="image-20221020095710406"></p>
+<p>每一行的后半部分是上次的反转，前一半部分和上次一行的相同: 有如下表达</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">if</span> <span class="token punctuation">(</span>k <span class="token operator">&lt;</span> n <span class="token operator">/</span> <span class="token number">2</span><span class="token punctuation">)</span>
+	target <span class="token operator">=</span> <span class="token function">func</span><span class="token punctuation">(</span>n <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">,</span> k<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">//n is the number of current line's character</span>
+<span class="token keyword">else</span> target <span class="token operator">=</span> <span class="token function">func</span><span class="token punctuation">(</span>n <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">,</span> k <span class="token operator">-</span> <span class="token punctuation">(</span>n <span class="token operator">/</span> <span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">^</span> <span class="token number">1</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p>写成递归，只需要逻辑对结果就对：</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">int</span> <span class="token function">kthGrammar</span><span class="token punctuation">(</span><span class="token keyword">int</span> n<span class="token punctuation">,</span> <span class="token keyword">int</span> k<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>n <span class="token operator">==</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>k <span class="token operator">&lt;=</span> <span class="token punctuation">(</span><span class="token number">1</span> <span class="token operator">&lt;&lt;</span> <span class="token punctuation">(</span>n <span class="token operator">-</span> <span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token function">kthGrammar</span><span class="token punctuation">(</span>n <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">,</span> k<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">return</span> <span class="token function">kthGrammar</span><span class="token punctuation">(</span>n <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">,</span> k <span class="token operator">-</span> <span class="token punctuation">(</span><span class="token number">1</span> <span class="token operator">&lt;&lt;</span> <span class="token punctuation">(</span>n <span class="token operator">-</span> <span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">^</span> <span class="token number">1</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
 <h2 id="4-括号类型题目"><a href="#4-括号类型题目" class="headerlink" title="4. 括号类型题目"></a>4. 括号类型题目</h2><h3 id="4-1-括号分数"><a href="#4-1-括号分数" class="headerlink" title="4.1 括号分数"></a>4.1 括号分数</h3><p><img src="/2022/04/06/suan-fa-bi-ji/Users\xuxiaohu\AppData\Roaming\Typora\typora-user-images\image-20221009092436769.png" alt="image-20221009092436769"></p>
 <blockquote>
 <p>分析</p>
@@ -1066,6 +1151,9 @@ stack<span class="token punctuation">.</span><span class="token function">push</
 <span class="token punctuation">}</span>
 <span class="token keyword">return</span> stack<span class="token punctuation">.</span><span class="token function">pop</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
+
+
+<p>1 3 6 4 5</p>
 
                 
             </div>

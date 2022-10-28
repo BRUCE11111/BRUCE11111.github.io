@@ -540,7 +540,7 @@ void test() {
 }
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<h1 id="2-类和对象"><a href="#2-类和对象" class="headerlink" title="2. 类和对象"></a>2. 类和对象</h1><p>类只是一个模板，不占用内存空间。对象是类的运行实例，其位于栈上或者堆上。</p>
+<h1 id="2-类和对象"><a href="#2-类和对象" class="headerlink" title="2. 类和对象"></a>2. 类和对象</h1><h2 id="2-1-class和struct"><a href="#2-1-class和struct" class="headerlink" title="2.1 class和struct"></a>2.1 class和struct</h2><p>类只是一个模板，不占用内存空间。对象是类的运行实例，其位于栈上或者堆上。</p>
 <blockquote>
 <p>栈</p>
 <pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">class demo {
@@ -561,7 +561,36 @@ int main(){
     return 0;
 }
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>==c++为了兼容c语言，保留了struct==</p>
 </blockquote>
+<h3 id="2-1-1-c语言中的struct"><a href="#2-1-1-c语言中的struct" class="headerlink" title="2.1.1 c语言中的struct"></a>2.1.1 c语言中的struct</h3><pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token keyword">struct</span> <span class="token class-name">A</span>
+<span class="token punctuation">{</span>
+	<span class="token keyword">int</span> a<span class="token punctuation">;</span>
+	<span class="token keyword">int</span> b<span class="token punctuation">;</span><span class="token comment">//成员列表</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>c语言设计理念是面向过程，面向过程中struct是一种数据类型，所以不能包含函数，否则编译器会报错。面向过程的变成认为数据和数据操作是分开的。</p>
+<p>当struct进入c++，c++就认为数据和数据操作是一个整体，不应该分开。</p>
+<p>所以，c++中的struct得到了很大的扩充：</p>
+<ul>
+<li>struct可以包括成员函数。</li>
+<li>struct可以实现继承。</li>
+<li>struct可以实现多态。</li>
+</ul>
+<p>struct和class的区别：</p>
+<ol>
+<li>默认的继承访问权和访问权。class默认的是private，struct默认的是public。</li>
+<li>class还可以用于定义模板参数，就像typename。但关键字struct不用于定义模板参数。</li>
+<li>class和struct在使用大括号{}的区别：<ol>
+<li>class和struct如果定义了构造函数，都不能使用大括号进行初始化。</li>
+<li>没有定义构造函数，struct可以使用大括号初始化。</li>
+<li>没有定义构造函数，且成员变量都是public，class可以使用大括号初始化。</li>
+</ol>
+</li>
+</ol>
+<h3 id="2-1-2-注意使用事项"><a href="#2-1-2-注意使用事项" class="headerlink" title="2.1.2 注意使用事项"></a>2.1.2 注意使用事项</h3><p>struct的复制，尽量自定义一个拷贝函数，否则在变量成员中有指针时，会浅拷贝，释放原拷贝值后会造成野指针。</p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/weekbo/p/8202754.html">C++ 的浅拷贝和深拷贝（结构体） - 史D芬周 - 博客园 (cnblogs.com)</a></p>
+<p><strong>当出现类的等号赋值时，会调用拷贝函数 在未定义显示拷贝构造函数的情况下，系统会调用默认的拷贝函数——即浅拷贝，它能够完成成员的一一复制。当数据成员中没有指针时，浅拷贝是可行的。 但当数据成员中有指针时，如果采用简单的浅拷贝，则两类中的两个指针将指向同一个地址，当对象快结束时，会调用两次析构函数，而导致指针悬挂现象。 所以，这时，必须采用深拷贝。 深拷贝与浅拷贝的区别就在于深拷贝会在堆内存中另外申请空间来储存数据，从而也就解决了指针悬挂的问题。 简而言之，当数据成员中有指针时，必须要用深拷贝。</strong></p>
 <h2 id="1-2-string"><a href="#1-2-string" class="headerlink" title="1.2 string"></a>1.2 string</h2><blockquote>
 <p>头文件</p>
 </blockquote>
@@ -688,6 +717,78 @@ int main(){
 <li>使用 const 能让函数接收 const 和非 const 类型的实参，否则将只能接收非 const 类型的实参；</li>
 <li>使用 const 引用能够让函数正确生成并使用临时变量。</li>
 </ol>
+<h2 id="3-4-constexpr"><a href="#3-4-constexpr" class="headerlink" title="3.4 constexpr"></a>3.4 constexpr</h2><h3 id="3-4-1-解释"><a href="#3-4-1-解释" class="headerlink" title="3.4.1 解释"></a>3.4.1 解释</h3><p>在编译阶段评估函数或者变量是否是常量。这个意思是，函数或者变量仅仅在编译阶段是常量表达式。</p>
+<p>要求必须是字面类型( [literal types](<a target="_blank" rel="noopener" href="https://learn.microsoft.com/en-us/cpp/cpp/trivial-standard-layout-and-pod-types?view=msvc-160#literal_types">Trivial, standard-layout, POD, and literal types | Microsoft Learn</a>))。 在编译阶段就能够知道它的实际值是多少，而不是可能像const那样推迟到运行时才可能计算出来真正的值。</p>
+<p><strong>在之前const就是被作为常量使用的，现在多了一个constexpr是不是多此一举呢？</strong></p>
+<p>我们继续来看，了解一下const的作用：</p>
+<p>（1）可以定义const常量，具有不可变性。 　　</p>
+<p>例如：const int Max=100; Max++会产生错误; 　</p>
+<p>（2）便于进行类型检查，使<a href="https://link.juejin.cn/?target=https://baike.sogou.com/lemma/ShowInnerLink.htm?lemmaId=106869&amp;ss_c=ssc.citiao.link">编译器</a>对处理内容有更多了解，消除了一些隐患。 　　</p>
+<p>例如： void f(const int i) { ………} 编译器就会知道i是一个常量，不允许修改；</p>
+<p>（3）可以避免意义模糊的数字出现，同样可以很方便地进行参数的调整和修改。 同宏定义一样，可以做到不变则已，一变都变！</p>
+<p>（4）可以保护被修饰的东西，防止意外的修改，增强程序的健壮性。</p>
+<p>（5） 可以节省空间，避免不必要的内存分配。</p>
+<p>const定义常量从汇编的角度来看，只是给出了对应的内存地址，而不是像#define一样给出的是立即数，所以，const定义的常量在程序运行过程中只有一份拷贝，而#define定义的常量在内存中有若干份拷贝。</p>
+<p>从上面几个地方看const就是常量，那么我们进行一个小测试：</p>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">const</span> <span class="token builtin">int</span> <span class="token builtin">len</span> <span class="token operator">=</span> <span class="token number">5</span><span class="token punctuation">;</span>
+
+<span class="token builtin">int</span> a<span class="token punctuation">[</span><span class="token builtin">len</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+复制代码<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>可能在现在编译器使用，它都是不报错的，因为已经经过了编译器优化，但是在老版本的编译器中往往会报错！</p>
+<p>这是因为 C++ 标准中数组的长度必须是一个常量表达式，而对 于 len而言，这是一个 const 常数，而不是一个常量表达式，因此（即便这种行为在大部分编译器中 都支持，但是）它是一个非法的行为。</p>
+<p>如果你想知道，这到底是为什么，可以看下这段我的总结，但是我不保证它百分百正确！</p>
+<blockquote>
+<p>数组的长度需要常量定义，像是5、6、7这种肯定是常量，只读；因为常量是被编译器放在内存中的只读区域，当然也就不能够去修改它。</p>
+<p>而const变量实在内存中存在的，只不过编译器不允许它被修改，毕竟const定义的变量，虽然被叫做常量，但是更细一点是被叫做”常值变量“，当作变量看待。</p>
+</blockquote>
+<h3 id="3-4-2-constexpr：常量表达式"><a href="#3-4-2-constexpr：常量表达式" class="headerlink" title="3.4.2 constexpr：常量表达式"></a>3.4.2 constexpr：常量表达式</h3><p><strong>constexpr（常量表达式）：是指值不会改变并且在编译过程就能得到计算结果的表达式。</strong></p>
+<p><strong>常量表达式的优点是将计算过程转移到编译时期，那么运行期就不再需要计算了，程序性能也就提升了。</strong></p>
+<p>const好用，但是在某些情况下，我们还是会被它所谓的”常量“，给迷惑，产生错误用法，那既然如此，到底有没有真正的常量定义呢！</p>
+<p>答案：有的。</p>
+<p>C++11 提供了 constexpr 让用户显式的声明函数或对象构造函数在编译期会成为常量表达式，这 个关键字明确的告诉编译器应该去验证 constexpr定义的值在编译期就应该是一个常量表达式。</p>
+<pre class="line-numbers language-ini" data-language="ini"><code class="language-ini">constexpr int len <span class="token attr-value"><span class="token punctuation">=</span> 5;</span>
+
+int a[len];
+复制代码<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>此时使用合法！</p>
+<h3 id="3-4-3-constexpr定义函数"><a href="#3-4-3-constexpr定义函数" class="headerlink" title="3.4.3 constexpr定义函数"></a>3.4.3 constexpr定义函数</h3><pre class="line-numbers language-arduino" data-language="arduino"><code class="language-arduino">constexpr <span class="token keyword">int</span> <span class="token function">Length_Constexpr</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token number">5</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+char arr_2<span class="token punctuation">[</span><span class="token function">Length_Constexpr</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token comment">// 合法</span>
+复制代码<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>constexpr返回值也是常量！</p>
+<p>但是constexpr函数和正常函数肯定是不一样的，因为它需要在编译期做事，需要有一定的使用限制！</p>
+<p>从C++11开始，constexpr函数不仅可以返回常量，还可以进行递归操作。</p>
+<pre class="line-numbers language-arduino" data-language="arduino"><code class="language-arduino">constexpr <span class="token keyword">int</span> <span class="token function">fibonacci</span><span class="token punctuation">(</span>const <span class="token keyword">int</span> n<span class="token punctuation">)</span> 
+<span class="token punctuation">{</span>
+<span class="token keyword">return</span> n <span class="token operator">==</span> <span class="token number">1</span> <span class="token operator">||</span> n <span class="token operator">==</span> <span class="token number">2</span> <span class="token operator">?</span> <span class="token number">1</span> <span class="token operator">:</span> <span class="token function">fibonacci</span><span class="token punctuation">(</span>n<span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token operator">+</span><span class="token function">fibonacci</span><span class="token punctuation">(</span>n<span class="token operator">-</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+复制代码<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>从 C++14 开始，constexpr 函数可以在内部使用局部变量、循环和分支等简单语句。</p>
+<pre class="line-numbers language-scss" data-language="scss"><code class="language-scss">constexpr int <span class="token function">fibonacci</span><span class="token punctuation">(</span>const int n<span class="token punctuation">)</span> 
+<span class="token punctuation">{</span>
+<span class="token function">if</span><span class="token punctuation">(</span>n <span class="token operator">==</span> 1<span class="token punctuation">)</span> return 1<span class="token punctuation">;</span>
+<span class="token function">if</span><span class="token punctuation">(</span>n <span class="token operator">==</span> 2<span class="token punctuation">)</span> return 1<span class="token punctuation">;</span>
+return <span class="token function">fibonacci</span><span class="token punctuation">(</span>n-1<span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token function">fibonacci</span><span class="token punctuation">(</span>n-2<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="3-5-左值和右值"><a href="#3-5-左值和右值" class="headerlink" title="3.5 左值和右值"></a>3.5 左值和右值</h2><p><em>左值 (lvalue, locator value)</em> 表示了一个占据内存中某个可识别的位置（S也就是一个地址）的对象。</p>
+<p><em>右值 (rvalue)</em> 则使用排除法来定义。一个表达式不是 <em>左值</em> 就是 <em>右值</em> 。 那么，右值是一个 <em>不</em> 表示内存中某个可识别位置的对象的表达式。</p>
+<p>上面的术语定义显得有些模糊，这时候我们就需要马上看一些例子。我们假设定义并赋值了一个整形变量：</p>
+<pre class="line-numbers language-none"><code class="language-none">int var;
+var = 4;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>赋值操作需要左操作数是一个左值。<code>var</code> 是一个有内存位置的对象，因此它是左值。然而，下面的写法则是错的：</p>
+<pre class="line-numbers language-none"><code class="language-none">4 = var;       // 错误！
+(var + 1) = 4; // 错误！<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>常量 <code>4</code> 和表达式 <code>var + 1</code> 都不是左值（也就是说，它们是右值），因为它们都是表达式的临时结果，而没有可识别的内存位置（也就是说，只存在于计算过程中的每个临时寄存器中）。因此，赋值给它们是没有任何语义上的意义的——我们赋值到了一个不存在的位置。</p>
 <h1 id="4-C-继承和派生"><a href="#4-C-继承和派生" class="headerlink" title="4. C++继承和派生"></a>4. C++继承和派生</h1><p>public、protected、private 修饰类的成员，protected 成员和 private 成员类似，也不能通过对象访问。但是当存在继承关系时，protected 和 private 就不一样了：基类中的 protected 成员可以在派生类中使用，而基类中的 private 成员不能在派生类中使用。</p>
 <ol>
 <li>基类成员在派生类中的访问权限不得高于继承方式中指定的权限。例如，当继承方式为 protected 时，那么基类成员在派生类中的访问权限最高也为 protected，高于 protected 的会降级为 protected，但低于 protected 不会升级。再如，当继承方式为 public 时，那么基类成员在派生类中的访问权限将保持不变。</li>

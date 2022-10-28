@@ -496,7 +496,65 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="机器学习"><a href="#机器学习" class="headerlink" title="机器学习"></a>机器学习</h1><h2 id="1-深度学习"><a href="#1-深度学习" class="headerlink" title="1. 深度学习"></a>1. 深度学习</h2><h3 id="1-1-卷积神经网络（CNN）"><a href="#1-1-卷积神经网络（CNN）" class="headerlink" title="1.1 卷积神经网络（CNN）"></a>1.1 卷积神经网络（CNN）</h3><h3 id="1-2-分离卷积（Separable-Convolution"><a href="#1-2-分离卷积（Separable-Convolution" class="headerlink" title="1.2 分离卷积（Separable Convolution)"></a>1.2 分离卷积（Separable Convolution)</h3><p><a target="_blank" rel="noopener" href="https://towardsdatascience.com/a-basic-introduction-to-separable-convolutions-b99ec3102728">A Basic Introduction to Separable Convolutions | by Chi-Feng Wang | Towards Data Science</a></p>
+                <h1 id="1-基础"><a href="#1-基础" class="headerlink" title="1. 基础"></a>1. 基础</h1><h2 id="1-1-神经网络基本工作原理"><a href="#1-1-神经网络基本工作原理" class="headerlink" title="1.1 神经网络基本工作原理"></a>1.1 神经网络基本工作原理</h2><h3 id="1-1-1-神经元的数学模型"><a href="#1-1-1-神经元的数学模型" class="headerlink" title="1.1.1 神经元的数学模型"></a>1.1.1 神经元的数学模型</h3><p><img src="https://microsoft.github.io/ai-edu/%E5%9F%BA%E7%A1%80%E6%95%99%E7%A8%8B/A2-%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E5%9F%BA%E6%9C%AC%E5%8E%9F%E7%90%86/%E7%AC%AC1%E6%AD%A5%20-%20%E5%9F%BA%E6%9C%AC%E7%9F%A5%E8%AF%86/img/1/NeuranCell.png" alt="img"></p>
+<ul>
+<li><p>input 输入</p>
+<p>训练样本，一般训练样本是多个属性，如果要预测房价，所以$x_1$可能代表面积，$x_2$可能代表地理位置，$x_3$代表朝向。</p>
+</li>
+<li><p>weights 权重</p>
+</li>
+</ul>
+<p>​    $w_1$是输入信号的权重值，衡量当前输入的比重。</p>
+<ul>
+<li><p>bias 偏移</p>
+<p>在生物学中，当脑神经细胞电平大于某个临界值时，神经元细胞才会处于兴奋状态，这个b就是实际那个临界值。</p>
+<p>当$w_1<em>x_1 + w_2</em>x_2 + w_3*x_3&gt;=t$时，该神经元才会兴奋，把t移动到左边来，他就是b。</p>
+</li>
+<li><p>激活函数</p>
+<p>求和之后，神经细胞已经处于兴奋状态，已经决定向下一个神经元传递信号了，但是要传递更多强烈的信号，需要激活函数来确定：</p>
+<p>$$A=\sigma(Z)$$</p>
+</li>
+</ul>
+<p>生物钟信号是一个渐变的过程，所以是个曲线。</p>
+<p><img src="https://microsoft.github.io/ai-edu/%E5%9F%BA%E7%A1%80%E6%95%99%E7%A8%8B/A2-%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E5%9F%BA%E6%9C%AC%E5%8E%9F%E7%90%86/%E7%AC%AC1%E6%AD%A5%20-%20%E5%9F%BA%E6%9C%AC%E7%9F%A5%E8%AF%86/img/1/activation.png" alt="img"></p>
+<h3 id="1-1-2-神经网路的训练过程"><a href="#1-1-2-神经网路的训练过程" class="headerlink" title="1.1.2 神经网路的训练过程"></a>1.1.2 神经网路的训练过程</h3><p><img src="https://microsoft.github.io/ai-edu/%E5%9F%BA%E7%A1%80%E6%95%99%E7%A8%8B/A2-%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E5%9F%BA%E6%9C%AC%E5%8E%9F%E7%90%86/%E7%AC%AC1%E6%AD%A5%20-%20%E5%9F%BA%E6%9C%AC%E7%9F%A5%E8%AF%86/img/1/OneLayerNN.png" alt="img"></p>
+<p>这是一个单层的神经网络，有 m 个输入 (这里 m=3)，有 n 个输出 (这里 n=2)。在神经网络中，b 到每个神经元的权值来表示实际的偏移值，亦即 (b1,b2)，这样便于矩阵运算。也有些人把 b 写成 x0，其实是同一个效果，即把偏移值看做是神经元的一个输入。</p>
+<ul>
+<li>(x1,x2,x3) 是一个样本数据的三个特征值</li>
+<li>(w11,w21,w31) 是 (x1,x2,x3) 到 n1 的权重</li>
+<li>(w12,w22,w32) 是 (x1,x2,x3) 到 n2 的权重</li>
+<li>b1 是 n1 的偏移</li>
+<li>b2 是 n2 的偏移</li>
+</ul>
+<p>同一个特征 x1，对于n1,n2来说，权重是不相同的，因为 n1,n2 是两个神经元，它们完成不同的任务（特征识别）。我们假设 x1,x2,x3 分别代表红绿蓝三种颜色，而 n1,n2 分别用于识别暖色和冷色，那么 x1 到 n1 的权重，肯定要大于 x1 到 n2 的权重，因为 x1 代表红色，是暖色。</p>
+<p>而对于 n1 来说，x1,x2,x3 输入的权重也是不相同的，因为它要对不同特征有选择地接纳。如同上面的例子，n1 对于代表红色的 x1，肯定是特别重视，权重值较高；而对于代表蓝色的 x3，尽量把权重值降低，才能有正确的输出。</p>
+<h4 id="训练流程"><a href="#训练流程" class="headerlink" title="训练流程"></a>训练流程</h4><p><img src="https://microsoft.github.io/ai-edu/%E5%9F%BA%E7%A1%80%E6%95%99%E7%A8%8B/A2-%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E5%9F%BA%E6%9C%AC%E5%8E%9F%E7%90%86/%E7%AC%AC1%E6%AD%A5%20-%20%E5%9F%BA%E6%9C%AC%E7%9F%A5%E8%AF%86/img/1/TrainFlow.png" alt="img"></p>
+<h3 id="1-1-3-神经网络中的矩阵运算"><a href="#1-1-3-神经网络中的矩阵运算" class="headerlink" title="1.1.3 神经网络中的矩阵运算"></a>1.1.3 神经网络中的矩阵运算</h3><p><img src="https://microsoft.github.io/ai-edu/%E5%9F%BA%E7%A1%80%E6%95%99%E7%A8%8B/A2-%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E5%9F%BA%E6%9C%AC%E5%8E%9F%E7%90%86/%E7%AC%AC1%E6%AD%A5%20-%20%E5%9F%BA%E6%9C%AC%E7%9F%A5%E8%AF%86/img/1/TwoLayerNN.png" alt="img"></p>
+<p>$$<br>z1_1 = x_1 \cdot w1_{1,1}+ x_2 \cdot w1_{2,1}+b1_1<br>$$</p>
+<p>$$<br>z1_2 = x_1 \cdot w1_{1,2}+ x_2 \cdot w1_{2,2}+b1_2<br>$$</p>
+<p>$$<br>z1_3 = x_1 \cdot w1_{1,3}+ x_2 \cdot w1_{2,3}+b1_3<br>$$</p>
+<p>变成矩阵运算：</p>
+<p>$$<br>z1_1=<br>\begin{pmatrix}<br>x_1 &amp; x_2<br>\end{pmatrix}<br>\begin{pmatrix}<br>w1_{1,1} \\<br>w1_{2,1}<br>\end{pmatrix}<br>+b1_1<br>$$</p>
+<p>$$<br>z1_2=<br>\begin{pmatrix}<br>x_1 &amp; x_2<br>\end{pmatrix}<br>\begin{pmatrix}<br>w1_{1,2} \\<br>w1_{2,2}<br>\end{pmatrix}<br>+b1_2<br>$$</p>
+<p>$$<br>z1_3=<br>\begin{pmatrix}<br>x_1 &amp; x_2<br>\end{pmatrix}<br>\begin{pmatrix}<br>w1_{1,3} \\<br>w1_{2,3}<br>\end{pmatrix}<br>+b1_3<br>$$</p>
+<p>再变成大矩阵：</p>
+<p>$$<br>Z1 =<br>\begin{pmatrix}<br>x_1 &amp; x_2<br>\end{pmatrix}<br>\begin{pmatrix}<br>w1_{1,1}&amp;w1_{1,2}&amp;w1_{1,3} \\<br>w1_{2,1}&amp;w1_{2,2}&amp;w1_{2,3} \\<br>\end{pmatrix}<br>+\begin{pmatrix}<br>b1_1 &amp; b1_2 &amp; b1_3<br>\end{pmatrix}<br>$$</p>
+<p>最后变成矩阵符号：</p>
+<p>$$Z1 = X \cdot W1 + B1$$</p>
+<p>然后是激活函数运算：</p>
+<p>$$A1=a(Z1)$$</p>
+<p>同理可得：</p>
+<p>$$Z2 = A1 \cdot W2 + B2$$</p>
+<p>注意：损失函数不是前向计算的一部分。</p>
+<h3 id="1-1-4-神经网络的主要功能"><a href="#1-1-4-神经网络的主要功能" class="headerlink" title="1.1.4 神经网络的主要功能"></a>1.1.4 神经网络的主要功能</h3><h4 id="回归-regression-或者拟合-Fitting"><a href="#回归-regression-或者拟合-Fitting" class="headerlink" title="回归(regression)或者拟合(Fitting)"></a>回归(regression)或者拟合(Fitting)</h4><p>单层神经网络模拟一条直线，完成线性分割。两层神经网络可以无限逼近任意函数。</p>
+<p>图1-18所示就是一个两层神经网络拟合复杂曲线的实例。</p>
+<img src="/2022/06/28/ji-qi-xue-xi/sgd_result.png">
+
+<p>图1-18 回归/拟合示意图</p>
+<p>所谓回归或者拟合，其实就是给出x值输出y值的过程，并且让y值与样本数据形成的曲线的距离尽量小，可以理解为是对样本数据的一种骨架式的抽象。</p>
+<h4 id="分类（Classification"><a href="#分类（Classification" class="headerlink" title="分类（Classification)"></a>分类（Classification)</h4><p>区分图片中红色和蓝色的点的边界，分类就是对两类或多类样本数据的边界的抽象。</p>
+<p><img src="/2022/06/28/ji-qi-xue-xi/image-20221015123625835.png" alt="image-20221015123625835"></p>
+<p>这么复杂的函数，需要两层以上的神经网络。从输入层到隐藏层的矩阵计算，就是对输入数据进行了空间变换，让它可以线性可分，然后在输出上画出一个分界线。而训练的过程，就是那个<font color="red">空间变换</font>的过程。</p>
 
                 
             </div>
