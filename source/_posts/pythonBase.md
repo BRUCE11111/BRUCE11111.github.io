@@ -23,13 +23,29 @@ python2 和 python3 共存的方法：
 
 [Windows10系统下安装python2和python3双版本 - 暮光微凉 - 博客园 (cnblogs.com)](https://www.cnblogs.com/schut/p/10344597.html)
 
+## 命名规范
+
+| 类别         | 规范                                         | 示例          |
+| ------------ | -------------------------------------------- | ------------- |
+| 模块名       | 小写字母，单词之间用_分割                    | ad_stats.py   |
+| 包名         | 小写字母，单词之间用_分割                    |               |
+| 类名         | 单词首字母大写                               | PersonInfo    |
+| 全局变量名   | 大写字母，单词之间用_分割                    | COLOR_WRITE   |
+| 普通变量     | 小写字母，单词之间用_分割                    | this_is_a_var |
+| 实例变量     | 以_开头，其他和普通变量一样                  | _is_var       |
+| 私有实例变量 | 以__开头（两个下划线），其他和普通变量一样   | __private_var |
+| 专有变量     | 以__开头，\_\_结尾，一般为python的自有变量   | \_\_doc\_\_   |
+| 普通函数     | 小写字母，单词之间用_分割                    | dfs           |
+| 私有函数     | 以\_\_开头（两个下划线），其他和普通变量一样 | __dfs         |
+| 文件名       | 全小写，可使用下划线                         | test.py       |
+
 ## 1. Python线程模块
 
 GIL（Global Interpreter Lock，全局解释器锁）不是Python独有的特性，它只是在实现CPython（Python解释器）时，引入的一个概念。在官方网站中定义如下：
 
 > In CPython, the global interpreter lock, or GIL, is a mutex that prevents multiple native threads from executing Python bytecodes at once. This lock is necessary mainly because CPython’s memory management is not thread-safe. (However, since the GIL exists, other features have grown to depend on the guarantees that it enforces.)
 
-由定义可知，GIL是一个互斥锁（mutex）。它阻止了 多个线程同时执行Python字节码，毫无疑问，这降低了执行效率。理解GIL的必要性，需要了解CPython对于线程安全的内存管理机制。
+由定义可知，==GIL是一个互斥锁（mutex）==。它阻止了 多个线程同时执行Python字节码，毫无疑问，这降低了执行效率。理解GIL的必要性，需要了解CPython对于线程安全的内存管理机制。
 
 首先，我们来看看单核CPU下，多线程任务是如何调度的。
 
