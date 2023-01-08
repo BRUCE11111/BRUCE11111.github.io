@@ -2466,7 +2466,9 @@ Integer reduced = integers.stream().reduce(23, (a,b) -> a + b);
 List<String> resultList = list.stream().map(element -> element.toUpperCase()).collect(Collectors.toList());
 ```
 
-### 4.2 lambda expressions
+### 4.2 lambda 表达式
+
+推荐先看一下这里：[(29 封私信 / 53 条消息) Lambda 表达式有何用处？如何使用？ - 知乎 (zhihu.com)](https://www.zhihu.com/question/20125256)
 
 如果一个接口只有一个抽象方法，那么这个接口可以标注为`FuncitonalInterface`。通过lambda表达式可以用更简短的代码更清楚地写明一个表达式。其形式如下：
 
