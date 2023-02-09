@@ -29,9 +29,9 @@
 
     <script src="/libs/jquery/jquery.min.js"></script>
 
-<meta name="generator" content="Hexo 5.4.0">
+<meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="小灰的博客" type="application/atom+xml">
+
 <style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
-<link rel="alternate" href="/atom.xml" title="小灰的博客" type="application/atom+xml">
 </head>
 
 
@@ -498,6 +498,9 @@
             <div id="articleContent">
                 <p>[toc]</p>
 <h1 id="算法必知"><a href="#算法必知" class="headerlink" title="算法必知"></a>算法必知</h1><p>做题上来必须首先<strong>估算题目要求的时间复杂度</strong>，首先看题目中的数据量大小。</p>
+<p>一般整体数据量应该小于1x10^8， 所有的数据量大于10^8，有的题目就会很难过去，会超时。</p>
+<p>比如n = 5000 m = 50，你的算法时间复杂度为(n * m * log(m))， 整体数据量小于1x10^8。不会超时。</p>
+<p>一般控制在上限 1x10^7 ~ 1x10^8。</p>
 <table>
 <thead>
 <tr>
@@ -841,6 +844,47 @@
         <span class="token punctuation">}</span>
     <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
+<h3 id="3-2-树状数组"><a href="#3-2-树状数组" class="headerlink" title="3.2 树状数组"></a>3.2 树状数组</h3><blockquote>
+<p>为什么</p>
+</blockquote>
+<p>区间查询和修改，查询区间的值。最简单暴力的方法就是利用前缀和。如果某段区间修改了，需要O（n）重新计算修改前缀和数组。这样耗时忒大。能不能想到一个更合适的数据结果，只需要修改对应区间的值就好，不需要修改所有的区间。</p>
+<p><img src="/2022/04/06/suan-fa-bi-ji/v2-83809502459ae695ec219d6974315292_1440w-1668603849051-3.png" alt="img"></p>
+<p>如果能够找到一个区间，可以用一个数组 C 维护若干个小区间，单点修改时，<strong>只更新包含这一元素的区间</strong>；求前n项和时，<strong>通过将区间进行组合，得到从1到n的区间，然后对所有用到的区间求和</strong>。实际上，设原数组是 A ，如果 Ci 维护的区间是 [Ai,Ai] ，此结构就相当于普通数组（还浪费了一倍内存）；如果 Ci 维护的区间就是 [1,Ai] ，此结构就相当于前缀和。</p>
+<p>树状数组就是这样一种结构，它巧妙地利用了<strong>二进制</strong>（实际上，树状数组的英文名BIT，直译过来就是<strong>二进制下标树</strong>）。例如11，转化为二进制数就是 (1011)2 ，如果我们要求前11项和，可以分别查询 ((0000)2,(1000)2] 、((1000)2,(1010)2]以及((1010)2,(1011)2]的和再相加。这三个区间怎么来的呢？其实就是<strong>不断地去掉二进制数最右边的一个1</strong>的过程（如下图）。</p>
+<p><img src="/2022/04/06/suan-fa-bi-ji/v2-a53a897f22763ef04a728f8263f06547_1440w.png" alt="img"></p>
+<p>通过二进制形式，将所有数据逻辑上变为一个个的二进制区间。减少元素的更新次数，提升算法效率。</p>
+<p>二进制数最右边的一个1，连带着它之后的0为 lowbit(x) （稍后再来看如何实现）。那么我们用Ci 维护区间 (Ai−lowbit(Ai),Ai]，这样显然查询前n项和时需要合并的区间数是少于 log2⁡n 的。树状数组的结构大概像下面这样：</p>
+<p><img src="/2022/04/06/suan-fa-bi-ji/v2-fbaeb49fdbad31a211fe37f068ca8bb0_1440w.png" alt="img"></p>
+<p>对于长度为8的数组，直接求C8。</p>
+<p>那么如何更新呢，大家会发现更新就是一个“<strong>爬树</strong>”的过程。一路往上更新，直到MAXN（树状数组的容量）。</p>
+<p><img src="/2022/04/06/suan-fa-bi-ji/v2-df001651925903a86ab640482b78c2d6_1440w.png" alt="img"></p>
+<p>我们举个例子来看看这树是怎么爬的。 现有二进制数(100110)2 ，包含它的最小区间当然是((100100)2,(100110)2]。然后，它也肯定位于区间((100000)2,(101000)2]内。然后是((100000)2,(110000)2]，再然后是 (0,(1000000)2] ……</p>
+<p><img src="/2022/04/06/suan-fa-bi-ji/v2-8ce9df6ada69084d3ccd0df5ecc45b5e_1440w.png" alt="img"></p>
+<p>每一步都把<strong>从右边起一系列连续的1变为0，再把这一系列1的前一位0变为1</strong>。这看起来像是一个<strong>进位</strong>的过程对吧？实际上，每一次加的正是 lowbit(x) 。（神奇吧？）这样，我们更新的区间数不会超过 log2⁡MAXN 。一个能以 O(log⁡n) 时间复杂度进行单点修改和区间查询的数据结构就诞生了。</p>
+<h3 id="3-2-1-计算区间"><a href="#3-2-1-计算区间" class="headerlink" title="3.2.1 计算区间"></a>3.2.1 计算区间</h3><p>使用公式：<img src="/2022/04/06/suan-fa-bi-ji/image-20221116210756146.png" alt="image-20221116210756146"></p>
+<p>计算机里有符号数一般是以<strong>补码</strong>的形式存储的。-x相当于x<strong>按位取反再加1</strong>，会把结尾处原来1000…的形式，变成0111…，再变成1000…；而前面每一位都与原来相反。这时我们再把它和x按位与，得到的结果便是lowbit(x)。下面的图中举了两个例子：</p>
+<p><img src="/2022/04/06/suan-fa-bi-ji/v2-fd4b485006b55bfd45c13f4348e1e1ee_1440w.png" alt="img"></p>
+<h3 id="单点修改"><a href="#单点修改" class="headerlink" title="单点修改"></a>单点修改</h3><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">int</span> tree<span class="token punctuation">[</span>MAXN<span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token keyword">inline</span> <span class="token keyword">void</span> <span class="token function">update</span><span class="token punctuation">(</span><span class="token keyword">int</span> i<span class="token punctuation">,</span> <span class="token keyword">int</span> x<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> pos <span class="token operator">=</span> i<span class="token punctuation">;</span> pos <span class="token operator">&lt;</span> MAXN<span class="token punctuation">;</span> pos <span class="token operator">+=</span> <span class="token function">lowbit</span><span class="token punctuation">(</span>pos<span class="token punctuation">)</span><span class="token punctuation">)</span>
+        tree<span class="token punctuation">[</span>pos<span class="token punctuation">]</span> <span class="token operator">+=</span> x<span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="求前n项和"><a href="#求前n项和" class="headerlink" title="求前n项和"></a>求前n项和</h3><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">inline</span> <span class="token keyword">int</span> <span class="token function">query</span><span class="token punctuation">(</span><span class="token keyword">int</span> n<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">int</span> ans <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> pos <span class="token operator">=</span> n<span class="token punctuation">;</span> pos<span class="token punctuation">;</span> pos <span class="token operator">-=</span> <span class="token function">lowbit</span><span class="token punctuation">(</span>pos<span class="token punctuation">)</span><span class="token punctuation">)</span>
+        ans <span class="token operator">+=</span> tree<span class="token punctuation">[</span>pos<span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> ans<span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="区间查询"><a href="#区间查询" class="headerlink" title="区间查询"></a>区间查询</h3><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">inline</span> <span class="token keyword">int</span> <span class="token function">query</span><span class="token punctuation">(</span><span class="token keyword">int</span> a<span class="token punctuation">,</span> <span class="token keyword">int</span> b<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token function">query</span><span class="token punctuation">(</span>b<span class="token punctuation">)</span> <span class="token operator">-</span> <span class="token function">query</span><span class="token punctuation">(</span>a <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>reference to： <a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/93795692">算法学习笔记(2) : 树状数组 - 知乎 (zhihu.com)</a></p>
 <h2 id="4-动态规划"><a href="#4-动态规划" class="headerlink" title="4. 动态规划"></a>4. 动态规划</h2><h3 id="4-1-最长公共子序列"><a href="#4-1-最长公共子序列" class="headerlink" title="4.1 最长公共子序列"></a>4.1 最长公共子序列</h3><p>当前的字符相等的话，那么序列数量就会 + 1， 且是在前面序列的基础上+1，前面的数量独立于本次计算，所以是动态规划。</p>
 <p>推导转移方程：</p>
 <p>状态： 第一个字符串 i 索引  第二个字符串 j索引，就这两个状态。</p>
@@ -1001,6 +1045,139 @@
 <span class="token punctuation">}</span>
 <span class="token keyword">return</span> ans<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
 </ul>
+<h2 id="7-字典树"><a href="#7-字典树" class="headerlink" title="7. 字典树"></a>7. 字典树</h2><p>对bit进行操作的不同数字间的计数问题，考虑字典树。</p>
+<p>字典树是一种实现字符串快速检索的多叉树结构。例如：给定字符串集合[cab, cos, car, cat], 我们现在需要判断cat是否存在于字符串集合中。</p>
+<p><img src="/2022/04/06/suan-fa-bi-ji/1672883906-PtaKBQ-%E5%9B%BE%E7%89%87.png"></p>
+<p>字典树代码：</p>
+<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">int trie[N][26], cnt[N], idx;
+void insert(string str){
+    int p = 0;
+    for (int i = 0; i &lt; str.length(); i++){
+        int u = str[i] - 'a';
+        if (!trie[p][u]) trie[p][u] = ++ idx;//创建结点并赋予编号idx
+        p = trie[p][u];//走到下一个结点
+    }
+    cnt[p]++ ;//个数增加
+}
+
+int query(string str){
+    int p = 0;
+    for (int i = 0; i &lt; str.length(); i++){
+        int u = str[i] - 'a';
+        if (!trie[p][u]) return 0; //若当前结点不存在，那么直接返回0
+        p = trie[p][u];
+    }
+    return cnt[p];//返回存在的次数
+}
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">static</span> <span class="token keyword">int</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token punctuation">]</span> trie <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token keyword">int</span><span class="token punctuation">[</span><span class="token class-name">N</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">26</span><span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token comment">//其中N为结点个数，一般为所有字符串长度之和。</span>
+<span class="token keyword">static</span> <span class="token keyword">int</span><span class="token punctuation">[</span><span class="token punctuation">]</span> cnt <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token keyword">int</span><span class="token punctuation">[</span><span class="token class-name">N</span><span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token comment">//代表红色结点结尾出现的次数</span>
+<span class="token keyword">void</span> <span class="token function">add</span><span class="token punctuation">(</span><span class="token class-name">String</span> str<span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token comment">//将字符串str添加进字典树</span>
+    <span class="token keyword">int</span> p <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> <span class="token comment">//根结点为0号</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">char</span> c <span class="token operator">:</span> str<span class="token punctuation">.</span><span class="token function">toCharArray</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">int</span> u <span class="token operator">=</span> c <span class="token operator">-</span> <span class="token string">'a'</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>trie<span class="token punctuation">[</span>p<span class="token punctuation">]</span><span class="token punctuation">[</span>u<span class="token punctuation">]</span> <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span> trie<span class="token punctuation">[</span>p<span class="token punctuation">]</span><span class="token punctuation">[</span>u<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token operator">++</span>idx<span class="token punctuation">;</span> <span class="token comment">//创建结点并赋予编号idx</span>
+        p <span class="token operator">=</span> trie<span class="token punctuation">[</span>p<span class="token punctuation">]</span><span class="token punctuation">[</span>u<span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token comment">//走到下一个结点</span>
+    <span class="token punctuation">}</span>
+    cnt<span class="token punctuation">[</span>p<span class="token punctuation">]</span><span class="token operator">++</span><span class="token punctuation">;</span> <span class="token comment">//个数增加</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">static</span> <span class="token keyword">int</span> <span class="token function">query</span><span class="token punctuation">(</span><span class="token class-name">String</span> str<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">int</span> p <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">char</span> c <span class="token operator">:</span> str<span class="token punctuation">.</span><span class="token function">toCharArray</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">int</span> u <span class="token operator">=</span> c <span class="token operator">-</span> <span class="token string">'a'</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>trie<span class="token punctuation">[</span>p<span class="token punctuation">]</span><span class="token punctuation">[</span>u<span class="token punctuation">]</span> <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span> <span class="token comment">//若当前结点不存在，那么直接返回0</span>
+        p <span class="token operator">=</span> trie<span class="token punctuation">[</span>p<span class="token punctuation">]</span><span class="token punctuation">[</span>u<span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">return</span> cnt<span class="token punctuation">[</span>p<span class="token punctuation">]</span><span class="token punctuation">;</span>  
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="7-1-数组异或计数"><a href="#7-1-数组异或计数" class="headerlink" title="7.1 数组异或计数"></a>7.1 数组异或计数</h3><p>这种是典型的<code>0-1字典树</code>。在某个区间<code>low high</code> 就转化为high - low。</p>
+<p>例题：</p>
+<p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/count-pairs-with-xor-in-a-range/solutions/2045595/by-lcbin-bmz4/">1803. 统计异或值在范围内的数对有多少 - 力扣（Leetcode）</a></p>
+<h2 id="8-图"><a href="#8-图" class="headerlink" title="8. 图"></a>8. 图</h2><h3 id="8-1-欧拉图"><a href="#8-1-欧拉图" class="headerlink" title="8.1 欧拉图"></a>8.1 欧拉图</h3><p>欧拉图是指通过图（无向图或有向图）中所有边且每边仅通过一次通路，相应的回路称为欧拉回路。具有欧拉回路的图叫做欧拉图(Euler Graph)，具有欧拉通路而无欧拉回路的图叫做半欧拉图。</p>
+<h4 id="8-1-1-Hierholzer算法"><a href="#8-1-1-Hierholzer算法" class="headerlink" title="8.1.1 Hierholzer算法"></a>8.1.1 Hierholzer算法</h4><p>这个算法可以在图中找出欧拉回路。</p>
+<p>举个例子：<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/cracking-the-safe/solutions/393529/po-jie-bao-xian-xiang-by-leetcode-solution/">753. 破解保险箱 - 力扣（Leetcode）</a></p>
+<p>对应这个题目中，将所有n - 1位数作为节点，共有$k^{n-1}$个节点，每个节点有k条入边和出边。（当前的n位数字，是由n-1位数字进行k进制数推演得到的，所以n-1个节点。）如果当前节点对应的数字为$a1a2…a(n-1)$，假设它的第x条出边连向a2…a(n-1)x对应的节点。这样从一个节点顺着x条边走到另外一个节点。意味着，在每个节点的末尾加上一个数字，就形成了一个n位数字，并且每个节点都能用这样的方式形成k个n位数字。这样构造总体就能够形成结果要求的个数，总共有$k^{n-1} * k=k^{n}$ 个数字。</p>
+<p>这个算法的大致流程如下：</p>
+<ol>
+<li>从节点u开始，遍历没有经过的边，直到无路可走。此时一定回到节点u（欧拉回路性质，出度 = 入度）。</li>
+<li>回到节点u后，得到一条从u开始到u结束的回路，这条回路仍然有节点没有经过的出边，那么找某个没有遍历的节点v，重复以上操作。</li>
+</ol>
+<p>就是个dfs回溯查找，判断是否存在（遍历过）罢了。注意构造初始和结束条件，满足最终答案。</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">class</span> <span class="token class-name">Solution</span> <span class="token punctuation">{</span>
+    <span class="token class-name">Set</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">Integer</span><span class="token punctuation">&gt;</span></span> seen <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">HashSet</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">Integer</span><span class="token punctuation">&gt;</span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token class-name">StringBuffer</span> ans <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">StringBuffer</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">int</span> highest<span class="token punctuation">;</span>
+    <span class="token keyword">int</span> k<span class="token punctuation">;</span>
+
+    <span class="token keyword">public</span> <span class="token class-name">String</span> <span class="token function">crackSafe</span><span class="token punctuation">(</span><span class="token keyword">int</span> n<span class="token punctuation">,</span> <span class="token keyword">int</span> k<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        highest <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">)</span> <span class="token class-name">Math</span><span class="token punctuation">.</span><span class="token function">pow</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">,</span> n <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>k <span class="token operator">=</span> k<span class="token punctuation">;</span>
+        <span class="token function">dfs</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> n<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            ans<span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span><span class="token string">'0'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">return</span> ans<span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">dfs</span><span class="token punctuation">(</span><span class="token keyword">int</span> node<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> x <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> x <span class="token operator">&lt;</span> k<span class="token punctuation">;</span> <span class="token operator">++</span>x<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">int</span> nei <span class="token operator">=</span> node <span class="token operator">*</span> <span class="token number">10</span> <span class="token operator">+</span> x<span class="token punctuation">;</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>seen<span class="token punctuation">.</span><span class="token function">contains</span><span class="token punctuation">(</span>nei<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                seen<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span>nei<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token function">dfs</span><span class="token punctuation">(</span>nei <span class="token operator">%</span> highest<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                ans<span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>另外一个例题：<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/cracking-the-safe/description/">753. 破解保险箱 - 力扣（Leetcode）</a></p>
+<p>回溯大法而已。</p>
+<h2 id="9-贪心"><a href="#9-贪心" class="headerlink" title="9. 贪心"></a>9. 贪心</h2><h3 id="9-1-寻找最大连续数数量"><a href="#9-1-寻找最大连续数数量" class="headerlink" title="9.1 寻找最大连续数数量"></a>9.1 寻找最大连续数数量</h3><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/maximum-number-of-consecutive-values-you-can-make/description/">1798. 你能构造出连续值的最大数目 - 力扣（Leetcode）</a></p>
+<ul>
+<li>当我们已经可以表示<code>[0,n]</code>时，再给一个整数<code>x</code>，可以表示的整数范围如何变化？</li>
+</ul>
+<p>显然，新增的可达数就是把原来的n+1个数都加上x，得到<code>[x,n+x]</code>，新的可以表示的数的范围就是这两部分的并集。在本题中，要求可达域连续，也就是要求x&lt;=n+1，这样可达域就被扩充为<code>[0,n+x]</code>。</p>
+<p>初始可达域为<code>{0}</code>，由于x&lt;=n+1的条件限制，我们肯定是从小到大地添加数。我们维护当前可以表示的最大值，也就是上面的n，如果当前最小数满足条件，就添加之，并更新最大值；否则就没有有可以添加的数了，返回答案。</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">class</span> <span class="token class-name">Solution</span> <span class="token punctuation">{</span>
+<span class="token keyword">public</span><span class="token operator">:</span>
+    <span class="token keyword">int</span> <span class="token function">getMaximumConsecutive</span><span class="token punctuation">(</span>vector<span class="token generics"><span class="token punctuation">&lt;</span><span class="token keyword">int</span><span class="token punctuation">&gt;</span></span><span class="token operator">&amp;</span> coins<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token function">sort</span><span class="token punctuation">(</span>coins<span class="token punctuation">.</span><span class="token function">begin</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>coins<span class="token punctuation">.</span><span class="token function">end</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//从小到大排序</span>
+        <span class="token keyword">int</span> canGet<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span><span class="token comment">//可以表示的最大值，初始为0</span>
+        <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> <span class="token operator">&amp;</span>num<span class="token operator">:</span>coins<span class="token punctuation">)</span>
+            <span class="token keyword">if</span><span class="token punctuation">(</span>num<span class="token operator">&lt;=</span>canGet<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token comment">//如果当前最小数满足条件，添加并更新</span>
+                canGet<span class="token operator">+=</span>num<span class="token punctuation">;</span>
+            <span class="token keyword">else</span><span class="token comment">//没有可添加的数了，返回</span>
+                <span class="token keyword">break</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> canGet<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/patching-array/">330. 按要求补齐数组 - 力扣（Leetcode）</a></p>
+<p>这个题是上个题目的升级版本。问的是需要向里面至少添加几个数，才能表示<code>[1,n]</code>的所有数。说白了，就是在无法连起来时，给我们一个补救的机会，那么，该添加什么数呢？同样是贪心的思路，既要求连续，也就是x&lt;=n+1，又希望尽可能扩大可达域，所以就添加n+1好了。细节就不多说了，代码如下：</p>
+<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">class Solution {
+public:
+    int minPatches(vector&lt;int&gt;&amp; nums, int n) {
+        sort(nums.begin(), nums.end());
+        long res = 0, cnt = 0, idx = 0;
+        while (cnt &lt; n) {
+            if (idx &lt; nums.size() &amp;&amp; nums[idx] &lt;= cnt + 1) {
+                cnt += nums[idx++];
+            } else {
+                cnt += cnt + 1, res++;
+            }
+        }
+        return res;
+    }
+};<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+
+
+
 <h1 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h1><h2 id="1-蓄水池抽样"><a href="#1-蓄水池抽样" class="headerlink" title="1. 蓄水池抽样"></a>1. 蓄水池抽样</h2><p>总的样本数量未知，从所有样本中抽取若干个，要求每个样本被抽到的概率相等。</p>
 <p>具体做法：从前往后处理每个样本，每个样本成为答案的概率为<code>1/i</code>，其中<code>i</code>为样本编号（编号从1开始），最终可以确保每个样本成为答案的概率均为<code>1/n</code>（其中<code>n</code>为样本总数）。</p>
 <p>证明：容易证明该做法的正确性，假设最终成为答案的样本编号为 <code>k</code>，那么 成为答案的充要条件为「在遍历到 时被选中」并且「遍历大于<code>k</code> 的所有元素时，均没有被选择（没有覆盖 <code>k</code>）」</p>
@@ -1154,6 +1331,43 @@ stack<span class="token punctuation">.</span><span class="token function">push</
 
 
 <p>1 3 6 4 5</p>
+<h1 id="技巧"><a href="#技巧" class="headerlink" title="技巧"></a>技巧</h1><h3 id="1-大小写字母转换"><a href="#1-大小写字母转换" class="headerlink" title="1. 大小写字母转换"></a>1. 大小写字母转换</h3><p>技巧：使用异或运算转换字母大小写、</p>
+<p>先看一看 ASCII 表，A 到 Z，Z 完了以后没有直接到 a，中间隔了 6 个字符。</p>
+<p><img src="/2022/04/06/suan-fa-bi-ji/b5bda457ce665cfaae1e51cd9c7fb26167e2931748d9a069607e39c65191756b-image.png" alt="image.png"></p>
+<p>（中间省略）</p>
+<p><img src="/2022/04/06/suan-fa-bi-ji/6d0acbb942713f7302632c6064a84e2debab6299c97726c66ac5a0497ece9140-image.png" alt="image.png"></p>
+<p>我们发现大写字符与其对应的小写字符的 ASCII 的差为 32，32 这个值如果敏感的话，它是 2^52<br>5，在编程语言中，可以表示为 1 &lt;&lt; 5。而</p>
+<p>变换大小写这件事等价于：</p>
+<p>如果字符是小写字符，减去 32 得到大写字符；<br>如果字符是大写字符，加上 32 得到小写字符。<br>而这两者合并起来，就是给这个字符做一次不进位的加法，即异或上 1 &lt;&lt; 5。</p>
+<p>题目举例（回溯题目）：力扣784 <a target="_blank" rel="noopener" href="https://leetcode.cn/problems/letter-case-permutation/">784. 字母大小写全排列 - 力扣（LeetCode）</a></p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token class-name">List</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">String</span><span class="token punctuation">&gt;</span></span> res<span class="token punctuation">;</span>
+<span class="token keyword">public</span> <span class="token class-name">List</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">String</span><span class="token punctuation">&gt;</span></span> <span class="token function">letterCasePermutation</span><span class="token punctuation">(</span><span class="token class-name">String</span> s<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">int</span> n <span class="token operator">=</span> s<span class="token punctuation">.</span><span class="token function">length</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    res <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ArrayList</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token punctuation">&gt;</span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">traverse</span><span class="token punctuation">(</span>s<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token string">""</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> res<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">traverse</span><span class="token punctuation">(</span><span class="token class-name">String</span> s<span class="token punctuation">,</span> <span class="token keyword">int</span> index<span class="token punctuation">,</span> <span class="token class-name">String</span> cur<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>index <span class="token operator">==</span> s<span class="token punctuation">.</span><span class="token function">length</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>cur<span class="token punctuation">.</span><span class="token function">length</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">==</span> s<span class="token punctuation">.</span><span class="token function">length</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            res<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span>cur<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">return</span> <span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">char</span> c <span class="token operator">=</span> s<span class="token punctuation">.</span><span class="token function">charAt</span><span class="token punctuation">(</span>index<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment">// 原始</span>
+    <span class="token function">traverse</span><span class="token punctuation">(</span>s<span class="token punctuation">,</span> index <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">,</span> cur <span class="token operator">+</span> c<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token class-name">Character</span><span class="token punctuation">.</span><span class="token function">isLetter</span><span class="token punctuation">(</span>c<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token function">traverse</span><span class="token punctuation">(</span>s<span class="token punctuation">,</span> index <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">,</span> cur <span class="token operator">+</span> <span class="token punctuation">(</span><span class="token keyword">char</span><span class="token punctuation">)</span> <span class="token punctuation">(</span>c <span class="token operator">^</span> <span class="token punctuation">(</span><span class="token number">1</span> <span class="token operator">&lt;&lt;</span> <span class="token number">5</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+
+
+
 
                 
             </div>
@@ -1420,13 +1634,13 @@ stack<span class="token punctuation">.</span><span class="token function">push</
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2022/05/10/vue/">
+                <a href="/2022/05/10/shi-me-shi-hou-shi-yong-avx512-zhi-ling-ji/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/6.jpg" class="responsive-img" alt="vue">
+                        <img src="/medias/featureimages/14.jpg" class="responsive-img" alt="什么时候使用AVX512指令集">
                         
-                        <span class="card-title">vue</span>
+                        <span class="card-title">什么时候使用AVX512指令集</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -1443,8 +1657,8 @@ stack<span class="token punctuation">.</span><span class="token function">push</
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/%E5%9F%BA%E7%A1%80/" class="post-category">
-                                    基础
+                            <a href="/categories/%E5%B7%A5%E4%BD%9C/" class="post-category">
+                                    工作
                                 </a>
                             
                             
@@ -1454,8 +1668,8 @@ stack<span class="token punctuation">.</span><span class="token function">push</
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/vue/">
-                        <span class="chip bg-color">vue</span>
+                    <a href="/tags/%E6%8C%87%E4%BB%A4%E9%9B%86/">
+                        <span class="chip bg-color">指令集</span>
                     </a>
                     
                 </div>
@@ -1705,7 +1919,7 @@ stack<span class="token punctuation">.</span><span class="token function">push</
         <div class="col s12 m8 l8 copy-right">
             Copyright&nbsp;&copy;
             
-                <span id="year">2019-2022</span>
+                <span id="year">2019-2023</span>
             
             <span id="year">2019</span>
             <a href="/about" target="_blank">小灰灰</a>

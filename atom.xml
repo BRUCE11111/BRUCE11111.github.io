@@ -6,7 +6,7 @@
   <link href="http://bruce11111.github.io/atom.xml" rel="self"/>
   
   <link href="http://bruce11111.github.io/"/>
-  <updated>2022-10-14T13:16:41.620Z</updated>
+  <updated>2022-11-27T08:33:58.314Z</updated>
   <id>http://bruce11111.github.io/</id>
   
   <author>
@@ -15,6 +15,19 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>汇编语言</title>
+    <link href="http://bruce11111.github.io/2022/11/27/hui-bian-yu-yan/"/>
+    <id>http://bruce11111.github.io/2022/11/27/hui-bian-yu-yan/</id>
+    <published>2022-11-27T08:33:58.000Z</published>
+    <updated>2022-11-27T08:33:58.314Z</updated>
+    
+    
+    
+    
+    
+  </entry>
   
   <entry>
     <title>读书笔记</title>
@@ -71,7 +84,7 @@
     <link href="http://bruce11111.github.io/2022/06/28/ji-qi-xue-xi/"/>
     <id>http://bruce11111.github.io/2022/06/28/ji-qi-xue-xi/</id>
     <published>2022-06-28T09:02:01.000Z</published>
-    <updated>2022-10-28T11:39:56.591Z</updated>
+    <updated>2022-10-29T04:20:50.326Z</updated>
     
     
       
@@ -96,7 +109,7 @@
     <link href="http://bruce11111.github.io/2022/06/27/c-ji-chu/"/>
     <id>http://bruce11111.github.io/2022/06/27/c-ji-chu/</id>
     <published>2022-06-27T01:29:48.000Z</published>
-    <updated>2022-10-28T11:40:09.068Z</updated>
+    <updated>2023-02-09T13:46:46.494Z</updated>
     
     
       
@@ -143,11 +156,36 @@
   </entry>
   
   <entry>
+    <title>什么时候使用AVX512指令集</title>
+    <link href="http://bruce11111.github.io/2022/05/10/shi-me-shi-hou-shi-yong-avx512-zhi-ling-ji/"/>
+    <id>http://bruce11111.github.io/2022/05/10/shi-me-shi-hou-shi-yong-avx512-zhi-ling-ji/</id>
+    <published>2022-05-10T14:23:11.000Z</published>
+    <updated>2023-02-09T13:46:46.504Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;什么时候使用AVX512指令集&quot;&gt;&lt;a href=&quot;#什么时候使用AVX512指令集&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="工作" scheme="http://bruce11111.github.io/categories/%E5%B7%A5%E4%BD%9C/"/>
+    
+    
+    <category term="指令集" scheme="http://bruce11111.github.io/tags/%E6%8C%87%E4%BB%A4%E9%9B%86/"/>
+    
+  </entry>
+  
+  <entry>
     <title>算法笔记</title>
     <link href="http://bruce11111.github.io/2022/04/06/suan-fa-bi-ji/"/>
     <id>http://bruce11111.github.io/2022/04/06/suan-fa-bi-ji/</id>
     <published>2022-04-06T01:52:34.000Z</published>
-    <updated>2022-10-28T11:40:09.088Z</updated>
+    <updated>2023-02-09T13:46:46.564Z</updated>
     
     
       
@@ -471,56 +509,6 @@
     <category term="Java基础" scheme="http://bruce11111.github.io/tags/Java%E5%9F%BA%E7%A1%80/"/>
     
     <category term="mybatis" scheme="http://bruce11111.github.io/tags/mybatis/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>mybatis-plus</title>
-    <link href="http://bruce11111.github.io/2021/06/07/mybatis-plus/"/>
-    <id>http://bruce11111.github.io/2021/06/07/mybatis-plus/</id>
-    <published>2021-06-07T07:59:52.000Z</published>
-    <updated>2022-08-15T14:17:07.268Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h2 id=&quot;1-介绍&quot;&gt;&lt;a href=&quot;#1-介绍&quot; class=&quot;headerlink&quot; title=&quot;1. 介绍&quot;&gt;&lt;/a&gt;1. 介绍&lt;/h2&gt;&lt;p&gt;官方地址：&lt;a href=&quot;https://baomidou.com/&quot;&gt;MyBatis-Plus</summary>
-        
-      
-    
-    
-    
-    <category term="Java" scheme="http://bruce11111.github.io/categories/Java/"/>
-    
-    
-    <category term="Java基础" scheme="http://bruce11111.github.io/tags/Java%E5%9F%BA%E7%A1%80/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>nginx</title>
-    <link href="http://bruce11111.github.io/2021/05/23/nginx/"/>
-    <id>http://bruce11111.github.io/2021/05/23/nginx/</id>
-    <published>2021-05-23T10:43:47.000Z</published>
-    <updated>2022-08-15T14:18:42.518Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h1 id=&quot;NIGNX&quot;&gt;&lt;a href=&quot;#NIGNX&quot; class=&quot;headerlink&quot; title=&quot;NIGNX&quot;&gt;&lt;/a&gt;NIGNX&lt;/h1&gt;&lt;h2 id=&quot;1-基本概念&quot;&gt;&lt;a href=&quot;#1-基本概念&quot; class=&quot;headerlink&quot;</summary>
-        
-      
-    
-    
-    
-    <category term="Java" scheme="http://bruce11111.github.io/categories/Java/"/>
-    
-    
-    <category term="nginx" scheme="http://bruce11111.github.io/tags/nginx/"/>
     
   </entry>
   

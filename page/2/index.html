@@ -29,9 +29,9 @@
 
     <script src="/libs/jquery/jquery.min.js"></script>
 
-<meta name="generator" content="Hexo 5.4.0">
+<meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="小灰的博客" type="application/atom+xml">
+
 <style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
-<link rel="alternate" href="/atom.xml" title="小灰的博客" type="application/atom+xml">
 </head>
 
 
@@ -362,6 +362,113 @@
     <!-- 所有文章卡片 -->
     <article id="articles" class="container articles">
         <div class="row article-row">
+            
+            <div class="article col s12 m6 l4" data-aos="zoom-in">
+                <div class="card">
+                    <a href="/2021/09/26/kafka/">
+                        <div class="card-image">
+                            
+                            
+                            <img src="/medias/featureimages/6.jpg" class="responsive-img" alt="kafka">
+                            
+                            <span class="card-title">kafka</span>
+                        </div>
+                    </a>
+
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                Kafka1. 概念为什么选择kafka？
+
+多生产者和多消费者。
+基于磁盘的数据存储。
+高伸缩性。
+高性能。
+
+常见场景：
+1.1 offset偏移量
+可以唯一标识一条消息
+偏移量决定读取数据的位置，不会有线程安全问题，消费者通过偏移量来
+                            
+                        </div>
+                        <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-09-26
+                            </span>
+                            <span class="publish-author">
+                                
+                                <i class="fas fa-bookmark fa-fw icon-category"></i>
+                                
+                                <a href="/categories/Java/" class="post-category">
+                                    Java
+                                </a>
+                                
+                                
+                            </span>
+                        </div>
+                    </div>
+
+                    
+                    <div class="card-action article-tags">
+                        
+                        <a href="/tags/Java%E5%9F%BA%E7%A1%80/">
+                            <span class="chip bg-color">Java基础</span>
+                        </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="article col s12 m6 l4" data-aos="zoom-in">
+                <div class="card">
+                    <a href="/2021/09/22/raft-suan-fa/">
+                        <div class="card-image">
+                            
+                            
+                            <img src="/medias/featureimages/21.jpg" class="responsive-img" alt="raft算法">
+                            
+                            <span class="card-title">raft算法</span>
+                        </div>
+                    </a>
+
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                Raft算法1、为什么需要跨网络的机器之间协调一致的工作。
+应对网络的不可靠以及节点的失效。
+2、 是什么组织机器使其状态最终一致并允许局部失败的算法。
+Paxos算法由来已久，目前是功能和性能最完善的一致性算法，然而他难以理解和实现。ra
+                            
+                        </div>
+                        <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-09-22
+                            </span>
+                            <span class="publish-author">
+                                
+                                <i class="fas fa-bookmark fa-fw icon-category"></i>
+                                
+                                <a href="/categories/%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%86/" class="post-category">
+                                    碎片知识
+                                </a>
+                                
+                                
+                            </span>
+                        </div>
+                    </div>
+
+                    
+                    <div class="card-action article-tags">
+                        
+                        <a href="/tags/%E5%88%86%E5%B8%83%E5%BC%8F/">
+                            <span class="chip bg-color">分布式</span>
+                        </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
             
             <div class="article col s12 m6 l4" data-aos="zoom-in">
                 <div class="card">
@@ -785,35 +892,33 @@ mybatis 中文文档 https://myb
             
             <div class="article col s12 m6 l4" data-aos="zoom-in">
                 <div class="card">
-                    <a href="/2021/05/19/springboot/">
+                    <a href="/2021/05/23/shi-me-shi-abi/">
                         <div class="card-image">
                             
                             
-                            <img src="/medias/featureimages/7.jpg" class="responsive-img" alt="springboot">
+                            <img src="/medias/featureimages/23.jpg" class="responsive-img" alt="什么是ABI">
                             
-                            <span class="card-title">springboot</span>
+                            <span class="card-title">什么是ABI</span>
                         </div>
                     </a>
 
                     <div class="card-content article-content">
                         <div class="summary block-with-text">
                             
-                                SpringBoot1.1 自动装配原理
-springboot在启动时，从类路径下/META-INF/spring.factories 获取指定的值。
-将这些自动配置的类导入容器，自动配置就会生效，帮我进行自动配置
-以前需要自动配置的东西，
+                                什么是应用程序接口（ABI）ABI是编程语言具体实现细节的描述。
+（一些有助于理解的废话：编译器需要Application Binary Interface (ABI) 来支持新的编程语言特性。所有的程序员都希望能够让新的编译器重新编译他们
                             
                         </div>
                         <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-05-19
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-05-23
                             </span>
                             <span class="publish-author">
                                 
                                 <i class="fas fa-bookmark fa-fw icon-category"></i>
                                 
-                                <a href="/categories/Java/" class="post-category">
-                                    Java
+                                <a href="/categories/%E9%A1%B9%E7%9B%AE/" class="post-category">
+                                    项目
                                 </a>
                                 
                                 
@@ -824,12 +929,8 @@ springboot在启动时，从类路径下/META-INF/spring.factories 获取指定�
                     
                     <div class="card-action article-tags">
                         
-                        <a href="/tags/Springboot/">
-                            <span class="chip bg-color">Springboot</span>
-                        </a>
-                        
-                        <a href="/tags/Spring/">
-                            <span class="chip bg-color">Spring</span>
+                        <a href="/tags/%E5%BA%95%E5%B1%82/">
+                            <span class="chip bg-color">底层</span>
                         </a>
                         
                     </div>
@@ -839,34 +940,33 @@ springboot在启动时，从类路径下/META-INF/spring.factories 获取指定�
             
             <div class="article col s12 m6 l4" data-aos="zoom-in">
                 <div class="card">
-                    <a href="/2021/05/18/shi-me-shi-gao-ke-yong/">
+                    <a href="/2021/05/23/shi-me-shi-cpuid/">
                         <div class="card-image">
                             
                             
-                            <img src="/medias/featureimages/14.jpg" class="responsive-img" alt="什么是高可用">
+                            <img src="/medias/featureimages/4.jpg" class="responsive-img" alt="什么是CPUID">
                             
-                            <span class="card-title">什么是高可用</span>
+                            <span class="card-title">什么是CPUID</span>
                         </div>
                     </a>
 
                     <div class="card-content article-content">
                         <div class="summary block-with-text">
                             
-                                什么是高可用为什么就不说了吧，系统都要保证这一点的，否则经常奔溃那这系统还能用吗？
-1. 是什么高可用HA(High Availability)是分布式系统架构设计种必须考虑的因素之一。指通过设计减少系统不可用的时间。
-如果系统能够一直提供
+                                什么是CPUIDx86芯片结构中，CPUID是处理器提供的一个指令操作码，能够让软件利用它分析出处理器的信息。比如，一个程序可以使用CPUID查看处理器的类型和是否能够使用MMX/SSE指令集。
+历史在CPUID出现之前，程序员需要费劲地写
                             
                         </div>
                         <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-05-18
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-05-23
                             </span>
                             <span class="publish-author">
                                 
                                 <i class="fas fa-bookmark fa-fw icon-category"></i>
                                 
-                                <a href="/categories/Java/" class="post-category">
-                                    Java
+                                <a href="/categories/%E9%A1%B9%E7%9B%AE/" class="post-category">
+                                    项目
                                 </a>
                                 
                                 
@@ -877,109 +977,8 @@ springboot在启动时，从类路径下/META-INF/spring.factories 获取指定�
                     
                     <div class="card-action article-tags">
                         
-                        <a href="/tags/%E9%AB%98%E5%8F%AF%E7%94%A8/">
-                            <span class="chip bg-color">高可用</span>
-                        </a>
-                        
-                    </div>
-                    
-                </div>
-            </div>
-            
-            <div class="article col s12 m6 l4" data-aos="zoom-in">
-                <div class="card">
-                    <a href="/2021/05/16/docker/">
-                        <div class="card-image">
-                            
-                            
-                            <img src="/medias/featureimages/8.jpg" class="responsive-img" alt="docker">
-                            
-                            <span class="card-title">docker</span>
-                        </div>
-                    </a>
-
-                    <div class="card-content article-content">
-                        <div class="summary block-with-text">
-                            
-                                Docker1. 概述1.1 为什么我的代码在我的机子上能跑，在你的机子上竟然崩了！！！docker解决这个问题！
-1.2 是什么通过docker直接把运行环境打包且跨平台。隔离是docker的核心思想。
-1.3 怎么做
-通过Docker 
-                            
-                        </div>
-                        <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-05-16
-                            </span>
-                            <span class="publish-author">
-                                
-                                <i class="fas fa-bookmark fa-fw icon-category"></i>
-                                
-                                <a href="/categories/%E5%9F%BA%E7%A1%80/" class="post-category">
-                                    基础
-                                </a>
-                                
-                                
-                            </span>
-                        </div>
-                    </div>
-
-                    
-                    <div class="card-action article-tags">
-                        
-                        <a href="/tags/docker/">
-                            <span class="chip bg-color">docker</span>
-                        </a>
-                        
-                    </div>
-                    
-                </div>
-            </div>
-            
-            <div class="article col s12 m6 l4" data-aos="zoom-in">
-                <div class="card">
-                    <a href="/2021/05/16/git/">
-                        <div class="card-image">
-                            
-                            
-                            <img src="/medias/featureimages/18.jpg" class="responsive-img" alt="git">
-                            
-                            <span class="card-title">git</span>
-                        </div>
-                    </a>
-
-                    <div class="card-content article-content">
-                        <div class="summary block-with-text">
-                            
-                                Git1. 简介开发中版本迭代，新的和老的版本之间进行管理。
-1.1 本地版本控制记录文件每次的更新，可以对每个版本做一个快照，或是记录补丁文件，适合个人用，如RCS。
-
-1.2 集中式版本控制
-所有版本数据保存在一个服务器上，协同开发者从
-                            
-                        </div>
-                        <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-05-16
-                            </span>
-                            <span class="publish-author">
-                                
-                                <i class="fas fa-bookmark fa-fw icon-category"></i>
-                                
-                                <a href="/categories/%E5%9F%BA%E7%A1%80/" class="post-category">
-                                    基础
-                                </a>
-                                
-                                
-                            </span>
-                        </div>
-                    </div>
-
-                    
-                    <div class="card-action article-tags">
-                        
-                        <a href="/tags/git/">
-                            <span class="chip bg-color">git</span>
+                        <a href="/tags/%E5%BA%95%E5%B1%82/">
+                            <span class="chip bg-color">底层</span>
                         </a>
                         
                     </div>
@@ -1080,7 +1079,7 @@ springboot在启动时，从类路径下/META-INF/spring.factories 获取指定�
         <div class="col s12 m8 l8 copy-right">
             Copyright&nbsp;&copy;
             
-                <span id="year">2019-2022</span>
+                <span id="year">2019-2023</span>
             
             <span id="year">2019</span>
             <a href="/about" target="_blank">小灰灰</a>
